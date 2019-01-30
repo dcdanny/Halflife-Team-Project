@@ -3,7 +3,7 @@ package network;
 import java.net.*;
 import java.io.*;
 
-public class startServer {
+/*public class startServer {
 
 	public static void main(String [] args) {
 		System.out.println("Start server...");
@@ -13,3 +13,4 @@ public class startServer {
 		
 	}
 }
+*/

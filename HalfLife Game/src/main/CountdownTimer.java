@@ -6,14 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Timer extends Pane{
+public class CountdownTimer extends Pane{
 	private Timeline ticker;
 	private int tmp=60;
 	private String emp="";
 	
 	Label label=new Label("60");
 	
-	Timer() {
+	CountdownTimer() {
 		
 	  label.setFont(javafx.scene.text.Font.font(50 ));
 	label.setTranslateX(0 ); 
@@ -28,7 +28,7 @@ public class Timer extends Pane{
 	}
 	private void timelabel() {
 		if (tmp>0) {
-			tmp--;
+			tmp++;
 		}
 		emp=tmp+"";
 		label.setText(emp);

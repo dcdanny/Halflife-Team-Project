@@ -40,11 +40,11 @@ public class Server {
 	          	
 	          //Once client is connected, hand over to sender receiver threads
 	          // We create and start a new thread to read from the client:
-	          (new ServerReceiver(clientName, fromClient, clientTable)).start();
+	       //   (new ServerReceiver(clientName, fromClient, clientTable)).start();
 
 	          // We create and start a new thread to write to the client:
 	          PrintStream toClient = new PrintStream(socket.getOutputStream());
-	          (new ServerSender(clientTable.getQueue(clientName), toClient)).start();
+	       //   (new ServerSender(clientTable.getQueue(clientName), toClient)).start();
 	          
 	        }
 		}catch (IOException e) {
