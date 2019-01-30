@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 
 
-public class Window extends Application {
+public class Game extends Application {
 	private Pane root= new Pane();
 	private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 	private Timer clock=new Timer();
