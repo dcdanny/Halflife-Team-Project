@@ -8,10 +8,10 @@ import javafx.util.Duration;
 
 public class CountdownTimer extends Pane{
 	private Timeline ticker;
-	private int tmp=60;
+	private int tmp=0;
 	private String emp="";
 	
-	Label label=new Label("60");
+	Label label=new Label("0");
 	
 	CountdownTimer() {
 		
@@ -27,7 +27,7 @@ public class CountdownTimer extends Pane{
 	  
 	}
 	private void timelabel() {
-		if (tmp>0) {
+		if (tmp>-1) {
 			tmp++;
 		}
 		emp=tmp+"";
