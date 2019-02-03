@@ -1,34 +1,48 @@
 package com.halflife.entities;
 
-import java.awt.event.KeyAdapter;
+import java.awt.event.*;
 
 import javafx.scene.input.KeyCode;
 
 public class Player extends KeyAdapter {
 	
-	
+	// Players x and y coordinates.
+	private double x;
+	private double y;
+
+	public Player(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
 	
 	// This will detect when a keyboard button is pressed, which controls the player.
-	public void keyPressed(KeyCode key) {
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
 		
-		if (key == KeyCode.W) {
-		 	System.out.println("Pressed W");
+		if (key == KeyEvent.VK_W) {
+			jump();
+		} else if (key == KeyEvent.VK_A) {
+			x = x - 5;
+		} else if (key == KeyEvent.VK_S) {
+			crouch();
+		} else if (key == KeyEvent.VK_D) {
+			x = x + 5;
 		} 
-		else if (key == KeyCode.S) {
-			System.out.println("Pressed S");
-		} 
-		else if (key == KeyCode.A) {
-			System.out.println("Pressed A");
-		}
-		else if (key == KeyCode.D) {
-			System.out.println("Pressed D");
-		}	
+	 
+		
+		
 	}
 	
 	// This will detect when a keyboard button has been released.
-	public void keyReleased(KeyCode key) {
-		if (key == KeyCode.W) {
-			//STOP DOING SOMETHING
-		}
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
+	}
+	
+	private void jump() {
+		
+	}
+	
+	private void crouch() {
+		
 	}
 }
