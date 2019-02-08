@@ -37,11 +37,12 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		setUpLevel();
-		stage.setTitle("Game Name is Here!! ");
+		stage.setTitle("Gaaaaaame is Here!! ");
 		Scene scene =new Scene(createContent());
 		stage.  setScene(scene);
 		
 		stage.show();
+		
 	}
 	private void setUpLevel() {
 		levelWidth= Level_Info.LEVEL1[0].length()*60;
@@ -53,7 +54,7 @@ public class Game extends Application {
 				case '0':
 					break;
 				case '1':
-				Node platform =new RectObject(j*150,i*200,150,30,"plat",Color.LIGHTSKYBLUE);
+				Node platform =new RectObject(j*150,i*150,150,30,"plat",Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
 				break; 

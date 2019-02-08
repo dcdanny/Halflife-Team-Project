@@ -33,5 +33,9 @@ public class CountdownTimer extends Pane{
 		emp=tmp+"";
 		label.setText(emp);
 		}
+	public int getTime() {
+		return tmp;
 	}
+	}
+
 
