@@ -22,11 +22,11 @@ public class Player extends KeyAdapter {
 		if (key == KeyEvent.VK_W) {
 			jump();
 		} else if (key == KeyEvent.VK_A) {
-			x = x - 5;
+			
 		} else if (key == KeyEvent.VK_S) {
 			crouch();
 		} else if (key == KeyEvent.VK_D) {
-			x = x + 5;
+			
 		} 
 	 
 		
