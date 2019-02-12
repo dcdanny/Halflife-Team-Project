@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 public class Game extends Application {
 	private Pane root= new Pane();
+	private StackPane DeathShow=new DeathScreen();
 	private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
@@ -31,6 +33,7 @@ public class Game extends Application {
 		root.getChildren().add(clock);
 		root.getChildren().add(heart);
 		root.setStyle("-fx-background-color: #4f7b8a;");
+		//root.getChildren().add(DeathShow);
 		return root;
 		
 	}

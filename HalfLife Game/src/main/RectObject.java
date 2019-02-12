@@ -25,8 +25,8 @@ public class RectObject extends Rectangle {
 		this.type =type;
 	 	setTranslateX(x);
 		setTranslateY(y);
-		playerFade();
-		
+	
+		//playerFade();
 		/* Ignore for now, i was testing using images on top of shapes
 		 Image player = null;
 		try {
