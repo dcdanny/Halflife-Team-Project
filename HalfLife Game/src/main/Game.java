@@ -34,8 +34,8 @@ public class Game extends Application {
 		root.getChildren().add(player);
 		root.getChildren().add(clock);
 		root.getChildren().add(heart);
-		root.getChildren().add(enemy1);
-		root.getChildren().add(spike1);
+		//root.getChildren().add(enemy1);
+		//root.getChildren().add(spike1);
 		root.setStyle("-fx-background-color: #4f7b8a;");
 		
 		AnimationTimer timer = new AnimationTimer() {
