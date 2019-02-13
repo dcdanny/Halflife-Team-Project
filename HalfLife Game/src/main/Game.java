@@ -3,8 +3,9 @@
 
 
 import java.util.ArrayList;
-
-import com.halflife.entities.RectObject;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -26,7 +27,7 @@ public class Game extends Application {
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
-	
+
 	private Parent createContent() {
 		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
@@ -46,13 +47,44 @@ public class Game extends Application {
 		return root;	
 	}
 	
+	public static ArrayList<Node> getAllNodes(Parent root) {
+	    ArrayList<Node> nodes = new ArrayList<Node>();
+	    addAllDescendents(root, nodes);
+	    return nodes;
+	}
+
+	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
+	    for (Node node : parent.getChildrenUnmodifiable()) {
+	    	
+	    	if (node instanceof RectObject) {
+	        nodes.add((RectObject) node);
+	        if (node instanceof Parent)
+	            addAllDescendents((Parent)node, nodes);
+	    	}
+	    }
+	}
+	
 	private void update() {
-		if (player.movingLeft == true)
-			player.moveLeft();
-		else if (player.movingRight == true)
-			player.moveRight();
+
+		if (player.movingLeft)
+			player.moveLeft(5);
+		else if (player.movingRight)
+			player.moveRight(5);
 		
 		player.resetMovement();
+
+		for (Node object : getAllNodes(root)) {
+			RectObject newObj = (RectObject) object;
+			if (newObj.getType().equals("playerbullet")) {
+				newObj.moveRight(5);
+			}
+		}
+	}
+	
+	public void shoot(RectObject shooter) {
+		RectObject bullet = player.getBullet(player, Color.GREEN);
+		System.out.println(bullet.getType());
+		root.getChildren().add(bullet);
 	}
 	
 	@Override
@@ -71,6 +103,9 @@ public class Game extends Application {
 			case D: 
 				player.movingLeft = false;
 				player.movingRight = true;
+				break;
+			case SPACE:
+				shoot(player);
 				break;
 			}
 		});

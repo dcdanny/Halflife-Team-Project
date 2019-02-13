@@ -13,7 +13,7 @@ public class Player extends RectObject{
 
 	@Override
 	public void Fade() {
-		if (type.equals("player")) {
+		if (getType().equals("player")) {
 				
 			 ft = new FadeTransition(Duration.millis(500), this);
 			

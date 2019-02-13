@@ -21,13 +21,13 @@ public class RectObject extends Rectangle {
     public boolean movingLeft = false; 
     public boolean movingRight = false;
     
-	boolean dead= false;
-	final String type;
-	public RectObject(int x, int y,int width, int height, String type, Color col){
+	private boolean dead= false;
+	private final String type;
+	public RectObject(double d, double e,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
-	 	setTranslateX(x);
-		setTranslateY(y);
+	 	setTranslateX(d);
+		setTranslateY(e);
 		Fade();
 		
 		/* Ignore for now, i was testing using images on top of shapes
@@ -41,11 +41,11 @@ public class RectObject extends Rectangle {
 		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
 		*/
 	}
-	public void moveLeft() {
-		setTranslateX(getTranslateX()-5); // you could change this, idk try implement speed? rather than straight translate
+	public void moveLeft(int i) {
+		setTranslateX(getTranslateX()-i); // you could change this, idk try implement speed? rather than straight translate
 	}
-	public void moveRight() {
-		setTranslateX(getTranslateX()+5); // you could change this, idk try implement speed? rather than straight translate
+	public void moveRight(int i) {
+		setTranslateX(getTranslateX()+i); // you could change this, idk try implement speed? rather than straight translate
 	}
 	public void resetMovement() {
 		movingLeft = false;
@@ -57,5 +57,19 @@ public class RectObject extends Rectangle {
 		//Overriding in Player class
 	}
 
+	public RectObject getBullet(RectObject shooter, Color colour) {
+		RectObject bullet = new RectObject(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
+		return bullet;
+	}
+	public String getType() {
+		return type;
+	}
+	public boolean isDead() {
+		return dead;
+	}
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
 }
