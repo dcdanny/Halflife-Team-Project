@@ -1,4 +1,4 @@
-package main;
+package com.halflife.entities;
 
 import java.io.FileInputStream;
 
@@ -15,17 +15,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class RectObject extends Rectangle {
-	private FadeTransition ft;
-    private Rectangle rect;
+	protected FadeTransition ft;
+    protected Rectangle rect;
 
+    public boolean movingLeft = false; 
+    public boolean movingRight = false;
+    
 	boolean dead= false;
 	final String type;
-	RectObject(int x, int y,int width, int height, String type, Color col){
+	public RectObject(int x, int y,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
 	 	setTranslateX(x);
 		setTranslateY(y);
-		playerFade();
+		Fade();
 		
 		/* Ignore for now, i was testing using images on top of shapes
 		 Image player = null;
@@ -38,40 +41,20 @@ public class RectObject extends Rectangle {
 		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
 		*/
 	}
-	void moveLeft() {
+	public void moveLeft() {
 		setTranslateX(getTranslateX()-5); // you could change this, idk try implement speed? rather than straight translate
 	}
-	void moveRight() {
+	public void moveRight() {
 		setTranslateX(getTranslateX()+5); // you could change this, idk try implement speed? rather than straight translate
 	}
+	public void resetMovement() {
+		movingLeft = false;
+		movingRight = false;
+	}
+	
 	//respawn animation when a player dies and respawns
-	void playerFade() {
-		if (type.equals("player")) {
-			
-			
-			 ft = new FadeTransition(Duration.millis(500), this);
-			
-				 ft.setFromValue(1.0);
-			        ft.setToValue(0.0);
-			        ft.setCycleCount(10);
-			        ft.setAutoReverse(true);
-			    
-			
-			 Double opa = this.getOpacity();
-	            if (opa.intValue() == 0) {
-	                return;
-	            }
-	            
-	            Animation.Status as = ft.getStatus();
-	            
-	            if (as == Animation.Status.RUNNING) {
-	                return;
-	            }
-
-	            if (as == Animation.Status.STOPPED) {
-	                ft.play();
-	            }            
-		}
+	public void Fade() {
+		//Overriding in Player class
 	}
 
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
