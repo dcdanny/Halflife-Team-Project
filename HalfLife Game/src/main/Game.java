@@ -90,7 +90,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		setUpLevel();
-		stage.setTitle("Gaaaaaame is Here!! ");
+		stage.setTitle("Gaaaaaame is Here!!");
 		Scene scene =new Scene(createContent());
 		stage.setScene(scene);
 		
