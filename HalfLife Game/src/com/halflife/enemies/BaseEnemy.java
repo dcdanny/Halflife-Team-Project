@@ -19,7 +19,7 @@ public class BaseEnemy extends RectObject {
 		// detection for if the player comes within x pixels
 		
 		startMoving = true;
-		while(startMoving && !dead) {
+		while(startMoving && !isDead()) {
 			//moveLeft(5);
 		}
 	}
