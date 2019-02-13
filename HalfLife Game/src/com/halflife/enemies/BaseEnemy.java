@@ -20,7 +20,7 @@ public class BaseEnemy extends RectObject {
 		
 		startMoving = true;
 		while(startMoving && !dead) {
-			//moveLeft();
+			//moveLeft(5);
 		}
 	}
 
