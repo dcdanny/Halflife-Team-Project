@@ -36,7 +36,7 @@ class Client {
     }
 
     // Tell the server what my nickname is:
-    toServer.println(nickname); // Matches BBBBB in Server.java
+    //toServer.println(nickname); // Matches BBBBB in Server.java
      
     // Create two client threads of a diferent nature:
     ClientSender sender = new ClientSender(nickname,toServer,server);
