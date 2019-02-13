@@ -5,6 +5,7 @@
 import java.util.ArrayList;
 
 import com.halflife.enemies.BaseEnemy;
+import com.halflife.enemies.Spike;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 
@@ -23,6 +25,10 @@ public class Game extends Application {
 	private Pane root= new Pane();
 	private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 	private BaseEnemy enemy1 = new BaseEnemy(200,200,40,40,"enemy1",Color.RED);
+	private Spike spike1 = new Spike(new double[]{
+            450.0, 350.0,
+            425.0, 400.0,
+            475.0, 400.0 });
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
@@ -34,6 +40,7 @@ public class Game extends Application {
 		root.getChildren().add(clock);
 		root.getChildren().add(heart);
 		root.getChildren().add(enemy1);
+		root.getChildren().add(spike1);
 		root.setStyle("-fx-background-color: #4f7b8a;");
 		return root;
 		
@@ -45,7 +52,7 @@ public class Game extends Application {
 		Scene scene =new Scene(createContent());
 		stage.  setScene(scene);
 		stage.show();
-		enemy1.PlayerNear();
+		//enemy1.PlayerNear();
 	}
 	private void setUpLevel() {
 		levelWidth= Level_Info.LEVEL1[0].length()*60;

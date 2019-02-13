@@ -1,5 +1,15 @@
 package com.halflife.enemies;
 
-public class Spike {
+import javafx.scene.shape.Polygon;
+
+public class Spike extends Polygon{
+	
+	public Spike(double[] points) {
+		super(points);
+	}
+	
+	void PlayerCollision() {
+		
+	}
 
 }
