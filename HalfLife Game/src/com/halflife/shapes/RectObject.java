@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 
 public class RectObject extends Rectangle{
 	
-	boolean dead = false;
+	protected boolean dead = false;
 	final String type;
 	
 	public RectObject(int x, int y,int width, int height, String type, Color col){
@@ -24,10 +24,10 @@ public class RectObject extends Rectangle{
 		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
 		*/
 	}
-	void moveLeft() {
+	protected void moveLeft() {
 		setTranslateX(getTranslateX()-5); // you could change this, idk try implement speed? rather than straight translate
 	}
-	void moveRight() {
+	protected void moveRight() {
 		setTranslateX(getTranslateX()+5); // you could change this, idk try implement speed? rather than straight translate
 	}
 
