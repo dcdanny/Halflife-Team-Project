@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import com.halflife.entities.*;
 
@@ -39,6 +40,8 @@ public class Game extends Application {
 		root.getChildren().add(player);
 		root.getChildren().add(clock);
 		root.getChildren().add(heart);
+		//root.getChildren().add(enemy1);
+		//root.getChildren().add(spike1);
 		root.setStyle("-fx-background-color: #4f7b8a;");
 <<<<<<< HEAD
 		//root.getChildren().add(DeathShow);
@@ -151,6 +154,6 @@ public class Game extends Application {
 	}
 	public static void main(String[] args) {
 		launch(args);
-		
+				
 	}
 }
