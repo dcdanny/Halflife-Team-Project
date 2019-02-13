@@ -94,7 +94,14 @@ public class Game extends Application {
 		Scene scene =new Scene(createContent());
 		stage.setScene(scene);
 		
-		scene.setOnKeyPressed(e-> {
+		buttonPressing(scene);
+		
+		stage.show();
+		
+	}
+	
+	private void buttonPressing(Scene s) {
+		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
 				player.movingRight = false;
@@ -109,10 +116,8 @@ public class Game extends Application {
 				break;
 			}
 		});
-		
-		stage.show();
-		
 	}
+	
 	private void setUpLevel() {
 		levelWidth= Level_Info.LEVEL1[0].length()*60;
 		
