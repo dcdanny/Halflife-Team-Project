@@ -3,7 +3,11 @@
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -14,39 +18,117 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-
+import com.halflife.entities.*;
 
 
 public class Game extends Application {
 	private Pane root= new Pane();
+<<<<<<< HEAD
 	private StackPane DeathShow=new DeathScreen();
 	private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
+=======
+	private Player player=new Player(500,300,40,50,Color.WHITE);
+>>>>>>> 2e3380f7083ffdb1ef0c29d094e8d292dd0cd6fe
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
-	
+
 	private Parent createContent() {
 		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
 		root.getChildren().add(clock);
 		root.getChildren().add(heart);
 		root.setStyle("-fx-background-color: #4f7b8a;");
+<<<<<<< HEAD
 		//root.getChildren().add(DeathShow);
 		return root;
+=======
+>>>>>>> 2e3380f7083ffdb1ef0c29d094e8d292dd0cd6fe
 		
+		AnimationTimer timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				update();
+			}
+		};
+		
+		timer.start();
+		
+		return root;	
 	}
+	
+	public static ArrayList<Node> getAllNodes(Parent root) {
+	    ArrayList<Node> nodes = new ArrayList<Node>();
+	    addAllDescendents(root, nodes);
+	    return nodes;
+	}
+
+	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
+	    for (Node node : parent.getChildrenUnmodifiable()) {
+	    	
+	    	if (node instanceof RectObject) {
+	        nodes.add((RectObject) node);
+	        if (node instanceof Parent)
+	            addAllDescendents((Parent)node, nodes);
+	    	}
+	    }
+	}
+	
+	private void update() {
+
+		if (player.movingLeft)
+			player.moveLeft(5);
+		else if (player.movingRight)
+			player.moveRight(5);
+		
+		player.resetMovement();
+
+		for (Node object : getAllNodes(root)) {
+			RectObject newObj = (RectObject) object;
+			if (newObj.getType().equals("playerbullet")) {
+				newObj.moveRight(5);
+			}
+		}
+	}
+	
+	public void shoot(RectObject shooter) {
+		RectObject bullet = player.getBullet(player, Color.GREEN);
+		System.out.println(bullet.getType());
+		root.getChildren().add(bullet);
+	}
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		setUpLevel();
-		stage.setTitle("Gaaaaaame is Here!! ");
+		stage.setTitle("Gaaaaaame is Here!!");
 		Scene scene =new Scene(createContent());
-		stage.  setScene(scene);
+		stage.setScene(scene);
+		
+		buttonPressing(scene);
 		
 		stage.show();
 		
 	}
+	
+	private void buttonPressing(Scene s) {
+		s.setOnKeyPressed(e-> {
+			switch (e.getCode()) {
+			case A:
+				player.movingRight = false;
+				player.movingLeft = true;
+				break;
+			case D: 
+				player.movingLeft = false;
+				player.movingRight = true;
+				break;
+			case SPACE:
+				shoot(player);
+				break;
+			}
+		});
+	}
+	
 	private void setUpLevel() {
 		levelWidth= Level_Info.LEVEL1[0].length()*60;
 		

@@ -1,48 +1,43 @@
 package com.halflife.entities;
 
-import java.awt.event.*;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
-import javafx.scene.input.KeyCode;
-
-public class Player extends KeyAdapter {
+public class Player extends RectObject{
 	
-	// Players x and y coordinates.
-	private double x;
-	private double y;
-
-	public Player(double x, double y) {
-		this.x = x;
-		this.y = y;
+	public Player(int x, int y, int width, int height, Color col) {
+		super(x, y, width, height, "player", col);
 	}
-	
-	// This will detect when a keyboard button is pressed, which controls the player.
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		
-		if (key == KeyEvent.VK_W) {
-			jump();
-		} else if (key == KeyEvent.VK_A) {
+
+	@Override
+	public void Fade() {
+		if (getType().equals("player")) {
+				
+			 ft = new FadeTransition(Duration.millis(500), this);
 			
-		} else if (key == KeyEvent.VK_S) {
-			crouch();
-		} else if (key == KeyEvent.VK_D) {
+			 ft.setFromValue(1.0);
+			 ft.setToValue(0.0);
+			 ft.setCycleCount(10);
+			 ft.setAutoReverse(true);
+			    
 			
-		} 
-	 
-		
-		
-	}
-	
-	// This will detect when a keyboard button has been released.
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-	}
-	
-	private void jump() {
-		
-	}
-	
-	private void crouch() {
-		
+			 Double opa = this.getOpacity();
+	         if (opa.intValue() == 0) {
+	             return;
+	         }
+	            
+	         Animation.Status as = ft.getStatus();
+	         
+	         if (as == Animation.Status.RUNNING) {
+	             return;
+	         
+	         }
+	         if (as == Animation.Status.STOPPED) {
+	             ft.play();
+	         }           
+	         
+		}
 	}
 }

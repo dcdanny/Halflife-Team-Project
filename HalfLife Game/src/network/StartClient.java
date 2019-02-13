@@ -3,15 +3,16 @@ package network;
 import java.net.*;
 import java.io.*;
 
-public class startServer {
 
+public class StartClient {
+	
 	public static void main(String [] args) {
-		System.out.println("Start server...");
+		System.out.println("Start client...");
 		//Can't use 0 - 1023, Use 1024 - 65 535
 		final int port = 1034;
 		System.out.println("port: "+port);
-		Server server = new Server(port);
-		server.getclientTable().getQueue("dan");
+		Client client = new Client(port,"dan","localhost");
+		//server.getclientTable().getQueue("dan");
 		
 	}
 }
