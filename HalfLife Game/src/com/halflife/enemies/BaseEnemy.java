@@ -1,6 +1,6 @@
 package com.halflife.enemies;
 
-import com.halflife.shapes.RectObject;
+import com.halflife.entities.RectObject;
 
 import javafx.scene.paint.Color;
 
