@@ -18,6 +18,9 @@ public class RectObject extends Rectangle {
 	protected FadeTransition ft;
     protected Rectangle rect;
 
+    public float gravity = 0.5f;
+	private boolean falling = true;
+	private boolean jumping = false;
     public boolean movingLeft = false; 
     public boolean movingRight = false;
     
@@ -70,6 +73,20 @@ public class RectObject extends Rectangle {
 	public void setDead(boolean dead) {
 		this.dead = dead;
 	}
+	public boolean isFalling() {
+		return falling;
+	}
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
+	public boolean isJumping() {
+		return jumping;
+	}
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+	
+	
 	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
 }
