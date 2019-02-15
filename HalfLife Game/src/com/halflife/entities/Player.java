@@ -9,8 +9,15 @@ public class Player extends RectObject{
 	
 	public Player(int x, int y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
+		movement(x, y);
 	}
 
+	public void movement(int x, int y) {
+		if (isFalling() || isJumping()) {
+			y += gravity;
+		}
+	}
+	
 	@Override
 	public void Fade() {
 		if (getType().equals("player")) {
