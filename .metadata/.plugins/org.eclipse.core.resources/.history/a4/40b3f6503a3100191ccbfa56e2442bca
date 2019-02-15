@@ -13,11 +13,11 @@ public class Player extends RectObject{
 		movement(x, y);
 
 		
-	}
+
 	
 
 
-	public void movement(double x, double y) {
+	public void movement(int x, int y) {
 		if (isFalling() || isJumping()) {
 			y += gravity;
 		}
