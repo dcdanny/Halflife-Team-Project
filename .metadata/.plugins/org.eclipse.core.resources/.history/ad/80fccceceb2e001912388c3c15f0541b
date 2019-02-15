@@ -1,0 +1,21 @@
+package main;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.image.Image;
+
+public class DeathScreen {
+
+	 Image death = null;
+		try {
+			death = new Image(new FileInputStream("res/death screen.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
+		
+	}
+}
+

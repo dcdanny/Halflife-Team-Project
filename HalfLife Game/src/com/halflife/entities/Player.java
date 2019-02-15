@@ -7,11 +7,17 @@ import javafx.util.Duration;
 
 public class Player extends RectObject{
 	
-	public Player(int x, int y, int width, int height, Color col) {
+	public Player(double x, double y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
+<<<<<<< Updated upstream
 		movement(x, y);
+=======
+		
+>>>>>>> Stashed changes
 	}
+	
 
+<<<<<<< Updated upstream
 	public void movement(int x, int y) {
 		if (isFalling() || isJumping()) {
 			y += gravity;
@@ -19,6 +25,9 @@ public class Player extends RectObject{
 	}
 	
 	@Override
+=======
+	
+>>>>>>> Stashed changes
 	public void Fade() {
 		if (getType().equals("player")) {
 				

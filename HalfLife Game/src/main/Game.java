@@ -24,31 +24,31 @@ import com.halflife.entities.*;
 
 public class Game extends Application {
 	private Pane root= new Pane();
-<<<<<<< HEAD
+	private Pane foreground=new Pane();
+	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
-	private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
-=======
+	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
+
 	private Player player=new Player(500,300,40,50,Color.WHITE);
->>>>>>> 2e3380f7083ffdb1ef0c29d094e8d292dd0cd6fe
+
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 
 	private Parent createContent() {
-		root.setPrefSize(800, 600);
+		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
+		//root.setPrefSize(800, 600);
 		root.getChildren().add(player);
-		root.getChildren().add(clock);
-		root.getChildren().add(heart);
+		foreground.getChildren().add(clock);
+		foreground.getChildren().add(heart);
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
-		root.setStyle("-fx-background-color: #4f7b8a;");
-<<<<<<< HEAD
-		//root.getChildren().add(DeathShow);
-		return root;
-=======
->>>>>>> 2e3380f7083ffdb1ef0c29d094e8d292dd0cd6fe
+		//root.setStyle("-fx-background-color: #4f7b8a;");
 		
+		//root.getChildren().add(DeathShow);
+		
+		//display.getChildren().addAll(root);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -57,7 +57,7 @@ public class Game extends Application {
 		};
 		
 		timer.start();
-		
+		display.getChildren().addAll(bg,root,foreground);
 		return root;	
 	}
 	
@@ -82,6 +82,7 @@ public class Game extends Application {
 
 		if (player.movingLeft)
 			player.moveLeft(5);
+			
 		else if (player.movingRight)
 			player.moveRight(5);
 		
@@ -104,36 +105,46 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		setUpLevel();
+		createContent();
 		stage.setTitle("Gaaaaaame is Here!!");
-		Scene scene =new Scene(createContent());
+		Scene scene =new Scene(display);
 		stage.setScene(scene);
 		
 		buttonPressing(scene);
 		
 		stage.show();
 		
+		
 	}
 	
 	private void buttonPressing(Scene s) {
+	
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
 				player.movingRight = false;
 				player.movingLeft = true;
+				root.setLayoutX(root.getLayoutX()+5);
 				break;
 			case D: 
 				player.movingLeft = false;
 				player.movingRight = true;
+				root.setLayoutX(root.getLayoutX()-5);
+				root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
 			case SPACE:
 				shoot(player);
 				break;
 			}
+			
 		});
+		
 	}
 	
 	private void setUpLevel() {
-		levelWidth= Level_Info.LEVEL1[0].length()*60;
+		levelWidth= Level_Info.LEVEL1[0].length()*150;
+	
+		
 		
 		for (int i = 0; i < Level_Info.LEVEL1.length; i++) {
 			String line=Level_Info.LEVEL1[i];
@@ -150,6 +161,10 @@ public class Game extends Application {
 				}
 			}
 		}
+		
+		
+		
+		
 		
 	}
 	public static void main(String[] args) {

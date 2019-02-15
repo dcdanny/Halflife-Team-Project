@@ -29,17 +29,15 @@ public class RectObject extends Rectangle {
 	public RectObject(double d, double e,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
-<<<<<<< HEAD:HalfLife Game/src/main/RectObject.java
-	 	setTranslateX(x);
-		setTranslateY(y);
+
 	
 		//playerFade();
-=======
+
 	 	setTranslateX(d);
 		setTranslateY(e);
-		Fade();
+
 		
->>>>>>> 2e3380f7083ffdb1ef0c29d094e8d292dd0cd6fe:HalfLife Game/src/com/halflife/entities/RectObject.java
+
 		/* Ignore for now, i was testing using images on top of shapes
 		 Image player = null;
 		try {
@@ -62,10 +60,6 @@ public class RectObject extends Rectangle {
 		movingRight = false;
 	}
 	
-	//respawn animation when a player dies and respawns
-	public void Fade() {
-		//Overriding in Player class
-	}
 
 	public RectObject getBullet(RectObject shooter, Color colour) {
 		RectObject bullet = new RectObject(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
