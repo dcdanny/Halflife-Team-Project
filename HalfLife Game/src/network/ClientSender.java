@@ -27,7 +27,7 @@ public void run() {
 	try {
 		
 	// Then loop forever sending messages to recipients via the server:
-		
+		ObjectOutputStream out = new ObjectOutputStream(toServer);
 		while (true) {
 			//String recipient = user.readLine();
 			
@@ -42,12 +42,14 @@ public void run() {
 				server.println(text);		// Matches DDDDD in ServerReceiver
 			}
 			-------------------------------------------------*/
-			System.out.println("send message! ");
-			String recipient = user.readLine();
-			System.out.println("aab!");
-			Message messagetoSend = new Message("DANN","Message Content!");
-			ObjectOutputStream out = new ObjectOutputStream(toServer);
-			System.out.println("sending message: "+messagetoSend.toString());
+			System.out.println("----- Message Object -----");
+			System.out.print("From: ");
+			String namefrom = user.readLine();
+			System.out.print("Content: ");
+			String msgcontent = user.readLine();
+			Message messagetoSend = new Message(namefrom,msgcontent);
+
+			System.out.println("----- ----- ----- -----");
 			out.writeObject(messagetoSend);
 			out.flush();
 			System.out.println("sent message: "+messagetoSend.toString());
