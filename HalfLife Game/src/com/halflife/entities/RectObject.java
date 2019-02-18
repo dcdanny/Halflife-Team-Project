@@ -84,6 +84,7 @@ public class RectObject extends Rectangle {
 	public double getYLocation() {
 		return this.getTranslateY();
 	}
+
 	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
 }

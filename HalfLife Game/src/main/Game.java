@@ -18,7 +18,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+
+import com.halflife.enemies.BaseEnemy;
 import com.halflife.entities.*;
 
 
@@ -29,8 +32,9 @@ public class Game extends Application {
 	//private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player= new Player(500,300,40,50,Color.RED);
-
+	private Player player= new Player(500,300,40,50,Color.WHITE);
+	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
+	
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
@@ -40,6 +44,7 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
 		//root.setPrefSize(800, 600);
 		root.getChildren().add(player);
+		root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		//root.getChildren().add(enemy1);
@@ -78,6 +83,10 @@ public class Game extends Application {
 	    }
 	}
 	
+	
+
+	
+	
 	// Game loop variables
 	long lastTime = System.nanoTime();
 	final double numberOfTicks = 60.0;
@@ -115,8 +124,30 @@ public class Game extends Application {
 		}	
 	}
 	
+	
+	public void checkCollision(Shape block) {
+		  boolean isCollided = false;
+		  for (Node static_bloc : getAllNodes(root)) {
+		    if (static_bloc != block) {
+		      ((Shape) static_bloc).setFill(Color.GREEN);
+
+		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+		    	  isCollided = true;
+		      }
+		    }
+		  }
+
+		  if (isCollided) {
+		    block.setFill(Color.RED);
+		  } else {
+		    block.setFill(Color.WHITE);
+		  }
+	}
+	
+	
 	private void tick() {
 		player.tick();
+		checkCollision(player);
 	}
 	
 	//TODO: Need to delete each bullet object after use
@@ -140,6 +171,7 @@ public class Game extends Application {
 		
 		
 	}
+	
 	
 	private void buttonPressing(Scene s) {
 	
@@ -185,7 +217,6 @@ public class Game extends Application {
 				player.setVelY(0);
 				break;
 			case W:
-				//player.setVelY(0);
 				break;
 			}
 			
