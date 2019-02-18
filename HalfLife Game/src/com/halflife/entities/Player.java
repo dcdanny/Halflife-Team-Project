@@ -7,21 +7,35 @@ import javafx.util.Duration;
 
 public class Player extends RectObject{
 	
+	
+	private double velX = 0;
+	private double velY = 0;
+	
 	public Player(double x, double y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
 
-		movement(x, y);
-
-		
+		movement(x, y);		
 	}
 	
-
-
+	public void tick() {
+		setTranslateX(getTranslateX() + velX);
+		setTranslateY(getTranslateY() + velY);
+	}
+	
+	public void setVelX(double v) {
+		this.velX = v;
+	}
+	public void setVelY(double v) {
+		this.velY = v;
+	}
+	
 	public void movement(double x, double y) {
 		if (isFalling() || isJumping()) {
 			y += gravity;
 		}
 	}
+	
+	
 	
 
 	public void Fade() {

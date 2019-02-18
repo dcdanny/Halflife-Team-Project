@@ -21,8 +21,6 @@ public class RectObject extends Rectangle {
     public float gravity = 0.5f;
 	private boolean falling = true;
 	private boolean jumping = false;
-    public boolean movingLeft = false; 
-    public boolean movingRight = false;
     
 	private boolean dead= false;
 	private final String type;
@@ -30,7 +28,7 @@ public class RectObject extends Rectangle {
 		super (width,height,col);
 		this.type =type;
 
-	
+		
 		//playerFade();
 
 	 	setTranslateX(d);
@@ -55,9 +53,8 @@ public class RectObject extends Rectangle {
 	public void moveRight(int i) {
 		setTranslateX(getTranslateX()+i); // you could change this, idk try implement speed? rather than straight translate
 	}
-	public void resetMovement() {
-		movingLeft = false;
-		movingRight = false;
+	public void jump(int i) {
+		setTranslateY(getTranslateY()-i);	
 	}
 	
 

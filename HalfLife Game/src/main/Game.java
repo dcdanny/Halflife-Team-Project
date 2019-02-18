@@ -26,10 +26,10 @@ public class Game extends Application {
 	private Pane root= new Pane();
 	private Pane foreground=new Pane();
 	private Pane display=new Pane();
-	private StackPane DeathShow=new DeathScreen();
+	//private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player=new Player(500,300,40,50,Color.WHITE);
+	private Player player= new Player(500,300,40,50,Color.WHITE);
 
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
@@ -78,23 +78,47 @@ public class Game extends Application {
 	    }
 	}
 	
+	// Game loop variables
+	long lastTime = System.nanoTime();
+	final double numberOfTicks = 60.0;
+	double ns = 1000000000 / numberOfTicks;
+	double delta = 0;
+	int updates = 0;
+	int frames = 0;
+	long timer = System.currentTimeMillis();
 	private void update() {
-
-		if (player.movingLeft)
-			player.moveLeft(5);
-			
-		else if (player.movingRight)
-			player.moveRight(5);
+		long now = System.nanoTime();
+		delta += (now - lastTime) / ns;
+		lastTime = now;
 		
-		player.resetMovement();
+		if (delta >= 1) {
+			tick();
+			updates++;
+			delta--;
+		}
+		
+		frames++;
+		
+		if (System.currentTimeMillis() - timer > 1000) {
+			timer += 1000;
+			System.out.println(updates + " Ticks, Fps " + frames);
+			updates = 0;
+			frames = 0;
+		}
+		
 
 		for (Node object : getAllNodes(root)) {
 			RectObject newObj = (RectObject) object;
 			if (newObj.getType().equals("playerbullet")) {
 				newObj.moveRight(5);
 			}
-		}
+		}	
 	}
+	
+	private void tick() {
+		player.tick();
+	}
+	
 	
 	public void shoot(RectObject shooter) {
 		RectObject bullet = player.getBullet(player, Color.GREEN);
@@ -111,6 +135,7 @@ public class Game extends Application {
 		stage.setScene(scene);
 		
 		buttonPressing(scene);
+		buttonReleasing(scene);
 		
 		stage.show();
 		
@@ -122,18 +147,41 @@ public class Game extends Application {
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
-				player.movingRight = false;
-				player.movingLeft = true;
+				player.setVelX(-5);
 				root.setLayoutX(root.getLayoutX()+5);
 				break;
 			case D: 
-				player.movingLeft = false;
-				player.movingRight = true;
+				player.setVelX(5);
 				root.setLayoutX(root.getLayoutX()-5);
 				root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
+			case S: 
+				player.setVelY(5);
+				break;
 			case SPACE:
-				shoot(player);
+				player.setVelY(-5);
+				break;
+			}
+			
+		});
+		
+	}
+	
+	private void buttonReleasing(Scene s) {
+		
+		s.setOnKeyReleased(e-> {
+			switch (e.getCode()) {
+			case A:
+				player.setVelX(0);
+				break;
+			case D: 
+				player.setVelX(0);
+				break;
+			case S: 
+				player.setVelY(0);
+				break;
+			case SPACE:
+				player.setVelY(0);
 				break;
 			}
 			
