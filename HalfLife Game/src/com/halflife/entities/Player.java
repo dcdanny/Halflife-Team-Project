@@ -1,6 +1,7 @@
 package com.halflife.entities;
 
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -10,6 +11,7 @@ public class Player extends RectObject{
 	
 	private double velX = 0;
 	private double velY = 0;
+	private int gravity = 0;
 	
 	public Player(double x, double y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
@@ -18,8 +20,8 @@ public class Player extends RectObject{
 	}
 	
 	public void tick() {
-		setTranslateX(getTranslateX() + velX);
-		setTranslateY(getTranslateY() + velY);
+		moveX((int)velX);
+		moveY((int)velY);
 	}
 	
 	public void setVelX(double v) {
@@ -27,6 +29,26 @@ public class Player extends RectObject{
 	}
 	public void setVelY(double v) {
 		this.velY = v;
+	}
+	
+	public void jump() {
+		double startingY = this.getTranslateY();
+		
+		AnimationTimer jTimer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				setVelY(-10+gravity);
+				gravity += 1;
+				System.out.println("Starting Y " + startingY + " - Current Y " + getYLocation());
+				if (startingY < getYLocation()) {
+					stop();
+                    gravity = 0;
+                    setVelY(0);
+				}
+			}
+		};
+		
+		jTimer.start();
 	}
 	
 	public void movement(double x, double y) {
@@ -65,5 +87,9 @@ public class Player extends RectObject{
 	         }           
 	         
 		}
+	}
+	
+	public int getGravity() {
+		return gravity;
 	}
 }

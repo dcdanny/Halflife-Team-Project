@@ -29,13 +29,13 @@ public class Game extends Application {
 	//private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player= new Player(500,300,40,50,Color.WHITE);
+	private Player player= new Player(500,300,40,50,Color.RED);
 
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
-
+	
 	private Parent createContent() {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
 		//root.setPrefSize(800, 600);
@@ -110,7 +110,7 @@ public class Game extends Application {
 		for (Node object : getAllNodes(root)) {
 			RectObject newObj = (RectObject) object;
 			if (newObj.getType().equals("playerbullet")) {
-				newObj.moveRight(5);
+				newObj.moveX(5);
 			}
 		}	
 	}
@@ -119,10 +119,9 @@ public class Game extends Application {
 		player.tick();
 	}
 	
-	
+	//TODO: Need to delete each bullet object after use
 	public void shoot(RectObject shooter) {
 		RectObject bullet = player.getBullet(player, Color.GREEN);
-		System.out.println(bullet.getType());
 		root.getChildren().add(bullet);
 	}
 	
@@ -158,8 +157,13 @@ public class Game extends Application {
 			case S: 
 				player.setVelY(5);
 				break;
+			case W:
+				if (player.getGravity() == 0) {
+				player.jump();
+				}
+				break;
 			case SPACE:
-				player.setVelY(-5);
+				shoot(player);
 				break;
 			}
 			
@@ -180,8 +184,8 @@ public class Game extends Application {
 			case S: 
 				player.setVelY(0);
 				break;
-			case SPACE:
-				player.setVelY(0);
+			case W:
+				//player.setVelY(0);
 				break;
 			}
 			

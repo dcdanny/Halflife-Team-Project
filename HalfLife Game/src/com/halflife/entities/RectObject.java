@@ -47,14 +47,11 @@ public class RectObject extends Rectangle {
 		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
 		*/
 	}
-	public void moveLeft(int i) {
-		setTranslateX(getTranslateX()-i); // you could change this, idk try implement speed? rather than straight translate
-	}
-	public void moveRight(int i) {
+	public void moveX(int i) {
 		setTranslateX(getTranslateX()+i); // you could change this, idk try implement speed? rather than straight translate
 	}
-	public void jump(int i) {
-		setTranslateY(getTranslateY()-i);	
+	public void moveY(int i) {
+		setTranslateY(getTranslateY()+i);	
 	}
 	
 
@@ -83,8 +80,10 @@ public class RectObject extends Rectangle {
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
-	
-	
+
+	public double getYLocation() {
+		return this.getTranslateY();
+	}
 	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
 }
