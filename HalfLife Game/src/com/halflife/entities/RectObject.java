@@ -18,18 +18,24 @@ public class RectObject extends Rectangle {
 	protected FadeTransition ft;
     protected Rectangle rect;
 
-    public boolean movingLeft = false; 
-    public boolean movingRight = false;
+    public float gravity = 0.5f;
+	private boolean falling = true;
+	private boolean jumping = false;
     
 	private boolean dead= false;
 	private final String type;
 	public RectObject(double d, double e,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
+
+		
+		//playerFade();
+
 	 	setTranslateX(d);
 		setTranslateY(e);
-		Fade();
+
 		
+
 		/* Ignore for now, i was testing using images on top of shapes
 		 Image player = null;
 		try {
@@ -41,21 +47,13 @@ public class RectObject extends Rectangle {
 		 this.setFill(new ImagePattern(player, 0, 0, 50, 50, false));
 		*/
 	}
-	public void moveLeft(int i) {
-		setTranslateX(getTranslateX()-i); // you could change this, idk try implement speed? rather than straight translate
-	}
-	public void moveRight(int i) {
+	public void moveX(int i) {
 		setTranslateX(getTranslateX()+i); // you could change this, idk try implement speed? rather than straight translate
 	}
-	public void resetMovement() {
-		movingLeft = false;
-		movingRight = false;
+	public void moveY(int i) {
+		setTranslateY(getTranslateY()+i);	
 	}
 	
-	//respawn animation when a player dies and respawns
-	public void Fade() {
-		//Overriding in Player class
-	}
 
 	public RectObject getBullet(RectObject shooter, Color colour) {
 		RectObject bullet = new RectObject(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
@@ -70,6 +68,23 @@ public class RectObject extends Rectangle {
 	public void setDead(boolean dead) {
 		this.dead = dead;
 	}
+	public boolean isFalling() {
+		return falling;
+	}
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
+	public boolean isJumping() {
+		return jumping;
+	}
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+
+	public double getYLocation() {
+		return this.getTranslateY();
+	}
+
 	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
 }
