@@ -182,11 +182,11 @@ public class Game extends Application {
 			switch (e.getCode()) {
 			case A:
 				player.setVelX(-5);
-				root.setLayoutX(root.getLayoutX()+5);
+				root.setLayoutX(root.getLayoutX()+10);
 				break;
 			case D: 
 				player.setVelX(5);
-				root.setLayoutX(root.getLayoutX()-5);
+				root.setLayoutX(root.getLayoutX()-10);
 				root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
 			case S: 

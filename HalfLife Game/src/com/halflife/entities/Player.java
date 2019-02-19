@@ -13,7 +13,7 @@ public class Player extends RectObject{
 	
 	private double velX = 0;
 	private double velY = 0;
-	private int gravity = 0;
+	private double gravity = 0;
 
 	public Player(double x, double y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
@@ -40,7 +40,7 @@ public class Player extends RectObject{
 			@Override
 			public void handle(long now) {
 				setVelY(-10+gravity);
-				gravity += 1;
+				gravity += .5;
 				if (startingY < getYLocation()) {
 					stop();
                     gravity = 0;
@@ -90,7 +90,7 @@ public class Player extends RectObject{
 		}
 	}
 	
-	public int getGravity() {
+	public double getGravity() {
 		return gravity;
 	}
 
