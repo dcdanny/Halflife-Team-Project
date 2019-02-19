@@ -22,6 +22,7 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 import com.halflife.enemies.BaseEnemy;
+import com.halflife.enemies.SpikePlatform;
 import com.halflife.entities.*;
 
 
@@ -34,7 +35,7 @@ public class Game extends Application {
 
 	private Player player= new Player(500,300,40,50,Color.WHITE);
 	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
-	
+	private SpikePlatform sp = new SpikePlatform(400,500,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart =new Lives();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
@@ -47,6 +48,8 @@ public class Game extends Application {
 		root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
+		root.getChildren().add(sp);
+		root.getChildren().add(sp.getSpike());
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
 		//root.setStyle("-fx-background-color: #4f7b8a;");
