@@ -43,7 +43,8 @@ public class Server {
 	          (new ServerReceiver(clientName, fromClient, clientTable)).start();
 
 	          // We create and start a new thread to write to the client:
-	          PrintStream toClient = new PrintStream(socket.getOutputStream());
+	          //PrintStream toClient = new PrintStream(socket.getOutputStream());
+	          ObjectOutputStream toClient = new ObjectOutputStream(socket.getOutputStream());
 	          (new ServerSender(clientTable.getQueue(clientName), toClient)).start();
 	          
 	        }

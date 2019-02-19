@@ -8,9 +8,9 @@ import java.net.*;
 
 public class ClientReceiver extends Thread {
 
-  private BufferedReader server;
+  private ObjectInputStream server;
 
-  ClientReceiver(BufferedReader server) {
+  ClientReceiver(ObjectInputStream server) {
     this.server = server;
   }
 
@@ -18,16 +18,21 @@ public class ClientReceiver extends Thread {
     // Print to the user whatever we get from the server:
     try {
       while (true) {
-        String s = server.readLine(); // Matches FFFFF in ServerSender.java
-        if (s != null)                
-          System.out.println(s);
+        //String s = server.readLine(); // Matches FFFFF in ServerSender.java
+		Message receivedMessage = (Message) server.readObject();
+		System.out.println("aa"+receivedMessage.toString());
+        if (receivedMessage != null)                
+          System.out.println(receivedMessage);
         else
           Report.errorAndGiveUp("Server seems to have died"); 
       }
     }
     catch (IOException e) {
       Report.errorAndGiveUp("Server seems to have died " + e.getMessage());
-    }
+    } catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 }
 
