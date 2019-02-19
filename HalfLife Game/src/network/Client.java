@@ -19,14 +19,16 @@ class Client {
     String hostname = args[1];*/
 
     // Open sockets:
-    PrintStream toServer = null;
-    BufferedReader fromServer = null;
+    ObjectOutputStream toServer = null;
+    ObjectInputStream fromServer = null;
     Socket server = null;
 
     try {
       server = new Socket(hostname, port); // Matches AAAAA in Server.java
-      toServer = new PrintStream(server.getOutputStream());
-      fromServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
+      //toServer = new PrintStream(server.getOutputStream());
+      toServer = new ObjectOutputStream(server.getOutputStream());
+      //fromServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
+      fromServer = new ObjectInputStream(server.getInputStream());
     } 
     catch (UnknownHostException e) {
       Report.errorAndGiveUp("Unknown host: " + hostname);
