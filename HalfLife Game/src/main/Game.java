@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -37,7 +38,8 @@ public class Game extends Application {
 	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
 	private SpikePlatform sp = new SpikePlatform(400,500,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
-	private Lives heart =new Lives();
+	private Lives heart = new Lives();
+	private Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	
@@ -48,6 +50,7 @@ public class Game extends Application {
 		root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
+		foreground.getChildren().add(ammo);
 		root.getChildren().add(sp);
 		root.getChildren().add(sp.getSpike());
 		//root.getChildren().add(enemy1);
@@ -87,8 +90,6 @@ public class Game extends Application {
 	}
 	
 	
-
-	
 	
 	// Game loop variables
 	long lastTime = System.nanoTime();
@@ -121,9 +122,8 @@ public class Game extends Application {
 
 		for (Node object : getAllNodes(root)) {
 			RectObject newObj = (RectObject) object;
-			if (newObj.getType().equals("playerbullet")) {
-				newObj.moveX(5);
-			}
+			if (newObj.isDead())
+				root.getChildren().remove(newObj);
 		}	
 	}
 	
@@ -151,12 +151,7 @@ public class Game extends Application {
 	private void tick() {
 		player.tick();
 		checkCollision(player);
-	}
-	
-	//TODO: Need to delete each bullet object after use
-	public void shoot(RectObject shooter) {
-		RectObject bullet = player.getBullet(player, Color.GREEN);
-		root.getChildren().add(bullet);
+
 	}
 	
 	@Override
@@ -198,7 +193,7 @@ public class Game extends Application {
 				}
 				break;
 			case SPACE:
-				shoot(player);
+				player.shoot(root);;
 				break;
 			}
 			

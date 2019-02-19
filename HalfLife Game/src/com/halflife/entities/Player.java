@@ -4,9 +4,11 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+import main.Ammo;
 
 public class Player extends RectObject{
 	
@@ -14,7 +16,8 @@ public class Player extends RectObject{
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-
+	private int ammo = 10; 
+	
 	public Player(double x, double y, int width, int height, Color col) {
 		super(x, y, width, height, "player", col);
 
@@ -57,8 +60,17 @@ public class Player extends RectObject{
 			y += gravity;
 		}
 	}
-	
 
+	
+	public void shoot(Pane root) {
+		if (ammo > 0) {
+			Bullet bullet = getBullet(this, Color.RED);
+			root.getChildren().add(bullet);
+			ammo--;
+		}else
+			System.out.println("No Bullets");
+		Ammo.setAmmo(ammo);
+	}
 	
 
 	public void Fade() {
@@ -94,4 +106,7 @@ public class Player extends RectObject{
 		return gravity;
 	}
 
+	public int getAmmo() {
+		return ammo;
+	}
 }

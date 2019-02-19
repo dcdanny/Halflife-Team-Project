@@ -55,8 +55,8 @@ public class RectObject extends Rectangle {
 	}
 	
 
-	public RectObject getBullet(RectObject shooter, Color colour) {
-		RectObject bullet = new RectObject(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
+	public Bullet getBullet(RectObject shooter, Color colour) {
+		Bullet bullet = new Bullet(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
 		return bullet;
 	}
 	public String getType() {
@@ -84,6 +84,7 @@ public class RectObject extends Rectangle {
 	public double getYLocation() {
 		return this.getTranslateY();
 	}
+	
 
 	
 //moving up and down will need to apply physics so its not included but we could try move up down for moving platforms (later)
