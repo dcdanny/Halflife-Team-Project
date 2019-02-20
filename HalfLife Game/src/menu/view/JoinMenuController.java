@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StartMenuController {
+public class JoinMenuController {
 	
 	private Stage primaryStage;
 	
@@ -17,18 +17,17 @@ public class StartMenuController {
 	}
 	
 	@FXML
-	private void goStart() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
-		Pane mainMenu = loader.load();
-		MainMenuController controller = loader.getController();
+	private void goBack() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("multimenu.fxml"));
+		Pane joinMenu = loader.load();
+		MultiMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
-		Scene scene = new Scene(mainMenu);
+		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 	
 	@FXML
-	private void goExit() throws IOException {
-		System.exit(0);
+	private void goNext() throws IOException {
 	}
 }

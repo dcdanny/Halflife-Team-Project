@@ -17,7 +17,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="243.0" layoutY="255.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" text="EXIT">
+      <Button layoutX="243.0" layoutY="255.0" mnemonicParsing="false" onAction="#goExit" prefHeight="48.0" prefWidth="115.0" text="EXIT">
          <font>
             <Font size="25.0" />
          </font>
