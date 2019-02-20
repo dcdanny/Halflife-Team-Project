@@ -36,6 +36,7 @@ public class Player extends RectObject{
 		this.velY = v;
 	}
 	
+	
 	public void jump() {
 		double startingY = this.getTranslateY();
 		

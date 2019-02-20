@@ -84,6 +84,9 @@ public class RectObject extends Rectangle {
 	public double getYLocation() {
 		return this.getTranslateY();
 	}
+	public double getXLocation() {
+		return this.getTranslateX();
+	}
 	
 
 	
