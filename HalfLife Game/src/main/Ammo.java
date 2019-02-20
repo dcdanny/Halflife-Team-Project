@@ -15,11 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Ammo extends Group {
-	private static int ammo=10;
+	
+	// Number of bullets the player starts with
+	private static int no_of_bullets = 6;
+	
 	private ArrayList<ImageView>ammoList=new ArrayList<ImageView>();
 	
-	public Ammo(){ 
-		super();	
+	// Main method
+	public Ammo(){ 	
 	    Image image = null;
 	    try {
 	    	image = new Image(new FileInputStream("res/ammo.png"));
@@ -28,22 +31,23 @@ public class Ammo extends Group {
 	    }      
 
 	    List<ImageView> ammunition = new ArrayList<ImageView>();
-	    for (int i = 0; i < 10; i++) {
+	    for (int i = 0; i < no_of_bullets; i++) {
 	    	ammunition.add(new ImageView(image));
 	    }
 
 	    setAmmoImages(ammunition);
 	    
-	    for (int k = 0; k < 10; k++) {
+	    for (int k = 0; k < no_of_bullets; k++) {
 	    	this.getChildren().add(ammunition.get(k));
 	    	ammoList.add(ammunition.get(k));
 	    }	   	   
+
      
-}
+	}
 	
 	
 	public void setAmmoImages(List<ImageView> ammunition) {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < no_of_bullets; i++) {
 	    	ammunition.get(i).setX(i*20 + 30);
 	    	ammunition.get(i).setY(0);
 	    	ammunition.get(i).setFitHeight(75);
@@ -54,14 +58,14 @@ public class Ammo extends Group {
 
 	public void lostBullet() {
 		
-		if (ammo>0) {
+		if (no_of_bullets>0) {
 			this.getChildren().remove(ammoList.get(ammoList.size()-1));
 			ammoList.remove(ammoList.size()-1);
-			ammo=ammo-1;
+			no_of_bullets --;
 		}
 	}
 	
 	public static void setAmmo(int i) {
-		ammo = i;
+		no_of_bullets = i;
 	}
 }
