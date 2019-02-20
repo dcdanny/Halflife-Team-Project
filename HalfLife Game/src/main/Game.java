@@ -156,6 +156,7 @@ public class Game extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		stage.setResizable(false);
 		setUpLevel();
 		createContent();
 		stage.setTitle("Gaaaaaame is Here!!");
