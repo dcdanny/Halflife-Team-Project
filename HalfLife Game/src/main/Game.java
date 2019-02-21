@@ -157,12 +157,21 @@ public class Game extends Application {
 
 	private void tick() {
 		player.tick();
+		checkPos();
 		CheckCollision.checkForCollision(player, root);
 		if (CheckCollision.getCollided()) {
 			
 		}
 	}
 	
+	private void checkPos() {
+		double x =player.getXLocation();
+		if (x>400) {
+			root.setLayoutX(root.getTranslateX()-(x-400));
+		}
+		
+	}
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
