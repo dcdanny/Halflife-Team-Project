@@ -131,7 +131,9 @@ public class Game extends Application {
 	private void tick() {
 		player.tick();
 		CheckCollision.checkForCollision(player, root);
-
+		if (CheckCollision.getCollided()) {
+			
+		}
 	}
 	
 	@Override

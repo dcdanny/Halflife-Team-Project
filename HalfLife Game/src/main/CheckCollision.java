@@ -9,12 +9,13 @@ import main.Game;
 
 public class CheckCollision {
 
+	private static boolean collided;
+	
 	public CheckCollision() {
 
 	}
 
-	static void checkForCollision(Shape block, Pane root) {
-		boolean collided;
+	public static void checkForCollision(Shape block, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
 		    if (static_bloc != block) {
@@ -26,14 +27,14 @@ public class CheckCollision {
 		    }
 		  }
 
-		  if (getCollided(collided)) {
+		  if (getCollided()) {
 		    block.setFill(Color.RED);
 		  } else {
 		    block.setFill(Color.WHITE);
 		  }
 	}
 	
-	private static boolean getCollided(boolean collided) {
+	public static boolean getCollided() {
 		return collided;
 	}
 
