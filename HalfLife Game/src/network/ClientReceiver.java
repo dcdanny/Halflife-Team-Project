@@ -18,7 +18,6 @@ public class ClientReceiver extends Thread {
     // Print to the user whatever we get from the server:
     try {
       while (true) {
-        //String s = server.readLine(); // Matches FFFFF in ServerSender.java
 		Message receivedMessage = (Message) server.readObject();
         if (receivedMessage != null)                
           System.out.println(receivedMessage);

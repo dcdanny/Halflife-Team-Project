@@ -35,8 +35,6 @@ public class Server extends Thread {
 				// Listen to the socket waiting for new clients wanting to connect
 				Socket socket = serverSocket.accept();
 
-
-
 				//TODO:Make it so IDs can be freed up if player quits. Currently just adds one to highest player id
 				String clientName = "Player" + numClients;
 				numClients++;
@@ -49,38 +47,34 @@ public class Server extends Thread {
 					System.out.println(clientName + " connected");
 				
 					//Once client is connected, hand over to sender receiver threads
-					// We create and start a new thread to read from the client:
 					(new ServerReceiver(clientName, fromClient, clientTable)).start();
 	
-					// We create and start a new thread to write to the client:
-					//PrintStream toClient = new PrintStream(socket.getOutputStream());
+					// Create and start a new thread to write to the client:
 					ObjectOutputStream toClient = new ObjectOutputStream(socket.getOutputStream());
 					(new ServerSender(clientTable.getQueue(clientName), toClient)).start();
 				}
 			}
 		}catch (IOException e) {
-			System.out.println("Network error " + e.getMessage());
+			Report.error("Network error " + e.getMessage());
 		}
 	}
 	public void setAllowNewPlayers(boolean allowNewPlayers) {
 		this.allowNewPlayers = allowNewPlayers;
 	}
-	/*public Message getMsg() {
-		return Message ;
-	}*/
 	
 	public void sendToAll(Message message) {
 		for(String client : clientTable.showAll()) {
 			BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
-			if (recipientsQueue != null && client != "server")
+			if (recipientsQueue != null && client != "server") {
 				recipientsQueue.offer(message);
+				System.out.println("Sent to: "+client);//DEBUG----------------------
+			}
 			else
-				Report.error("Can't/won't send to "+ client + ": " + message);
-			System.out.println("Sent to: "+client);
+				Report.error("Can't/won't send to "+ client + ": " + message);//DEBUG----------------------
 		}
-		
 	}
 	public BlockingQueue<Message> getReceived() {
+		//Gets message queue of messages received by the server
 		String recipient = "server";
 		BlockingQueue<Message> recipientsQueue = clientTable.getQueue(recipient); // Matches EEEEE in ServerSender.java
 
