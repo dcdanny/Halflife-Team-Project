@@ -130,7 +130,7 @@ public class Game extends Application {
 	
 	private void tick() {
 		player.tick();
-		CheckCollision.checkIt(player, root);
+		CheckCollision.checkForCollision(player, root);
 
 	}
 	
