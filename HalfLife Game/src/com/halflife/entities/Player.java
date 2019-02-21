@@ -38,9 +38,21 @@ public class Player extends RectObject{
 		
 		RectObject collidedObj = CheckCollision.checkForCollision(this, root);
 		if (CheckCollision.getCollided()) {
-			setVelY(0);
-			setTranslateY(collidedObj.getTranslateY() - 50);
+			if (collidedObj.getType().equals("plat")) {
+				 setVelY(0);
+				setTranslateY(collidedObj.getTranslateY() - 50);
+		    }
+			else if (collidedObj.getType().equals("goal")) 
+				System.out.println("Winner");
+			else if (collidedObj.getType().equals("floor")) {
+				this.setDead(true);
+			}
+			else if (collidedObj.getType().equals("wall")) {
+				this.setTranslateX(getTranslateX() + 20);
+				//this.setTranslateY(getTranslateY() + 50);
+			}
 		}
+		
 
 	}
 	public void loseLife() {

@@ -21,7 +21,6 @@ public class CheckCollision {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
 		    if (static_bloc != block) {
-		      ((Shape) static_bloc).setFill(Color.GREEN);
 
 		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
 		    	  

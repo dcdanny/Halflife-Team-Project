@@ -229,11 +229,33 @@ public class Game extends Application {
 				case '0':
 					break;
 				case '1':
-				Node platform =new RectObject(j*150,i*150,150,30,"plat",Color.LIGHTSKYBLUE);
+				Node platform =new RectObject(j*150,i*100,150,30,"plat",Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
 				break; 
+				case '2':
+					Node gPlatform =new GoalPlatform(j*150,i*100,150,30);
+					root.getChildren().add(gPlatform);
+					platforms.add(gPlatform);
+					break;
+				case '3': 
+					Node floor;
+					if (j==1) {
+						 floor =new Floor(j*150,i*120,400,5);
+						 floor.setTranslateX(0);
+					}
+					else {
+						 floor =new Floor(j*150,i*120,150,5);
+					}					
 					
+					root.getChildren().add(floor);
+					platforms.add(floor);
+					break;
+				case '4': 
+					Node wall =new Wall(j*150,i*150,25,150);
+					root.getChildren().add(wall);
+					platforms.add(wall);
+					break;
 				}
 			}
 		}
