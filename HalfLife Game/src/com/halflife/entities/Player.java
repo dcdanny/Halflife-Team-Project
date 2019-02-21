@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import main.Ammo;
+import main.CheckCollision;
 
 public class Player extends RectObject{
 	
@@ -28,9 +29,16 @@ public class Player extends RectObject{
 		movement(x, y);		
 	}
 	
-	public void tick() {
+	public void tick(Pane root) {
 		moveX((int)velX);
 		moveY((int)velY);	
+		
+		setVelY(5);
+		
+		CheckCollision.checkForCollision(this, root);
+		if (CheckCollision.getCollided()) 
+			setVelY(0);
+
 	}
 	public void loseLife() {
 		 
@@ -44,7 +52,6 @@ public class Player extends RectObject{
 		this.velY = v;
 	}
 	
-	
 	public void jump() {
 		double startingY = this.getTranslateY();
 		
@@ -57,6 +64,7 @@ public class Player extends RectObject{
 					stop();
                     gravity = 0;
                     setVelY(0);
+                    setTranslateY(getTranslateY() - 10);
 				}
 			}
 		};

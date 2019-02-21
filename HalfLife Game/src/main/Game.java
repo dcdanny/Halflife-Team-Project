@@ -35,7 +35,7 @@ public class Game extends Application {
 	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player= new Player(500,300,40,50,Color.WHITE,3);
+	private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
 	private SpikePlatform sp = new SpikePlatform(400,500,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
@@ -156,13 +156,8 @@ public class Game extends Application {
 	
 
 	private void tick() {
-		player.tick();
-		CheckCollision.checkForCollision(player, root);
-		if (CheckCollision.getCollided()) {
-			
-		}
-		
-		
+		player.tick(root);
+
 		
 	}
 	
