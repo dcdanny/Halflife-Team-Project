@@ -141,8 +141,8 @@ public class Game extends Application {
 		stage.setResizable(false);
 		setUpLevel();
 		createContent();
-		stage.setTitle("Gaaaaaame is Here!!");
-		Scene scene =new Scene(display);
+		stage.setTitle("GAME NAME HERE");
+		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		
 		buttonPressing(scene);
