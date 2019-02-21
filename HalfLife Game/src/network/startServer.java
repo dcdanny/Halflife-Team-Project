@@ -11,7 +11,29 @@ public class startServer {
 		final int port = 1034;
 		System.out.println("port: "+port);
 		Server server = new Server(port);
-		server.getclientTable().getQueue("dan");
+		server.start();
+				
+		BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			while(true) {
+				System.out.println("----- Inbox: -----");
+				System.out.println(server.getReceived());
+				System.out.println("----- End Inbox -----");
+		    	System.out.println("----- Message Object -----");
+				System.out.print("From: ");
+				String namefrom;
+				namefrom = user.readLine();
+				System.out.print("Content: ");
+				String msgcontent = user.readLine();
+				Message messagetoSend = new Message(namefrom,msgcontent);
 		
+				System.out.println("----- ----- ----- -----");
+				server.sendToAll(messagetoSend);
+			}
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

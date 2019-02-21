@@ -20,7 +20,6 @@ public class ClientReceiver extends Thread {
       while (true) {
         //String s = server.readLine(); // Matches FFFFF in ServerSender.java
 		Message receivedMessage = (Message) server.readObject();
-		System.out.println("aa"+receivedMessage.toString());
         if (receivedMessage != null)                
           System.out.println(receivedMessage);
         else
