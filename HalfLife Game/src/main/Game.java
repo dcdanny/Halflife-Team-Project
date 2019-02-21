@@ -131,30 +131,6 @@ public class Game extends Application {
 		}	
 	}
 	
-
-	
-	public void checkCollision(Shape block) {
-		  boolean isCollided = false;
-		  for (Node static_bloc : getAllNodes(root)) {
-		    if (static_bloc != block) {
-		      ((Shape) static_bloc).setFill(Color.GREEN);
-
-		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
-		    	  isCollided = true;
-		      }
-		    }
-		  }
-
-		  if (isCollided) {
-		    block.setFill(Color.RED);
-		    
-		  } else {
-		    block.setFill(Color.WHITE);
-		  }
-	}
-	
-	
-
 	private void tick() {
 		player.tick();
 		checkPos();
