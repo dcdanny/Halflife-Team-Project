@@ -256,6 +256,15 @@ public class Game extends Application {
 					root.getChildren().add(wall);
 					platforms.add(wall);
 					break;
+				case '5' : 
+					SpikePlatform spikePlat = new SpikePlatform(j*125,i*100,30,30,"spikePlat",Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,30,"plat",Color.LIGHTSKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
+					root.getChildren().add(spikePlat);
+					root.getChildren().add(spikePlat.getSpike());
+					platforms.add(spikePlat);
+					platforms.add(spikePlat.getSpike());
 				}
 			}
 		}
