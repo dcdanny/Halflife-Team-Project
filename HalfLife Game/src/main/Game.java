@@ -131,36 +131,21 @@ public class Game extends Application {
 		}	
 	}
 	
+	private void tick() {
 
-	
-	public void checkCollision(Shape block) {
-		  boolean isCollided = false;
-		  for (Node static_bloc : getAllNodes(root)) {
-		    if (static_bloc != block) {
-		      ((Shape) static_bloc).setFill(Color.GREEN);
+		player.tick(root);
+		checkPos();
 
-		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
-		    	  isCollided = true;
-		      }
-		    }
-		  }
-
-		  if (isCollided) {
-		    block.setFill(Color.RED);
-		    
-		  } else {
-		    block.setFill(Color.WHITE);
-		  }
 	}
 	
-	
-
-	private void tick() {
-		player.tick(root);
-
+	private void checkPos() {
+		double x =player.getXLocation();
+		if (x>400) {
+			root.setLayoutX(root.getTranslateX()-(x-400));
+		}
 		
 	}
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
