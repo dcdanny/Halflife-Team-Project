@@ -162,6 +162,9 @@ public class Game extends Application {
 		if (CheckCollision.getCollided()) {
 			
 		}
+		
+		
+		
 	}
 	
 	private void checkPos() {
@@ -212,7 +215,8 @@ public class Game extends Application {
 				}
 				break;
 			case SPACE:
-				player.shoot(root);;
+				ammo.lostBullet();
+				player.shoot(root);
 				break;
 			}
 			
