@@ -16,6 +16,7 @@ public class MultiMenuController {
 		primaryStage = stage;
 	}
 	
+	// The "HOST GAME" button, directing to the "HOST GAME" menu
 	@FXML
 	private void goHost() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("hostmenu.fxml"));
@@ -27,6 +28,7 @@ public class MultiMenuController {
 		primaryStage.show();
 	}
 	
+	// The "JOIN GAME" button, directing to the "JOIN GAME" menu
 	@FXML
 	private void goJoin() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("joinmenu.fxml"));
@@ -38,6 +40,7 @@ public class MultiMenuController {
 		primaryStage.show();
 	}
 	
+	// The "BACK" button, directing to the main menu "HALFLIFE" 
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));

@@ -29,19 +29,7 @@ public void run() {System.out.println("clientSender");
 	// Then loop forever sending messages to recipients via the server:
 		//ObjectOutputStream out = new ObjectOutputStream(toServer);
 		while (true) {
-			//String recipient = user.readLine();
-			
-			/* ----------------------------------------------
-			if (recipient.equals("quit")){
-				server.println(recipient);	// Matches CCCCC in ServerReceiver
-				break;
-			}else{
-				String text = user.readLine();
-				server.println(recipient);	// Matches CCCCC in ServerReceiver
 
-				server.println(text);		// Matches DDDDD in ServerReceiver
-			}
-			-------------------------------------------------*/
 			System.out.println("----- Message Object -----");
 			System.out.print("From: ");
 			String namefrom = user.readLine();

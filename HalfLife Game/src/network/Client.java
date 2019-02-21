@@ -7,17 +7,6 @@ class Client {
 
 	public Client(int port,String nickname,String hostname) {
 
-    // Check correct usage:
-    /*if (args.length != 2) {
-      Report.errorAndGiveUp("Usage: java Client user-nickname server-hostname");
-    }else if (args[0].equals("quit")){
-	Report.errorAndGiveUp("Can't use 'quit' as a user-nickname");
-    }*/
-
-    // Initialize information:
-    /*String nickname = args[0];
-    String hostname = args[1];*/
-
     // Open sockets:
     ObjectOutputStream toServer = null;
     ObjectInputStream fromServer = null;
@@ -36,11 +25,8 @@ class Client {
     catch (IOException e) {
       Report.errorAndGiveUp("The server doesn't seem to be running " + e.getMessage());
     }
-
-    // Tell the server what my nickname is:
-    //toServer.println(nickname); // Matches BBBBB in Server.java
      
-    // Create two client threads of a diferent nature:
+    // Create two threads to send and receive
     ClientSender sender = new ClientSender(nickname,toServer,server);
     ClientReceiver receiver = new ClientReceiver(fromServer);
 

@@ -1,5 +1,7 @@
 package network;
 
+import java.util.Collection;
+import java.util.Set;
 import java.util.concurrent.*;
 
 public class ClientTable {
@@ -7,20 +9,23 @@ public class ClientTable {
   private ConcurrentMap<String,BlockingQueue<Message>> queueTable
     = new ConcurrentHashMap<String,BlockingQueue<Message>>();
 
-  // The following overrides any previously existing nickname, and
-  // hence the last client to use this nickname will get the messages
-  // for that nickname, and the previously exisiting clients with that
-  // nickname won't be able to get messages. Obviously, this is not a
-  // good design of a messaging system. So I don't get full marks:
-
-  public void add(String nickname) {
-    queueTable.put(nickname, new LinkedBlockingQueue<Message>());
+  public boolean add(String nickname) {
+	  if(queueTable.get(nickname) == null) {
+		  queueTable.put(nickname, new LinkedBlockingQueue<Message>());
+		  return true;
+	  }
+	  else {
+		  Report.error("Error: Player with that name is already connected");
+		  return false;
+	  }
   }
 
   public void remove(String nickname) {
     queueTable.remove(nickname);
   }
-
+  public Set<String> showAll() {
+	    return queueTable.keySet();
+  }
   // Returns null if the nickname is not in the table:
   public BlockingQueue<Message> getQueue(String nickname) {
     return queueTable.get(nickname);

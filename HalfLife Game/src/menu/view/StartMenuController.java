@@ -16,6 +16,7 @@ public class StartMenuController {
 		primaryStage = stage;
 	}
 	
+	// The "START" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goStart() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
@@ -27,6 +28,7 @@ public class StartMenuController {
 		primaryStage.show();
 	}
 	
+	// The "EXIT" Button, quitting the game
 	@FXML
 	private void goExit() throws IOException {
 		System.exit(0);

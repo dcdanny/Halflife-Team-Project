@@ -20,7 +20,11 @@ public class Player extends RectObject{
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
+
 	
+
+		Ammo.setAmmo(ammo);
+
 		movement(x, y);		
 	}
 	
@@ -68,6 +72,7 @@ public class Player extends RectObject{
 
 	
 	public void shoot(Pane root) {
+		
 		if (ammo > 0) {
 			Bullet bullet = getBullet(this, Color.RED);
 			root.getChildren().add(bullet);

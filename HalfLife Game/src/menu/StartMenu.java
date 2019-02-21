@@ -21,6 +21,7 @@ public class StartMenu extends Application {
 		showMainView();
 	}
 	
+	// Loading the first "HALFLIFE" menu
 	public void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));

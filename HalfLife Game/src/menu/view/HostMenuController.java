@@ -16,6 +16,7 @@ public class HostMenuController {
 		primaryStage = stage;
 	}
 	
+	// The "BACK" Button, directing to the "MULTI-PLAYERS" menu
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("multimenu.fxml"));
@@ -27,6 +28,7 @@ public class HostMenuController {
 		primaryStage.show();
 	}
 	
+	// The "NEXT" Button, directing to the "SELECT GAME LEVEL" menu
 	@FXML
 	private void goNext() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));

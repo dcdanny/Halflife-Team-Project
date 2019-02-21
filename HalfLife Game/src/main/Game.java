@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import com.halflife.enemies.BaseEnemy;
 import com.halflife.enemies.SpikePlatform;
 import com.halflife.entities.*;
+import main.CheckCollision;
 
 
 public class Game extends Application {
@@ -57,7 +58,6 @@ public class Game extends Application {
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
 		//root.setStyle("-fx-background-color: #4f7b8a;");
-		
 		
 		//root.getChildren().add(DeathShow);
 		
@@ -131,6 +131,7 @@ public class Game extends Application {
 		}	
 	}
 	
+
 	
 	public void checkCollision(Shape block) {
 		  boolean isCollided = false;
@@ -153,31 +154,22 @@ public class Game extends Application {
 	}
 	
 	
+
 	private void tick() {
 		player.tick();
-		checkCollision(player);
-		checkPos(player);
-
-	}
-	
-	private void checkPos(Player player) {
-		// TODO Auto-generated method stub
-		double x =player.getXLocation();
-	
-		if (x>400) {
-			root.setLayoutX(root.getTranslateX()-(x-400));
+		CheckCollision.checkForCollision(player, root);
+		if (CheckCollision.getCollided()) {
+			
 		}
-		
-		
 	}
-
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
 		setUpLevel();
 		createContent();
-		stage.setTitle("Gaaaaaame is Here!!");
-		Scene scene =new Scene(display);
+		stage.setTitle("GAME NAME HERE");
+		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		
 		buttonPressing(scene);
@@ -192,28 +184,15 @@ public class Game extends Application {
 	private void buttonPressing(Scene s) {
 	
 		s.setOnKeyPressed(e-> {
-			double x=player.getXLocation();
 			switch (e.getCode()) {
 			case A:
-			//	if (x<405) {
-				//	root.setLayoutX(root.getTranslateX()+(405-x));
-			//	}
-				
-				//System.out.println("layout"+root.getLayoutX());
 				player.setVelX(-5);
-				
+				root.setLayoutX(root.getLayoutX()+10);
 				break;
 			case D: 
-				
-				
-			//	//if (x>root.getMaxWidth())
-			//	if (x>405) {
-			//		root.setLayoutX(root.getTranslateX()-(x-405));
-			//	}
-			
 				player.setVelX(5);
-				
-				//root.setStyle("-fx-background-color: #4f7b8a;");
+				root.setLayoutX(root.getLayoutX()-10);
+				root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
 			case S: 
 				player.setVelY(5);
@@ -221,7 +200,6 @@ public class Game extends Application {
 			case W:
 				if (player.getGravity() == 0) {
 				player.jump();
-				
 				}
 				break;
 			case SPACE:

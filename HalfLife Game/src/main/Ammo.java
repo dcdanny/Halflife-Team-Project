@@ -17,12 +17,13 @@ import javafx.stage.Stage;
 public class Ammo extends Group {
 	
 	// Number of bullets the player starts with
-	private static int no_of_bullets = 6;
+	private static int no_of_bullets;
 	
 	private ArrayList<ImageView>ammoList=new ArrayList<ImageView>();
 	
 	// Main method
 	public Ammo(){ 	
+		no_of_bullets = getAmmo();
 	    Image image = null;
 	    try {
 	    	image = new Image(new FileInputStream("res/ammo.png"));
@@ -67,5 +68,9 @@ public class Ammo extends Group {
 	
 	public static void setAmmo(int i) {
 		no_of_bullets = i;
+	}
+	
+	private static int getAmmo() {
+		return no_of_bullets;
 	}
 }
