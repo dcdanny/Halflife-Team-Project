@@ -2,11 +2,13 @@ package menu.view;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.Game;
 
 public class JoinMenuController {
 	
@@ -29,5 +31,19 @@ public class JoinMenuController {
 	
 	@FXML
 	private void goNext() throws IOException {
+		 new Thread() {
+	            @Override
+	            public void run() {
+	            	 Platform.runLater(() -> {
+	                     try {
+							new Game().start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+	                 });
+	            }}.start();
+		 
+		
 	}
 }

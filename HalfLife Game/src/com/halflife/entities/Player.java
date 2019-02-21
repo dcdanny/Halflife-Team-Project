@@ -18,15 +18,19 @@ public class Player extends RectObject{
 	private double gravity = 0;
 	private int ammo = 10; 
 	
-	public Player(double x, double y, int width, int height, Color col) {
+	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
-
+	
 		movement(x, y);		
 	}
 	
 	public void tick() {
 		moveX((int)velX);
 		moveY((int)velY);	
+	}
+	public void loseLife() {
+		 
+		
 	}
 	
 	public void setVelX(double v) {
@@ -73,7 +77,7 @@ public class Player extends RectObject{
 		Ammo.setAmmo(ammo);
 	}
 	
-
+//respawn animation, flashing player
 	public void Fade() {
 		if (getType().equals("player")) {
 				
