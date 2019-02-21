@@ -16,6 +16,7 @@ public class SettingsMenuController {
 		primaryStage = stage;
 	}
 	
+	// The "BACK" button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));

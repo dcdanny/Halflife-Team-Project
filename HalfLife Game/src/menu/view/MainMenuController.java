@@ -16,6 +16,7 @@ public class MainMenuController {
 		primaryStage = stage;
 	}
 	
+	// The "SINGLE-PLAYER" button, directing to the "SELECT GAME LEVEL" menu
 	@FXML
 	private void goSingle() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
@@ -27,6 +28,7 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
+	// The "MULTI-PLAYERS" button, directing to the "MULTI-PLAYERS" menu
 	@FXML
 	private void goMulti() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("multimenu.fxml"));
@@ -38,6 +40,7 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
+	// The "SETTINGS" button, directing to the "SETTINGS" menu
 	@FXML
 	private void goSettings() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("settingsmenu.fxml"));
@@ -49,6 +52,7 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
+	// The "BACK" button, directing to the first "HALFLIFE" menu
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
