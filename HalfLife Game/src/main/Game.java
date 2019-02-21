@@ -32,10 +32,10 @@ public class Game extends Application {
 	private Pane root= new Pane();
 	private Pane foreground=new Pane();
 	private Pane display=new Pane();
-	//private StackPane DeathShow=new DeathScreen();
+	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player= new Player(500,300,40,50,Color.WHITE);
+	private Player player= new Player(500,300,40,50,Color.WHITE,3);
 	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
 	private SpikePlatform sp = new SpikePlatform(400,500,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
@@ -54,6 +54,7 @@ public class Game extends Application {
 		foreground.getChildren().add(ammo);
 		root.getChildren().add(sp);
 		root.getChildren().add(sp.getSpike());
+		
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
 		//root.setStyle("-fx-background-color: #4f7b8a;");
@@ -70,6 +71,8 @@ public class Game extends Application {
 		
 		timer.start();
 		display.getChildren().addAll(bg,root,foreground);
+		
+		//foreground.getChildren().add(DeathShow);
 		return root;	
 	}
 	
@@ -128,6 +131,30 @@ public class Game extends Application {
 		}	
 	}
 	
+
+	
+	public void checkCollision(Shape block) {
+		  boolean isCollided = false;
+		  for (Node static_bloc : getAllNodes(root)) {
+		    if (static_bloc != block) {
+		      ((Shape) static_bloc).setFill(Color.GREEN);
+
+		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+		    	  isCollided = true;
+		      }
+		    }
+		  }
+
+		  if (isCollided) {
+		    block.setFill(Color.RED);
+		    
+		  } else {
+		    block.setFill(Color.WHITE);
+		  }
+	}
+	
+	
+
 	private void tick() {
 		player.tick();
 		CheckCollision.checkForCollision(player, root);
@@ -235,8 +262,8 @@ public class Game extends Application {
 		
 		
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		launch(args);
 				
-	}
+	}*/
 }
