@@ -18,6 +18,7 @@ public class Player extends RectObject{
 	private double velY = 0;
 	private double gravity = 0;
 	private int ammo = 10; 
+	private boolean isJumping = false;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
@@ -35,9 +36,11 @@ public class Player extends RectObject{
 		
 		setVelY(5);
 		
-		CheckCollision.checkForCollision(this, root);
-		if (CheckCollision.getCollided()) 
+		RectObject collidedObj = CheckCollision.checkForCollision(this, root);
+		if (CheckCollision.getCollided()) {
 			setVelY(0);
+			setTranslateY(collidedObj.getTranslateY() - 50);
+		}
 
 	}
 	public void loseLife() {
@@ -52,19 +55,25 @@ public class Player extends RectObject{
 		this.velY = v;
 	}
 	
+	public double getVelX() {
+		return velX;
+	}
+	public double getVelY() {
+		return velY;
+	}
+	
 	public void jump() {
 		double startingY = this.getTranslateY();
-		
 		AnimationTimer jTimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				setVelY(-10+gravity);
+				setVelY(-15+gravity);
 				gravity += .5;
-				if (startingY < getYLocation()) {
+				if (startingY < getYLocation() || CheckCollision.getCollided()) {
 					stop();
                     gravity = 0;
                     setVelY(0);
-                    setTranslateY(getTranslateY() - 10);
+                    setTranslateY(getTranslateY() - 15);
 				}
 			}
 		};

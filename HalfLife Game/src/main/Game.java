@@ -181,8 +181,9 @@ public class Game extends Application {
 				player.setVelY(5);
 				break;
 			case W:
-				if (player.getGravity() == 0) {
-				player.jump();
+				if (player.getGravity() == 0 && CheckCollision.getCollided()) {
+					player.setTranslateY(player.getTranslateY() - 10);
+					player.jump();
 				}
 				break;
 			case SPACE:

@@ -1,6 +1,8 @@
 package main;
 
 
+import com.halflife.entities.RectObject;
+
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,14 +17,16 @@ public class CheckCollision {
 
 	}
 
-	public static void checkForCollision(Shape block, Pane root) {
+	public static RectObject checkForCollision(Shape block, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
 		    if (static_bloc != block) {
 		      ((Shape) static_bloc).setFill(Color.GREEN);
 
 		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+		    	  
 		    	  collided = true;
+		    	  return (RectObject) static_bloc;
 		      }
 		    }
 		  }
@@ -32,6 +36,7 @@ public class CheckCollision {
 		  } else {
 		    block.setFill(Color.WHITE);
 		  }
+		  return null;
 	}
 	
 	public static boolean getCollided() {
