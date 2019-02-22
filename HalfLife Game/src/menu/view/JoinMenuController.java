@@ -6,14 +6,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
+import network.Client;
+import network.Server;
 
 public class JoinMenuController {
 	
 	private Stage primaryStage;
-	
+	@FXML private TextField ipAddrInput;
+
 	public void setStage(Stage stage) {
 		primaryStage = stage;
 	}
@@ -33,6 +37,14 @@ public class JoinMenuController {
 	// The "NEXT" Button, directing to the Game
 	@FXML
 	private void goNext() throws IOException {
+		  System.out.println(ipAddrInput.getText());
+			System.out.println("Network Client Connecting to: "+ipAddrInput.getText());
+			//Can't use 0 - 1023, Use 1024 - 65 535
+			final int port = 1035;
+			System.out.println("port: "+port);
+			Client client = new Client(port,"dan",ipAddrInput.getText());
+			client.start();
+			//server.getclientTable().getQueue("dan");
 		 new Thread() {
 	            @Override
 	            public void run() {

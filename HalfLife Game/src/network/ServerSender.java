@@ -9,10 +9,12 @@ import java.util.concurrent.*;
 public class ServerSender extends Thread {
 	private BlockingQueue<Message> clientQueue;
 	private ObjectOutputStream client;
-
-	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c) {
+	private volatile boolean running = true;
+	
+	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, Boolean r) {
 		clientQueue = q;   
 		client = c;
+		running = r;
 	}
 
 	public void run() {
@@ -20,7 +22,7 @@ public class ServerSender extends Thread {
 		BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
-			while (true) {
+			while (running) {
 				
 		        Message msg = clientQueue.take(); // Matches EEEEE in ServerReceiver
 				client.writeObject(msg);
@@ -33,5 +35,9 @@ public class ServerSender extends Thread {
 		} catch (InterruptedException e) {
 			// Return to infinite while loop.
 		}
+	}
+	
+	public void stopThread() {
+		running = false;
 	}
 }
