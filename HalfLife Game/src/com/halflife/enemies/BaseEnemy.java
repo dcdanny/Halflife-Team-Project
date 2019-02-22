@@ -22,10 +22,13 @@ public class BaseEnemy extends RectObject {
 	
 	public void tick(Player player) {
 		velX = 0;
+		if (isCollided(player)) {
+			System.out.println("afjisdfsd");
+		}
 		if (isNear(player)) {
-			if (Mathematics.getDistance(this, player)< 0)
+			if (Mathematics.getDistanceX(this, player)< 0)
 				velX = 2;
-			else if (Mathematics.getDistance(this, player)> 0)
+			else if (Mathematics.getDistanceX(this, player)> 0)
 				velX = -2;
 		}
 		moveX((int)velX);
@@ -42,12 +45,19 @@ public class BaseEnemy extends RectObject {
 	}
 	
 	public boolean isNear(Player player) {
-		if (Mathematics.getDistance(this, player) < 400) {
+		if (Mathematics.getDistanceX(this, player) < 400 && Mathematics.getDistanceY(this, player) < 30) {
 			return true;
 		}
 		return false;
 	}
 
+	public boolean isCollided(Player player)
+	{
+		if(this.getBoundsInParent().intersects(player.getBoundsInParent()))
+			return true;
+		return false;
+	}
+	
 	public void setVelX(double v) {
 		this.velX = v;
 	}
