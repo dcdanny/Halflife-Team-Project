@@ -7,16 +7,18 @@ public class ServerReceiver extends Thread {
 	private String myClientsName;
 	private ObjectInputStream myClient;
 	private ClientTable clientTable;
-
-	public ServerReceiver(String n, ObjectInputStream c, ClientTable t) {
+	private volatile boolean running = true;
+	
+	public ServerReceiver(String n, ObjectInputStream c, ClientTable t, Boolean r) {
 		myClientsName = n;
 		myClient = c;
 		clientTable = t;
+		running = r;
 	}
 
 	public void run() {
 		try {
-			while (true) {
+			while (running) {
 					Message receivedMessage = (Message) myClient.readObject();
 					System.out.println("From: "+myClientsName+" "+receivedMessage.toString());
 					
@@ -41,6 +43,10 @@ public class ServerReceiver extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void stopThread() {
+		running = false;
 	}
 }
 
