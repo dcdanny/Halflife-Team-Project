@@ -12,6 +12,7 @@ public class StartClient {
 		final int port = 1035;
 		System.out.println("port: "+port);
 		Client client = new Client(port,"dan","localhost");
+		client.start();
 		//server.getclientTable().getQueue("dan");
 		
 	}

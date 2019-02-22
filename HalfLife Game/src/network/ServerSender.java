@@ -9,35 +9,30 @@ import java.util.concurrent.*;
 public class ServerSender extends Thread {
 	private BlockingQueue<Message> clientQueue;
 	private ObjectOutputStream client;
-	private volatile boolean running = true;
+	private ClientTable clientTable;
 	
-	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, Boolean r) {
+	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, ClientTable t) {
 		clientQueue = q;   
 		client = c;
-		running = r;
+		clientTable = t;
 	}
 
 	public void run() {
 		// So that we can use the method readLine:
-		BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
+		//BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
-			while (running) {
-				
+			while (clientTable.getServerRunning()) {
 		        Message msg = clientQueue.take(); // Matches EEEEE in ServerReceiver
 				client.writeObject(msg);
 				client.flush();
-		        //client.println(msg); // Matches FFFFF in ClientReceiver
 			}
 		}
 		catch (IOException e) {
-				Report.errorAndGiveUp("Communication broke in ServerSender" + e.getMessage());
+				Report.error("Communication broke in ServerSender" + e.getMessage());
 		} catch (InterruptedException e) {
 			// Return to infinite while loop.
 		}
 	}
 	
-	public void stopThread() {
-		running = false;
-	}
 }
