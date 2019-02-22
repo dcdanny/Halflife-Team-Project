@@ -71,7 +71,7 @@ public class Game extends Application {
 		timer.start();
 		display.getChildren().addAll(bg,root,foreground);
 		
-		//foreground.getChildren().add(DeathShow);
+
 		return root;	
 	}
 	
@@ -131,10 +131,13 @@ public class Game extends Application {
 	}
 	
 	private void tick() {
-
-		player.tick(root);
+		//boolean deathScreenDisplayed = false;
+		player.tick(root, heart);
 		checkPos();
-
+		if (heart.isDead() && !foreground.getChildren().contains(DeathShow)) {
+			foreground.getChildren().add(DeathShow);
+//			deathScreenDisplayed = true;
+		}
 	}
 	
 	private void checkPos() {
@@ -150,7 +153,7 @@ public class Game extends Application {
 		stage.setResizable(false);
 		setUpLevel();
 		createContent();
-		stage.setTitle("GAME NAME HERE");
+		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		

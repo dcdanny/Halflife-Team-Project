@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 public class Lives extends Group {
 	private int lives=3;
+	private boolean isDead;
 	private ArrayList<ImageView>heartlist=new ArrayList<ImageView>();
 	Lives(){
 	 
@@ -62,16 +63,22 @@ public class Lives extends Group {
   
      
      
-   
+    isDead = false;
      
-}
+	}
 	//Removes lives from display when called
-	void lostlife() {
+	public void lostlife() {
 		
 		if (lives>0) {
 			this.getChildren().remove(heartlist.get(heartlist.size()-1));
 			heartlist.remove(heartlist.size()-1);
 			lives=lives-1;
+		} else {
+			isDead = true;
 		}
+	}
+	
+	public boolean isDead() {
+		return isDead;
 	}
 }
