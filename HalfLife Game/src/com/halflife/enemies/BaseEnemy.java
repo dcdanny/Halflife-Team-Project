@@ -8,9 +8,9 @@ public class BaseEnemy extends RectObject {
 	
 	private boolean startMoving;
 
-	public BaseEnemy(int x, int y, int width, int height, String type, Color col) {
+	public BaseEnemy(int x, int y, int width, int height) {
 		
-		super(x, y, width, height, type, col);		
+		super(x, y, width, height, "enemy", Color.RED);		
 		// TODO Auto-generated constructor stub
 		startMoving = false;
 	}

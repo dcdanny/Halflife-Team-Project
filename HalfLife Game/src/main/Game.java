@@ -259,10 +259,25 @@ public class Game extends Application {
 					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
-					Node sPlatform =new Spike(new double[] {j*150+(30/2), i*100-30, j*150, i*100, j*150+30, i*100});
-					root.getChildren().add(sPlatform);
-					//platforms.add(sPlatform);
-					break;
+					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
+					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
+					root.getChildren().add(bEnemy);
+					
+					
+					
+//					Node spike =new Spike(new double[] {j*150+(30/2), i*100-30, j*150, i*100, j*150+30, i*100});
+//					root.getChildren().add(spike);
+//					//platforms.add(sPlatform);
+//					break;
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					
 //					
 //					platform =new RectObject(j*150,i*100,150,30,"plat",Color.LIGHTSKYBLUE);
