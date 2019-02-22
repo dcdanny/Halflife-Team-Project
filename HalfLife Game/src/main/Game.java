@@ -240,11 +240,11 @@ public class Game extends Application {
 				case '3': 
 					Node floor;
 					if (j==1) {
-						 floor =new Floor(j*150,i*120,400,5);
+						 floor =new Floor(j*150,i*120,400,10);
 						 floor.setTranslateX(0);
 					}
 					else {
-						 floor =new Floor(j*150,i*120,150,5);
+						 floor =new Floor(j*150,i*120,150,10);
 					}					
 					
 					root.getChildren().add(floor);
