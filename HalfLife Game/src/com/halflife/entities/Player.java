@@ -21,6 +21,7 @@ public class Player extends RectObject{
 	private int ammo = 10; 
 	private int lives = 3;
 	private boolean isJumping = false;
+	private Lives heart;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
@@ -32,7 +33,11 @@ public class Player extends RectObject{
 		movement(x, y);		
 	}
 	
-	public void tick(Pane root, Lives heart) {
+	public void tick(Pane root, Lives hearts) {
+		if (lives == 0)
+			setDead(true);
+		
+		this.heart = hearts;
 		moveX((int)velX);
 		moveY((int)velY);	
 		
@@ -49,6 +54,7 @@ public class Player extends RectObject{
 				System.out.println("Winner");
 			else if (collidedObj.getType().equals("floor")) {
 				heart.lostlife();
+				lives--;
 				this.setTranslateX(200);
 				this.setTranslateY(0);
 				//this.setDead(true);
@@ -65,9 +71,12 @@ public class Player extends RectObject{
 
 	}
 	public void loseLife() {
-		if (lives > 0)
+		if (lives > 0) {
+			this.setTranslateX(200);
+			this.setTranslateY(0);
 			lives--;	
-		else
+			heart.lostlife();
+		}else
 			setDead(true);
 	}
 	

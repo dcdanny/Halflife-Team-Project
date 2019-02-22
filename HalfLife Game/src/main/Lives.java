@@ -15,69 +15,65 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Lives extends Group {
-	private int lives=3;
+	private int lives = 3;
 	private boolean isDead;
-	private ArrayList<ImageView>heartlist=new ArrayList<ImageView>();
-	Lives(){
-	 
+	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>();
+
+	Lives() {
 
 		super();
-		
-	 Image image = null;
-	try {
-		image = new Image(new FileInputStream("res/heart-1.png.png"));
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}  
-     
-	
-	
-     //Setting the image view 
-	//  this.setImage(image);
-	
-	List<ImageView> hearts = new ArrayList<ImageView>();
-    for (int i = 0; i < lives; i++) {
-    	hearts.add(new ImageView(image));
-    }
-    
-    for (int i = 0; i < lives; i++) {
-    	hearts.get(i).setX(i*50 + 25);
-    	hearts.get(i).setY(50);
-    	hearts.get(i).setFitHeight(100);
-    	hearts.get(i).setFitWidth(100);
-    	hearts.get(i).setPreserveRatio(true);
-    	this.getChildren().add(hearts.get(i));
-    	heartlist.add(hearts.get(i));
-    }
 
-   
+		Image image = null;
+		try {
+			image = new Image(new FileInputStream("res/heart-1.png.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// Setting the image view
+		// this.setImage(image);
+
+		List<ImageView> hearts = new ArrayList<ImageView>();
+		for (int i = 0; i < lives; i++) {
+			hearts.add(new ImageView(image));
+		}
+
+		for (int i = 0; i < lives; i++) {
+			hearts.get(i).setX(i * 50 + 25);
+			hearts.get(i).setY(50);
+			hearts.get(i).setFitHeight(100);
+			hearts.get(i).setFitWidth(100);
+			hearts.get(i).setPreserveRatio(true);
+			this.getChildren().add(hearts.get(i));
+			heartlist.add(hearts.get(i));
+		}
+
 //  VBox root= new VBox();
- // root.getChildren().add(imageView);
- // Scene scene =new Scene(new Group());
+		// root.getChildren().add(imageView);
+		// Scene scene =new Scene(new Group());
 
-    // this.getChildren().remove(hearts2);
-    // lostlife();
-    // lostlife();
-  //   lostlife();
-  
-     
-     
-    isDead = false;
-     
+		// this.getChildren().remove(hearts2);
+		// lostlife();
+		// lostlife();
+		// lostlife();
+
+		isDead = false;
+
 	}
-	//Removes lives from display when called
+
+	// Removes lives from display when called
 	public void lostlife() {
-		
-		if (lives>0) {
-			this.getChildren().remove(heartlist.get(heartlist.size()-1));
-			heartlist.remove(heartlist.size()-1);
-			lives=lives-1;
+
+		if (lives > 0) {
+			this.getChildren().remove(heartlist.get(heartlist.size() - 1));
+			heartlist.remove(heartlist.size() - 1);
+			lives = lives - 1;
 		} else {
 			isDead = true;
 		}
 	}
-	
+
 	public boolean isDead() {
 		return isDead;
 	}
