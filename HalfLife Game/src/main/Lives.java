@@ -3,6 +3,7 @@ package main;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -32,41 +33,28 @@ public class Lives extends Group {
 	
 	
      //Setting the image view 
- //  this.setImage(image);
-   ImageView hearts0= new ImageView(image);
-   ImageView hearts1= new ImageView(image);
-   ImageView hearts2= new ImageView(image);
-     
-     //Setting the position of the image 
-    hearts0.setX(0); 
-    hearts0.setY(50); 
-    hearts1.setX(50); 
-    hearts1.setY(50); 
-    hearts2.setX(100); 
-    hearts2.setY(50); 
-     //setting the fit height and width of the image view 
-     hearts0.setFitHeight(100); 
-    hearts0.setFitWidth(100); 
-    hearts1.setFitHeight(100); 
-    hearts1.setFitWidth(100); 
-    hearts2.setFitHeight(100); 
-    hearts2.setFitWidth(100); 
+	//  this.setImage(image);
+	
+	List<ImageView> hearts = new ArrayList<ImageView>();
+    for (int i = 0; i < lives; i++) {
+    	hearts.add(new ImageView(image));
+    }
     
-     //Setting the preserve ratio of the image view 
-    
-   hearts0.setPreserveRatio(true); 
-   hearts1.setPreserveRatio(true);
-   hearts2.setPreserveRatio(true);
-   this.getChildren().add(hearts0);
-   this.getChildren().add(hearts1);
-   this.getChildren().add(hearts2);
+    for (int i = 0; i < lives; i++) {
+    	hearts.get(i).setX(i*50 + 25);
+    	hearts.get(i).setY(50);
+    	hearts.get(i).setFitHeight(100);
+    	hearts.get(i).setFitWidth(100);
+    	hearts.get(i).setPreserveRatio(true);
+    	this.getChildren().add(hearts.get(i));
+    	heartlist.add(hearts.get(i));
+    }
+
    
 //  VBox root= new VBox();
  // root.getChildren().add(imageView);
  // Scene scene =new Scene(new Group());
-   heartlist.add(hearts0);
-   heartlist.add(hearts1);
-   heartlist.add(hearts2);
+
     // this.getChildren().remove(hearts2);
     // lostlife();
     // lostlife();
