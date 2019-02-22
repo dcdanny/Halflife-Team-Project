@@ -72,6 +72,7 @@ public class Player extends RectObject{
 	}
 	public void loseLife() {
 		if (lives > 0) {
+			this.Fade();
 			this.setTranslateX(200);
 			this.setTranslateY(0);
 			lives--;	
