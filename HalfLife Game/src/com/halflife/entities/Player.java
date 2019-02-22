@@ -19,6 +19,7 @@ public class Player extends RectObject{
 	private double velY = 0;
 	private double gravity = 0;
 	private int ammo = 10; 
+	private int lives = 3;
 	private boolean isJumping = false;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
@@ -64,8 +65,10 @@ public class Player extends RectObject{
 
 	}
 	public void loseLife() {
-		 
-		
+		if (lives > 0)
+			lives--;	
+		else
+			setDead(true);
 	}
 	
 	public void setVelX(double v) {

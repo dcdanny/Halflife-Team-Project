@@ -137,6 +137,7 @@ public class Game extends Application {
 
 		player.tick(root);
 		
+		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player);
 		}
