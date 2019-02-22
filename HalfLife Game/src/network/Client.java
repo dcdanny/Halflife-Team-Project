@@ -40,6 +40,7 @@ public class Client  extends Thread {
 		catch (IOException e) {
 			Report.error("The server doesn't seem to be running " + e.getMessage());
 		}
+		
 		if(clientStart) {
 			// Create two threads to send and receive
 			ClientSender sender = new ClientSender(nickname,toServer,server);

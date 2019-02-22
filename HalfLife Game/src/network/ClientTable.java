@@ -8,7 +8,8 @@ public class ClientTable {
 
   private ConcurrentMap<String,BlockingQueue<Message>> queueTable
     = new ConcurrentHashMap<String,BlockingQueue<Message>>();
-
+  private boolean running = true;
+  
   public boolean add(String nickname) {
 	  if(queueTable.get(nickname) == null) {
 		  queueTable.put(nickname, new LinkedBlockingQueue<Message>());
@@ -20,14 +21,23 @@ public class ClientTable {
 	  }
   }
 
-  public void remove(String nickname) {
-    queueTable.remove(nickname);
-  }
-  public Set<String> showAll() {
-	    return queueTable.keySet();
-  }
-  // Returns null if the nickname is not in the table:
-  public BlockingQueue<Message> getQueue(String nickname) {
-    return queueTable.get(nickname);
-  }
+	public void remove(String nickname) {
+		queueTable.remove(nickname);
+	}
+	public Set<String> showAll() {
+		return queueTable.keySet();
+	}
+	
+	// Returns null if the nickname is not in the table:
+	public BlockingQueue<Message> getQueue(String nickname) {
+		return queueTable.get(nickname);
+	}
+
+	//Is server running?
+	public boolean getServerRunning() {
+		return running;
+	}
+	public void stopServer() {
+		this.running = false;
+	}
 }

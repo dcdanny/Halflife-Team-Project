@@ -13,6 +13,7 @@ public class Server extends Thread {
 	private ServerReceiver receiver;
 	private ServerSender sender;
 	Boolean running;
+	Socket socket;
 	
 	public Server(int port) {
 		//Initialise and open Socket
@@ -37,14 +38,15 @@ public class Server extends Thread {
 			while (allowNewPlayers) {
 
 				// Listen to the socket waiting for new clients wanting to connect
-				Socket socket = serverSocket.accept();
+				socket = serverSocket.accept();
 				if(!running) break;
+				
 				//TODO:Make it so IDs can be freed up if player quits. Currently just adds one to highest player id
 				String clientName = "Player" + numClients;
 				numClients++;
+				
 				// We add the client to the table checking if already exists:
 				if(clientTable.add(clientName)) {
-					
 					//BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					ObjectInputStream fromClient = new ObjectInputStream(socket.getInputStream());
 					
@@ -59,8 +61,9 @@ public class Server extends Thread {
 					ObjectOutputStream toClient = new ObjectOutputStream(socket.getOutputStream());
 					//sender = new ServerSender(clientTable.getQueue(clientName), toClient);
 					//sender.start();
-					(new ServerSender(clientTable.getQueue(clientName), toClient, running)).start();
-					
+					(new ServerSender(clientTable.getQueue(clientName), toClient, clientTable, running)).start();
+				}else {
+					Report.error("client name already in use");
 				}
 			}
 		}catch (IOException e) {
@@ -71,18 +74,20 @@ public class Server extends Thread {
 	public void setAllowNewPlayers(boolean allowNewPlayers) {
 		this.allowNewPlayers = allowNewPlayers;
 	}
+
 	
 	public void stopServer() {
+		System.out.println("Server stopping...");
 		allowNewPlayers = false;
+		clientTable.stopServer();
 		running = false;
-		//receiver.stopThread();
-		sender.stopThread();
 		try {
+			socket.close();
 			serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Server stopping...");
+		System.out.println("Server Running: "+this.clientTable.getServerRunning());
 		
 	}
 	

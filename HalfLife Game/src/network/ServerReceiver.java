@@ -18,9 +18,8 @@ public class ServerReceiver extends Thread {
 
 	public void run() {
 		try {
-			while (running) {
+			while (clientTable.getServerRunning()) {
 					Message receivedMessage = (Message) myClient.readObject();
-					System.out.println("From: "+myClientsName+" "+receivedMessage.toString());
 					
 					//Security measure set message sender to what we know the sender is
 					//(prevents forging sender and manipulating another player)
