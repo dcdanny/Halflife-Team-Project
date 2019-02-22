@@ -38,6 +38,9 @@ public class Player extends RectObject{
 		
 		RectObject collidedObj = CheckCollision.checkForCollision(this, root);
 		if (CheckCollision.getCollided()) {
+			if (collidedObj.getType().equals("enemy")) {
+				System.out.println("I am here");
+			}
 			if (collidedObj.getType().equals("plat")) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
@@ -52,9 +55,7 @@ public class Player extends RectObject{
 				this.setTranslateX(getTranslateX() + 20);
 				//this.setTranslateY(getTranslateY() + 50);
 			}
-			if (collidedObj.getType().equals("enemy")) {
-				System.out.println("I am here");
-			}
+			
 		}
 		
 
