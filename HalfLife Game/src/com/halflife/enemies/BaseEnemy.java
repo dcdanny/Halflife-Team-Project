@@ -23,7 +23,7 @@ public class BaseEnemy extends RectObject {
 	public void tick(Player player) {
 		velX = 0;
 		if (isCollided(player)) {
-			System.out.println("afjisdfsd");
+			player.loseLife();
 		}
 		if (isNear(player)) {
 			if (Mathematics.getDistanceX(this, player)< 0)
