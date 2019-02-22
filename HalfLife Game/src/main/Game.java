@@ -135,6 +135,7 @@ public class Game extends Application {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
 
+
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player);
 		}
