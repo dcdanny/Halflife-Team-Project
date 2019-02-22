@@ -82,7 +82,9 @@ public class Server extends Thread {
 		clientTable.stopServer();
 		running = false;
 		try {
-			socket.close();
+			if(socket != null) {
+				socket.close();
+			}
 			serverSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
