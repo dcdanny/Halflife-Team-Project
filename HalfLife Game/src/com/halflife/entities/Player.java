@@ -10,6 +10,7 @@ import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
+import main.DeathScreen;
 import main.Lives;
 
 public class Player extends RectObject{
@@ -34,8 +35,10 @@ public class Player extends RectObject{
 	}
 	
 	public void tick(Pane root, Lives hearts) {
-		if (lives == 0)
+		if (lives == 0) {	
 			setDead(true);
+			
+		}
 		
 		this.heart = hearts;
 		moveX((int)velX);
@@ -53,10 +56,7 @@ public class Player extends RectObject{
 			else if (collidedObj.getType().equals("goal")) 
 				System.out.println("Winner");
 			else if (collidedObj.getType().equals("floor")) {
-				heart.lostlife();
-				lives--;
-				this.setTranslateX(200);
-				this.setTranslateY(0);
+				loseLife();
 				//this.setDead(true);
 			}
 			else if (collidedObj.getType().equals("wall")) {
