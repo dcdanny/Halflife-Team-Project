@@ -36,6 +36,7 @@ public class Game extends Application {
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
+	private List<Spike> spikes = new ArrayList<Spike>();
 	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
 	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
@@ -138,6 +139,9 @@ public class Game extends Application {
 
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player);
+		}
+		for (Spike spike : spikes) {
+			spike.tick(player);
 		}
 		
 		checkPos();
@@ -280,15 +284,11 @@ public class Game extends Application {
 					platforms.add(platform);
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
 					root.getChildren().add(sPlatform.getSpike());
-				
+					spikes.add(sPlatform.getSpike());
 					break;
 				}
 			}
-		}
-		
-		
-		
-		
+		}	
 		
 	}
 	/*public static void main(String[] args) {
