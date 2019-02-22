@@ -45,7 +45,7 @@ public class Game extends Application {
 	
 	private Parent createContent() {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
-		//root.setPrefSize(800, 600);
+		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
 		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
@@ -263,30 +263,14 @@ public class Game extends Application {
 					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(bEnemy);
 					break;
-				case '6':	
+				case '6':
+					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
 					Node spike =new Spike(new double[] {j*150+(30/2), i*100-30, j*150, i*100, j*150+30, i*100});
-//					root.getChildren().add(spike);
-//					//platforms.add(sPlatform);
-//					break;				
-//					
-//					platform =new RectObject(j*150,i*100,150,30,"plat",Color.LIGHTSKYBLUE);
-//					root.getChildren().add(platform);
-//					platforms.add(platform);
-//					
-//					
-//					
-//					SpikePlatform sp = new SpikePlatform(j*150,i*100,30,30);
-//					Spike test = new Spike(sp.getArray());
-//					root.getChildren().add(test);
-//					platforms.add(test);
-//					root.getChildren().add(sp.getSpike());
-//					
-//					
-//					
-					
-//					root.getChildren().add(sp.getSpike());
-//					platforms.add(sp.getSpike());
-//					break;
+					root.getChildren().add(spike);
+				
+					break;
 				}
 			}
 		}
