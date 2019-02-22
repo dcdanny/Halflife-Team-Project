@@ -41,6 +41,6 @@ public class CheckCollision {
 	public static boolean getCollided() {
 		return collided;
 	}
-
+//
 
 }
