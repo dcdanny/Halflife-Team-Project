@@ -21,11 +21,13 @@ public class BaseEnemy extends RectObject {
 	}
 	
 	public void tick(Player player) {
-		if (isNear(player))
-			velX = -5;
-		else
-			velX = 0;
-		
+		velX = 0;
+		if (isNear(player)) {
+			if (Mathematics.getDistance(this, player)< 0)
+				velX = 2;
+			else if (Mathematics.getDistance(this, player)> 0)
+				velX = -2;
+		}
 		moveX((int)velX);
 		//moveY((int)velY);	
 	}
@@ -40,7 +42,7 @@ public class BaseEnemy extends RectObject {
 	}
 	
 	public boolean isNear(Player player) {
-		if (Mathematics.getDistance(this, player) < 200) {
+		if (Mathematics.getDistance(this, player) < 400) {
 			return true;
 		}
 		return false;
