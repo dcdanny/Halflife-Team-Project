@@ -22,8 +22,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
-import com.halflife.enemies.BaseEnemy;
-import com.halflife.enemies.SpikePlatform;
+import com.halflife.enemies.*;
 import com.halflife.entities.*;
 import main.CheckCollision;
 
@@ -36,8 +35,8 @@ public class Game extends Application {
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
-	private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
-	private SpikePlatform sp = new SpikePlatform(400,500,30,30,"sp",Color.LIGHTSKYBLUE);
+	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
+	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart = new Lives();
 	private Ammo ammo = new Ammo();
@@ -46,14 +45,14 @@ public class Game extends Application {
 	
 	private Parent createContent() {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
-		//root.setPrefSize(800, 600);
+		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
-		root.getChildren().add(enemy);
+		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-		root.getChildren().add(sp);
-		root.getChildren().add(sp.getSpike());
+		//root.getChildren().add(sp);
+		//root.getChildren().add(sp.getSpike());
 		
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
@@ -229,7 +228,7 @@ public class Game extends Application {
 				case '0':
 					break;
 				case '1':
-				Node platform =new RectObject(j*150,i*100,150,30,"plat",Color.LIGHTSKYBLUE);
+				Node platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
 				break; 
@@ -255,6 +254,22 @@ public class Game extends Application {
 					Node wall =new Wall(j*150,i*150,25,150);
 					root.getChildren().add(wall);
 					platforms.add(wall);
+					break;
+				case '5':
+					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
+					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
+					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
+					root.getChildren().add(bEnemy);
+					break;
+				case '6':
+					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
+					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30s,10);
+					root.getChildren().add(sPlatform.getSpike());
+				
 					break;
 				}
 			}
