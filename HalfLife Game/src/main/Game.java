@@ -35,6 +35,7 @@ public class Game extends Application {
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
 	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
@@ -133,6 +134,13 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
+
+		player.tick(root);
+		
+		for (BaseEnemy enemy : enemies) {
+			enemy.tick(player);
+		}
+		
 		checkPos();
 		if (heart.isDead() && !foreground.getChildren().contains(DeathShow)) {
 			foreground.getChildren().add(DeathShow);
@@ -265,6 +273,7 @@ public class Game extends Application {
 					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
 					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(bEnemy);
+					enemies.add((BaseEnemy) bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
