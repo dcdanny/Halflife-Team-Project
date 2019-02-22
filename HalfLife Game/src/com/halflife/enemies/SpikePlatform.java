@@ -11,15 +11,12 @@ public class SpikePlatform extends RectObject {
 	
 	public SpikePlatform(int x, int y, int width, int height) {
 		super(x,y,width,height,"spikePlat",Color.LIGHTSKYBLUE);
-		array = new double[] {x+(width/2), y-height, x, y, x+width, y};
+		array = new double[] {x+(width/2), y-30, x, y, x+width, y};
 		
 		spike = new Spike(array);
 	}
 
 	public Spike getSpike() {
 		return spike;
-	}	
-//	public double[] getArray() {
-//		return array;
-//	}
+	}
 }
