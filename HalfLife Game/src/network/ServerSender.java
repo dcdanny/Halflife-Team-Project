@@ -9,19 +9,17 @@ import java.util.concurrent.*;
 public class ServerSender extends Thread {
 	private BlockingQueue<Message> clientQueue;
 	private ObjectOutputStream client;
-	private volatile boolean running = true;
 	private ClientTable clientTable;
 	
-	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, ClientTable t, Boolean r) {
+	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, ClientTable t) {
 		clientQueue = q;   
 		client = c;
 		clientTable = t;
-		running = r;
 	}
 
 	public void run() {
 		// So that we can use the method readLine:
-		BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
+		//BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
 			while (clientTable.getServerRunning()) {

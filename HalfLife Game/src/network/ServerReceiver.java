@@ -7,13 +7,11 @@ public class ServerReceiver extends Thread {
 	private String myClientsName;
 	private ObjectInputStream myClient;
 	private ClientTable clientTable;
-	private volatile boolean running = true;
 	
-	public ServerReceiver(String n, ObjectInputStream c, ClientTable t, Boolean r) {
+	public ServerReceiver(String n, ObjectInputStream c, ClientTable t) {
 		myClientsName = n;
 		myClient = c;
 		clientTable = t;
-		running = r;
 	}
 
 	public void run() {
@@ -44,9 +42,6 @@ public class ServerReceiver extends Thread {
 		}
 	}
 	
-	public void stopThread() {
-		running = false;
-	}
 }
 
 

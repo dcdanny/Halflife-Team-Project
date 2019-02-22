@@ -55,13 +55,13 @@ public class Server extends Thread {
 					//Once client is connected, hand over to sender receiver threads
 					//receiver = new ServerReceiver(clientName, fromClient, clientTable);
 					//receiver.start();
-					(new ServerReceiver(clientName, fromClient, clientTable, running)).start();
+					(new ServerReceiver(clientName, fromClient, clientTable)).start();
 	
 					// Create and start a new thread to write to the client:
 					ObjectOutputStream toClient = new ObjectOutputStream(socket.getOutputStream());
 					//sender = new ServerSender(clientTable.getQueue(clientName), toClient);
 					//sender.start();
-					(new ServerSender(clientTable.getQueue(clientName), toClient, clientTable, running)).start();
+					(new ServerSender(clientTable.getQueue(clientName), toClient, clientTable)).start();
 				}else {
 					Report.error("client name already in use");
 				}
