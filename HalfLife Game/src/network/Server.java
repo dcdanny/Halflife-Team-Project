@@ -36,9 +36,10 @@ public class Server extends Thread {
 		// Start loop of waiting for new connections
 		try { 
 			while (allowNewPlayers) {
-
+				//System.out.println("Ip: "+socket.getLocalAddress().getHostAddress());
 				// Listen to the socket waiting for new clients wanting to connect
 				socket = serverSocket.accept();
+
 				if(!running) break;
 				
 				//TODO:Make it so IDs can be freed up if player quits. Currently just adds one to highest player id
@@ -83,6 +84,10 @@ public class Server extends Thread {
 		running = false;
 		try {
 			if(socket != null) {
+				System.out.println("getRemoteSocketAddress: "+socket.getRemoteSocketAddress());
+				System.out.println("socket.getInet: "+socket.getInetAddress().getHostAddress());
+				System.out.println("aa"+InetAddress.getLocalHost().getByAddress(InetAddress.getLocalHost().getAddress()));
+				//int unsignedByte = signedByte < 0 ? signedByte + 256 : signedByte;
 				socket.close();
 			}
 			serverSocket.close();

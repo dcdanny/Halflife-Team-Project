@@ -1,6 +1,7 @@
 package network;
 //Class for Testing only
 import java.net.*;
+import java.util.Enumeration;
 import java.io.*;
 
 public class startServer {
@@ -17,6 +18,21 @@ public class startServer {
 		try {
 			while(true) {
 				System.out.println(server.getIpAddress());
+				System.out.println(Inet4Address.getLocalHost().getHostAddress());
+				Enumeration e = NetworkInterface.getNetworkInterfaces();
+				//Utils.getIPAddress(true);
+				while(e.hasMoreElements())
+				{
+					System.out.println("----NetIface-------");
+				    NetworkInterface n = (NetworkInterface) e.nextElement();
+				    Enumeration ee = n.getInetAddresses();
+				    while (ee.hasMoreElements())
+				    {
+				    	System.out.println("-NetAddr:");
+				        InetAddress i = (InetAddress) ee.nextElement();
+				        System.out.println(i.getHostAddress());
+				    }
+				}
 				System.out.println("----- Inbox: -----");
 				System.out.println(server.getReceived());
 				System.out.println("----- End Inbox -----");
