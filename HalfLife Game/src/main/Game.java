@@ -141,7 +141,7 @@ public class Game extends Application {
 			enemy.tick(player, root);
 		}
 		for (Spike spike : spikes) {
-			spike.tick(player);
+			spike.tick(player, root);
 		}
 		
 		checkPos();

@@ -2,6 +2,7 @@ package com.halflife.enemies;
 
 import com.halflife.entities.Player;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import main.GameConstants;
 
@@ -15,9 +16,9 @@ public class Spike extends Polygon{
 	}
 	
 	
-	public void tick(Player player) {
+	public void tick(Player player, Pane root) {
 		if(playerCollision(player)) {
-			player.loseLife();
+			player.loseLife(root);
 		}
 	}
 	

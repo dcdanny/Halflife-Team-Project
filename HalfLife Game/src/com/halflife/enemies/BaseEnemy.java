@@ -32,7 +32,7 @@ public class BaseEnemy extends RectObject {
 			this.setDead(true);
 		}
 		if (isCollidedWithPlayer(player) && !isDead()) {
-			player.loseLife();
+			player.loseLife(root);
 		}
 		if (isNear(player)) {
 			if (Mathematics.getDistanceX(this, player)< 0)

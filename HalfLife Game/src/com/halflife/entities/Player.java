@@ -59,7 +59,7 @@ public class Player extends RectObject{
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) 
 				System.out.println("Winner");
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
-				loseLife();
+				loseLife(root);
 				//this.setDead(true);
 			}
 			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
@@ -70,7 +70,8 @@ public class Player extends RectObject{
 		
 
 	}
-	public void loseLife() {
+	public void loseLife(Pane root) {
+		root.setLayoutX(0);
 		if (lives > 0) {
 			this.Fade();
 			this.setTranslateX(200);
