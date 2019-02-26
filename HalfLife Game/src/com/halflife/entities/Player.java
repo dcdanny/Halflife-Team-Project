@@ -56,15 +56,15 @@ public class Player extends RectObject{
 				setTranslateY(collidedObj.getTranslateY() - 50);
 //				System.out.println("1");
 		    }
-			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) 
+			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
+				setVelY(0);
 				System.out.println("Winner");
+			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife(root);
-				//this.setDead(true);
 			}
 			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
 				this.setTranslateX(getTranslateX() + 20);
-				//this.setTranslateY(getTranslateY() + 50);
 			}
 		}
 		
@@ -101,13 +101,13 @@ public class Player extends RectObject{
 		AnimationTimer jTimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				setVelY(-15+gravity);
+				setVelY(-10+gravity);
 				gravity += .5;
 				if (startingY < getYLocation() || collisionChecker.getCollided()) {
 					stop();
                     gravity = 0;
                     setVelY(0);
-                    setTranslateY(getTranslateY() - 15);
+                    setTranslateY(getTranslateY() - 10);
 				}
 			}
 		};
