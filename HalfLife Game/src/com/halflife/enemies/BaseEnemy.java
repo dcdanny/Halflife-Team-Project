@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import main.Game;
+import main.GameConstants;
 import main.Mathematics;
 
 public class BaseEnemy extends RectObject {
@@ -20,7 +21,7 @@ public class BaseEnemy extends RectObject {
 	
 	public BaseEnemy(int x, int y, int width, int height) {
 		
-		super(x, y, width, height, "enemy", Color.RED);		
+		super(x, y, width, height, GameConstants.TYPE_ENEMY, Color.RED);		
 		// TODO Auto-generated constructor stub
 		startMoving = false;
 	}
@@ -70,7 +71,7 @@ public class BaseEnemy extends RectObject {
 	{
 		 for (Node static_bloc : Game.getAllNodes(root)) {
 			 RectObject b = (RectObject) static_bloc;
-			    if (b != this && b.getType().equals("playerbullet"))
+			    if (b != this && b.getType().equals(GameConstants.TYPE_PLAYER_BULLET))
 			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
 			    	 	 return true;
 			      }

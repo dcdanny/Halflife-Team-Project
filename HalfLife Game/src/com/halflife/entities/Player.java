@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
 import main.DeathScreen;
+import main.GameConstants;
 import main.Lives;
 
 public class Player extends RectObject{
@@ -27,7 +28,7 @@ public class Player extends RectObject{
 	private CheckCollision collisionChecker;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
-		super(x, y, width, height, "player", col);
+		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
 		
 		collisionChecker = new CheckCollision();
 
@@ -50,24 +51,21 @@ public class Player extends RectObject{
 		
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
-			if (collidedObj.getType().equals("plat")) {
+			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
 //				System.out.println("1");
 		    }
-			else if (collidedObj.getType().equals("goal")) 
+			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) 
 				System.out.println("Winner");
-			else if (collidedObj.getType().equals("floor")) {
+			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife();
 				//this.setDead(true);
 			}
-			else if (collidedObj.getType().equals("wall")) {
+			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
 				this.setTranslateX(getTranslateX() + 20);
 				//this.setTranslateY(getTranslateY() + 50);
 			}
-//			if (collidedObj.getType().equals("enemy")) {
-//				System.out.println("I am here");
-//			}
 		}
 		
 
@@ -140,7 +138,7 @@ public class Player extends RectObject{
 	
 //respawn animation, flashing player
 	public void Fade() {
-		if (getType().equals("player")) {
+		if (getType().equals(GameConstants.TYPE_PLAYER)) {
 				
 			 ft = new FadeTransition(Duration.millis(500), this);
 			

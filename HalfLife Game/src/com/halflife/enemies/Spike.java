@@ -3,6 +3,7 @@ package com.halflife.enemies;
 import com.halflife.entities.Player;
 
 import javafx.scene.shape.Polygon;
+import main.GameConstants;
 
 public class Spike extends Polygon{
 	
@@ -10,7 +11,7 @@ public class Spike extends Polygon{
 	
 	public Spike(double[] points) {
 		super(points);
-		type = "spike";
+		type = GameConstants.TYPE_SPIKE;
 	}
 	
 	

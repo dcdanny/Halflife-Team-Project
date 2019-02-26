@@ -46,7 +46,7 @@ public class Game extends Application {
 	private int levelWidth;
 	
 	private Parent createContent() {
-		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
+		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
 		//root.getChildren().add(enemy);
@@ -242,7 +242,7 @@ public class Game extends Application {
 				case '0':
 					break;
 				case '1':
-				Node platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
 				break; 
@@ -270,7 +270,7 @@ public class Game extends Application {
 					platforms.add(wall);
 					break;
 				case '5':
-					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
@@ -279,7 +279,7 @@ public class Game extends Application {
 					enemies.add((BaseEnemy) bEnemy);
 					break;
 				case '6':
-					platform =new RectObject(j*150,i*100,150,10,"plat",Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
