@@ -2,6 +2,7 @@
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	
-	private Parent createContent() {
+	private Parent createContent() throws IOException {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 		root.setPrefSize(800, 600);
 		root.getChildren().add(player);

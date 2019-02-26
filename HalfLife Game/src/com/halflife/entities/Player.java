@@ -1,5 +1,7 @@
 package com.halflife.entities;
 
+import java.io.IOException;
+
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -17,6 +19,7 @@ import main.CheckCollision;
 import main.DeathScreen;
 import main.GameConstants;
 import main.Lives;
+import main.WriteFile;
 import menu.view.LevelMenuController;
 
 public class Player extends RectObject{
@@ -64,7 +67,13 @@ public class Player extends RectObject{
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
 				System.out.println("Winner");
-
+				
+				WriteFile wr = new WriteFile(false);
+				try {
+					wr.write("level1=true");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
@@ -74,8 +83,6 @@ public class Player extends RectObject{
 				this.setTranslateX(getTranslateX() + 20);
 			}
 		}
-		
-
 	}
 	public void loseLife(Pane root) {
 		root.setLayoutX(0);
