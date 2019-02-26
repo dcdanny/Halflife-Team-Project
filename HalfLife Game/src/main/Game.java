@@ -138,7 +138,7 @@ public class Game extends Application {
 
 
 		for (BaseEnemy enemy : enemies) {
-			enemy.tick(player);
+			enemy.tick(player, root);
 		}
 		for (Spike spike : spikes) {
 			spike.tick(player);
@@ -194,7 +194,7 @@ public class Game extends Application {
 				player.setVelY(5);
 				break;
 			case W:
-				if (player.getGravity() == 0 && CheckCollision.getCollided()) {
+				if (player.getGravity() == 0 && player.hasCollided(root)) {
 					player.setTranslateY(player.getTranslateY() - 10);
 					player.jump();
 				}

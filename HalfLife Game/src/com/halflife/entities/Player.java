@@ -24,10 +24,12 @@ public class Player extends RectObject{
 	private boolean isJumping = false;
 	private Lives heart;
 	
+	private CheckCollision collisionChecker;
+	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
-
-	
+		
+		collisionChecker = new CheckCollision();
 
 		Ammo.setAmmo(ammo);
 
@@ -46,8 +48,8 @@ public class Player extends RectObject{
 		
 		setVelY(5);
 		
-		RectObject collidedObj = CheckCollision.checkForCollision(this, root);
-		if (CheckCollision.getCollided()) {
+		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
+		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals("plat")) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
@@ -102,7 +104,7 @@ public class Player extends RectObject{
 			public void handle(long now) {
 				setVelY(-15+gravity);
 				gravity += .5;
-				if (startingY < getYLocation() || CheckCollision.getCollided()) {
+				if (startingY < getYLocation() || collisionChecker.getCollided()) {
 					stop();
                     gravity = 0;
                     setVelY(0);
@@ -120,11 +122,15 @@ public class Player extends RectObject{
 		}
 	}
 
+	public boolean hasCollided(Pane root) {
+		collisionChecker.checkForCollision(this, root);
+		return collisionChecker.getCollided();
+	}
 	
 	public void shoot(Pane root) {
 		
 		if (ammo > 0) {
-			Bullet bullet = getBullet(this, Color.RED);
+			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
 			ammo--;
 		}else

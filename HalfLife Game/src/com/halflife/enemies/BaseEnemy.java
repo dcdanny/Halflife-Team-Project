@@ -1,9 +1,14 @@
 package com.halflife.enemies;
 
+import com.halflife.entities.Bullet;
+
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import main.Game;
 import main.Mathematics;
 
 public class BaseEnemy extends RectObject {
@@ -20,9 +25,12 @@ public class BaseEnemy extends RectObject {
 		startMoving = false;
 	}
 	
-	public void tick(Player player) {
+	public void tick(Player player, Pane root) {
 		velX = 0;
-		if (isCollided(player)) {
+		if (isCollidedWithBullet(root)) {
+			this.setDead(true);
+		}
+		if (isCollidedWithPlayer(player) && !isDead()) {
 			player.loseLife();
 		}
 		if (isNear(player)) {
@@ -51,11 +59,23 @@ public class BaseEnemy extends RectObject {
 		return false;
 	}
 
-	public boolean isCollided(Player player)
+	public boolean isCollidedWithPlayer(Player player)
 	{
 		if(this.getBoundsInParent().intersects(player.getBoundsInParent()))
 			return true;
 		return false;
+	}
+	
+	public boolean isCollidedWithBullet(Pane root)
+	{
+		 for (Node static_bloc : Game.getAllNodes(root)) {
+			 RectObject b = (RectObject) static_bloc;
+			    if (b != this && b.getType().equals("playerbullet"))
+			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+			    	 	 return true;
+			      }
+			    }
+		 return false;
 	}
 	
 	public void setVelX(double v) {

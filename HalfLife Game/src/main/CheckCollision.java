@@ -11,13 +11,13 @@ import main.Game;
 
 public class CheckCollision {
 
-	private static boolean collided;
+	private  boolean collided;
 	
 	public CheckCollision() {
 
 	}
 
-	public static RectObject checkForCollision(Shape block, Pane root) {
+	public  RectObject checkForCollision(Shape block, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
 		    if (static_bloc != block) {
@@ -37,8 +37,8 @@ public class CheckCollision {
 		  }
 		  return null;
 	}
-	
-	public static boolean getCollided() {
+
+	public  boolean getCollided() {
 		return collided;
 	}
 //
