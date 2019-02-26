@@ -3,16 +3,21 @@ package com.halflife.entities;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
 import main.DeathScreen;
 import main.GameConstants;
 import main.Lives;
+import menu.view.LevelMenuController;
 
 public class Player extends RectObject{
 	
@@ -36,7 +41,7 @@ public class Player extends RectObject{
 
 		movement(x, y);		
 	}
-	
+
 	public void tick(Pane root, Lives hearts) {
 		if (lives == 0) {	
 			setDead(true);
@@ -47,7 +52,7 @@ public class Player extends RectObject{
 		moveX((int)velX);
 		moveY((int)velY);	
 		
-		setVelY(5);
+		setVelY(10);
 		
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
@@ -59,6 +64,8 @@ public class Player extends RectObject{
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
 				System.out.println("Winner");
+
+				
 			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife(root);
