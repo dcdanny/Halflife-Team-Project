@@ -23,7 +23,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fill="#909090" layoutX="84.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(IP ADDRESS)">
+      <Text fill="#909090" fx:id="dispIPAddr" layoutX="84.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(IP ADDRESS)">
          <font>
             <Font size="20.0" />
          </font>

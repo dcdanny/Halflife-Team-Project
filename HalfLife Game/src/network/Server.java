@@ -85,14 +85,6 @@ public class Server extends Thread {
 		running = false;
 		try {
 			if(socket != null) {
-				System.out.println("getRemoteSocketAddress: "+socket.getRemoteSocketAddress());
-				System.out.println("socket.getInet: "+socket.getInetAddress().getHostAddress());
-				System.out.println("aa"+InetAddress.getLocalHost().getByAddress(InetAddress.getLocalHost().getAddress()));
-				System.out.println("socket.getAddress "+socket.getInetAddress());
-				System.out.println("socket.getAddress "+socket.getPort());
-				System.out.println("byte arr -> string " +InetAddress.getLocalHost());
-				//System.out.println("byte arr -> string " +new String(InetAddress.getLocalHost()));
-				//int unsignedByte = signedByte < 0 ? signedByte + 256 : signedByte;
 				socket.close();
 			}
 			serverSocket.close();

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import network.Message;
 import network.Server;
@@ -15,7 +16,11 @@ import network.Server;
 public class HostMenuController {
 	
 	private Stage primaryStage;
+	private String serverLocation;
 	Server server;
+	
+    @FXML
+    private Text dispIPAddr;
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
@@ -28,6 +33,8 @@ public class HostMenuController {
 		final int port = 1035;
 		System.out.println("port: "+port);
 		server = new Server(port);
+		serverLocation = server.getIpAddress()+":"+server.getPort();
+		dispIPAddr.setText(serverLocation);
 		server.start();
 				
 	}
