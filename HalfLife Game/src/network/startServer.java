@@ -17,22 +17,8 @@ public class startServer {
 		BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			while(true) {
-				System.out.println(server.getIpAddress());
-				System.out.println(Inet4Address.getLocalHost().getHostAddress());
-				Enumeration e = NetworkInterface.getNetworkInterfaces();
-				//Utils.getIPAddress(true);
-				while(e.hasMoreElements())
-				{
-					System.out.println("----NetIface-------");
-				    NetworkInterface n = (NetworkInterface) e.nextElement();
-				    Enumeration ee = n.getInetAddresses();
-				    while (ee.hasMoreElements())
-				    {
-				    	System.out.println("-NetAddr:");
-				        InetAddress i = (InetAddress) ee.nextElement();
-				        System.out.println(i.getHostAddress());
-				    }
-				}
+				System.out.println("IP Address is: "+server.getIpAddress());
+				System.out.println("Full IP Address is: "+server.getIpAddress()+":"+server.getPort());
 				System.out.println("----- Inbox: -----");
 				System.out.println(server.getReceived());
 				System.out.println("----- End Inbox -----");

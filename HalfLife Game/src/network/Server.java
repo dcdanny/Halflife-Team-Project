@@ -2,6 +2,7 @@ package network;
 
 import java.net.*;
 import java.io.*;
+import java.util.Enumeration;
 import java.util.concurrent.*;
 //Class to deal with creating threads for new clients
 public class Server extends Thread {
@@ -87,6 +88,10 @@ public class Server extends Thread {
 				System.out.println("getRemoteSocketAddress: "+socket.getRemoteSocketAddress());
 				System.out.println("socket.getInet: "+socket.getInetAddress().getHostAddress());
 				System.out.println("aa"+InetAddress.getLocalHost().getByAddress(InetAddress.getLocalHost().getAddress()));
+				System.out.println("socket.getAddress "+socket.getInetAddress());
+				System.out.println("socket.getAddress "+socket.getPort());
+				System.out.println("byte arr -> string " +InetAddress.getLocalHost());
+				//System.out.println("byte arr -> string " +new String(InetAddress.getLocalHost()));
 				//int unsignedByte = signedByte < 0 ? signedByte + 256 : signedByte;
 				socket.close();
 			}
@@ -119,13 +124,28 @@ public class Server extends Thread {
 	public ClientTable getclientTable() {
 		return clientTable;
 	}
-	public InetAddress getIpAddress() {
+	public String getIpAddress() {
+		String currentHostIpAddress = "";
+		Enumeration e;
 		try {
-			return InetAddress.getByName("localhost");
-			//return InetAddress.getLocalHost();
-			//return serverSocket.getInetAddress();
-		} catch (UnknownHostException e) {
+			e = NetworkInterface.getNetworkInterfaces();
+			while(e.hasMoreElements()){
+			    NetworkInterface n = (NetworkInterface) e.nextElement();
+			    Enumeration ee = n.getInetAddresses();
+			    while (ee.hasMoreElements()){
+			        InetAddress i = (InetAddress) ee.nextElement();
+		            if (i.getHostAddress().indexOf(":") == -1 && !i.isLoopbackAddress() && i.isSiteLocalAddress()) {
+		                currentHostIpAddress = i.getHostAddress();
+		            }
+			    }
+			}
+		} catch (SocketException e1) {
+			e1.printStackTrace();
 			return null;
 		}
+		return currentHostIpAddress;
+	}
+	public int getPort() {
+		return port;
 	}
 }
