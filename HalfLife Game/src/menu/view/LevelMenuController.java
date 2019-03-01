@@ -21,21 +21,18 @@ public class LevelMenuController {
 	// The "1" Button, directing to the Game "Level 1"
 	@FXML
 	private void go1() throws IOException {
-		 new Thread() {
-	            @Override
-	            public void run() {
-	            	 Platform.runLater(() -> {
-	                     try {
-							new Game().start(new Stage());
-							System.out.println("dsf");
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-	                 });
-	            }}.start();
-		 
-		
+		new Thread() {
+			@Override
+			public void run() {
+				Platform.runLater(() -> {
+					try {
+						new Game().start(new Stage());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				});
+				}
+			}.start();	
 	}
 	
 	// The "2" Button, directing to the Game "Level 2"
