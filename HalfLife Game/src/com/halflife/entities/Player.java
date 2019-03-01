@@ -1,19 +1,31 @@
 package com.halflife.entities;
 
+import java.io.IOException;
+
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.scene.Scene;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
 import main.DeathScreen;
+import main.GameConstants;
 import main.Lives;
+import main.WriteFile;
+import menu.view.LevelMenuController;
 
 
 public class Player extends RectObject{
@@ -27,15 +39,22 @@ public class Player extends RectObject{
 	private boolean isJumping = false;
 	private Lives heart;
 	
-	public Player(double x, double y, int width, int height, Color col, int lives) {
-		super(x, y, width, height, "player", col);
 
+	
+
+	private CheckCollision collisionChecker;
+	
+	public Player(double x, double y, int width, int height, Color col, int lives) {
+		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
 		
+		collisionChecker = new CheckCollision();
+
+
 		Ammo.setAmmo(ammo);
 
 		movement(x, y);		
 	}
-	
+
 	public void tick(Pane root, Lives hearts) {
 		if (lives == 0) {	
 			setDead(true);
@@ -46,33 +65,37 @@ public class Player extends RectObject{
 		moveX((int)velX);
 		moveY((int)velY);	
 		
-		setVelY(5);
+		setVelY(10);
 		
-		RectObject collidedObj = CheckCollision.checkForCollision(this, root);
-		if (CheckCollision.getCollided()) {
-			if (collidedObj.getType().equals("plat")) {
+		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
+		if (collisionChecker.getCollided()) {
+			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
 //				System.out.println("1");
 		    }
-			else if (collidedObj.getType().equals("goal")) 
+			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
+				setVelY(0);
 				System.out.println("Winner");
-			else if (collidedObj.getType().equals("floor")) {
-				loseLife();
-				//this.setDead(true);
+				
+				WriteFile wr = new WriteFile(false);
+				try {
+					wr.write("level1=true");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}	
+			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
+				loseLife(root);
 			}
-			else if (collidedObj.getType().equals("wall")) {
+			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
 				this.setTranslateX(getTranslateX() + 20);
-				//this.setTranslateY(getTranslateY() + 50);
 			}
-//			if (collidedObj.getType().equals("enemy")) {
-//				System.out.println("I am here");
-//			}
 		}
-		
-
 	}
-	public void loseLife() {
+	public void loseLife(Pane root) {
+		root.setLayoutX(0);
 		if (lives > 0) {
 			this.Fade();
 			this.setTranslateX(200);
@@ -102,13 +125,13 @@ public class Player extends RectObject{
 		AnimationTimer jTimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				setVelY(-15+gravity);
+				setVelY(-10+gravity);
 				gravity += .5;
-				if (startingY < getYLocation() || CheckCollision.getCollided()) {
+				if (startingY < getYLocation() || collisionChecker.getCollided()) {
 					stop();
                     gravity = 0;
                     setVelY(0);
-                    setTranslateY(getTranslateY() - 15);
+                    setTranslateY(getTranslateY() - 10);
 				}
 			}
 		};
@@ -122,11 +145,15 @@ public class Player extends RectObject{
 		}
 	}
 
+	public boolean hasCollided(Pane root) {
+		collisionChecker.checkForCollision(this, root);
+		return collisionChecker.getCollided();
+	}
 	
 	public void shoot(Pane root) {
 		
 		if (ammo > 0) {
-			Bullet bullet = getBullet(this, Color.RED);
+			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
 			ammo--;
 		}else
@@ -136,7 +163,7 @@ public class Player extends RectObject{
 	
 //respawn animation, flashing player
 	public void Fade() {
-		if (getType().equals("player")) {
+		if (getType().equals(GameConstants.TYPE_PLAYER)) {
 				
 			 ft = new FadeTransition(Duration.millis(500), this);
 			

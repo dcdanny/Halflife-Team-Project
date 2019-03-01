@@ -1,9 +1,15 @@
 package com.halflife.enemies;
 
+import com.halflife.entities.Bullet;
+
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import main.Game;
+import main.GameConstants;
 import main.Mathematics;
 
 public class BaseEnemy extends RectObject {
@@ -15,15 +21,18 @@ public class BaseEnemy extends RectObject {
 	
 	public BaseEnemy(int x, int y, int width, int height) {
 		
-		super(x, y, width, height, "enemy", Color.RED);		
+		super(x, y, width, height, GameConstants.TYPE_ENEMY, Color.RED);		
 		// TODO Auto-generated constructor stub
 		startMoving = false;
 	}
 	
-	public void tick(Player player) {
+	public void tick(Player player, Pane root) {
 		velX = 0;
-		if (isCollided(player)) {
-			player.loseLife();
+		if (isCollidedWithBullet(root)) {
+			this.setDead(true);
+		}
+		if (isCollidedWithPlayer(player) && !isDead()) {
+			player.loseLife(root);
 		}
 		if (isNear(player)) {
 			if (Mathematics.getDistanceX(this, player)< 0)
@@ -51,11 +60,23 @@ public class BaseEnemy extends RectObject {
 		return false;
 	}
 
-	public boolean isCollided(Player player)
+	public boolean isCollidedWithPlayer(Player player)
 	{
 		if(this.getBoundsInParent().intersects(player.getBoundsInParent()))
 			return true;
 		return false;
+	}
+	
+	public boolean isCollidedWithBullet(Pane root)
+	{
+		 for (Node static_bloc : Game.getAllNodes(root)) {
+			 RectObject b = (RectObject) static_bloc;
+			    if (b != this && b.getType().equals(GameConstants.TYPE_PLAYER_BULLET))
+			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+			    	 	 return true;
+			      }
+			    }
+		 return false;
 	}
 	
 	public void setVelX(double v) {

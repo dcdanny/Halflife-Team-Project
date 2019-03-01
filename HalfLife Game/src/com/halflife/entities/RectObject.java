@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javafx.scene.layout.Pane;
 
 public class RectObject extends Rectangle {
 	protected FadeTransition ft;
@@ -55,8 +56,8 @@ public class RectObject extends Rectangle {
 	}
 	
 
-	public Bullet getBullet(RectObject shooter, Color colour) {
-		Bullet bullet = new Bullet(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour);
+	public Bullet getBullet(RectObject shooter, Color colour, Pane root) {
+		Bullet bullet = new Bullet(shooter.getTranslateX() + 20, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour, root);
 		return bullet;
 	}
 	public String getType() {
