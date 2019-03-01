@@ -32,6 +32,7 @@ public class Player extends RectObject{
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
+	private boolean completedLevel;
 	
 	private CheckCollision collisionChecker;
 	
@@ -43,6 +44,8 @@ public class Player extends RectObject{
 		Ammo.setAmmo(ammo);
 
 		movement(x, y);		
+		
+		completedLevel = false;
 	}
 
 	public void tick(Pane root, Lives hearts) {
@@ -66,7 +69,11 @@ public class Player extends RectObject{
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
-				System.out.println("Winner");
+				if (!completedLevel) {
+					completedLevel = true;
+					System.out.println("Winner");
+				}
+				
 				
 				WriteFile wr = new WriteFile(false);
 				try {
