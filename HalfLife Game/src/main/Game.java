@@ -43,6 +43,7 @@ public class Game extends Application {
 	private Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+	private SpriteAnimation sp= new SpriteAnimation();
 	
 	private Parent createContent() {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
@@ -52,7 +53,7 @@ public class Game extends Application {
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-		//root.getChildren().add(sp);
+		root.getChildren().add(sp);
 		//root.getChildren().add(sp.getSpike());
 		
 		//root.getChildren().add(enemy1);
