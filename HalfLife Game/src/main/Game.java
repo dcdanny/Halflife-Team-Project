@@ -7,13 +7,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -21,9 +25,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
+import com.halflife.entities.Character;
+
 import main.CheckCollision;
 
 
@@ -35,6 +42,7 @@ public class Game extends Application {
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	private AnimationSprite ani =new AnimationSprite(); 
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
@@ -45,6 +53,22 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	
+	Image image= new Image ("ghostcharnew.png");
+	ImageView img=new ImageView(image);
+	//Character ghost= new Character(img);
+	//SPRITE STUFF
+	private static final int COLUMNS  =   2;
+    private static final int COUNT    =  4;
+    private static final int OFFSET_X =  18;
+    private static final int OFFSET_Y =  25;
+    private static final int WIDTH    = 100;
+    private static final int HEIGHT   = 100;
+
+	
+	
+	
+	
+
 	private Parent createContent() {
 		RectObject bg=new RectObject(0,0,800,600,"background",Color.valueOf("#4f7b8a"));
 		root.setPrefSize(800, 600);
@@ -53,16 +77,13 @@ public class Game extends Application {
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-		//root.getChildren().add(sp);
+	
 		//root.getChildren().add(sp.getSpike());
 		
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
-		//root.setStyle("-fx-background-color: #4f7b8a;");
-		
-		//root.getChildren().add(DeathShow);
-		
-		//display.getChildren().addAll(root);
+	
+	    	//root.getChildren().add(ani);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -135,8 +156,8 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
-
-
+		
+		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player);
 		}

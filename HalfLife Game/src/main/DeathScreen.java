@@ -8,8 +8,11 @@ import com.sun.prism.paint.ImagePattern;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.event.EventHandler;
+import javafx.scene.image.*;
+
+import javafx.scene.paint.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -18,6 +21,7 @@ public class DeathScreen extends StackPane {
 
 	 DeathScreen() {
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.BLACK);
+		 
 		 Fade(bg);
 			Image death = new Image("youdied.png");
 			ImageView img= new ImageView(death);
@@ -36,7 +40,32 @@ public class DeathScreen extends StackPane {
 	         resimg.setPreserveRatio(true);
 	         resimg.setSmooth(true);
 	         resimg.setCache(true);
+	         RectObject resbutton=new RectObject(-150,180,250,100,"restart button",Color.TRANSPARENT);
+	       
 	         
+	      //  resbutton.setFill(new javafx.scene.paint.ImagePattern(restart));
+	         
+	         resbutton.setOnMouseEntered(new EventHandler<MouseEvent>
+	         () {
+
+	             @Override
+	             public void handle(MouseEvent t) {
+	                resimg.setFitWidth(500);
+	             }
+	         });
+
+	         resbutton.setOnMouseExited(new EventHandler<MouseEvent>
+	         () {
+
+	             @Override
+	             public void handle(MouseEvent t) {
+	                resimg.setFitWidth(450);
+	             }
+	         });
+	         
+	         resbutton.setOnMouseClicked((MouseEvent e) -> {
+	             System.out.println("Clicked!"); // change functionality
+	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);
 	         exitimg.setFitWidth(400);
@@ -46,10 +75,36 @@ public class DeathScreen extends StackPane {
 	         exitimg.setSmooth(true);
 	         exitimg.setCache(true);
 	         
+	         RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
+	         exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
+	         () {
+
+	             @Override
+	             public void handle(MouseEvent f) {
+	                exitimg.setFitWidth(450);
+	             }
+	         });
+
+	         exitbutton.setOnMouseExited(new EventHandler<MouseEvent>
+	         () {
+
+	             @Override
+	             public void handle(MouseEvent f) {
+	                exitimg.setFitWidth(400);
+	             }
+	         });
+	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
+	             System.out.println("Clicked Exit!"); // change functionality
+	         });
+	         
 	         this.getChildren().add(bg);
+	         
 			this.getChildren().add(img);
 			this.getChildren().add(resimg);
+			this.getChildren().add(resbutton);
+			
 			this.getChildren().add(exitimg);
+			this.getChildren().add(exitbutton);
 			
 		
 }

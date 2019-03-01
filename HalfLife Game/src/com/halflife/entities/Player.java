@@ -4,6 +4,8 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -12,6 +14,7 @@ import main.Ammo;
 import main.CheckCollision;
 import main.DeathScreen;
 import main.Lives;
+
 
 public class Player extends RectObject{
 	
@@ -27,8 +30,7 @@ public class Player extends RectObject{
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, "player", col);
 
-	
-
+		
 		Ammo.setAmmo(ammo);
 
 		movement(x, y);		
