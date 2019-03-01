@@ -241,6 +241,10 @@ public class Game extends Application {
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
+					Node edgePlat =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM,Color.valueOf("#4f7b8a"));
+					edgePlat.setTranslateX(edgePlat.getTranslateX()+1);
+					root.getChildren().add(edgePlat);
+					platforms.add(edgePlat);
 					break;
 				case '1':
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);

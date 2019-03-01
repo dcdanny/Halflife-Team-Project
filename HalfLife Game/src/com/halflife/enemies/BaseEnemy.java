@@ -34,7 +34,7 @@ public class BaseEnemy extends RectObject {
 		if (isCollidedWithPlayer(player) && !isDead()) {
 			player.loseLife(root);
 		}
-		if (isNear(player)) {
+		if (isNear(player) && !isAtEdge(root)) {
 			if (Mathematics.getDistanceX(this, player)< 0)
 				velX = 2;
 			else if (Mathematics.getDistanceX(this, player)> 0)
@@ -65,6 +65,18 @@ public class BaseEnemy extends RectObject {
 		if(this.getBoundsInParent().intersects(player.getBoundsInParent()))
 			return true;
 		return false;
+	}
+	
+	public boolean isAtEdge(Pane root)
+	{
+		 for (Node static_bloc : Game.getAllNodes(root)) {
+			 RectObject b = (RectObject) static_bloc;
+			    if (b != this && b.getType().equals(GameConstants.TYPE_EDGE_PLATFORM))
+			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+			    	 	 return true;
+			      }
+			    }
+		 return false;
 	}
 	
 	public boolean isCollidedWithBullet(Pane root)

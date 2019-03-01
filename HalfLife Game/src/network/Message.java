@@ -1,11 +1,16 @@
 package network;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.halflife.entities.Player;
+
 public class Message implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String sender;
-	  private final String text;
-
+	private final String text;
+	  
 	  public Message(String sender, String text) {
 		  this.sender = sender;
 		  this.text = text;
@@ -24,5 +29,5 @@ public class Message implements java.io.Serializable{
 	  public String toString() {
 		  return "From " + sender + ": " + text;
 	  }
-
+	  
 }

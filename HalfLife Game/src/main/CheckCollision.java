@@ -20,7 +20,8 @@ public class CheckCollision {
 	public  RectObject checkForCollision(Shape block, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
-		    if (static_bloc != block) {
+		     RectObject b = (RectObject) static_bloc;
+		    if (static_bloc != block && b.getType() != GameConstants.TYPE_EDGE_PLATFORM) {
 
 		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
 		    	  

@@ -27,7 +27,6 @@ public class LevelMenuController {
 	            	 Platform.runLater(() -> {
 	                     try {
 							new Game().start(new Stage());
-							System.out.println("dsf");
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

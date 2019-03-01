@@ -8,6 +8,7 @@ public class GameConstants {
 	public static final String TYPE_ENEMY = "enemy";
 	public static final String TYPE_BACKGROUND = "background";
 	public static final String TYPE_PLATFORM = "plat";
+	public static final String TYPE_EDGE_PLATFORM = "edgePlat";
 	public static final String TYPE_WALL = "wall";
 	public static final String TYPE_FLOOR = "floor";
 	public static final String TYPE_GOAL = "goal";

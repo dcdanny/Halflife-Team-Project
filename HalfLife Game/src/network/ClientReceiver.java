@@ -19,8 +19,9 @@ public class ClientReceiver extends Thread {
     try {
       while (true) {
 		Message receivedMessage = (Message) server.readObject();
-        if (receivedMessage != null)                
+        if (receivedMessage != null) {                
           System.out.println(receivedMessage);
+        }
         else
           Report.errorAndGiveUp("Server seems to have died"); 
       }
