@@ -40,6 +40,9 @@ public class BaseEnemy extends RectObject {
 			else if (Mathematics.getDistanceX(this, player)> 0)
 				velX = -2;
 		}
+		if (isAtEdge(root)) {
+			this.setTranslateX(this.getTranslateX() - 1);
+		}
 		moveX((int)velX);
 		//moveY((int)velY);	
 	}
