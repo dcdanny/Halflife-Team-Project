@@ -188,10 +188,14 @@ public class Game extends Application {
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
-					Node edgePlat =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM,Color.valueOf("#4f7b8a"));
-					edgePlat.setTranslateX(edgePlat.getTranslateX()+1);
-					root.getChildren().add(edgePlat);
-					platforms.add(edgePlat);
+					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#4f7b8a"));
+					edgePlatR.setTranslateX(edgePlatR.getTranslateX()+1);
+					root.getChildren().add(edgePlatR);
+					platforms.add(edgePlatR);
+					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#4f7b8a"));
+					edgePlatL.setTranslateX(edgePlatL.getTranslateX()+148);
+					root.getChildren().add(edgePlatL);
+					platforms.add(edgePlatL);
 					break;
 				case '1':
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
