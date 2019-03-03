@@ -126,7 +126,7 @@ public class Server extends Thread {
 			    Enumeration ee = n.getInetAddresses();
 			    while (ee.hasMoreElements()){
 			        InetAddress i = (InetAddress) ee.nextElement();
-		            if (i.getHostAddress().indexOf(":") == -1 && !i.isLoopbackAddress() && i.isSiteLocalAddress()) {
+		            if (i.getHostAddress().indexOf(":") == -1 && !i.isLoopbackAddress() && i.isSiteLocalAddress() && currentHostIpAddress.equals("")) {
 		                currentHostIpAddress = i.getHostAddress();
 		            }
 			    }
