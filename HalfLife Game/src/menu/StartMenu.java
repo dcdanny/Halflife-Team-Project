@@ -18,6 +18,9 @@ public class StartMenu extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HALFLIFE");
+		this.primaryStage.setWidth(800);
+		this.primaryStage.setHeight(600);
+		this.primaryStage.setResizable(false);
 		showMainView();
 	}
 	

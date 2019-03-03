@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import network.Client;
 import network.Message;
 import network.Server;
 
@@ -58,6 +59,11 @@ public class HostMenuController {
 	@FXML
 	private void goNext() throws IOException {
 		server.setAllowNewPlayers(false); //Stop any further players from connecting
+		System.out.println("Network Client Connecting to: "+"localhost");
+		//Can't use 0 - 1023, Use 1024 - 65 535
+		Client client = new Client(1035,"dan","localhost");
+		client.start();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane hostMenu = loader.load();
 		LevelMenuController controller = loader.getController();

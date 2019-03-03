@@ -4,6 +4,8 @@ import java.net.*;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.concurrent.*;
+
+import main.Game;
 //Class to deal with creating threads for new clients
 public class Server extends Thread {
 	private volatile boolean allowNewPlayers;
@@ -13,7 +15,7 @@ public class Server extends Thread {
 	ServerSocket serverSocket;
 	private ServerReceiver receiver;
 	private ServerSender sender;
-	Boolean running;
+	//Boolean running;
 	Socket socket;
 	
 	public Server(int port) {
@@ -25,7 +27,7 @@ public class Server extends Thread {
 		clientTable = new ClientTable();
 		clientTable.add("server");
 		serverSocket = null;
-		running = true;
+		//running = true;
 	}
 	public void run() {
 		try {
@@ -41,7 +43,7 @@ public class Server extends Thread {
 				// Listen to the socket waiting for new clients wanting to connect
 				socket = serverSocket.accept();
 
-				if(!running) break;
+				//if(!allowNewPlayers) break;
 				
 				//TODO:Make it so IDs can be freed up if player quits. Currently just adds one to highest player id
 				String clientName = "Player" + numClients;
@@ -68,6 +70,10 @@ public class Server extends Thread {
 					Report.error("client name already in use");
 				}
 			}
+			//start game object here
+			System.out.println("Starting game...");
+			Game game = new Game();
+			
 		}catch (IOException e) {
 			Report.error("Network error " + e.getMessage());
 		}
@@ -82,7 +88,7 @@ public class Server extends Thread {
 		System.out.println("Server stopping...");
 		allowNewPlayers = false;
 		clientTable.stopServer();
-		running = false;
+		//running = false;
 		try {
 			if(socket != null) {
 				socket.close();

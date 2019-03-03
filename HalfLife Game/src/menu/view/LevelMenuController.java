@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
+import main.Level_Info;
 
 public class LevelMenuController {
 	
@@ -26,7 +27,7 @@ public class LevelMenuController {
 			public void run() {
 				Platform.runLater(() -> {
 					try {
-						new Game().start(new Stage());
+						new Game().start(primaryStage);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -38,7 +39,9 @@ public class LevelMenuController {
 	// The "2" Button, directing to the Game "Level 2"
 	@FXML
 	private void go2() throws IOException {
-		
+	/*	Game game = new Game();
+		game.setLevel(Level_Info.LEVEL2);
+		game.start(primaryStage);*/
 	}
 	
 	// The "3" Button, directing to the Game "Level 3"
