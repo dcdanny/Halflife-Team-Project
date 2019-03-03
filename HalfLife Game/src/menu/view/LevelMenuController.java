@@ -33,6 +33,7 @@ public class LevelMenuController {
 					}
 				});
 				}*/
+		//Client side game
 			Game game = new Game();
 			game.setCurrentLevel(Level_Info.LEVEL1);
 			game.start(primaryStage);
