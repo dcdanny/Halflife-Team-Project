@@ -17,7 +17,7 @@
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="301.0" layoutY="190.0" mnemonicParsing="false" onAction="#goMulti" text="MULTI-PLAYERS">
+      <Button layoutX="301.0" layoutY="190.0" mnemonicParsing="false" onAction="#goMulti" text="MULTIPLAYER">
          <font>
             <Font size="25.0" />
          </font>
