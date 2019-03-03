@@ -21,7 +21,7 @@ public class CheckCollision {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
 		     RectObject b = (RectObject) static_bloc;
-		    if (static_bloc != block && b.getType() != GameConstants.TYPE_EDGE_PLATFORM) {
+		    if (static_bloc != block && b.getType() != GameConstants.TYPE_EDGE_PLATFORM_RIGHT && b.getType() != GameConstants.TYPE_EDGE_PLATFORM_LEFT) {
 
 		      if (block.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
 		    	  
