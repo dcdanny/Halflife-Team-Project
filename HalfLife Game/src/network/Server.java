@@ -68,6 +68,9 @@ public class Server extends Thread {
 					Report.error("client name already in use");
 				}
 			}
+			//start game object here
+			
+			
 		}catch (IOException e) {
 			Report.error("Network error " + e.getMessage());
 		}
