@@ -33,6 +33,7 @@ public class HostMenuController {
 		final int port = 1035;
 		System.out.println("port: "+port);
 		server = new Server(port);
+		server.setAllowNewPlayers(true); //Allow new players to connect
 		serverLocation = server.getIpAddress()+":"+server.getPort();
 		dispIPAddr.setText(serverLocation);
 		server.start();
@@ -56,6 +57,7 @@ public class HostMenuController {
 	// The "NEXT" Button, directing to the "SELECT GAME LEVEL" menu
 	@FXML
 	private void goNext() throws IOException {
+		server.setAllowNewPlayers(false); //Stop any further players from connecting
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane hostMenu = loader.load();
 		LevelMenuController controller = loader.getController();
