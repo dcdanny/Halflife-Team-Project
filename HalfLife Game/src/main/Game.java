@@ -45,7 +45,12 @@ public class Game extends Application {
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+	private String[] currentLevel;
 	
+	public void setCurrentLevel(String[] currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
 	private Parent createContent() throws IOException {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 		root.setPrefSize(800, 600);
@@ -163,7 +168,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
-		setUpLevel(Level_Info.LEVEL4);
+		setUpLevel(currentLevel);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
@@ -176,9 +181,7 @@ public class Game extends Application {
 		
 		
 	}
-	
-//	public void levelSelect 
-	
+		
 	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
