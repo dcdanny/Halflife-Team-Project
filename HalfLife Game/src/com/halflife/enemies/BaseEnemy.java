@@ -34,14 +34,17 @@ public class BaseEnemy extends RectObject {
 		if (isCollidedWithPlayer(player) && !isDead()) {
 			player.loseLife(root);
 		}
-		if (isNear(player) && !isAtEdge(root)) {
+		if (isNear(player) && !isAtEdgeR(root) && !isAtEdgeL(root)){
 			if (Mathematics.getDistanceX(this, player)< 0)
 				velX = 2;
 			else if (Mathematics.getDistanceX(this, player)> 0)
 				velX = -2;
 		}
-		if (isAtEdge(root)) {
+		if (isAtEdgeR(root)) {
 			this.setTranslateX(this.getTranslateX() - 1);
+		}
+		if (isAtEdgeL(root)) {
+			this.setTranslateX(this.getTranslateX() + 1);
 		}
 		moveX((int)velX);
 		//moveY((int)velY);	
@@ -70,11 +73,23 @@ public class BaseEnemy extends RectObject {
 		return false;
 	}
 	
-	public boolean isAtEdge(Pane root)
+	public boolean isAtEdgeR(Pane root)
 	{
 		 for (Node static_bloc : Game.getAllNodes(root)) {
 			 RectObject b = (RectObject) static_bloc;
-			    if (b != this && b.getType().equals(GameConstants.TYPE_EDGE_PLATFORM))
+			    if (b != this && b.getType().equals(GameConstants.TYPE_EDGE_PLATFORM_RIGHT))
+			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
+			    	 	 return true;
+			      }
+			    }
+		 return false;
+	}
+	
+	public boolean isAtEdgeL(Pane root)
+	{
+		 for (Node static_bloc : Game.getAllNodes(root)) {
+			 RectObject b = (RectObject) static_bloc;
+			    if (b != this && b.getType().equals(GameConstants.TYPE_EDGE_PLATFORM_LEFT))
 			      if (this.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
 			    	 	 return true;
 			      }
