@@ -29,7 +29,7 @@ import main.CheckCollision;
 
 
 public class Game extends Application {
-	private Pane root= new Pane();
+	public Pane root= new Pane();
 	private Pane foreground=new Pane();
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
@@ -42,7 +42,7 @@ public class Game extends Application {
 	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart = new Lives();
-	private Ammo ammo = new Ammo();
+	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	
@@ -169,67 +169,14 @@ public class Game extends Application {
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		
-		buttonPressing(scene);
-		buttonReleasing(scene);
+		player.buttonPressing(this, scene);
+		player.buttonReleasing(scene);
 		
 		stage.show();
 		
 		
 	}
 	
-	
-	private void buttonPressing(Scene s) {
-	
-		s.setOnKeyPressed(e-> {
-			switch (e.getCode()) {
-			case A:
-				player.setVelX(-5);
-				root.setLayoutX(root.getLayoutX()+10);
-				break;
-			case D: 
-				player.setVelX(5);
-				root.setLayoutX(root.getLayoutX()-10);
-				root.setStyle("-fx-background-color: #4f7b8a;");
-				break;
-			case S: 
-				player.setVelY(5);
-				break;
-			case W:
-				if (player.getGravity() == 0 && player.hasCollided(root)) {
-					player.setTranslateY(player.getTranslateY() - 10);
-					player.jump();
-				}
-				break;
-			case SPACE:
-				ammo.lostBullet();
-				player.shoot(root);
-				break;
-			}
-			
-		});
-		
-	}
-	
-	private void buttonReleasing(Scene s) {
-		
-		s.setOnKeyReleased(e-> {
-			switch (e.getCode()) {
-			case A:
-				player.setVelX(0);
-				break;
-			case D: 
-				player.setVelX(0);
-				break;
-			case S: 
-				player.setVelY(0);
-				break;
-			case W:
-				break;
-			}
-			
-		});
-		
-	}
 	
 	private void setUpLevel() {
 		levelWidth= Level_Info.LEVEL1[0].length()*150;
