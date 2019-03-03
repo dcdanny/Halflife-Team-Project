@@ -163,7 +163,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
-		setUpLevel();
+		setUpLevel(Level_Info.LEVEL4);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
@@ -177,14 +177,16 @@ public class Game extends Application {
 		
 	}
 	
+//	public void levelSelect 
 	
-	private void setUpLevel() {
-		levelWidth= Level_Info.LEVEL1[0].length()*150;
+	
+	private void setUpLevel(String[] lvl) {
+		levelWidth= lvl[0].length()*150;
 	
 		
 		
-		for (int i = 0; i < Level_Info.LEVEL1.length; i++) {
-			String line=Level_Info.LEVEL1[i];
+		for (int i = 0; i < lvl.length; i++) {
+			String line=lvl[i];
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
