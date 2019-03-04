@@ -56,13 +56,6 @@ public class AnimationSprite extends Pane {
 		img.setTranslateY(120);
 		return img;
 	}
-	public void FrameLoop() {
-		//for (int i = 0; i < imglist.size(); i++) {
-		//imageView.setImage(imageIndex);
-			
-			
-			
-	//	}
-	}
+	
 	
 }
