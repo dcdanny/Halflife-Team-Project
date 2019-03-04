@@ -90,12 +90,7 @@ public class DeathScreen extends StackPane {
 	         });
 	         
 	         this.getChildren().add(bg);
-<<<<<<< HEAD
-	         
-			this.getChildren().add(img);
-=======
-	
->>>>>>> visuals
+
 			this.getChildren().add(resimg);
 			this.getChildren().add(resbutton);
 			

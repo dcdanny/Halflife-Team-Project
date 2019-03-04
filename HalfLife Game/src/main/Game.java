@@ -30,7 +30,7 @@ import javafx.util.Duration;
 
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
-import com.halflife.entities.Character;
+
 
 import main.CheckCollision;
 
@@ -53,11 +53,11 @@ public class Game extends Application {
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
-<<<<<<< HEAD
+
 	private String[] currentLevel;
-=======
+
 	private SpriteAnimation sp= new SpriteAnimation();
->>>>>>> visuals
+
 	
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
@@ -72,11 +72,9 @@ public class Game extends Application {
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-<<<<<<< HEAD
-	
-=======
+
 		root.getChildren().add(sp);
->>>>>>> visuals
+
 		//root.getChildren().add(sp.getSpike());
 		
 		//root.getChildren().add(enemy1);
