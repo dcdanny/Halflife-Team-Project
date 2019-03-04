@@ -1891,3 +1891,24 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.core 4 0 2019-03-04 11:59:37.116
+!MESSAGE An exception occurred during push on URI git@git-teaching.cs.bham.ac.uk:mod-team-proj-2018/halflife.git: git@git-teaching.cs.bham.ac.uk:mod-team-proj-2018/halflife.git: Auth fail
+!STACK 0
+org.eclipse.jgit.errors.TransportException: git@git-teaching.cs.bham.ac.uk:mod-team-proj-2018/halflife.git: Auth fail
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:172)
+	at org.eclipse.jgit.transport.SshTransport.getSession(SshTransport.java:137)
+	at org.eclipse.jgit.transport.TransportGitSsh$SshPushConnection.<init>(TransportGitSsh.java:336)
+	at org.eclipse.jgit.transport.TransportGitSsh.openPush(TransportGitSsh.java:174)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:160)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1310)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:189)
+	at org.eclipse.egit.ui.internal.push.ConfirmationPage$2.run(ConfirmationPage.java:209)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Caused by: com.jcraft.jsch.JSchException: Auth fail
+	at com.jcraft.jsch.Session.connect(Session.java:519)
+	at org.eclipse.jgit.transport.JschConfigSessionFactory.getSession(JschConfigSessionFactory.java:126)
+	... 8 more
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-03-04 12:03:33.206
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/integration/4.7/.
