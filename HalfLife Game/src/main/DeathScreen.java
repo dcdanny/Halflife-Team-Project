@@ -19,15 +19,7 @@ public class DeathScreen extends StackPane {
 	 DeathScreen() {
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.BLACK);
 		 Fade(bg);
-			Image death = new Image("youdied.png");
-			ImageView img= new ImageView(death);
-			img.setFitWidth(450);
-		//	img.setTranslateX(170);
-			img.setTranslateY(-100);
-	         img.setPreserveRatio(true);
-	         img.setSmooth(true);
-	         img.setCache(true);
-	         
+				         
 	         Image restart = new Image("restart.png");
 	         ImageView resimg= new ImageView(restart);
 	         resimg.setFitWidth(400);
@@ -47,7 +39,7 @@ public class DeathScreen extends StackPane {
 	         exitimg.setCache(true);
 	         
 	         this.getChildren().add(bg);
-			this.getChildren().add(img);
+	
 			this.getChildren().add(resimg);
 			this.getChildren().add(exitimg);
 			
