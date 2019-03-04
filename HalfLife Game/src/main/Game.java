@@ -33,7 +33,7 @@ import com.halflife.entities.*;
 
 
 import main.CheckCollision;
-
+//IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
 public class Game extends Application {
 	public Pane root= new Pane();
@@ -43,6 +43,7 @@ public class Game extends Application {
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	private SpritePlayer spplayer= new SpritePlayer();
 	private AnimationSprite ani =new AnimationSprite(); 
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -73,7 +74,7 @@ public class Game extends Application {
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 
-		root.getChildren().add(sp);
+		root.getChildren().add(spplayer);
 
 		//root.getChildren().add(sp.getSpike());
 		
@@ -153,7 +154,7 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
-		
+		spplayer.tick(root, heart);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
@@ -185,8 +186,11 @@ public class Game extends Application {
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
+	//	spplayer.buttonPressing(this, scene);
+		//spplayer.buttonReleasing(scene);
 		
-		player.buttonPressing(this, scene);
+		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
+		player.buttonPressing(this, scene); 
 		player.buttonReleasing(scene);
 		
 		stage.show();
