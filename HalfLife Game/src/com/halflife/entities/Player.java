@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
 import main.DeathScreen;
+import main.Game;
 import main.GameConstants;
 import main.Lives;
 import main.WriteFile;
@@ -38,6 +39,7 @@ public class Player extends RectObject{
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
+	private boolean completedLevel;
 	
 
 	
@@ -53,6 +55,8 @@ public class Player extends RectObject{
 		Ammo.setAmmo(ammo);
 
 		movement(x, y);		
+		
+		completedLevel = false;
 	}
 
 	public void tick(Pane root, Lives hearts) {
@@ -76,7 +80,11 @@ public class Player extends RectObject{
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
-				System.out.println("Winner");
+				if (!completedLevel) {
+					completedLevel = true;
+					System.out.println("Winner");
+				}
+				
 				
 				WriteFile wr = new WriteFile(false);
 				try {
@@ -197,6 +205,59 @@ public class Player extends RectObject{
 
 	public int getAmmo() {
 		return ammo;
+	}
+
+	public void buttonPressing(Game game, Scene s) {
+	
+		s.setOnKeyPressed(e-> {
+			switch (e.getCode()) {
+			case A:
+				setVelX(-5);
+				game.root.setLayoutX(game.root.getLayoutX()+10);
+				break;
+			case D: 
+				setVelX(5);
+				game.root.setLayoutX(game.root.getLayoutX()-10);
+				game.root.setStyle("-fx-background-color: #4f7b8a;");
+				break;
+			case S: 
+				setVelY(5);
+				break;
+			case W:
+				if (getGravity() == 0 && hasCollided(game.root)) {
+					setTranslateY(getTranslateY() - 10);
+					jump();
+				}
+				break;
+			case SPACE:
+				game.ammo.lostBullet();
+				shoot(game.root);
+				break;
+			}
+			
+		});
+		
+	}
+
+	public void buttonReleasing(Scene s) {
+		
+		s.setOnKeyReleased(e-> {
+			switch (e.getCode()) {
+			case A:
+				setVelX(0);
+				break;
+			case D: 
+				setVelX(0);
+				break;
+			case S: 
+				setVelY(0);
+				break;
+			case W:
+				break;
+			}
+			
+		});
+		
 	}
 
 

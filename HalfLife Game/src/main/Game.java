@@ -36,7 +36,7 @@ import main.CheckCollision;
 
 
 public class Game extends Application {
-	private Pane root= new Pane();
+	public Pane root= new Pane();
 	private Pane foreground=new Pane();
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
@@ -50,27 +50,14 @@ public class Game extends Application {
 	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart = new Lives();
-	private Ammo ammo = new Ammo();
+	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+	private String[] currentLevel;
 	
-
-	Image image= new Image ("ghostcharnew.png");
-	ImageView img=new ImageView(image);
-	//Character ghost= new Character(img);
-	//SPRITE STUFF
-	private static final int COLUMNS  =   2;
-    private static final int COUNT    =  4;
-    private static final int OFFSET_X =  18;
-    private static final int OFFSET_Y =  25;
-    private static final int WIDTH    = 100;
-    private static final int HEIGHT   = 100;
-
-	
-	
-	
-	
-
+	public void setCurrentLevel(String[] currentLevel) {
+		this.currentLevel = currentLevel;
+	}
 
 	private Parent createContent() throws IOException {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
@@ -187,84 +174,39 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
-		setUpLevel();
+		setUpLevel(currentLevel);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		
-		buttonPressing(scene);
-		buttonReleasing(scene);
+		player.buttonPressing(this, scene);
+		player.buttonReleasing(scene);
 		
 		stage.show();
 		
 		
 	}
-	
-	
-	private void buttonPressing(Scene s) {
-	
-		s.setOnKeyPressed(e-> {
-			switch (e.getCode()) {
-			case A:
-				player.setVelX(-5);
-				root.setLayoutX(root.getLayoutX()+10);
-				break;
-			case D: 
-				player.setVelX(5);
-				root.setLayoutX(root.getLayoutX()-10);
-				root.setStyle("-fx-background-color: #4f7b8a;");
-				break;
-			case S: 
-				player.setVelY(5);
-				break;
-			case W:
-				if (player.getGravity() == 0 && player.hasCollided(root)) {
-					player.setTranslateY(player.getTranslateY() - 10);
-					player.jump();
-				}
-				break;
-			case SPACE:
-				ammo.lostBullet();
-				player.shoot(root);
-				break;
-			}
-			
-		});
 		
-	}
 	
-	private void buttonReleasing(Scene s) {
-		
-		s.setOnKeyReleased(e-> {
-			switch (e.getCode()) {
-			case A:
-				player.setVelX(0);
-				break;
-			case D: 
-				player.setVelX(0);
-				break;
-			case S: 
-				player.setVelY(0);
-				break;
-			case W:
-				break;
-			}
-			
-		});
-		
-	}
-	
-	private void setUpLevel() {
-		levelWidth= Level_Info.LEVEL1[0].length()*150;
+	private void setUpLevel(String[] lvl) {
+		levelWidth= lvl[0].length()*150;
 	
 		
 		
-		for (int i = 0; i < Level_Info.LEVEL1.length; i++) {
-			String line=Level_Info.LEVEL1[i];
+		for (int i = 0; i < lvl.length; i++) {
+			String line=lvl[i];
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
+					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#4f7b8a"));
+					edgePlatR.setTranslateX(edgePlatR.getTranslateX()+1);
+					root.getChildren().add(edgePlatR);
+					platforms.add(edgePlatR);
+					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#4f7b8a"));
+					edgePlatL.setTranslateX(edgePlatL.getTranslateX()+148);
+					root.getChildren().add(edgePlatL);
+					platforms.add(edgePlatL);
 					break;
 				case '1':
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
