@@ -8,13 +8,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -22,11 +26,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
-import main.CheckCollision;
 
+
+import main.CheckCollision;
+//IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
 public class Game extends Application {
 	public Pane root= new Pane();
@@ -36,6 +43,7 @@ public class Game extends Application {
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
@@ -45,7 +53,11 @@ public class Game extends Application {
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+
 	private String[] currentLevel;
+
+	private SpriteAnimation sp= new SpriteAnimation();
+
 	
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
@@ -53,22 +65,22 @@ public class Game extends Application {
 
 	private Parent createContent() throws IOException {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
+
 		root.setPrefSize(800, 600);
 		root.getChildren().add(player);
 		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-		//root.getChildren().add(sp);
+
+		root.getChildren().add(spplayer);
+
 		//root.getChildren().add(sp.getSpike());
 		
 		//root.getChildren().add(enemy1);
 		//root.getChildren().add(spike1);
-		//root.setStyle("-fx-background-color: #4f7b8a;");
-		
-		//root.getChildren().add(DeathShow);
-		
-		//display.getChildren().addAll(root);
+	
+	    	//root.getChildren().add(ani);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -141,8 +153,8 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
-
-
+		spplayer.tick(root, heart);
+		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
 		}
@@ -150,21 +162,13 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		
-		checkPos();
+		player.checkPos(this);
 		if (player.isDead() && !foreground.getChildren().contains(DeathShow)) {
 			foreground.getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 	}
 	
-	private void checkPos() {
-		double x =player.getXLocation();
-		if (x>400) {
-			root.setLayoutX(root.getTranslateX()-(x-400));
-		}
-		
-	}
-
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
@@ -173,8 +177,11 @@ public class Game extends Application {
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
+	//	spplayer.buttonPressing(this, scene);
+		//spplayer.buttonReleasing(scene);
 		
-		player.buttonPressing(this, scene);
+		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
+		player.buttonPressing(this, scene); 
 		player.buttonReleasing(scene);
 		
 		stage.show();

@@ -8,7 +8,12 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import javafx.scene.Scene;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -23,6 +28,7 @@ import main.Lives;
 import main.WriteFile;
 import menu.view.LevelMenuController;
 
+
 public class Player extends RectObject{
 	
 	
@@ -35,12 +41,16 @@ public class Player extends RectObject{
 	private Lives heart;
 	private boolean completedLevel;
 	
+
+	
+
 	private CheckCollision collisionChecker;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
 		
 		collisionChecker = new CheckCollision();
+
 
 		Ammo.setAmmo(ammo);
 
@@ -247,6 +257,14 @@ public class Player extends RectObject{
 			}
 			
 		});
+		
+	}
+
+	public void checkPos(Game game) {
+		double x =getXLocation();
+		if (x>400) {
+			game.root.setLayoutX(game.root.getTranslateX()-(x-400));
+		}
 		
 	}
 
