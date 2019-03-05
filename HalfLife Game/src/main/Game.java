@@ -44,7 +44,6 @@ public class Game extends Application {
 
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private SpritePlayer spplayer= new SpritePlayer();
-	private AnimationSprite ani =new AnimationSprite(); 
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
