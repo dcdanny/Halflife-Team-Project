@@ -21,6 +21,13 @@ public class DeathScreen extends StackPane {
 
 	 DeathScreen() {
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.BLACK);
+		 Image youdied = new Image("youdied.png");
+         ImageView img= new ImageView(youdied);
+         img.setFitWidth(500);
+         img.setTranslateY(-100);
+         img.setPreserveRatio(true);
+         img.setSmooth(true);
+         img.setCache(true);
 		 
 		 Fade(bg);
 				         
@@ -90,7 +97,7 @@ public class DeathScreen extends StackPane {
 	         });
 	         
 	         this.getChildren().add(bg);
-
+	         this.getChildren().add(img);
 			this.getChildren().add(resimg);
 			this.getChildren().add(resbutton);
 			
