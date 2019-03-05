@@ -260,5 +260,13 @@ public class Player extends RectObject{
 		
 	}
 
+	public void checkPos(Game game) {
+		double x =getXLocation();
+		if (x>400) {
+			game.root.setLayoutX(game.root.getTranslateX()-(x-400));
+		}
+		
+	}
+
 
 }

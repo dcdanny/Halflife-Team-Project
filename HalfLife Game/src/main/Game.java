@@ -162,21 +162,13 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		
-		checkPos();
+		player.checkPos(this);
 		if (player.isDead() && !foreground.getChildren().contains(DeathShow)) {
 			foreground.getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 	}
 	
-	private void checkPos() {
-		double x =player.getXLocation();
-		if (x>400) {
-			root.setLayoutX(root.getTranslateX()-(x-400));
-		}
-		
-	}
-
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setResizable(false);
