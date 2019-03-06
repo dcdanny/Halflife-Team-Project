@@ -1,25 +1,25 @@
 
 .root {
-     -fx-background-color: #333;
+	-fx-alignment: center ;
+	-fx-background-color: #333;
 }
 .button{
 	-fx-background-color: #FFF;
 	-fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 30 3 30;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
-    -fx-pref-height:48.0;
-	-fx-pref-width:200.0;
+	-fx-background-radius: 3,2,1;
+	-fx-padding: 3 30 3 30;
+	-fx-margin:10;
+	-fx-border-outsets: 5px;
+	-fx-text-fill: black;
+	-fx-font-size: 14px;
+	-fx-pref-height:48.0;
+	-fx-pref-width:300.0;
 }
 .button:pressed{
 	-fx-background-color: #999;
 
 }
 .title {
-    /*-fx-layout-x:220.0;*/
-    /*-fx-layout-y:137.0;*/
-    -fx-alignment: center ;
     -fx-padding: 10 ;
   /*-fx-padding: 3 30 3 30;*/
     -fx-font: 100px Tahoma;
