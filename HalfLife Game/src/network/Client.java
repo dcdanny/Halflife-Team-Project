@@ -2,6 +2,7 @@ package network;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.BlockingQueue;
 
 public class Client  extends Thread {
 	ObjectOutputStream toServer;
@@ -65,5 +66,15 @@ public class Client  extends Thread {
 			Report.errorAndGiveUp("Unexpected interruption " + e.getMessage());
 			}
 		}
+	}
+	public void sendToServer(Message message) {
+		/*BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
+		if (recipientsQueue != null && client != "server") {
+			recipientsQueue.offer(message);
+			System.out.println("Sent to: "+client);//DEBUG----------------------
+		}
+		else
+			Report.error("Can't/won't send to "+ client + ": " + message);//DEBUG----------------------
+		*/
 	}
 }

@@ -82,6 +82,7 @@ public class Server extends Thread {
 	public void setAllowNewPlayers(boolean allowNewPlayers) {
 		this.allowNewPlayers = allowNewPlayers;
 	}
+	//Returns array of all players currently connected
 	public String[] showConnected() {
 		String[] outArr =new String[clientTable.size()];
 		int i = 0;
