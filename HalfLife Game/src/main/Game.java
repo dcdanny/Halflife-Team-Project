@@ -31,7 +31,6 @@ import javafx.util.Duration;
 
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
-import com.sun.corba.se.spi.activation.Server;
 
 import main.CheckCollision;
 import network.*;
