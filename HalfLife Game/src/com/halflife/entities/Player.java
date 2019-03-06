@@ -27,7 +27,7 @@ import main.GameConstants;
 import main.Lives;
 import main.WriteFile;
 import menu.view.LevelMenuController;
-
+import network.Message;
 
 public class Player extends RectObject{
 	
@@ -213,12 +213,13 @@ public class Player extends RectObject{
 			switch (e.getCode()) {
 			case A:
 				setVelX(-5);
+				Message message = new Message("playerX","A");
 				game.root.setLayoutX(game.root.getLayoutX()+10);
 				break;
 			case D: 
-				setVelX(5);
-				game.root.setLayoutX(game.root.getLayoutX()-10);
-				game.root.setStyle("-fx-background-color: #4f7b8a;");
+				setVelX(5);//move player
+				game.root.setLayoutX(game.root.getLayoutX()-10);//scroll window
+				game.root.setStyle("-fx-background-color: #4f7b8a;");//continue background beyond window edges
 				break;
 			case S: 
 				setVelY(5);

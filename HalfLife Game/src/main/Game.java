@@ -41,8 +41,9 @@ public class Game extends Application {
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
-
+	
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	private List<Player> players= new ArrayList<Player>();
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -57,7 +58,6 @@ public class Game extends Application {
 	private String[] currentLevel;
 
 	private SpriteAnimation sp= new SpriteAnimation();
-
 	
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
@@ -67,13 +67,13 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		root.getChildren().add(player);
+//		root.getChildren().add(player);
 		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 
-		root.getChildren().add(spplayer);
+//		root.getChildren().add(spplayer);
 
 		//root.getChildren().add(sp.getSpike());
 		
@@ -152,9 +152,15 @@ public class Game extends Application {
 	
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
-		player.tick(root, heart);
-		spplayer.tick(root, heart);
 		
+		
+		
+//		spplayer.tick(root, heart);
+		
+		
+		for (Player p : players) {
+			p.tick(root, heart);
+		}
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
 		}
@@ -162,11 +168,11 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		
-		player.checkPos(this);
-		if (player.isDead() && !foreground.getChildren().contains(DeathShow)) {
-			foreground.getChildren().add(DeathShow);
-//			deathScreenDisplayed = true;
-		}
+//		player.checkPos(this);
+//		if (player.isDead() && !foreground.getChildren().contains(DeathShow)) {
+//			foreground.getChildren().add(DeathShow);
+////			deathScreenDisplayed = true;
+//		}
 	}
 	
 	@Override
@@ -192,7 +198,8 @@ public class Game extends Application {
 	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
-	
+		players.add(player);
+		root.getChildren().add(player);
 		
 		
 		for (int i = 0; i < lvl.length; i++) {
