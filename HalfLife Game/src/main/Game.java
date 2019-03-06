@@ -56,6 +56,7 @@ public class Game extends Application {
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
 	private NetworkedPlayer temp;
+	private NetworkedPlayer temp2;
 
 
 
@@ -192,8 +193,8 @@ public class Game extends Application {
 		player.buttonPressing(this, scene); 
 		player.buttonReleasing(scene);
 		
-//		temp.buttonPressing(this, scene);
-//		temp.buttonReleasing(scene);
+//		temp2.buttonPressing(this, scene);
+//		temp2.buttonReleasing(scene);
 		
 		stage.show();
 		
@@ -210,6 +211,8 @@ public class Game extends Application {
 			netPlayers.add(temp = new NetworkedPlayer(i*50,0,40,50,Color.GREEN,3));
 			root.getChildren().add(temp);
 		}
+//		netPlayers.add(temp2 = new NetworkedPlayer(400,0,40,50,Color.GREEN,3));
+//		root.getChildren().add(temp2);
 //		for (NetworkedPlayer np : netPlayers) {
 //			root.getChildren().add(np);
 //		}		
