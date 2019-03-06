@@ -30,9 +30,10 @@ import javafx.util.Duration;
 
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
-
+import com.sun.corba.se.spi.activation.Server;
 
 import main.CheckCollision;
+import network.ClientTable;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
 public class Game extends Application {
@@ -46,13 +47,13 @@ public class Game extends Application {
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
-	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
-	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
+	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart = new Lives();
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+	private ClientTable cTable = new ClientTable();
 
 	private String[] currentLevel;
 
@@ -171,6 +172,8 @@ public class Game extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
+		
+		
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
@@ -192,6 +195,11 @@ public class Game extends Application {
 	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
+		
+		for (NetworkedPlayer np : netPlayers) {
+			// 
+			root.getChildren().add(np);
+		}
 	
 		
 		
