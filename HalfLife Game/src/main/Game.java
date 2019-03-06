@@ -68,7 +68,7 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		root.getChildren().add(player);
+		//root.getChildren().add(player);
 		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
@@ -172,10 +172,12 @@ public class Game extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		
+		for (String string : currentLevel) {
+			
+		}
 		
 		stage.setResizable(false);
-		setUpLevel(currentLevel);
+		setUpLevel(Level_Info.LEVEL2);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
@@ -195,6 +197,9 @@ public class Game extends Application {
 	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
+		
+		
+		root.getChildren().add(player);
 		
 		for (NetworkedPlayer np : netPlayers) {
 			// 
