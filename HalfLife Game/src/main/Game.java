@@ -4,6 +4,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ import com.halflife.entities.*;
 import com.sun.corba.se.spi.activation.Server;
 
 import main.CheckCollision;
-import network.ClientTable;
+import network.*;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
 public class Game extends Application {
@@ -53,9 +54,12 @@ public class Game extends Application {
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
-	private ClientTable cTable = new ClientTable();
+	private String[] s = new String[ClientTable.size()];
+	private NetworkedPlayer temp;
 
-	private String[] currentLevel;
+
+
+	private String[] currentLevel = Level_Info.LEVEL2;
 
 	private SpriteAnimation sp= new SpriteAnimation();
 
@@ -68,20 +72,12 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		//root.getChildren().add(player);
-		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 
 		root.getChildren().add(spplayer);
 
-		//root.getChildren().add(sp.getSpike());
-		
-		//root.getChildren().add(enemy1);
-		//root.getChildren().add(spike1);
-	
-	    	//root.getChildren().add(ani);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -154,13 +150,19 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
-		spplayer.tick(root, heart);
+//		temp.tick(root, heart);
+		
+		
+//		spplayer.tick(root, heart);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
 		}
 		for (Spike spike : spikes) {
 			spike.tick(player, root);
+		}
+		for (NetworkedPlayer np : netPlayers) {
+			np.tick(root, heart);
 		}
 		
 		player.checkPos(this);
@@ -170,14 +172,15 @@ public class Game extends Application {
 		}
 	}
 	
+	
+
+
+	
 	@Override
 	public void start(Stage stage) throws Exception {
-		for (String string : currentLevel) {
 			
-		}
-		
 		stage.setResizable(false);
-		setUpLevel(Level_Info.LEVEL2);
+		setUpLevel(currentLevel);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
@@ -189,24 +192,29 @@ public class Game extends Application {
 		player.buttonPressing(this, scene); 
 		player.buttonReleasing(scene);
 		
+//		temp.buttonPressing(this, scene);
+//		temp.buttonReleasing(scene);
+		
 		stage.show();
 		
 		
 	}
 		
-	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
 		
+		s = network.Server.showConnected();
+		Arrays.sort(s);
+		for (int i = 0; i <s.length-2;i++) {
+			System.out.println(s[i]);
+			netPlayers.add(temp = new NetworkedPlayer(i*50,0,40,50,Color.GREEN,3));
+			root.getChildren().add(temp);
+		}
+//		for (NetworkedPlayer np : netPlayers) {
+//			root.getChildren().add(np);
+//		}		
 		
 		root.getChildren().add(player);
-		
-		for (NetworkedPlayer np : netPlayers) {
-			// 
-			root.getChildren().add(np);
-		}
-	
-		
 		
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];

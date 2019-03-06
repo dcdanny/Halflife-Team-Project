@@ -28,9 +28,10 @@ public class NetworkedPlayer extends Player {
 	private boolean isJumping = false;
 	private Lives heart;
 	private boolean completedLevel;
+	
 
 	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
-		super(x,y,width,height, col,3);
+		super(x,y,width,height, col, 3);
 		
 		collisionChecker = new CheckCollision();
 
@@ -59,6 +60,7 @@ public class NetworkedPlayer extends Player {
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
+				this.setFill(Color.RED);
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
 //				System.out.println("1");

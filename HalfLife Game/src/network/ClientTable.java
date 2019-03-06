@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 
 public class ClientTable {
 
-  private ConcurrentMap<String,BlockingQueue<Message>> queueTable
+  private static ConcurrentMap<String,BlockingQueue<Message>> queueTable
     = new ConcurrentHashMap<String,BlockingQueue<Message>>();
   private boolean running = true;
   
@@ -32,7 +32,7 @@ public class ClientTable {
 	public BlockingQueue<Message> getQueue(String nickname) {
 		return queueTable.get(nickname);
 	}
-	public int size() {
+	public static int size() {
 		return queueTable.size();
 	}
 	
