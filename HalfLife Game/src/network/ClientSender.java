@@ -2,6 +2,7 @@ package network;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
 
 
 //Repeatedly reads recipient's nickname and text from the user in two
@@ -13,14 +14,17 @@ public class ClientSender extends Thread {
 private String nickname;
 private ObjectOutputStream toServer;
 private Socket server;
+private BlockingQueue<Message> sendQueue;
 
-ClientSender(String nickname, ObjectOutputStream toServer, Socket server) {
+ClientSender(BlockingQueue<Message> q, String nickname, ObjectOutputStream toServer, Socket server) {
 	this.nickname = nickname;
 	this.toServer = toServer;
 	this.server = server;
+	this.sendQueue = q;
 }
 
-public void run() {System.out.println("clientSender");
+public void run() {
+	System.out.println("clientSender");
 	// So that we can use the method readLine:
 	BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
 
@@ -29,23 +33,17 @@ public void run() {System.out.println("clientSender");
 	// Then loop forever sending messages to recipients via the server:
 		//ObjectOutputStream out = new ObjectOutputStream(toServer);
 		while (true) {
-
-			System.out.println("----- Message Object -----");
-			System.out.print("From: ");
-			String namefrom = user.readLine();
-			System.out.print("Content: ");
-			String msgcontent = user.readLine();
-			Message messagetoSend = new Message(namefrom,msgcontent);
-
-			System.out.println("----- ----- ----- -----");
-			toServer.writeObject(messagetoSend);
+			Message msg = sendQueue.take(); // Matches EEEEE in ServerReceiver
+			toServer.writeObject(msg);
 			toServer.flush();
-			System.out.println("sent message: "+messagetoSend.toString());
 		}
 	}
 	catch (IOException e) {
 		Report.errorAndGiveUp("Communication broke in ClientSender" 
 				+ e.getMessage());
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 }
 }
