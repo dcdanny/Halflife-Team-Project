@@ -45,6 +45,14 @@ public class JoinMenuController {
 			Client client = new Client(port,"dan",ipAddrInput.getText());
 			client.start();
 			//server.getclientTable().getQueue("dan");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
+			Pane joinMenu = loader.load();
+			WaitScreenController controller = loader.getController();
+			controller.setStage(primaryStage);
+			Scene scene = new Scene(joinMenu);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
 		 new Thread() {
 	            @Override
 	            public void run() {
