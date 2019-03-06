@@ -56,7 +56,7 @@ public class Game extends Application {
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
 	private NetworkedPlayer temp;
-	private NetworkedPlayer temp2;
+//	private NetworkedPlayer temp2;
 
 
 
