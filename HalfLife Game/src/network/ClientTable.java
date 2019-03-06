@@ -32,7 +32,10 @@ public class ClientTable {
 	public BlockingQueue<Message> getQueue(String nickname) {
 		return queueTable.get(nickname);
 	}
-
+	public int size() {
+		return queueTable.size();
+	}
+	
 	//Is server running?
 	public boolean getServerRunning() {
 		return running;
