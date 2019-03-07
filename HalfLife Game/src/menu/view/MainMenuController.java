@@ -7,11 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.SpriteFollower;
 
 public class MainMenuController {
 	
 	private Stage primaryStage;
-	
+	private SpriteFollower sf;
 	public void setStage(Stage stage) {
 		primaryStage = stage;
 	}
@@ -21,6 +22,8 @@ public class MainMenuController {
 	private void goSingle() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane mainMenu = loader.load();
+		sf= new SpriteFollower(mainMenu);
+		mainMenu.getChildren().add(sf);
 		LevelMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
