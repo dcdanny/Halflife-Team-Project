@@ -19,6 +19,7 @@ public class ClientReceiver extends Thread {
     try {
       while (true) {
 		Message receivedMessage = (Message) server.readObject();
+		receivedMessage.setSender("server");
         if (receivedMessage != null) {                
           System.out.println(receivedMessage);
         }

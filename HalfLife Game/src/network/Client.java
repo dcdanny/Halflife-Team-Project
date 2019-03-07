@@ -3,8 +3,9 @@ package network;
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class Client  extends Thread {
+public class Client extends Thread {
 	ObjectOutputStream toServer;
 	ObjectInputStream fromServer;
 	Socket server;
@@ -12,6 +13,7 @@ public class Client  extends Thread {
 	int port;
 	String nickname;
 	String hostname;
+	private BlockingQueue<Message> sendQueue; 
 	
 	public Client(int port,String nickname,String hostname) {
 
@@ -23,6 +25,7 @@ public class Client  extends Thread {
 		this.port = port;
 		this.nickname = nickname;
 		this.hostname = hostname;
+		this.sendQueue = new LinkedBlockingQueue<Message>();
 		
 	}
 	public void run(){
@@ -44,7 +47,7 @@ public class Client  extends Thread {
 		
 		if(clientStart) {
 			// Create two threads to send and receive
-			ClientSender sender = new ClientSender(nickname,toServer,server);
+			ClientSender sender = new ClientSender(sendQueue,nickname,toServer,server);
 			ClientReceiver receiver = new ClientReceiver(fromServer);
 	
 			// Run them in parallel:
@@ -68,13 +71,8 @@ public class Client  extends Thread {
 		}
 	}
 	public void sendToServer(Message message) {
-		/*BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
-		if (recipientsQueue != null && client != "server") {
-			recipientsQueue.offer(message);
-			System.out.println("Sent to: "+client);//DEBUG----------------------
-		}
-		else
-			Report.error("Can't/won't send to "+ client + ": " + message);//DEBUG----------------------
-		*/
+		BlockingQueue<Message> recipientsQueue = sendQueue; // Matches EEEEE in ServerSender.java
+		recipientsQueue.offer(message);
+		System.out.println("Sent to: servaa");//DEBUG----------------------
 	}
 }

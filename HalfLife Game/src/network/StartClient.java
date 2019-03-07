@@ -16,7 +16,22 @@ public class StartClient {
 		System.out.println("port: "+port);
 		Client client = new Client(port,"dan",connectAddress);
 		client.start();
-		//server.getclientTable().getQueue("dan");
-		
+		while(true) {
+			System.out.println("----- Message Object -----");
+			System.out.print("From: ");
+			String namefrom = user.readLine();
+			System.out.print("Content: ");
+			String msgcontent = user.readLine();
+			Message messagetoSend = new Message(namefrom,msgcontent);
+	
+			System.out.println("----- ----- ----- -----");
+			//toServer.writeObject(messagetoSend);
+			//toServer.flush();
+			client.sendToServer(messagetoSend);
+			System.out.println("sent message: "+messagetoSend.toString());
+		}
+		/*Message messagetoSend = new Message("heyMeWannaBeServerr","helloServer");
+		client.sendToServer(messagetoSend);
+		System.out.println("sent message: "+messagetoSend.toString());*/
 	}
 }

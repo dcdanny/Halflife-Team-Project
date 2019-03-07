@@ -36,7 +36,7 @@ public class startServer {
 		
 				System.out.println("----- ----- ----- -----");
 				server.sendToAll(messagetoSend);
-				server.stopServer();
+				//server.stopServer();
 			}
 		}
 		catch (IOException e) {
