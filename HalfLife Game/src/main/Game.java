@@ -207,7 +207,7 @@ public class Game extends Application {
 		Arrays.sort(s);
 		for (int i = 0; i <s.length-2;i++) {
 			System.out.println(s[i]);
-			netPlayers.add(temp = new NetworkedPlayer(i*50,0,40,50,Color.GREEN,3));
+			netPlayers.add(temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3));
 			root.getChildren().add(temp);
 		}
 //		netPlayers.add(temp2 = new NetworkedPlayer(400,0,40,50,Color.GREEN,3));
