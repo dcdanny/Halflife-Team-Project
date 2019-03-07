@@ -26,7 +26,6 @@ public class SpriteAnimation extends Pane {
 		Image frame4 = new Image("player4.png");
 		
 		
-		
 		ArrayList<Image> images = new ArrayList<>();
 		images.add(frame1);
 		images.add(frame2);
@@ -49,6 +48,7 @@ public class SpriteAnimation extends Pane {
                     }
                 });
 		
+	    this.setPickOnBounds(false);
 		
 	    timeline.getKeyFrames().add(nextframe);
 		timeline.setCycleCount(Timeline.INDEFINITE);

@@ -29,9 +29,10 @@ public class StartMenu extends Application {
 	public void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
+		
 		mainLayout = loader.load();
-		sp.resizeView(300, 30,500);
-		//mainLayout.getChildren().add(sp);
+		sp.resizeView(300, 30,600);
+		mainLayout.getChildren().add(sp);
 		
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
