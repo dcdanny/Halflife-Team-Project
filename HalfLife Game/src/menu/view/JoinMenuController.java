@@ -59,6 +59,13 @@ public class JoinMenuController {
 //						}
 //	                 });
 //	            }}.start();
+			primaryStage.show();
+			primaryStage.setScene(scene);
+			Scene scene = new Scene(joinMenu);
+			controller.setStage(primaryStage);
+			WaitScreenController controller = loader.getController();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
+			Pane joinMenu = loader.load();
 		 
 		
 	}
