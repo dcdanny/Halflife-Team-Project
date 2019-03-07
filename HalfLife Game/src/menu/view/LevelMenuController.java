@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
 import main.Level_Info;
+import network.Server;
 
 public class LevelMenuController {
 	
@@ -74,6 +75,14 @@ public class LevelMenuController {
 		Scene scene = new Scene(levelMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+	
+	private void sendLevel() {
+		String[] s = Server.showConnected();
+		if (s.length>1) {
+			//send level
+		}
+		//else single player no code required
 	}
 
 }
