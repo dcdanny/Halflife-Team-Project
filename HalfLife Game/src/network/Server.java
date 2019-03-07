@@ -9,7 +9,7 @@ import main.Game;
 //Class to deal with creating threads for new clients
 public class Server extends Thread {
 	private volatile boolean allowNewPlayers;
-	ClientTable clientTable;
+	static ClientTable clientTable;
 	int numClients;
 	int port;
 	ServerSocket serverSocket;
@@ -82,7 +82,16 @@ public class Server extends Thread {
 	public void setAllowNewPlayers(boolean allowNewPlayers) {
 		this.allowNewPlayers = allowNewPlayers;
 	}
-
+	//Returns array of all players currently connected
+	public static String[] showConnected() {
+		String[] outArr =new String[ClientTable.size()];
+		int i = 0;
+		for(String item : clientTable.showAll()){
+			outArr[i] = item;
+			i++;
+		}
+		return outArr;
+	}
 	
 	public void stopServer() {
 		System.out.println("Server stopping...");

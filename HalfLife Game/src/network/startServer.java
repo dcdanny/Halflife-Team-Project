@@ -22,6 +22,10 @@ public class startServer {
 				System.out.println("----- Inbox: -----");
 				System.out.println(server.getReceived());
 				System.out.println("----- End Inbox -----");
+				System.out.println("Connected:");
+				for(String item:server.showConnected()) {
+					System.out.println(item);
+				}
 		    	System.out.println("----- Message Object -----");
 				System.out.print("From: ");
 				String namefrom;

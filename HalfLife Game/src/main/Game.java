@@ -4,6 +4,7 @@
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,8 +32,8 @@ import javafx.util.Duration;
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
 
-
 import main.CheckCollision;
+import network.*;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
 public class Game extends Application {
@@ -46,15 +47,19 @@ public class Game extends Application {
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
-	//private BaseEnemy enemy = new BaseEnemy(600,300,40,50,"enemy",Color.RED);
-	//private SpikePlatform sp = new SpikePlatform(400,400,30,30,"sp",Color.LIGHTSKYBLUE);
+	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private CountdownTimer clock=new CountdownTimer();
 	private Lives heart = new Lives();
 	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
+	private String[] s = new String[ClientTable.size()];
+	private NetworkedPlayer temp;
+//	private NetworkedPlayer temp2;
 
-	private String[] currentLevel;
+
+
+	private String[] currentLevel = Level_Info.LEVEL2;
 
 	private SpriteAnimation sp= new SpriteAnimation();
 
@@ -67,20 +72,12 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		root.getChildren().add(player);
-		//root.getChildren().add(enemy);
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 
 		root.getChildren().add(spplayer);
 
-		//root.getChildren().add(sp.getSpike());
-		
-		//root.getChildren().add(enemy1);
-		//root.getChildren().add(spike1);
-	
-	    	//root.getChildren().add(ani);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -153,13 +150,19 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root, heart);
-		spplayer.tick(root, heart);
+//		temp.tick(root, heart);
+		
+		
+//		spplayer.tick(root, heart);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
 		}
 		for (Spike spike : spikes) {
 			spike.tick(player, root);
+		}
+		for (NetworkedPlayer np : netPlayers) {
+			np.tick(root, heart);
 		}
 		
 		player.checkPos(this);
@@ -169,8 +172,13 @@ public class Game extends Application {
 		}
 	}
 	
+	
+
+
+	
 	@Override
 	public void start(Stage stage) throws Exception {
+			
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
@@ -184,16 +192,31 @@ public class Game extends Application {
 		player.buttonPressing(this, scene); 
 		player.buttonReleasing(scene);
 		
+//		temp2.buttonPressing(this, scene);
+//		temp2.buttonReleasing(scene);
+		
 		stage.show();
 		
 		
 	}
 		
-	
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;
-	
 		
+		s = network.Server.showConnected();
+		Arrays.sort(s);
+		for (int i = 0; i <s.length-2;i++) {
+			System.out.println(s[i]);
+			netPlayers.add(temp = new NetworkedPlayer(i*50,0,40,50,Color.GREEN,3));
+			root.getChildren().add(temp);
+		}
+//		netPlayers.add(temp2 = new NetworkedPlayer(400,0,40,50,Color.GREEN,3));
+//		root.getChildren().add(temp2);
+//		for (NetworkedPlayer np : netPlayers) {
+//			root.getChildren().add(np);
+//		}		
+		
+		root.getChildren().add(player);
 		
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];

@@ -44,19 +44,21 @@ public class JoinMenuController {
 			System.out.println("port: "+port);
 			Client client = new Client(port,"dan",ipAddrInput.getText());
 			client.start();
+			
+			System.out.println("waiting");
 			//server.getclientTable().getQueue("dan");
-		 new Thread() {
-	            @Override
-	            public void run() {
-	            	 Platform.runLater(() -> {
-	                     try {
-							new Game().start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-	                 });
-	            }}.start();
+//		 new Thread() {
+//	            @Override
+//	            public void run() {
+//	            	 Platform.runLater(() -> {
+//	                     try {
+//							new Game().start(new Stage());
+//						} catch (Exception e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//	                 });
+//	            }}.start();
 		 
 		
 	}

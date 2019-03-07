@@ -5,31 +5,19 @@ import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import javafx.scene.Scene;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
-import main.DeathScreen;
 import main.Game;
 import main.GameConstants;
 import main.Lives;
 import main.WriteFile;
-import menu.view.LevelMenuController;
+import network.Message;
 
-
-public class Player extends RectObject{
+public class NetworkedPlayer extends Player {
 	
 	
 	private double velX = 0;
@@ -42,12 +30,8 @@ public class Player extends RectObject{
 	private boolean completedLevel;
 	
 
-	
-
-	protected CheckCollision collisionChecker;
-	
-	public Player(double x, double y, int width, int height, Color col, int lives) {
-		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
+	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
+		super(x,y,width,height, col, 3);
 		
 		collisionChecker = new CheckCollision();
 
@@ -57,8 +41,10 @@ public class Player extends RectObject{
 		movement(x, y);		
 		
 		completedLevel = false;
+		// TODO Auto-generated constructor stub
 	}
 
+	
 	public void tick(Pane root, Lives hearts) {
 		if (lives == 0) {	
 			setDead(true);
@@ -74,6 +60,7 @@ public class Player extends RectObject{
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
+				this.setFill(Color.RED);
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
 //				System.out.println("1");
@@ -83,6 +70,7 @@ public class Player extends RectObject{
 				if (!completedLevel) {
 					completedLevel = true;
 					System.out.println("Winner");
+					Message mWin = new Message("", "Goal");
 				}
 				
 				
@@ -112,6 +100,7 @@ public class Player extends RectObject{
 			heart.lostlife();
 		}else
 			setDead(true);
+			Message mDead = new Message("", "hasDied");
 	}
 	
 	public void setVelX(double v) {
@@ -127,6 +116,7 @@ public class Player extends RectObject{
 	public double getVelY() {
 		return velY;
 	}
+
 	
 	public void jump() {
 		double startingY = this.getTranslateY();
@@ -212,24 +202,38 @@ public class Player extends RectObject{
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
+				// message to server
+				Message mLeft= new Message("","A");
+				
 				setVelX(-5);
 				game.root.setLayoutX(game.root.getLayoutX()+10);
 				break;
 			case D: 
+				//message to server
+				Message mRight = new Message("","D");
+				
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
 				game.root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
 			case S: 
-				setVelY(5);
+				//setVelY(5);
 				break;
 			case W:
+				//message to server
+				Message mJump = new Message("","W");
+				
+				
 				if (getGravity() == 0 && hasCollided(game.root)) {
 					setTranslateY(getTranslateY() - 10);
 					jump();
 				}
 				break;
 			case SPACE:
+				//message to server
+				Message mShoot = new Message("","SPACE");
+				
+				
 				game.ammo.lostBullet();
 				shoot(game.root);
 				break;
@@ -267,6 +271,4 @@ public class Player extends RectObject{
 		}
 		
 	}
-
-
 }
