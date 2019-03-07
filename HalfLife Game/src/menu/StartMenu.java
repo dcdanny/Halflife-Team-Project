@@ -7,13 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.SpriteAnimation;
 import menu.view.*;
 
 public class StartMenu extends Application {
 	
 	private static Stage primaryStage;
 	private static Pane mainLayout;
-
+	private SpriteAnimation sp= new SpriteAnimation();
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -29,6 +30,9 @@ public class StartMenu extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		mainLayout = loader.load();
+		sp.resizeView(300, 30,500);
+		mainLayout.getChildren().add(sp);
+		
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainLayout);

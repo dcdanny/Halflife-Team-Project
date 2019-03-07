@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.SpriteAnimation;
 
 public class StartMenuController {
 	
 	private Stage primaryStage;
+	
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
@@ -21,6 +23,7 @@ public class StartMenuController {
 	private void goStart() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
 		Pane mainMenu = loader.load();
+		
 		MainMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);

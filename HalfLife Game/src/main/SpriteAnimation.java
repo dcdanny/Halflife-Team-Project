@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.animation.KeyFrame;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,7 @@ import javafx.event.EventHandler;
 public class SpriteAnimation extends Pane {
 	private int imageIndex = 0 ;
 	private final int frameTime = 2000; // milliseconds
-
+	private ImageView imageView = new ImageView();
 	// ...
 	public SpriteAnimation() {
 		
@@ -25,7 +26,7 @@ public class SpriteAnimation extends Pane {
 		Image frame4 = new Image("player4.png");
 		
 		
-		ImageView imageView = new ImageView();
+		
 		ArrayList<Image> images = new ArrayList<>();
 		images.add(frame1);
 		images.add(frame2);
@@ -61,6 +62,14 @@ public class SpriteAnimation extends Pane {
 		return img;
 		
 	}
+	
 
+	public ImageView resizeView(int x , int y , int fit) {
+		imageView.setFitHeight(fit);
+		imageView.setFitWidth(fit);
+		imageView.setTranslateX(x);
+		imageView.setTranslateY(y);
+		return imageView;
+	}
 }
 
