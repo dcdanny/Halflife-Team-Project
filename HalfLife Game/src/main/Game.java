@@ -47,9 +47,6 @@ public class Game extends Application {
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
-	private CountdownTimer clock=new CountdownTimer();
-	private Lives heart = new Lives();
-	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
@@ -159,7 +156,7 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
-			np.tick(root, heart);
+			np.tick(root);
 		}
 		
 		player.checkPos(this);
