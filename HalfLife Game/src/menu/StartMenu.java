@@ -21,6 +21,8 @@ public class StartMenu extends Application {
 		this.primaryStage.setTitle("HALFLIFE");
 		this.primaryStage.setWidth(800);
 		this.primaryStage.setHeight(600);
+		this.primaryStage.setMinWidth(250);
+		this.primaryStage.setMinHeight(250);
 		this.primaryStage.setResizable(true);
 		showMainView();
 	}
@@ -34,7 +36,7 @@ public class StartMenu extends Application {
 		sp.resizeView(300, -60,600);
 		mainLayout.getChildren().add(sp);
 		/*mainLayout.add(sp);*/
-		System.out.println(mainLayout.getChildren());
+		//System.out.println(mainLayout.getChildren());
 		
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);

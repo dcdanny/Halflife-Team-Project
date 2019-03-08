@@ -25,11 +25,6 @@
 		<HBox>
 			<Button onAction="#goBack" text="BACK"></Button>
 			<Region HBox.hgrow="ALWAYS" />
-			<VBox styleClass="right">
-				<children>
-					<Button onAction="#goBack" prefHeight="27.0" prefWidth="104.0" text="BACK"></Button>
-				</children>
-			</VBox>
 		</HBox>
 
 	</children>
