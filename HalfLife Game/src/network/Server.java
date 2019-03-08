@@ -115,7 +115,8 @@ public class Server extends Thread {
 	public void sendToAll(Message message) {
 		for(String client : clientTable.showAll()) {
 			BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
-			if (recipientsQueue != null && client != "server") {
+			if(client == "server") {
+			}else if (recipientsQueue != null && client != "server") {
 				recipientsQueue.offer(message);
 				System.out.println("Sent to: "+client);//DEBUG----------------------
 			}
