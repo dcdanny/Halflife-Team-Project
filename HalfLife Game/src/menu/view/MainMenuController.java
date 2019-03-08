@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.SpriteAnimation;
 import main.SpriteFollower;
 import network.Client;
 import network.Server;
@@ -15,7 +16,7 @@ public class MainMenuController {
 	
 	private Stage primaryStage;
 	private SpriteFollower sf;
-	
+	private SpriteAnimation sp= new SpriteAnimation();
 	private String serverLocation;
 	public Server server;
 	
@@ -82,8 +83,11 @@ public class MainMenuController {
 	// The "BACK" button, directing to the first "HALFLIFE" menu
 	@FXML
 	private void goBack() throws IOException {
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
+		sp.resizeView(300, -60,600);
+		mainMenu.getChildren().add(sp);
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);

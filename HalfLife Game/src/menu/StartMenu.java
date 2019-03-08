@@ -31,8 +31,10 @@ public class StartMenu extends Application {
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		
 		mainLayout = loader.load();
-		sp.resizeView(300, 30,600);
+		sp.resizeView(300, -60,600);
 		mainLayout.getChildren().add(sp);
+		/*mainLayout.add(sp);*/
+		System.out.println(mainLayout.getChildren());
 		
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
