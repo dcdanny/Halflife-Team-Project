@@ -13,7 +13,7 @@ public class CountdownTimer extends Pane{
 	
 	Label label=new Label("0");
 	
-	CountdownTimer() {
+	public CountdownTimer() {
 		
 	  label.setFont(javafx.scene.text.Font.font(50 ));
 	label.setTranslateX(0 ); 

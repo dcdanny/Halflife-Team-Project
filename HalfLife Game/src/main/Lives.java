@@ -19,7 +19,7 @@ public class Lives extends Group {
 	private boolean isDead;
 	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>();
 
-	Lives() {
+	public Lives() {
 
 		super();
 

@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
+import main.CountdownTimer;
 import main.Game;
 import main.GameConstants;
 import main.Lives;
@@ -23,11 +24,13 @@ public class NetworkedPlayer extends Player {
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammo = 10; 
+	private int ammoNo = 10; 
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
 	private boolean completedLevel;
+	private Ammo ammo;
+	private CountdownTimer clock;
 	
 
 	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
@@ -36,12 +39,15 @@ public class NetworkedPlayer extends Player {
 		collisionChecker = new CheckCollision();
 
 
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
-		// TODO Auto-generated constructor stub
+		
+		heart = new Lives();
+		ammo = new Ammo();
+		clock = new CountdownTimer();
 	}
 
 	
@@ -150,13 +156,13 @@ public class NetworkedPlayer extends Player {
 	
 	public void shoot(Pane root) {
 		
-		if (ammo > 0) {
+		if (ammoNo > 0) {
 			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
-			ammo--;
+			ammoNo--;
 		}else
 			System.out.println("No Bullets");
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 	}
 	
 //respawn animation, flashing player
@@ -194,7 +200,7 @@ public class NetworkedPlayer extends Player {
 	}
 
 	public int getAmmo() {
-		return ammo;
+		return ammoNo;
 	}
 
 	public void buttonPressing(Game game, Scene s) {
@@ -234,7 +240,7 @@ public class NetworkedPlayer extends Player {
 //				Message mShoot = new Message("","SPACE");
 				
 				
-				game.ammo.lostBullet();
+				ammo.lostBullet();
 				shoot(game.root);
 				break;
 			}

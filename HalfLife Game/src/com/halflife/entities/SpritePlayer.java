@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
+import main.CountdownTimer;
 import main.Game;
 import main.GameConstants;
 import main.Lives;
@@ -23,13 +24,15 @@ public class SpritePlayer extends Pane {
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammo = 10; 
+	private int ammoNo = 10; 
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
 	private boolean completedLevel;
 	private boolean dead=false;
 	protected FadeTransition ft;
+	private Ammo ammo;
+	private CountdownTimer clock;
 	
 	private CheckCollision collisionChecker;
 	
@@ -46,6 +49,10 @@ public class SpritePlayer extends Pane {
 		animation =new SpriteAnimation();
 		getChildren().add(animation);
 		collisionChecker = new CheckCollision();
+		
+		heart = new Lives();
+		ammo = new Ammo();
+		clock = new CountdownTimer();
 		
 	}
 	public void moveX(int i) {
@@ -175,7 +182,7 @@ public class SpritePlayer extends Pane {
 				}
 				break;
 			case SPACE:
-				game.ammo.lostBullet();
+				ammo.lostBullet();
 				//shoot(game.root);
 				break;
 			}
@@ -188,7 +195,7 @@ public class SpritePlayer extends Pane {
 	}
 
 	public int getAmmo() {
-		return ammo;
+		return ammoNo;
 	}
 	public boolean hasCollided(Pane root) {
 		//collisionChecker.checkForCollision(this, root);
