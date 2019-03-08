@@ -70,7 +70,7 @@ public class NetworkedPlayer extends Player {
 				if (!completedLevel) {
 					completedLevel = true;
 					System.out.println("Winner");
-					Message mWin = new Message("", "Goal");
+//					Message mWin = new Message("Goal");
 				}
 				
 				
@@ -100,7 +100,7 @@ public class NetworkedPlayer extends Player {
 			heart.lostlife();
 		}else
 			setDead(true);
-			Message mDead = new Message("", "hasDied");
+//			Message mDead = new Message("", "hasDied");
 	}
 	
 	public void setVelX(double v) {
@@ -203,14 +203,14 @@ public class NetworkedPlayer extends Player {
 			switch (e.getCode()) {
 			case A:
 				// message to server
-				Message mLeft= new Message("","A");
+//				Message mLeft= new Message("","A");
 				
 				setVelX(-5);
 				game.root.setLayoutX(game.root.getLayoutX()+10);
 				break;
 			case D: 
 				//message to server
-				Message mRight = new Message("","D");
+//				Message mRight = new Message("","D");
 				
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
@@ -221,7 +221,7 @@ public class NetworkedPlayer extends Player {
 				break;
 			case W:
 				//message to server
-				Message mJump = new Message("","W");
+//				Message mJump = new Message("","W");
 				
 				
 				if (getGravity() == 0 && hasCollided(game.root)) {
@@ -231,7 +231,7 @@ public class NetworkedPlayer extends Player {
 				break;
 			case SPACE:
 				//message to server
-				Message mShoot = new Message("","SPACE");
+//				Message mShoot = new Message("","SPACE");
 				
 				
 				game.ammo.lostBullet();
