@@ -6,20 +6,22 @@ import java.util.List;
 
 import com.halflife.entities.Player;
 
+import javafx.scene.layout.Pane;
+
 public class Message implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String sender =null;
 	private String text=null;
-	private String[] level=null;
+	private Pane root=null;
 	  
 	  public Message(String text) {
 //		  this.sender = sender;
 		  this.text = text;
 	  }
-	  public Message( String[] level) {
+	  public Message(Pane root) {
 //		  this.sender = sender;
-		  this.level = level;
+		  this.root = root;
 	  }
 	  public void setSender(String sender) {
 		  this.sender = sender;
@@ -31,9 +33,12 @@ public class Message implements java.io.Serializable{
 	  public String getText() {
 		  return text;
 	  }
+	  public Pane getPane() {
+		  return root;
+	  }
 	  
 	  public String toString() {
-		  return "From " + sender + ": " + text + Arrays.toString(level);
+		  return "From " + sender + ": " + text;
 	  }
 	  
 }

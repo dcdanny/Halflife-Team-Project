@@ -49,7 +49,7 @@ public class LevelMenuController {
 		Game game = new Game();
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		game.start(primaryStage);
-		Message m = new Message(Level_Info.LEVEL2);
+		Message m = new Message(game.root);
 		server.sendToAll(m);
 		
 	}
