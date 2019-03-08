@@ -102,7 +102,9 @@ public class Server extends Thread {
 			if(socket != null) {
 				socket.close();
 			}
-			serverSocket.close();
+			if(serverSocket != null) {
+				serverSocket.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
