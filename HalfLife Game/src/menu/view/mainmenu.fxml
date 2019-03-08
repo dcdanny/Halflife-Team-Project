@@ -16,11 +16,11 @@
 		<Text styleClass="title" text="HALFLIFE">
 		</Text>
 		<Label></Label>
-		<Button onAction="#goSingle" prefHeight="48.0" prefWidth="233.0" text="SINGLE PLAYER"></Button>
+		<Button onAction="#goSingle" text="SINGLE PLAYER"></Button>
 		<Label></Label>
 		<Button onAction="#goMulti" text="MULTIPLAYER"></Button>
 		<Label></Label>
-		<Button onAction="#goSettings" prefHeight="48.0" prefWidth="233.0" text="SETTINGS"></Button>
+		<Button onAction="#goSettings" text="SETTINGS"></Button>
 		<Label></Label>
 		<HBox>
 			<Button onAction="#goBack" text="BACK"></Button>

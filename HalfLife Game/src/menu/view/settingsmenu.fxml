@@ -14,7 +14,7 @@
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.SettingsMenuController">
 	<children>
-		<Text styleClass="title" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS"></Text>
+		<Text styleClass="title" text="SETTINGS"></Text>
 		<Label></Label>
 		
 		<HBox>
@@ -32,7 +32,7 @@
 		</HBox>
 		
 		<Label></Label><Label></Label>
-      <Button layoutX="53.0" layoutY="316.0" mnemonicParsing="false" onAction="#goBack" prefHeight="48.0" prefWidth="115.0" text="BACK">
+      <Button onAction="#goBack" text="BACK">
       </Button>
    </children>
 </VBox>

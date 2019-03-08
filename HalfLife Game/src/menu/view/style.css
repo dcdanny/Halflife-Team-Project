@@ -45,3 +45,6 @@
 SpriteAnimation{
 	/*Style any sprites*/
 }
+TextField{
+	-fx-font: 25px Tahoma;
+}

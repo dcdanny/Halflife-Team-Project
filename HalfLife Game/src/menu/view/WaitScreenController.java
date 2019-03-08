@@ -22,5 +22,16 @@ public class WaitScreenController {
 		primaryStage = stage;
 	}
 	
-	
+	// The "Disconnect" Button
+	@FXML
+	private void goBack() throws IOException {
+		//client.stopClient();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("joinmenu.fxml"));
+		Pane joinmenu = loader.load();
+		JoinMenuController controller = loader.getController();
+		controller.setStage(primaryStage);
+		Scene scene = new Scene(joinmenu);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
 }
