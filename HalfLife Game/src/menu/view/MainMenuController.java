@@ -23,6 +23,8 @@ public class MainMenuController {
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
+		this.primaryStage.setWidth(800);//So the menu works on bens laptop?
+		this.primaryStage.setHeight(600);//So the menu works on bens laptop?
 	}
 	
 		
