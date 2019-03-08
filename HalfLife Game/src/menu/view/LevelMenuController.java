@@ -15,9 +15,11 @@ import network.Server;
 public class LevelMenuController {
 	
 	private Stage primaryStage;
+	private Server server;
 	
-	public void setStage(Stage stage) {
+	public void setStage(Stage stage, Server server) {
 		primaryStage = stage;
+		this.server = server;
 	}
 	
 	// The "1" Button, directing to the Game "Level 1"
@@ -68,6 +70,7 @@ public class LevelMenuController {
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goBack() throws IOException {
+		server.stopServer();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
 		Pane levelMenu = loader.load();
 		MainMenuController controller = loader.getController();

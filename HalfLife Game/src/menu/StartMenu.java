@@ -21,7 +21,7 @@ public class StartMenu extends Application {
 		this.primaryStage.setTitle("HALFLIFE");
 		this.primaryStage.setWidth(800);
 		this.primaryStage.setHeight(600);
-		this.primaryStage.setResizable(false);
+		this.primaryStage.setResizable(true);
 		showMainView();
 	}
 	

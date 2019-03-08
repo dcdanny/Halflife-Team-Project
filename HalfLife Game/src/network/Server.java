@@ -71,8 +71,8 @@ public class Server extends Thread {
 				}
 			}
 			//start game object here
-			System.out.println("Starting game...");
-			Game game = new Game();
+//			System.out.println("Starting game...");
+//			Game game = new Game();
 			
 		}catch (IOException e) {
 			Report.error("Network error " + e.getMessage());

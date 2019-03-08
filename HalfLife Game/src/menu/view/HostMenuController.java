@@ -67,7 +67,7 @@ public class HostMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane hostMenu = loader.load();
 		LevelMenuController controller = loader.getController();
-		controller.setStage(primaryStage);
+		controller.setStage(primaryStage, server);
 		Scene scene = new Scene(hostMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
