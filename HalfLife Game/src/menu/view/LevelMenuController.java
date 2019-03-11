@@ -64,6 +64,10 @@ public class LevelMenuController {
 		game.start(primaryStage);
 	}
 	
+	private void sendLevel() {
+		
+	}
+	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goBack() throws IOException {

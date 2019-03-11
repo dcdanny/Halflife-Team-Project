@@ -30,18 +30,18 @@ public class SpritePlayer extends Pane {
 	private boolean completedLevel;
 	private boolean dead=false;
 	protected FadeTransition ft;
+	private final String type;
 	
 	private CheckCollision collisionChecker;
 	
 	public SpritePlayer() {
-	
-
+		type=GameConstants.TYPE_PLAYER;
 	     gravity = 0.5f;
 		 boolean falling = true;
 		boolean jumping = false;
 	    
 		 boolean dead= false;
-		 final String type;
+		
 
 		animation =new SpriteAnimation();
 		getChildren().add(animation);
@@ -56,6 +56,9 @@ public class SpritePlayer extends Pane {
 		setTranslateY(getTranslateY()+i); 
 	
 }
+	public String getType() {
+		return type;
+	}
 	
 	public void setVelX(double v) {
 		this.velX = v;
@@ -118,14 +121,14 @@ public class SpritePlayer extends Pane {
 		moveX((int)velX);
 		moveY((int)velY);	
 		
-		//setVelY(10);
+		/*setVelY(10);
 		
-		/*RectObject collidedObj = collisionChecker.checkForCollision(this, root);
+		SpritePlayer collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
-//				System.out.println("1");
+				System.out.println("1");
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
@@ -148,8 +151,9 @@ public class SpritePlayer extends Pane {
 			}
 			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
 				this.setTranslateX(getTranslateX() + 20);
-			}*/
-		//}
+			}
+			
+		}*/
 	}
 	
 	public void buttonPressing(Game game, Scene s) {

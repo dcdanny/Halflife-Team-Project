@@ -153,7 +153,7 @@ public class Game extends Application {
 //		temp.tick(root, heart);
 		
 		
-//		spplayer.tick(root, heart);
+	//	spplayer.tick(root, heart);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
@@ -186,7 +186,7 @@ public class Game extends Application {
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 	//	spplayer.buttonPressing(this, scene);
-		//spplayer.buttonReleasing(scene);
+	//spplayer.buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
 		player.buttonPressing(this, scene); 
