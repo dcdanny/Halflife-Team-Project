@@ -10,13 +10,16 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
 import main.Level_Info;
+import network.*;
 
 public class LevelMenuController {
 	
 	private Stage primaryStage;
+	private Server server;
 	
-	public void setStage(Stage stage) {
+	public void setStage(Stage stage, Server server) {
 		primaryStage = stage;
+		this.server = server;
 	}
 	
 	// The "1" Button, directing to the Game "Level 1"
@@ -46,6 +49,9 @@ public class LevelMenuController {
 		Game game = new Game();
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		game.start(primaryStage);
+		Message m = new Message(game.root);
+		server.sendToAll(m);
+		
 	}
 	
 	// The "3" Button, directing to the Game "Level 3"

@@ -18,8 +18,10 @@ public class WaitScreenController {
 	private Stage primaryStage;
 	@FXML private TextField ipAddrInput;
 
-	public void setStage(Stage stage) {
+	public void setStage(Stage stage, Client client) {
 		primaryStage = stage;
+//		Pane root = client.waitForMessage().getPane();
+//		primaryStage.setScene(root);
 	}
 	
 	

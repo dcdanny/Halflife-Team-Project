@@ -34,7 +34,7 @@ public class MainMenuController {
 		sf= new SpriteFollower(mainMenu);
 		mainMenu.getChildren().add(sf);
 		LevelMenuController controller = loader.getController();
-		controller.setStage(primaryStage);
+		controller.setStage(primaryStage, server);
 		Scene scene = new Scene(mainMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();

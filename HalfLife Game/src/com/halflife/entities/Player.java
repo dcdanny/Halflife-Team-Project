@@ -19,15 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.Ammo;
-import main.CheckCollision;
-import main.DeathScreen;
-import main.Game;
-import main.GameConstants;
-import main.Lives;
-import main.WriteFile;
-import menu.view.LevelMenuController;
-
+import main.*;
 
 public class Player extends RectObject{
 	
@@ -35,13 +27,14 @@ public class Player extends RectObject{
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammo = 10; 
+	private int ammoNo = 10; 
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
 	private boolean completedLevel;
-	
-
+	private Pane foreground=new Pane();
+	private Ammo ammo;
+	private CountdownTimer clock;
 	
 
 	protected CheckCollision collisionChecker;
@@ -52,20 +45,30 @@ public class Player extends RectObject{
 		collisionChecker = new CheckCollision();
 
 
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
+		
+		heart = new Lives();
+		ammo = new Ammo();
+		clock = new CountdownTimer();
+		foreground.getChildren().add(clock);
+		foreground.getChildren().add(heart);
+		foreground.getChildren().add(ammo);
 	}
 
-	public void tick(Pane root, Lives hearts) {
+	public Pane getForeground() {
+		return foreground;
+	}
+	
+	public void tick(Pane root) {
 		if (lives == 0) {	
 			setDead(true);
 			
 		}
-		
-		this.heart = hearts;
+
 		moveX((int)velX);
 		moveY((int)velY);	
 		
@@ -160,13 +163,13 @@ public class Player extends RectObject{
 	
 	public void shoot(Pane root) {
 		
-		if (ammo > 0) {
+		if (ammoNo > 0) {
 			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
-			ammo--;
+			ammoNo--;
 		}else
 			System.out.println("No Bullets");
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 	}
 	
 //respawn animation, flashing player
@@ -204,7 +207,7 @@ public class Player extends RectObject{
 	}
 
 	public int getAmmo() {
-		return ammo;
+		return ammoNo;
 	}
 
 	public void buttonPressing(Game game, Scene s) {
@@ -230,7 +233,7 @@ public class Player extends RectObject{
 				}
 				break;
 			case SPACE:
-				game.ammo.lostBullet();
+				ammo.lostBullet();
 				shoot(game.root);
 				break;
 			}

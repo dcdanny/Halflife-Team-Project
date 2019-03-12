@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.Ammo;
 import main.CheckCollision;
+import main.CountdownTimer;
 import main.Game;
 import main.GameConstants;
 import main.Lives;
@@ -23,12 +24,14 @@ public class NetworkedPlayer extends Player {
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammo = 10; 
+	private int ammoNo = 10; 
 	private int lives = 3;
 	private boolean isJumping = false;
 	private Lives heart;
 	private boolean completedLevel;
-	
+	private Ammo ammo;
+	private CountdownTimer clock;
+	private Pane foreground=new Pane();
 
 	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
 		super(x,y,width,height, col, 3);
@@ -36,12 +39,18 @@ public class NetworkedPlayer extends Player {
 		collisionChecker = new CheckCollision();
 
 
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
-		// TODO Auto-generated constructor stub
+		
+		heart = new Lives();
+		ammo = new Ammo();
+		clock = new CountdownTimer();
+		foreground.getChildren().add(clock);
+		foreground.getChildren().add(heart);
+		foreground.getChildren().add(ammo);
 	}
 
 	
@@ -70,7 +79,7 @@ public class NetworkedPlayer extends Player {
 				if (!completedLevel) {
 					completedLevel = true;
 					System.out.println("Winner");
-					Message mWin = new Message("", "Goal");
+//					Message mWin = new Message("Goal");
 				}
 				
 				
@@ -100,7 +109,7 @@ public class NetworkedPlayer extends Player {
 			heart.lostlife();
 		}else
 			setDead(true);
-			Message mDead = new Message("", "hasDied");
+//			Message mDead = new Message("", "hasDied");
 	}
 	
 	public void setVelX(double v) {
@@ -150,13 +159,13 @@ public class NetworkedPlayer extends Player {
 	
 	public void shoot(Pane root) {
 		
-		if (ammo > 0) {
+		if (ammoNo > 0) {
 			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
-			ammo--;
+			ammoNo--;
 		}else
 			System.out.println("No Bullets");
-		Ammo.setAmmo(ammo);
+		Ammo.setAmmo(ammoNo);
 	}
 	
 //respawn animation, flashing player
@@ -194,7 +203,7 @@ public class NetworkedPlayer extends Player {
 	}
 
 	public int getAmmo() {
-		return ammo;
+		return ammoNo;
 	}
 
 	public void buttonPressing(Game game, Scene s) {
@@ -203,14 +212,14 @@ public class NetworkedPlayer extends Player {
 			switch (e.getCode()) {
 			case A:
 				// message to server
-				Message mLeft= new Message("","A");
+//				Message mLeft= new Message("","A");
 				
 				setVelX(-5);
 				game.root.setLayoutX(game.root.getLayoutX()+10);
 				break;
 			case D: 
 				//message to server
-				Message mRight = new Message("","D");
+//				Message mRight = new Message("","D");
 				
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
@@ -221,7 +230,7 @@ public class NetworkedPlayer extends Player {
 				break;
 			case W:
 				//message to server
-				Message mJump = new Message("","W");
+//				Message mJump = new Message("","W");
 				
 				
 				if (getGravity() == 0 && hasCollided(game.root)) {
@@ -231,10 +240,10 @@ public class NetworkedPlayer extends Player {
 				break;
 			case SPACE:
 				//message to server
-				Message mShoot = new Message("","SPACE");
+//				Message mShoot = new Message("","SPACE");
 				
 				
-				game.ammo.lostBullet();
+				ammo.lostBullet();
 				shoot(game.root);
 				break;
 			}

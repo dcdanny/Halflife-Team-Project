@@ -38,7 +38,6 @@ import network.*;
 
 public class Game extends Application {
 	public Pane root= new Pane();
-	private Pane foreground=new Pane();
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
@@ -48,9 +47,6 @@ public class Game extends Application {
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
-	private CountdownTimer clock=new CountdownTimer();
-	private Lives heart = new Lives();
-	public Ammo ammo = new Ammo();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
@@ -72,9 +68,7 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		foreground.getChildren().add(clock);
-		foreground.getChildren().add(heart);
-		foreground.getChildren().add(ammo);
+
 
 		root.getChildren().add(spplayer);
 
@@ -86,7 +80,7 @@ public class Game extends Application {
 		};
 		
 		timer.start();
-		display.getChildren().addAll(bg,root,foreground);
+		display.getChildren().addAll(bg,root,player.getForeground());
 		
 
 		return root;	
@@ -149,7 +143,7 @@ public class Game extends Application {
 	
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
-		player.tick(root, heart);
+		player.tick(root);
 //		temp.tick(root, heart);
 		
 		
@@ -162,12 +156,12 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
-			np.tick(root, heart);
+			np.tick(root);
 		}
 		
 		player.checkPos(this);
-		if (player.isDead() && !foreground.getChildren().contains(DeathShow)) {
-			foreground.getChildren().add(DeathShow);
+		if (player.isDead() && !player.getForeground().getChildren().contains(DeathShow)) {
+			player.getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 	}

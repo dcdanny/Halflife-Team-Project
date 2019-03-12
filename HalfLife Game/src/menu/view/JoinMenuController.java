@@ -48,7 +48,7 @@ public class JoinMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
 		Pane joinMenu = loader.load();
 		WaitScreenController controller = loader.getController();
-		controller.setStage(primaryStage);
+		controller.setStage(primaryStage, client);
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
