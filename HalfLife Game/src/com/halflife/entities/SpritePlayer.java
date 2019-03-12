@@ -130,13 +130,12 @@ public class SpritePlayer extends Pane {
 		}else
 			dead=true;
 	}
-	public void tick(Pane root, Lives hearts) {
+	public void tick(Pane root) {
 		if (lives == 0) {	
 			dead=true;
 			
 		}
 		
-		this.heart = hearts;
 		moveX((int)velX);
 		moveY((int)velY);	
 		
