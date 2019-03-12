@@ -62,6 +62,11 @@ public class SpritePlayer extends Pane {
 		foreground.getChildren().add(ammo);
 		
 	}
+	
+	public Pane getForeground() {
+		return foreground;
+	}
+	
 	public void moveX(int i) {
 			setTranslateX(getTranslateX()+i); 
 		

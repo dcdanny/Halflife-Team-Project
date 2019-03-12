@@ -48,6 +48,10 @@ public class NetworkedPlayer extends Player {
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(ammo);
 	}
+	
+	public Pane getForeground() {
+		return foreground;
+	}
 
 	
 	public void tick(Pane root, Lives hearts) {
