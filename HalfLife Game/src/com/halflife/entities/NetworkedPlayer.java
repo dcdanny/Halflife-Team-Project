@@ -31,7 +31,7 @@ public class NetworkedPlayer extends Player {
 	private boolean completedLevel;
 	private Ammo ammo;
 	private CountdownTimer clock;
-	
+	private Pane foreground=new Pane();
 
 	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
 		super(x,y,width,height, col, 3);
@@ -48,6 +48,9 @@ public class NetworkedPlayer extends Player {
 		heart = new Lives();
 		ammo = new Ammo();
 		clock = new CountdownTimer();
+		foreground.getChildren().add(clock);
+		foreground.getChildren().add(heart);
+		foreground.getChildren().add(ammo);
 	}
 
 	

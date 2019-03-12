@@ -33,6 +33,7 @@ public class SpritePlayer extends Pane {
 	protected FadeTransition ft;
 	private Ammo ammo;
 	private CountdownTimer clock;
+	private Pane foreground=new Pane();
 	
 	private CheckCollision collisionChecker;
 	
@@ -53,6 +54,9 @@ public class SpritePlayer extends Pane {
 		heart = new Lives();
 		ammo = new Ammo();
 		clock = new CountdownTimer();
+		foreground.getChildren().add(clock);
+		foreground.getChildren().add(heart);
+		foreground.getChildren().add(ammo);
 		
 	}
 	public void moveX(int i) {
