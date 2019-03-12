@@ -22,7 +22,7 @@ public class StartClient {
 			String namefrom = user.readLine();
 			System.out.print("Content: ");
 			String msgcontent = user.readLine();
-			Message messagetoSend = new Message(namefrom,msgcontent);
+			Message messagetoSend = new Message(msgcontent);
 	
 			System.out.println("----- ----- ----- -----");
 			//toServer.writeObject(messagetoSend);

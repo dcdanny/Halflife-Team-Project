@@ -32,7 +32,7 @@ public class startServer {
 				namefrom = user.readLine();
 				System.out.print("Content: ");
 				String msgcontent = user.readLine();
-				Message messagetoSend = new Message(namefrom,msgcontent);
+				Message messagetoSend = new Message(msgcontent);
 		
 				System.out.println("----- ----- ----- -----");
 				server.sendToAll(messagetoSend);
