@@ -1,6 +1,9 @@
 package menu.view;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -17,12 +20,98 @@ public class WaitScreenController {
 	
 	private Stage primaryStage;
 	@FXML private TextField ipAddrInput;
-
-	public void setStage(Stage stage, Client client) throws InterruptedException {
+	private FutureTask msga1;
+	
+	public void setStage(Stage stage, Client client){
 		primaryStage = stage;
-		Pane root = client.waitForMessage().getPane();
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
+		//initialise(stage, client);
+		CallableExample callableexample = new CallableExample();
+		try {
+			callableexample.setClient(client);
+			//callableexample.call();
+			
+		      // Create the FutureTask with Callable 
+		      msga1 = new FutureTask(callableexample); 
+		  
+		      // As it implements Runnable, create Thread 
+		      // with FutureTask 
+		      Thread t = new Thread(msga1); 
+		      t.start();
+		      
+			
+			System.out.println("m");
+
+			//System.out.println("Get: "+ msga1.get());
+			System.out.println("n");
+		      
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	@FXML
+	private void initialize(){
+		waitConnection();	
+	}
+	public void waitConnection() {
+		try {
+			System.out.println("Get: "+ msga1.get());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("STARTGAME");
+	}
+	/*public void initialise(Stage stage, Client client){
+		System.out.println("a");
+		Pane root = null;
+		try {
+			root = client.waitForMessage().getPane();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("b");
+		if(root != null) {
+			Scene scene = new Scene(root);
+			System.out.println("c");
+			primaryStage.setScene(scene);
+			System.out.println("d");
+		}else {
+			try {
+				goBack();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}*/
+	class CallableExample implements Callable { 
+	  
+		private Client client;
+		
+		public void setClient(Client c) {
+			client = c;
+		}
+		
+	    public Object call() throws Exception 
+	    { 
+	    	Pane root = null;
+	        // Create random number generator 
+	    	System.out.println("heyyyy neww threaddd");
+	    	Thread.sleep(2 * 1000);
+	    	System.out.println("ha");
+	    	root = client.waitForMessage().getPane();
+	        // To simulate a heavy computation, 
+	        // we delay the thread for some random time 
+	        Thread.sleep(2 * 1000); 
+	  
+	        return 45; 
+	    } 
 	}
 	
 	// The "Disconnect" Button
@@ -37,4 +126,6 @@ public class WaitScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+
+
 }

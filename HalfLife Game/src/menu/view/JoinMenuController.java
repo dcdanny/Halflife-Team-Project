@@ -48,35 +48,26 @@ public class JoinMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
 		Pane joinMenu = loader.load();
 		WaitScreenController controller = loader.getController();
-		try {
-			controller.setStage(primaryStage, client);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		controller.setStage(primaryStage, client);
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 		
+		/*while (!primaryStage.isShowing()) {
+			if (primaryStage.isShowing())
+				break;
+		}*/
 		
-		
+		/*
+		System.out.println("z");
+		if (primaryStage.isShowing())
+			initialiseController(controller, client);
 			
 			System.out.println("waiting");
-			//server.getclientTable().getQueue("dan");
-//		 new Thread() {
-//	            @Override
-//	            public void run() {
-//	            	 Platform.runLater(() -> {
-//	                     try {
-//							new Game().start(new Stage());
-//						} catch (Exception e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//	                 });
-//	            }}.start();
-			primaryStage.show();
-			primaryStage.setScene(scene);
+*/
 	}
+	/*public void initialiseController(WaitScreenController controller, Client client) {
+		controller.initialise(primaryStage, client);
+	}*/
 }

@@ -78,7 +78,10 @@ public class Client extends Thread {
 		System.out.println("Sent to: servaa");//DEBUG----------------------
 	}
 	public Message waitForMessage() throws InterruptedException {
+		System.out.println("cliWait");
 		Message msg = receiveQueue.take(); // Matches EEEEE in ServerReceiver
+		//Message msg = new Message("asdfghjk");
+		System.out.println("cliGot");
 		return msg;
 	}
 }
