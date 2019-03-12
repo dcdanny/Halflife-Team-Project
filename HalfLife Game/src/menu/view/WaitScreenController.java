@@ -18,10 +18,11 @@ public class WaitScreenController {
 	private Stage primaryStage;
 	@FXML private TextField ipAddrInput;
 
-	public void setStage(Stage stage, Client client) {
+	public void setStage(Stage stage, Client client) throws InterruptedException {
 		primaryStage = stage;
-//		Pane root = client.waitForMessage().getPane();
-//		primaryStage.setScene(root);
+		Pane root = client.waitForMessage().getPane();
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
 	}
 	
 	// The "Disconnect" Button

@@ -36,7 +36,7 @@ public class JoinMenuController {
 	
 	// The "NEXT" Button, directing to the Game
 	@FXML
-	private void goNext() throws IOException {
+	private void goNext() throws IOException, InterruptedException {
 		System.out.println(ipAddrInput.getText());
 		System.out.println("Network Client Connecting to: "+ipAddrInput.getText());
 		//Can't use 0 - 1023, Use 1024 - 65 535
