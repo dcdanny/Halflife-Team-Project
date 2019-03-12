@@ -36,7 +36,7 @@ public class JoinMenuController {
 	
 	// The "NEXT" Button, directing to the Game
 	@FXML
-	private void goNext() throws IOException, InterruptedException {
+	private void goNext() throws IOException {
 		System.out.println(ipAddrInput.getText());
 		System.out.println("Network Client Connecting to: "+ipAddrInput.getText());
 		//Can't use 0 - 1023, Use 1024 - 65 535
@@ -48,7 +48,12 @@ public class JoinMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
 		Pane joinMenu = loader.load();
 		WaitScreenController controller = loader.getController();
-		controller.setStage(primaryStage, client);
+		try {
+			controller.setStage(primaryStage, client);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
