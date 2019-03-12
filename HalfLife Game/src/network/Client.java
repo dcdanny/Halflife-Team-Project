@@ -13,7 +13,8 @@ public class Client extends Thread {
 	int port;
 	String nickname;
 	String hostname;
-	private BlockingQueue<Message> sendQueue; 
+	private BlockingQueue<Message> sendQueue;
+	private BlockingQueue<Message> receiveQueue;
 	
 	public Client(int port,String nickname,String hostname) {
 
@@ -26,6 +27,7 @@ public class Client extends Thread {
 		this.nickname = nickname;
 		this.hostname = hostname;
 		this.sendQueue = new LinkedBlockingQueue<Message>();
+		this.receiveQueue = new LinkedBlockingQueue<Message>();
 		
 	}
 	public void run(){
@@ -48,7 +50,7 @@ public class Client extends Thread {
 		if(clientStart) {
 			// Create two threads to send and receive
 			ClientSender sender = new ClientSender(sendQueue,nickname,toServer,server);
-			ClientReceiver receiver = new ClientReceiver(fromServer);
+			ClientReceiver receiver = new ClientReceiver(receiveQueue, fromServer);
 	
 			// Run them in parallel:
 			sender.start();
@@ -74,5 +76,9 @@ public class Client extends Thread {
 		BlockingQueue<Message> recipientsQueue = sendQueue; // Matches EEEEE in ServerSender.java
 		recipientsQueue.offer(message);
 		System.out.println("Sent to: servaa");//DEBUG----------------------
+	}
+	public Message waitForMessage() throws InterruptedException {
+		Message msg = receiveQueue.take(); // Matches EEEEE in ServerReceiver
+		return msg;
 	}
 }

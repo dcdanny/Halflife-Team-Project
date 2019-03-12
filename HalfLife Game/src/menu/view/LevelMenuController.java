@@ -73,6 +73,7 @@ public class LevelMenuController {
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goBack() throws IOException {
+		server.stopServer();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
 		Pane levelMenu = loader.load();
 		MainMenuController controller = loader.getController();
@@ -80,6 +81,14 @@ public class LevelMenuController {
 		Scene scene = new Scene(levelMenu);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+	
+	private void sendLevel() {
+		String[] s = Server.showConnected();
+		if (s.length>1) {
+			//send level
+		}
+		//else single player no code required
 	}
 
 }
