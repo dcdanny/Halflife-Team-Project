@@ -17,6 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.*;
@@ -167,9 +170,44 @@ public class Player extends RectObject{
 			Bullet bullet = getBullet(this, Color.RED, root);
 			root.getChildren().add(bullet);
 			ammoNo--;
-		}else
+		}else {
 			System.out.println("No Bullets");
+			this.noBullets();
+		}
 		Ammo.setAmmo(ammoNo);
+	}
+	
+	
+	private void noBullets() {
+		Text t = new Text("No bullets remaining");
+		t.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+		t.setFill(Color.WHITE);
+		t.setX(300);
+		t.setY(200);
+		ft = new FadeTransition(Duration.millis(400), t);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.0);
+		ft.setCycleCount(5);
+		ft.setAutoReverse(true);
+		    
+		
+		 Double opa = this.getOpacity();
+        if (opa.intValue() == 0) {
+            return;
+        }
+           
+        Animation.Status as = ft.getStatus();
+        
+        if (as == Animation.Status.RUNNING) {
+            return;
+        
+        }
+        if (as == Animation.Status.STOPPED) {
+            ft.play();
+            foreground.getChildren().remove(t);
+        }           
+		foreground.getChildren().add(t);
+		
 	}
 	
 //respawn animation, flashing player
