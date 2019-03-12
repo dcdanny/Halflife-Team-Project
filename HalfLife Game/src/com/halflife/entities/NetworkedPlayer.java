@@ -25,9 +25,7 @@ public class NetworkedPlayer extends Player {
 	private double velY = 0;
 	private double gravity = 0;
 	private int ammoNo = 10; 
-	private int lives = 3;
 	private boolean isJumping = false;
-	private Lives heart;
 	private boolean completedLevel;
 	private Ammo ammo;
 	private CountdownTimer clock;
@@ -45,22 +43,19 @@ public class NetworkedPlayer extends Player {
 		
 		completedLevel = false;
 		
-		heart = new Lives();
 		ammo = new Ammo();
 		clock = new CountdownTimer();
 		foreground.getChildren().add(clock);
-		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 	}
 
 	
 	public void tick(Pane root, Lives hearts) {
-		if (lives == 0) {	
-			setDead(true);
-			
-		}
+//		if (lives == 0) {	
+//			setDead(true);
+//			
+//		}
 		
-		this.heart = hearts;
 		moveX((int)velX);
 		moveY((int)velY);	
 		
@@ -99,18 +94,18 @@ public class NetworkedPlayer extends Player {
 			}
 		}
 	}
-	public void loseLife(Pane root) {
-		root.setLayoutX(0);
-		if (lives > 0) {
-			this.Fade();
-			this.setTranslateX(200);
-			this.setTranslateY(0);
-			lives--;	
-			heart.lostlife();
-		}else
-			setDead(true);
+//	public void loseLife(Pane root) {
+//		root.setLayoutX(0);
+//		if (lives > 0) {
+//			this.Fade();
+//			this.setTranslateX(200);
+//			this.setTranslateY(0);
+//			lives--;	
+//			heart.lostlife();
+//		}else
+//			setDead(true);
 //			Message mDead = new Message("", "hasDied");
-	}
+//	}
 	
 	public void setVelX(double v) {
 		this.velX = v;
