@@ -19,10 +19,15 @@ public class Lives extends Group {
 	private boolean isDead;
 	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>();
 
-	public Lives() {
+	public Lives(int _lives) {
 
 		super();
+		lives = _lives;
+		addLives();
+	}
 
+	public void addLives() {
+		this.getChildren().clear();
 		Image image = null;
 		try {
 			image = new Image(new FileInputStream("res/heart-1.png.png"));
@@ -49,19 +54,9 @@ public class Lives extends Group {
 			heartlist.add(hearts.get(i));
 		}
 
-//  VBox root= new VBox();
-		// root.getChildren().add(imageView);
-		// Scene scene =new Scene(new Group());
-
-		// this.getChildren().remove(hearts2);
-		// lostlife();
-		// lostlife();
-		// lostlife();
-
 		isDead = false;
-
 	}
-
+	
 	// Removes lives from display when called
 	public void lostlife() {
 
@@ -76,5 +71,9 @@ public class Lives extends Group {
 
 	public boolean isDead() {
 		return isDead;
+	}
+	
+	public void setLives(int _lives) {
+		lives = _lives;
 	}
 }

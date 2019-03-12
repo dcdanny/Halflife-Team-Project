@@ -23,7 +23,7 @@ public class RectObject extends Rectangle {
 	private boolean falling = true;
 	private boolean jumping = false;
     
-	private boolean dead= false;
+	protected boolean dead= false;
 	private final String type;
 	public RectObject(double d, double e,int width, int height, String type, Color col){
 		super (width,height,col);

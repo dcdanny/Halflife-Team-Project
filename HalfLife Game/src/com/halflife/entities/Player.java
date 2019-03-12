@@ -35,7 +35,6 @@ public class Player extends RectObject{
 	private Pane foreground=new Pane();
 	private Ammo ammo;
 	private CountdownTimer clock;
-	
 
 	protected CheckCollision collisionChecker;
 	
@@ -44,21 +43,21 @@ public class Player extends RectObject{
 		
 		collisionChecker = new CheckCollision();
 
-
-		Ammo.setAmmo(ammoNo);
-
 		movement(x, y);		
 		
 		completedLevel = false;
 		
-		heart = new Lives();
-		ammo = new Ammo();
+		heart = new Lives(GameConstants.MAX_LIVES);
+		heart.setLives(lives);
+		ammo = new Ammo(GameConstants.MAX_AMMO);
+		ammo.setAmmo(ammoNo);
 		clock = new CountdownTimer();
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
-	}
 
+	}
+	
 	public Pane getForeground() {
 		return foreground;
 	}
@@ -68,7 +67,7 @@ public class Player extends RectObject{
 			setDead(true);
 			
 		}
-
+		
 		moveX((int)velX);
 		moveY((int)velY);	
 		
@@ -169,7 +168,7 @@ public class Player extends RectObject{
 			ammoNo--;
 		}else
 			System.out.println("No Bullets");
-		Ammo.setAmmo(ammoNo);
+		ammo.setAmmo(ammoNo);
 	}
 	
 //respawn animation, flashing player
@@ -210,6 +209,28 @@ public class Player extends RectObject{
 		return ammoNo;
 	}
 
+	public void addAmmo(int i) {
+		System.out.println("OLD AMMO + " + ammoNo);
+		if (ammoNo + i > GameConstants.MAX_AMMO)
+			ammoNo = GameConstants.MAX_AMMO;
+		else
+			ammoNo += i;
+		System.out.println("NEW AMMO + " + ammoNo);
+		
+		ammo.setAmmo(ammoNo);
+		ammo.addBullets();
+	}
+
+	public void addLives(int i) {
+		if (lives + i > GameConstants.MAX_LIVES)
+			lives = GameConstants.MAX_LIVES;
+		else
+			lives += i;
+		
+		heart.setLives(lives);
+		heart.addLives();
+	}
+	
 	public void buttonPressing(Game game, Scene s) {
 	
 		s.setOnKeyPressed(e-> {
