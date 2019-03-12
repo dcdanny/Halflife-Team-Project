@@ -143,11 +143,11 @@ public class Game extends Application {
 	
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
-		player.tick(root);
+	//	player.tick(root);
 //		temp.tick(root, heart);
 		
 		
-	//	spplayer.tick(root, heart);
+		spplayer.tick(root);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
@@ -179,12 +179,12 @@ public class Game extends Application {
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
-	//	spplayer.buttonPressing(this, scene);
-	//spplayer.buttonReleasing(scene);
+		spplayer.buttonPressing(this, scene);
+	spplayer.buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
-		player.buttonPressing(this, scene); 
-		player.buttonReleasing(scene);
+	//	player.buttonPressing(this, scene); 
+	//	player.buttonReleasing(scene);
 		
 //		temp2.buttonPressing(this, scene);
 //		temp2.buttonReleasing(scene);

@@ -48,7 +48,7 @@ public class SpriteAnimation extends Pane {
                     }
                 });
 		
-	    this.setPickOnBounds(false);
+	    this.setPickOnBounds(true);
 		
 	    timeline.getKeyFrames().add(nextframe);
 		timeline.setCycleCount(Timeline.INDEFINITE);

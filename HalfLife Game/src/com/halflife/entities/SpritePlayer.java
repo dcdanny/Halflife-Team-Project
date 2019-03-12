@@ -52,6 +52,7 @@ public class SpritePlayer extends Pane {
 
 		animation =new SpriteAnimation();
 		getChildren().add(animation);
+		this.setPickOnBounds(false);
 		collisionChecker = new CheckCollision();
 		
 		heart = new Lives();
@@ -125,19 +126,19 @@ public class SpritePlayer extends Pane {
 		}else
 			dead=true;
 	}
-	public void tick(Pane root, Lives hearts) {
+	public void tick(Pane root) {
 		if (lives == 0) {	
 			dead=true;
 			
 		}
 		
-		this.heart = hearts;
+		
 		moveX((int)velX);
 		moveY((int)velY);	
 		
-		/*setVelY(10);
+		setVelY(10);
 		
-		SpritePlayer collidedObj = collisionChecker.checkForCollision(this, root);
+		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
@@ -167,7 +168,7 @@ public class SpritePlayer extends Pane {
 				this.setTranslateX(getTranslateX() + 20);
 			}
 			
-		}*/
+		}
 	}
 	
 	public void buttonPressing(Game game, Scene s) {

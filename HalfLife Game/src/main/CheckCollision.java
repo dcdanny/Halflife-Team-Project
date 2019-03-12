@@ -41,16 +41,16 @@ public class CheckCollision {
 		return null;
 		    
 	}
-	public SpritePlayer checkForCollision(SpritePlayer sprite, Pane root) {
+	public RectObject checkForCollision(SpritePlayer sprite, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
-			  SpritePlayer s= (SpritePlayer) static_bloc;
-			  if (static_bloc != sprite && s.getType() != GameConstants.TYPE_EDGE_PLATFORM_RIGHT && s.getType() != GameConstants.TYPE_EDGE_PLATFORM_LEFT) {
+			  RectObject b= (RectObject) static_bloc;
+			  if (static_bloc != sprite && b.getType() != GameConstants.TYPE_EDGE_PLATFORM_RIGHT && b.getType() != GameConstants.TYPE_EDGE_PLATFORM_LEFT) {
 
 			      if (sprite.getBoundsInParent().intersects(static_bloc.getBoundsInParent())) {
-			    	  System.out.println("S collide");
+			    	 // System.out.println("S collide");
 			    	  collided = true;
-			    	  return (SpritePlayer) static_bloc;
+			    	  return (RectObject) static_bloc;
 			      }
 			  }
 		  }
