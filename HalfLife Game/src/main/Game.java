@@ -45,6 +45,7 @@ public class Game extends Application {
 	private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
+	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
@@ -154,6 +155,9 @@ public class Game extends Application {
 		}
 		for (Spike spike : spikes) {
 			spike.tick(player, root);
+		}
+		for (SupplyDrop supply : supplies) {
+			supply.tick(player, root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
 			np.tick(root);
@@ -270,6 +274,15 @@ public class Game extends Application {
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
 					root.getChildren().add(sPlatform.getSpike());
 					spikes.add(sPlatform.getSpike());
+					break;
+				
+				case '7':
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
+					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);
+					root.getChildren().add(supply);
+					supplies.add(supply);
 					break;
 				}
 			}

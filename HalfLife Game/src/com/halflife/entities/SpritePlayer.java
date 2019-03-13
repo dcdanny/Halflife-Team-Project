@@ -54,8 +54,8 @@ public class SpritePlayer extends Pane {
 		getChildren().add(animation);
 		collisionChecker = new CheckCollision();
 		
-		heart = new Lives();
-		ammo = new Ammo();
+		heart = new Lives(GameConstants.MAX_LIVES);
+		ammo = new Ammo(GameConstants.MAX_AMMO);
 		clock = new CountdownTimer();
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
