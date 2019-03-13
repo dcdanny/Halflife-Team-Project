@@ -30,7 +30,7 @@
 	-fx-pref-height:60.0;
 }
 .levelBtn:hover{
-	-fx-pref-width:75.0;
+	-fx-pref-width:60.0;
 	-fx-pref-height:75.0;
 }
 .title {
