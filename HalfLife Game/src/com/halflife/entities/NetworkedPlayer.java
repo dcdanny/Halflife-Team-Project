@@ -37,13 +37,13 @@ public class NetworkedPlayer extends Player {
 		collisionChecker = new CheckCollision();
 
 
-		Ammo.setAmmo(ammoNo);
+		ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
 		
-		ammo = new Ammo();
+		ammo = new Ammo(0);
 		clock = new CountdownTimer();
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(ammo);
@@ -164,7 +164,7 @@ public class NetworkedPlayer extends Player {
 			ammoNo--;
 		}else
 			System.out.println("No Bullets");
-		Ammo.setAmmo(ammoNo);
+		ammo.setAmmo(ammoNo);
 	}
 	
 //respawn animation, flashing player

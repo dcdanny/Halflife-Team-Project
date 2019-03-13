@@ -30,7 +30,7 @@ public class SupplyDrop extends RectObject{
 	}
 
 	public void tick(Player player, Pane root) {
-		if (isCollidedWithPlayer(player)) {
+		if (isCollidedWithPlayer(player) && ammoContents != 0 && livesContents != 0) {
 			player.addAmmo(ammoContents);
 			player.addLives(livesContents);
 			System.out.println(ammoContents + " - " + livesContents);

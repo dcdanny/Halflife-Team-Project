@@ -173,7 +173,7 @@ public class Player extends RectObject{
 			System.out.println("No Bullets");
 			this.noBullets();
 		}
-		Ammo.setAmmo(ammoNo);
+		ammo.setAmmo(ammoNo);
 	}
 	
 	
