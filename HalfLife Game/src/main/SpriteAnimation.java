@@ -54,12 +54,13 @@ public class SpriteAnimation extends Pane {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 		this.getChildren().add(imageView);
+		this.setTranslateX(0);
 	}
 
 	private ImageView format (ImageView img) {
 		img.setFitWidth(120);
 		img.setFitHeight(120);
-		img.setTranslateX(0);
+		img.setTranslateX(150);
 		
 		return img;
 		
