@@ -12,7 +12,7 @@ public class Bullet extends RectObject{
 
 	private CheckCollision collisionChecker;
 	public Bullet(double x, double y, int width, int height, String type, Color col, Pane root) {
-		super(x+25, y + 25, width, height, type, col);
+		super(x+30, y + 25, width, height, type, col);
 		collisionChecker = new CheckCollision();
 		startTimer(System.currentTimeMillis(), root);
 	}
