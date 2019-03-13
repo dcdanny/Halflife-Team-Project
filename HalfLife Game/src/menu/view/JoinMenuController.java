@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.Game;
 import network.Client;
 import network.Server;
@@ -51,6 +52,21 @@ public class JoinMenuController {
 		controller.setStage(primaryStage, client);
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
+		
+		primaryStage.setOnShowing((WindowEvent e) -> {
+			System.out.println("onshowing triggered");
+	        //controller.waitConnection();
+			Pane asdf = null;
+			try {
+				asdf = client.waitForMessage().getPane();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("end onshowing");
+			
+	    });
+		
 		primaryStage.show();
 		
 		

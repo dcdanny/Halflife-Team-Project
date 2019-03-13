@@ -55,7 +55,7 @@ public class WaitScreenController {
 		waitConnection();	
 	}
 	public void waitConnection() {
-		try {
+		/*try {
 			System.out.println("Get: "+ msga1.get());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -63,7 +63,7 @@ public class WaitScreenController {
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		System.out.println("STARTGAME");
 	}
 	/*public void initialise(Stage stage, Client client){
