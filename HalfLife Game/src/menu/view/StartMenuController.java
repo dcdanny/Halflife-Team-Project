@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.SpriteAnimation;
+import javafx.stage.WindowEvent;
 
 public class StartMenuController {
 	
@@ -28,6 +29,9 @@ public class StartMenuController {
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
 		primaryStage.setScene(scene);
+		this.primaryStage.setOnCloseRequest((WindowEvent event) -> {
+	        System.exit(0);
+	    });
 		primaryStage.show();
 	}
 	

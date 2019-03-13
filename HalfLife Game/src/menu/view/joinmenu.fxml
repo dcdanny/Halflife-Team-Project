@@ -19,7 +19,7 @@
 		<Label></Label>
 		<HBox>
 			<Region HBox.hgrow="ALWAYS" />
-			<TextField prefWidth="400.0" id="ipAddrInput" fx:id="ipAddrInput"/>
+			<TextField prefWidth="400.0" id="ipAddrInput" onAction="#goNext" fx:id="ipAddrInput"/>
 			<Region HBox.hgrow="ALWAYS" />
 		</HBox>
 		<Label></Label>
