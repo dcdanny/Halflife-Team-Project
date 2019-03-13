@@ -42,5 +42,6 @@ public class ClientTable {
 	}
 	public void stopServer() {
 		this.running = false;
+		queueTable.clear();
 	}
 }
