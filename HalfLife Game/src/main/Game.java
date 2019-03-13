@@ -50,7 +50,7 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	private NetworkedPlayer temp;
+//	private NetworkedPlayer temp;
 //	private NetworkedPlayer temp2;
 
 
@@ -82,6 +82,22 @@ public class Game extends Application {
 		timer.start();
 		display.getChildren().addAll(bg,root,player.getForeground());
 		
+		
+		s = network.Server.showConnected();
+		Arrays.sort(s);
+		for (int i = 0; i <s.length-2;i++) {
+			System.out.println(s[i]);
+			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
+//			System.out.println("asdfghjkl   :::" + temp.toString());
+			netPlayers.add(temp);
+		}
+
+		for (NetworkedPlayer np : netPlayers) {
+//			System.out.println(np.toString());
+			root.getChildren().add(np);
+		}		
+		
+		root.getChildren().add(player);
 
 		return root;	
 	}
@@ -144,7 +160,7 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root);
-//		temp.tick(root, heart);
+
 		
 		
 //		spplayer.tick(root, heart);
@@ -156,7 +172,9 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
+//			System.out.println(np.toString());
 			np.tick(root);
+//			System.out.println("np ticking");
 		}
 		
 		player.checkPos(this);
@@ -195,22 +213,7 @@ public class Game extends Application {
 	}
 		
 	private void setUpLevel(String[] lvl) {
-		levelWidth= lvl[0].length()*150;
-		
-		s = network.Server.showConnected();
-		Arrays.sort(s);
-		for (int i = 0; i <s.length-2;i++) {
-			System.out.println(s[i]);
-			netPlayers.add(temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3));
-			root.getChildren().add(temp);
-		}
-//		netPlayers.add(temp2 = new NetworkedPlayer(400,0,40,50,Color.GREEN,3));
-//		root.getChildren().add(temp2);
-//		for (NetworkedPlayer np : netPlayers) {
-//			root.getChildren().add(np);
-//		}		
-		
-		root.getChildren().add(player);
+		levelWidth= lvl[0].length()*150;	
 		
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];
@@ -275,9 +278,5 @@ public class Game extends Application {
 			}
 		}	
 		
-	}
-	public static void main(String[] args) {
-		launch(args);
-				
 	}
 }
