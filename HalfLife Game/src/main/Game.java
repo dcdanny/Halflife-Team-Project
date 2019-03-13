@@ -150,19 +150,20 @@ public class Game extends Application {
 		spplayer.GetPlayer().tick(root);
 		
 		
+	
 		for (BaseEnemy enemy : enemies) {
-			enemy.tick(player, root);
+			enemy.tick(spplayer.GetPlayer(), root);
 		}
 		for (Spike spike : spikes) {
-			spike.tick(player, root);
+			spike.tick(spplayer.GetPlayer(), root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
 			np.tick(root);
 		}
 		
-		player.checkPos(this);
-		if (player.isDead() && !player.getForeground().getChildren().contains(DeathShow)) {
-			player.getForeground().getChildren().add(DeathShow);
+		spplayer.GetPlayer().checkPos(this);
+		if ((spplayer.GetPlayer()).isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 	}

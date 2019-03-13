@@ -29,10 +29,11 @@ public class SpritePlayer extends Pane {
 		 this.pl=  new Player(200,0,40,50,Color.WHITE,3);
 		//this.getChildren().add(pl);
 		this.ani=new SpriteAnimation();
-		ani.resizeView(-38, 0, 120);
+		ani.resizeView(-38, -45, 120);
 		System.out.println(pl.translateXProperty());
 		System.out.println(ani.translateXProperty());
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
+		ani.translateYProperty().bindBidirectional(pl.translateYProperty());
 		//this.getChildren().add(ani);
 		Pane PlayerSprite= new Pane();
 		PlayerSprite.getChildren().addAll(pl,ani);
