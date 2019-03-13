@@ -12,8 +12,8 @@
 	-fx-border-outsets: 5px;
 	-fx-text-fill: black;
 	-fx-font-size: 14px;
-	-fx-pref-height:48.0;
 	-fx-pref-width:300.0;
+	-fx-pref-height:48.0;
 }
 .button:hover{
 	-fx-pref-width:320.0;
@@ -24,6 +24,14 @@
 .button:focused {
 	-fx-border-color:#66BBFF;
 	-fx-border-width: 3;
+}
+.levelBtn{
+	-fx-pref-width:60.0;
+	-fx-pref-height:60.0;
+}
+.levelBtn:hover{
+	-fx-pref-width:60.0;
+	-fx-pref-height:75.0;
 }
 .title {
 	-fx-padding: 10 ;
