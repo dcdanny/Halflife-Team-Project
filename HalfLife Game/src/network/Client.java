@@ -89,4 +89,7 @@ public class Client extends Thread {
 		
 		return msg;
 	}
+	public void stopClient() {
+		//Stop client thread and remove from client table
+	}
 }
