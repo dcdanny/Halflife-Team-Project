@@ -105,7 +105,7 @@ public class WaitScreenController {
 	    	String msg = null;
 	        // Create random number generator 
 	    	System.out.println("heyyyy neww threaddd");
-	    	Thread.sleep(2 * 1000);
+//	    	Thread.sleep(2 * 1000);
 	    	System.out.println("ha");
 	    	msg = client.waitForMessage().getText();
 	    	
@@ -125,7 +125,7 @@ public class WaitScreenController {
 			}
 	        // To simulate a heavy computation, 
 	        // we delay the thread for some random time 
-	        Thread.sleep(2 * 1000); 
+//	        Thread.sleep(2 * 1000); 
 	  
 	        return 45; 
 	    } 
