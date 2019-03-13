@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -38,7 +39,7 @@ public class SpritePlayer extends Pane {
 	private CountdownTimer clock;
 	private Pane foreground=new Pane();
 
-	
+	private Rectangle boundary;
 	private CheckCollision collisionChecker;
 	
 	public SpritePlayer() {
@@ -49,22 +50,40 @@ public class SpritePlayer extends Pane {
 	    
 		 boolean dead= false;
 		
-
+		this.setTranslateX(200);
 		animation =new SpriteAnimation();
-		getChildren().add(animation);
-		this.setPickOnBounds(false);
+		
+	//	animation.resizeView((int)getTranslateX(), (int)getTranslateY(), 120);
+		this.getChildren().add(animation);
+		 boundary= new Rectangle(getTranslateX(),getTranslateY(),40,50);
+		 boundary.setFill(Color.YELLOW);
+		 this.getChildren().add(boundary);
+		//this.setPickOnBounds(false);
 		collisionChecker = new CheckCollision();
+		
 		
 		heart = new Lives();
 		ammo = new Ammo();
 		clock = new CountdownTimer();
+		
 		foreground.getChildren().add(clock);
 		foreground.getChildren().add(heart);
 		foreground.getChildren().add(ammo);
 		
 	}
+	
+	public Rectangle getBoundary() {
+		boundary.setTranslateX(getTranslateX());
+		boundary.setTranslateY(getTranslateY());
+		
+        return boundary;
+        
+    }
+	
+
 	public void moveX(int i) {
-			setTranslateX(getTranslateX()+i); 
+			setTranslateX(getTranslateX()+i);
+			
 		
 	}
 	public void moveY(int i) {
@@ -131,19 +150,19 @@ public class SpritePlayer extends Pane {
 			dead=true;
 			
 		}
-		
+		//System.out.println(getTranslateX());
 		
 		moveX((int)velX);
 		moveY((int)velY);	
 		
 		setVelY(10);
 		
-		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
+		RectObject collidedObj = collisionChecker.checkForCollisionS(getBoundary(), root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
-				setTranslateY(collidedObj.getTranslateY() - 50);
-				System.out.println("1");
+				setTranslateY(collidedObj.getTranslateY() -50);
+				//System.out.println("1");
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);

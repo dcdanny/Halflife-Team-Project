@@ -55,10 +55,12 @@ public class SpriteAnimation extends Pane {
 		timeline.play();
 		this.getChildren().add(imageView);
 	}
+
 	private ImageView format (ImageView img) {
 		img.setFitWidth(120);
 		img.setFitHeight(120);
-		img.setTranslateX(100);
+		img.setTranslateX(0);
+		
 		return img;
 		
 	}
@@ -70,6 +72,12 @@ public class SpriteAnimation extends Pane {
 		imageView.setTranslateX(x);
 		imageView.setTranslateY(y);
 		return imageView;
+	}
+	public double getX() {
+		return imageView.getLayoutX();
+	}
+	public double getY() {
+		return imageView.getLayoutY();
 	}
 }
 
