@@ -53,19 +53,19 @@ public class JoinMenuController {
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
 		
-		primaryStage.setOnShowing((WindowEvent e) -> {
-			System.out.println("onshowing triggered");
-	        //controller.waitConnection();
-			Pane asdf = null;
-			try {
-				asdf = client.waitForMessage().getPane();
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			System.out.println("end onshowing");
-			
-	    });
+//		primaryStage.setOnShowing((WindowEvent e) -> {
+//			System.out.println("onshowing triggered");
+//	        //controller.waitConnection();
+//			Pane root = null;
+//			try {
+//				root = client.waitForMessage().getPane();
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			System.out.println("end onshowing");
+//			
+//	    });
 		
 		primaryStage.show();
 		

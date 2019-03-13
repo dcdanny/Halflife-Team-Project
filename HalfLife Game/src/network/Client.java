@@ -82,6 +82,7 @@ public class Client extends Thread {
 		Message msg = receiveQueue.take(); // Matches EEEEE in ServerReceiver
 		//Message msg = new Message("asdfghjk");
 		System.out.println("cliGot");
+		System.out.println(msg.getText());
 		return msg;
 	}
 }
