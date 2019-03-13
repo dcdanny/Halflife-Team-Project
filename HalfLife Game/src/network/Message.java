@@ -13,16 +13,12 @@ public class Message implements java.io.Serializable{
 	
 	private String sender =null;
 	private String text=null;
-	private Pane root=null;
 	  
 	  public Message(String text) {
 //		  this.sender = sender;
 		  this.text = text;
 	  }
-	  public Message(Pane root) {
-//		  this.sender = sender;
-		  this.root = root;
-	  }
+
 	  public void setSender(String sender) {
 		  this.sender = sender;
 	  } 
@@ -32,9 +28,6 @@ public class Message implements java.io.Serializable{
 	  
 	  public String getText() {
 		  return text;
-	  }
-	  public Pane getPane() {
-		  return root;
 	  }
 	  
 	  public String toString() {

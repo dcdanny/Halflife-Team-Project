@@ -56,42 +56,10 @@ public class WaitScreenController {
 	private void initialize(){
 		waitConnection();	
 	}
-	public void waitConnection() {
-		/*try {
-			System.out.println("Get: "+ msga1.get());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+	public void waitConnection() {	
 		System.out.println("STARTGAME");
 	}
-	/*public void initialise(Stage stage, Client client){
-		System.out.println("a");
-		Pane root = null;
-		try {
-			root = client.waitForMessage().getPane();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("b");
-		if(root != null) {
-			Scene scene = new Scene(root);
-			System.out.println("c");
-			primaryStage.setScene(scene);
-			System.out.println("d");
-		}else {
-			try {
-				goBack();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}*/
+
 	class CallableExample implements Callable { 
 	  
 		private Client client;
@@ -111,7 +79,21 @@ public class WaitScreenController {
 	    	
 			switch (msg){
 				case "lvl1":
+					System.out.println("here 1234567890");
+//					FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
+//					Pane levelMenu = loader.load();
+//					MainMenuController controller = loader.getController();
+//					controller.setStage(primaryStage);
+//					Scene scene = new Scene(levelMenu);
+//					primaryStage.setScene(scene);
+//					primaryStage.show();
 					
+					
+					
+					Game game = new Game();
+					game.setCurrentLevel(Level_Info.LEVEL1);
+					game.start(primaryStage);
+					primaryStage.show();
 					break;
 				case "lvl2":
 					

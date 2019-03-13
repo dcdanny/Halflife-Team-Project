@@ -88,7 +88,6 @@ public class Game extends Application {
 		for (int i = 0; i <s.length-2;i++) {
 			System.out.println(s[i]);
 			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
-//			System.out.println("asdfghjkl   :::" + temp.toString());
 			netPlayers.add(temp);
 		}
 
@@ -172,9 +171,7 @@ public class Game extends Application {
 			spike.tick(player, root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
-//			System.out.println(np.toString());
 			np.tick(root);
-//			System.out.println("np ticking");
 		}
 		
 		player.checkPos(this);
@@ -190,15 +187,15 @@ public class Game extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-			
+//		System.out.println("Game is Starting!!!!!!!!!!");
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
-	//	spplayer.buttonPressing(this, scene);
-		//spplayer.buttonReleasing(scene);
+//		spplayer.buttonPressing(this, scene);
+//		spplayer.buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
 		player.buttonPressing(this, scene); 
