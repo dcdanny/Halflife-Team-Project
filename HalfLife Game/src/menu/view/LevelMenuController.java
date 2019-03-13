@@ -25,22 +25,11 @@ public class LevelMenuController {
 	// The "1" Button, directing to the Game "Level 1"
 	@FXML
 	private void go1() throws Exception {
-		/*new Thread() {
-			@Override
-			public void run() {
-				Platform.runLater(() -> {
-					try {
-						new Game().start(primaryStage);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				});
-				}*/
-		//Client side game
 			Game game = new Game();
 			game.setCurrentLevel(Level_Info.LEVEL1);
 			game.start(primaryStage);
-			//}.start();	
+			Message m = new Message("lvl1");
+			server.sendToAll(m);
 	}
 	
 	// The "2" Button, directing to the Game "Level 2"
@@ -49,7 +38,7 @@ public class LevelMenuController {
 		Game game = new Game();
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		game.start(primaryStage);
-		Message m = new Message("offnbiuerqiubn");
+		Message m = new Message("lvl2");
 		server.sendToAll(m);
 		
 	}
@@ -60,6 +49,8 @@ public class LevelMenuController {
 		Game game = new Game();
 		game.setCurrentLevel(Level_Info.LEVEL3);
 		game.start(primaryStage);
+		Message m = new Message("lvl3");
+		server.sendToAll(m);
 	}
 	
 	// The "4" Button, directing to the Game "Level 4"
@@ -68,6 +59,8 @@ public class LevelMenuController {
 		Game game = new Game();
 		game.setCurrentLevel(Level_Info.LEVEL4);
 		game.start(primaryStage);
+		Message m = new Message("lvl4");
+		server.sendToAll(m);
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"

@@ -5,6 +5,9 @@ import java.net.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import main.Game;
+import main.Level_Info;
+
 public class Client extends Thread {
 	ObjectOutputStream toServer;
 	ObjectInputStream fromServer;
@@ -83,6 +86,7 @@ public class Client extends Thread {
 		//Message msg = new Message("asdfghjk");
 		System.out.println("cliGot");
 		System.out.println(msg.getText());
+		
 		return msg;
 	}
 }

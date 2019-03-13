@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
+import main.Level_Info;
 import network.Client;
+import network.Message;
 import network.Server;
 
 public class WaitScreenController {
@@ -100,12 +102,38 @@ public class WaitScreenController {
 		
 	    public Object call() throws Exception 
 	    { 
-	    	Pane root = null;
+	    	String msg = null;
 	        // Create random number generator 
 	    	System.out.println("heyyyy neww threaddd");
 	    	Thread.sleep(2 * 1000);
 	    	System.out.println("ha");
-	    	root = client.waitForMessage().getPane();
+	    	msg = client.waitForMessage().getText();
+	    	
+	    	Game game;
+			switch (msg){
+				case "lvl1":
+					game = new Game();
+					game.setCurrentLevel(Level_Info.LEVEL1);
+//					game.start(primaryStage);
+					break;
+				case "lvl2":
+					game = new Game();
+					game.setCurrentLevel(Level_Info.LEVEL2);
+					System.out.println("Level 2 started");
+					game.start(primaryStage);
+					break;
+				case "lvl3":
+					game = new Game();
+					game.setCurrentLevel(Level_Info.LEVEL3);
+//					game.start(primaryStage);
+					break;
+				case "lvl4":
+					game = new Game();
+					game.setCurrentLevel(Level_Info.LEVEL4);
+//					game.start(primaryStage);
+					break;
+					
+			}
 	        // To simulate a heavy computation, 
 	        // we delay the thread for some random time 
 	        Thread.sleep(2 * 1000); 
