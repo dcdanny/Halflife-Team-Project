@@ -60,7 +60,7 @@ public class NetworkedPlayer extends Player {
 		moveY((int)velY);	
 		
 		setVelY(10);
-		System.out.println(velY);
+//		System.out.println(velY);
 		
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
