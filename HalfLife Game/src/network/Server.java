@@ -84,11 +84,18 @@ public class Server extends Thread {
 	}
 	//Returns array of all players currently connected
 	public static String[] showConnected() {
-		String[] outArr =new String[ClientTable.size()];
-		int i = 0;
-		for(String item : clientTable.showAll()){
-			outArr[i] = item;
-			i++;
+		String[] outArr;
+		//If client (client table wont exist) etc return empty array
+		if (clientTable != null) {
+			outArr =new String[ClientTable.size()];
+			int i = 0;
+			for(String item : clientTable.showAll()){
+				outArr[i] = item;
+				i++;
+			}
+		}else{
+			outArr = new String[0];
+			
 		}
 		return outArr;
 	}
