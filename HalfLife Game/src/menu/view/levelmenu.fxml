@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <!--<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.LevelMenuController">-->
 
-<VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.LevelMenuController">
+<VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="menu.view.LevelMenuController">
 	<children>
-		<Text styleClass="subTitle" strokeWidth="0.0" text="SELECT GAME LEVEL"></Text>
-		<Label></Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/SELECT-GAME-LEVEL.png" />
+         </image>
+      </ImageView>
+		<Label />
 		<HBox>
 		<Region prefHeight="75.0" HBox.hgrow="ALWAYS" />
-		<Button styleClass="levelBtn" onAction="#go1" text="1"></Button>
+		<Button onAction="#go1" styleClass="levelBtn" text="1" />
 		<Region HBox.hgrow="ALWAYS" />
-		<Button styleClass="levelBtn" onAction="#go2" text="2"></Button>
+		<Button onAction="#go2" styleClass="levelBtn" text="2" />
 		<Region HBox.hgrow="ALWAYS" />
-		<Button styleClass="levelBtn" onAction="#go3" text="3"></Button>
+		<Button onAction="#go3" styleClass="levelBtn" text="3" />
 		<Region HBox.hgrow="ALWAYS" />
-		<Button styleClass="levelBtn" onAction="#go4" text="4"></Button>
+		<Button onAction="#go4" styleClass="levelBtn" text="4" />
 		<Region HBox.hgrow="ALWAYS" />
 		</HBox>
-		<Label></Label>
-		<Button onAction="#goBack" text="BACK"></Button>
+		<Label />
+		<Button onAction="#goBack" text="BACK" />
 	</children>
 </VBox>
