@@ -185,15 +185,15 @@ public class WaitScreenController {
 				
 				
 				
-				Game game = new Game();
-				game.setCurrentLevel(Level_Info.LEVEL1);
-			try {
-				game.start(primaryStage);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-				primaryStage.show();
+//				Game game = new Game(server);
+//				game.setCurrentLevel(Level_Info.LEVEL1);
+//			try {
+//				game.start(primaryStage);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//				primaryStage.show();
 				break;
 			case "lvl2":
 				

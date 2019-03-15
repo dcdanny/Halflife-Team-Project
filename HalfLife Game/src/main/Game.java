@@ -51,7 +51,9 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
+	private Server server;
 //	private NetworkedPlayer temp;
+	
 //	private NetworkedPlayer temp2;
 
 
@@ -59,6 +61,10 @@ public class Game extends Application {
 	private String[] currentLevel = Level_Info.LEVEL2;
 
 	private SpriteAnimation sp= new SpriteAnimation();
+	
+	public Game(Server server) {
+		this.server = server;
+	}
 
 	
 	public void setCurrentLevel(String[] currentLevel) {

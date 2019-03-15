@@ -25,7 +25,7 @@ public class LevelMenuController {
 	// The "1" Button, directing to the Game "Level 1"
 	@FXML
 	private void go1() throws Exception {
-			Game game = new Game();
+			Game game = new Game(server);
 			game.setCurrentLevel(Level_Info.LEVEL1);
 			game.start(primaryStage);
 			Message m = new Message("lvl1");
@@ -35,7 +35,7 @@ public class LevelMenuController {
 	// The "2" Button, directing to the Game "Level 2"
 	@FXML
 	private void go2() throws Exception {
-		Game game = new Game();
+		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		game.start(primaryStage);
 		Message m = new Message("lvl2");
@@ -46,7 +46,7 @@ public class LevelMenuController {
 	// The "3" Button, directing to the Game "Level 3"
 	@FXML
 	private void go3() throws Exception {
-		Game game = new Game();
+		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL3);
 		game.start(primaryStage);
 		Message m = new Message("lvl3");
@@ -56,7 +56,7 @@ public class LevelMenuController {
 	// The "4" Button, directing to the Game "Level 4"
 	@FXML
 	private void go4() throws Exception {
-		Game game = new Game();
+		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL4);
 		game.start(primaryStage);
 		Message m = new Message("lvl4");
