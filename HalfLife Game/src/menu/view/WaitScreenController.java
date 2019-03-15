@@ -1,6 +1,7 @@
 package menu.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -10,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -26,7 +28,7 @@ public class WaitScreenController {
 	@FXML private TextField ipAddrInput;
 	private FutureTask msga1;
 	private Client client;
-	String msgR;
+	ArrayList<Node> msgR;
 	
 	public void setStage(Stage stage, Client client){
 		this.client = client;
@@ -46,7 +48,7 @@ public class WaitScreenController {
 			
 			 Task<Integer> task = new Task<Integer>() {
 		         @Override protected Integer call() throws Exception {
-		        	 msgR = client.waitForMessage().getText();
+		        	 msgR = client.waitForMessage().getNodes();
 		             System.out.println("msgRCeiVeDD " + msgR);
 		             return 0;
 		         }
@@ -169,42 +171,17 @@ public class WaitScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	private void startGame(String msg){
-		System.out.println("message:"+msg);
+	private void startGame(ArrayList<Node> msgR2){
+//		System.out.println("message:"+msgR2);
+		Pane root = new Pane();
+		for (Node node : msgR2) {
+			root.getChildren().add(node);
+		}				
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 		
-		switch (msg){
-			case "lvl1":
-				System.out.println("here 1234567890");
-	//			FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
-	//			Pane levelMenu = loader.load();
-	//			MainMenuController controller = loader.getController();
-	//			controller.setStage(primaryStage);
-	//			Scene scene = new Scene(levelMenu);
-	//			primaryStage.setScene(scene);
-	//			primaryStage.show();
-				
-				
-				
-//				Game game = new Game(server);
-//				game.setCurrentLevel(Level_Info.LEVEL1);
-//			try {
-//				game.start(primaryStage);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//				primaryStage.show();
-				break;
-			case "lvl2":
-				
-				break;
-			case "lvl3":
-				
-				break;
-			case "lvl4":
-				
-				break;					
-		}
+		
 	}
 
 }
