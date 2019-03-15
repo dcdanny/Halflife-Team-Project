@@ -29,7 +29,8 @@ public class RectObject extends Rectangle implements java.io.Serializable{
     
 	protected boolean dead= false;
 	private final String type;
-	private double x, y;
+	private double x,y,w,h;
+	private Color col;
 
 	
 	public RectObject(double x, double y,int width, int height, String type, Color col){
@@ -37,6 +38,9 @@ public class RectObject extends Rectangle implements java.io.Serializable{
 		this.type =type;
 		this.x=x;
 		this.y=y;
+		this.w=width;
+		this.h=height;
+//		this.col=col;
 
 		
 		//playerFade();
@@ -96,6 +100,12 @@ public class RectObject extends Rectangle implements java.io.Serializable{
 	}
 	public double getXLocation() {
 		return this.getTranslateX();
+	}
+	
+	@Override
+	public String toString() {
+		return "RectObject x: "+x+ " y: "+ y +" w: "+ w +" h: " + h;
+		
 	}
 	
 

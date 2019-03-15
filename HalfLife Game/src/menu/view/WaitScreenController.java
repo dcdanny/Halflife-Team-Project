@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+
+import com.halflife.entities.RectObject;
+
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -15,8 +18,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Game;
+import main.GameConstants;
 import main.Level_Info;
 import network.Client;
 import network.Message;
@@ -28,7 +33,7 @@ public class WaitScreenController {
 	@FXML private TextField ipAddrInput;
 	private FutureTask msga1;
 	private Client client;
-	ArrayList<Node> msgR;
+	ArrayList<RectObject> msgR;
 	
 	public void setStage(Stage stage, Client client){
 		this.client = client;
@@ -171,16 +176,30 @@ public class WaitScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	private void startGame(ArrayList<Node> msgR2){
-//		System.out.println("message:"+msgR2);
+	private void startGame(ArrayList<RectObject> msgR2){
+		System.out.println("message:"+msgR2);
 		Pane root = new Pane();
-		for (Node node : msgR2) {
-			root.getChildren().add(node);
+
+		for (RectObject node : msgR2) {
+			if(node.getType().equals(GameConstants.TYPE_PLATFORM)) {
+//				System.out.println("X150!!!!!!!!");
+				node.setFill(Color.LIGHTSKYBLUE);
+//				System.out.println("FillCodeRun");
+			}
+			if(node.getType().equals(GameConstants.TYPE_BACKGROUND)) {
+//				System.out.println("ebruvbwriuvnqyvo");
+				RectObject bg = new RectObject(node.getTranslateX(), node.getTranslateY(), (int) node.getWidth(), (int) node.getHeight(), node.getType(), Color.valueOf("#4f7b8a"));
+				root.getChildren().add(bg);
+			}
+			//root.getChildren().add(node);
+			System.out.println(root);
 		}				
 		Scene scene = new Scene(root);
+		System.out.println("1");
 		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+		System.out.println("2");
+		primaryStage.show();		
+		System.out.println("3");
 		
 	}
 

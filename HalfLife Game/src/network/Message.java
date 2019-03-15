@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.halflife.entities.Player;
+import com.halflife.entities.RectObject;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -15,14 +16,14 @@ public class Message implements java.io.Serializable{
 	private String sender =null;
 	private String text=null;
 
-	private ArrayList<Node> nodes;
+	private ArrayList<RectObject> nodes;
 	  
 	  public Message(String text) {
 //		  this.sender = sender;
 		  this.text = text;
 	  }
 
-	  public Message(ArrayList<Node> allNodes) {
+	  public Message(ArrayList<RectObject> allNodes) {
 		  this.setNodes(allNodes);
 	  }
 
@@ -41,11 +42,11 @@ public class Message implements java.io.Serializable{
 		  return "From " + sender + ": " + text;
 	  }
 
-	public ArrayList<Node> getNodes() {
+	public ArrayList<RectObject> getNodes() {
 		return nodes;
 	}
 
-	private void setNodes(ArrayList<Node> nodes) {
+	private void setNodes(ArrayList<RectObject> nodes) {
 		this.nodes = nodes;
 	}
 	  
