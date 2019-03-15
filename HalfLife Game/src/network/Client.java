@@ -5,6 +5,9 @@ import java.net.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import main.Game;
+import main.Level_Info;
+
 public class Client extends Thread {
 	ObjectOutputStream toServer;
 	ObjectInputStream fromServer;
@@ -13,7 +16,8 @@ public class Client extends Thread {
 	int port;
 	String nickname;
 	String hostname;
-	private BlockingQueue<Message> sendQueue; 
+	private BlockingQueue<Message> sendQueue;
+	private BlockingQueue<Message> receiveQueue;
 	
 	public Client(int port,String nickname,String hostname) {
 
@@ -26,6 +30,7 @@ public class Client extends Thread {
 		this.nickname = nickname;
 		this.hostname = hostname;
 		this.sendQueue = new LinkedBlockingQueue<Message>();
+		this.receiveQueue = new LinkedBlockingQueue<Message>();
 		
 	}
 	public void run(){
@@ -48,7 +53,7 @@ public class Client extends Thread {
 		if(clientStart) {
 			// Create two threads to send and receive
 			ClientSender sender = new ClientSender(sendQueue,nickname,toServer,server);
-			ClientReceiver receiver = new ClientReceiver(fromServer);
+			ClientReceiver receiver = new ClientReceiver(receiveQueue, fromServer);
 	
 			// Run them in parallel:
 			sender.start();
@@ -74,5 +79,17 @@ public class Client extends Thread {
 		BlockingQueue<Message> recipientsQueue = sendQueue; // Matches EEEEE in ServerSender.java
 		recipientsQueue.offer(message);
 		System.out.println("Sent to: servaa");//DEBUG----------------------
+	}
+	public Message waitForMessage() throws InterruptedException {
+		System.out.println("cliWait");
+		Message msg = receiveQueue.take(); // Matches EEEEE in ServerReceiver
+		//Message msg = new Message("asdfghjk");
+		System.out.println("cliGot");
+		System.out.println(msg.getText());
+		
+		return msg;
+	}
+	public void stopClient() {
+		//Stop client thread and remove from client table
 	}
 }

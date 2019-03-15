@@ -21,7 +21,9 @@ public class StartMenu extends Application {
 		this.primaryStage.setTitle("HALFLIFE");
 		this.primaryStage.setWidth(800);
 		this.primaryStage.setHeight(600);
-		this.primaryStage.setResizable(false);
+		this.primaryStage.setMinWidth(250);
+		this.primaryStage.setMinHeight(250);
+		this.primaryStage.setResizable(true);
 		showMainView();
 	}
 	
@@ -31,8 +33,10 @@ public class StartMenu extends Application {
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		
 		mainLayout = loader.load();
-		sp.resizeView(300, 30,600);
+		sp.resizeView(300, -60,600);
 		mainLayout.getChildren().add(sp);
+		/*mainLayout.add(sp);*/
+		//System.out.println(mainLayout.getChildren());
 		
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);

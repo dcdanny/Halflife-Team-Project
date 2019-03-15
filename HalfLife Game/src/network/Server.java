@@ -71,8 +71,8 @@ public class Server extends Thread {
 				}
 			}
 			//start game object here
-			System.out.println("Starting game...");
-			Game game = new Game();
+//			System.out.println("Starting game...");
+//			Game game = new Game();
 			
 		}catch (IOException e) {
 			Report.error("Network error " + e.getMessage());
@@ -84,11 +84,18 @@ public class Server extends Thread {
 	}
 	//Returns array of all players currently connected
 	public static String[] showConnected() {
-		String[] outArr =new String[ClientTable.size()];
-		int i = 0;
-		for(String item : clientTable.showAll()){
-			outArr[i] = item;
-			i++;
+		String[] outArr;
+		//If client (client table wont exist) etc return empty array
+		if (clientTable != null) {
+			outArr =new String[ClientTable.size()];
+			int i = 0;
+			for(String item : clientTable.showAll()){
+				outArr[i] = item;
+				i++;
+			}
+		}else{
+			outArr = new String[0];
+			
 		}
 		return outArr;
 	}
@@ -102,7 +109,9 @@ public class Server extends Thread {
 			if(socket != null) {
 				socket.close();
 			}
-			serverSocket.close();
+			if(serverSocket != null) {
+				serverSocket.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +122,8 @@ public class Server extends Thread {
 	public void sendToAll(Message message) {
 		for(String client : clientTable.showAll()) {
 			BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
-			if (recipientsQueue != null && client != "server") {
+			if(client == "server") {
+			}else if (recipientsQueue != null && client != "server") {
 				recipientsQueue.offer(message);
 				System.out.println("Sent to: "+client);//DEBUG----------------------
 			}

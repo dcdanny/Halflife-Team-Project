@@ -25,15 +25,17 @@ public class RectObject extends Rectangle {
     
 	protected boolean dead= false;
 	private final String type;
-	public RectObject(double d, double e,int width, int height, String type, Color col){
+
+	
+	public RectObject(double x, double y,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
 
 		
 		//playerFade();
 
-	 	setTranslateX(d);
-		setTranslateY(e);
+	 	setTranslateX(x);
+		setTranslateY(y);
 
 		
 

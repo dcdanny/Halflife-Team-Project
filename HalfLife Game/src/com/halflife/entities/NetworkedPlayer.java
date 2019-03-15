@@ -24,10 +24,10 @@ public class NetworkedPlayer extends Player {
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammoNo = 10; 
+//	private int ammoNo = 10; 
 	private boolean isJumping = false;
 	private boolean completedLevel;
-	private Ammo ammo;
+//	private Ammo ammo;
 	private CountdownTimer clock;
 	private Pane foreground=new Pane();
 
@@ -37,16 +37,16 @@ public class NetworkedPlayer extends Player {
 		collisionChecker = new CheckCollision();
 
 
-		ammo.setAmmo(ammoNo);
+//		Ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
 		
-		ammo = new Ammo(0);
+//		ammo = new Ammo();
 		clock = new CountdownTimer();
 		foreground.getChildren().add(clock);
-		foreground.getChildren().add(ammo);
+//		foreground.getChildren().add(ammo);
 	}
 	
 	public Pane getForeground() {
@@ -54,7 +54,7 @@ public class NetworkedPlayer extends Player {
 	}
 
 	
-	public void tick(Pane root, Lives hearts) {
+	public void tick(Pane root) {
 //		if (lives == 0) {	
 //			setDead(true);
 //			
@@ -64,6 +64,7 @@ public class NetworkedPlayer extends Player {
 		moveY((int)velY);	
 		
 		setVelY(10);
+//		System.out.println(velY);
 		
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
@@ -90,9 +91,9 @@ public class NetworkedPlayer extends Player {
 				}
 				
 			}	
-			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
-				loseLife(root);
-			}
+//			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
+//				loseLife(root);
+//			}
 			else if (collidedObj.getType().equals(GameConstants.TYPE_WALL)) {
 				this.setTranslateX(getTranslateX() + 20);
 			}
@@ -156,16 +157,16 @@ public class NetworkedPlayer extends Player {
 		return collisionChecker.getCollided();
 	}
 	
-	public void shoot(Pane root) {
-		
-		if (ammoNo > 0) {
-			Bullet bullet = getBullet(this, Color.RED, root);
-			root.getChildren().add(bullet);
-			ammoNo--;
-		}else
-			System.out.println("No Bullets");
-		ammo.setAmmo(ammoNo);
-	}
+//	public void shoot(Pane root) {
+//		
+//		if (ammoNo > 0) {
+//			Bullet bullet = getBullet(this, Color.RED, root);
+//			root.getChildren().add(bullet);
+//			ammoNo--;
+//		}else
+//			System.out.println("No Bullets");
+//		Ammo.setAmmo(ammoNo);
+//	}
 	
 //respawn animation, flashing player
 	public void Fade() {
@@ -200,10 +201,10 @@ public class NetworkedPlayer extends Player {
 	public double getGravity() {
 		return gravity;
 	}
-
-	public int getAmmo() {
-		return ammoNo;
-	}
+//
+//	public int getAmmo() {
+//		return ammoNo;
+//	}
 
 	public void buttonPressing(Game game, Scene s) {
 	
@@ -237,14 +238,14 @@ public class NetworkedPlayer extends Player {
 					jump();
 				}
 				break;
-			case SPACE:
-				//message to server
-//				Message mShoot = new Message("","SPACE");
-				
-				
-				ammo.lostBullet();
-				shoot(game.root);
-				break;
+//			case SPACE:
+//				//message to server
+////				Message mShoot = new Message("","SPACE");
+//				
+//				
+//				ammo.lostBullet();
+//				shoot(game.root);
+//				break;
 			}
 			
 		});
