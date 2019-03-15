@@ -48,14 +48,14 @@ public class WaitScreenController {
 		         @Override protected Integer call() throws Exception {
 		        	 msgR = client.waitForMessage().getText();
 		             System.out.println("msgRCeiVeDD " + msgR);
-		             return 65;
+		             return 0;
 		         }
 		     };
 			
 		      Thread t = new Thread(task); 
 		      t.start();
 		      
-		      task.setOnSucceeded(event -> startGame(msgR, task.getValue()));
+		      task.setOnSucceeded(event -> startGame(msgR));
 
 		     System.out.println("m");
 
@@ -169,8 +169,8 @@ public class WaitScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	private void startGame(String msg,int ret){
-		System.out.println("message:"+msg+" Return:"+ret);
+	private void startGame(String msg){
+		System.out.println("message:"+msg);
 		
 		switch (msg){
 			case "lvl1":

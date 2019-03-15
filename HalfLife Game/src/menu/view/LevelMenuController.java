@@ -63,9 +63,6 @@ public class LevelMenuController {
 		server.sendToAll(m);
 	}
 	
-	private void sendLevel() {
-		
-	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
