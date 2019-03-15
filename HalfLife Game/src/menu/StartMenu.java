@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.SpriteAnimation;
@@ -19,6 +20,7 @@ public class StartMenu extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("HALFLIFE");
+		this.primaryStage.getIcons().add(new Image("player2.png"));
 		this.primaryStage.setWidth(800);
 		this.primaryStage.setHeight(600);
 		this.primaryStage.setMinWidth(250);
