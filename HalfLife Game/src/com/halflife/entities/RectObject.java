@@ -15,7 +15,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
-public class RectObject extends Rectangle {
+public class RectObject extends Rectangle implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2072511921833351490L;
 	protected FadeTransition ft;
     protected Rectangle rect;
 
@@ -25,15 +29,24 @@ public class RectObject extends Rectangle {
     
 	protected boolean dead= false;
 	private final String type;
-	public RectObject(double d, double e,int width, int height, String type, Color col){
+	private double x,y,w,h;
+	private Color col;
+
+	
+	public RectObject(double x, double y,int width, int height, String type, Color col){
 		super (width,height,col);
 		this.type =type;
+		this.x=x;
+		this.y=y;
+		this.w=width;
+		this.h=height;
+//		this.col=col;
 
 		
 		//playerFade();
 
-	 	setTranslateX(d);
-		setTranslateY(e);
+	 	setTranslateX(x);
+		setTranslateY(y);
 
 		
 
@@ -87,6 +100,12 @@ public class RectObject extends Rectangle {
 	}
 	public double getXLocation() {
 		return this.getTranslateX();
+	}
+	
+	@Override
+	public String toString() {
+		return "RectObject x: "+x+ " y: "+ y +" w: "+ w +" h: " + h;
+		
 	}
 	
 

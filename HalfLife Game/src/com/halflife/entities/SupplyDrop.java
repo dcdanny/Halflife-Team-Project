@@ -36,6 +36,8 @@ public class SupplyDrop extends RectObject{
 			System.out.println(ammoContents + " - " + livesContents);
 			this.setDead(true);
 			
+		} else {
+			this.dead = false;
 		}
 	}
 	

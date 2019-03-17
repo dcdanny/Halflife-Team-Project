@@ -3,12 +3,14 @@ package menu.view;
 import java.io.IOException;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.Game;
 import network.Client;
 import network.Server;
@@ -51,27 +53,38 @@ public class JoinMenuController {
 		controller.setStage(primaryStage, client);
 		Scene scene = new Scene(joinMenu);
 		primaryStage.setScene(scene);
+		
+//		primaryStage.setOnShowing((WindowEvent e) -> {
+//			System.out.println("onshowing triggered");
+//	        //controller.waitConnection();
+//			Pane root = null;
+//			try {
+//				root = client.waitForMessage().getPane();
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			System.out.println("end onshowing");
+//			
+//	    });
+		
 		primaryStage.show();
 		
 		
+		/*while (!primaryStage.isShowing()) {
+			if (primaryStage.isShowing())
+				break;
+		}*/
 		
-		
+		/*
+		System.out.println("z");
+		if (primaryStage.isShowing())
+			initialiseController(controller, client);
 			
 			System.out.println("waiting");
-			//server.getclientTable().getQueue("dan");
-//		 new Thread() {
-//	            @Override
-//	            public void run() {
-//	            	 Platform.runLater(() -> {
-//	                     try {
-//							new Game().start(new Stage());
-//						} catch (Exception e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//	                 });
-//	            }}.start();
-			primaryStage.show();
-			primaryStage.setScene(scene);
+*/
 	}
+	/*public void initialiseController(WaitScreenController controller, Client client) {
+		controller.initialise(primaryStage, client);
+	}*/
 }

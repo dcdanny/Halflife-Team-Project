@@ -51,14 +51,22 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	private NetworkedPlayer temp;
-//	private NetworkedPlayer temp2;
+	private Server server;
+	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
+//	private NetworkedPlayer temp;
+	private Message coords;
+	
+	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 
 
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
 	private SpriteAnimation sp= new SpriteAnimation();
+	
+	public Game(Server server) {
+		this.server = server;
+	}
 
 	
 	public void setCurrentLevel(String[] currentLevel) {
@@ -69,10 +77,7 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-
-
 		root.getChildren().add(spplayer);
-
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -83,9 +88,28 @@ public class Game extends Application {
 		timer.start();
 		display.getChildren().addAll(bg,root,player.getForeground());
 		
+		
+		s = network.Server.showConnected();
+		Arrays.sort(s);
+		for (int i = 0; i <s.length-2;i++) {
+			System.out.println(s[i]);
+			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
+			netPlayers.add(temp);
+		}
+
+		for (NetworkedPlayer np : netPlayers) {
+//			System.out.println(np.toString());
+			root.getChildren().add(np);
+//			rectNodes.add(np);
+		}		
+		
+		root.getChildren().add(player);
+		
+		root.getChildren().add(tempNP);
 
 		return root;	
 	}
+	
 	
 	public static ArrayList<Node> getAllNodes(Parent root) {
 	    ArrayList<Node> nodes = new ArrayList<Node>();
@@ -145,7 +169,7 @@ public class Game extends Application {
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 		player.tick(root);
-//		temp.tick(root, heart);
+
 		
 		
 		spplayer.tick(root);
@@ -168,6 +192,18 @@ public class Game extends Application {
 			player.getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
+		coords = new Message(player.getTranslateX(), player.getTranslateY());
+		server.sendToAll(coords);
+		
+		Message temp = null;
+		try {
+			temp = server.getReceived().take();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tempNP.setTranslateX(temp.getX());
+		tempNP.setTranslateY(temp.getY());
 	}
 	
 	
@@ -176,15 +212,15 @@ public class Game extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-			
+//		System.out.println("Game is Starting!!!!!!!!!!");
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
-	//	spplayer.buttonPressing(this, scene);
-	//  spplayer.buttonReleasing(scene);
+//		spplayer.buttonPressing(this, scene);
+//		spplayer.buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
 		player.buttonPressing(this, scene); 
@@ -199,22 +235,7 @@ public class Game extends Application {
 	}
 		
 	private void setUpLevel(String[] lvl) {
-		levelWidth= lvl[0].length()*150;
-		
-		s = network.Server.showConnected();
-		Arrays.sort(s);
-		for (int i = 0; i <s.length-2;i++) {
-			System.out.println(s[i]);
-			netPlayers.add(temp = new NetworkedPlayer(i*50,0,40,50,Color.GREEN,3));
-			root.getChildren().add(temp);
-		}
-//		netPlayers.add(temp2 = new NetworkedPlayer(400,0,40,50,Color.GREEN,3));
-//		root.getChildren().add(temp2);
-//		for (NetworkedPlayer np : netPlayers) {
-//			root.getChildren().add(np);
-//		}		
-		
-		root.getChildren().add(player);
+		levelWidth= lvl[0].length()*150;	
 		
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];
@@ -234,11 +255,14 @@ public class Game extends Application {
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
+//				System.out.println(platform);
+				rectNodes.add((RectObject)platform);
 				break; 
 				case '2':
 					Node gPlatform =new GoalPlatform(j*150,i*100,150,30);
 					root.getChildren().add(gPlatform);
 					platforms.add(gPlatform);
+					rectNodes.add((RectObject)gPlatform);
 					break;
 				case '3': 
 					Node floor;
@@ -252,11 +276,13 @@ public class Game extends Application {
 					
 					root.getChildren().add(floor);
 					platforms.add(floor);
+					rectNodes.add((RectObject)floor);
 					break;
 				case '4': 
 					Node wall =new Wall(j*150,i*150,25,150);
 					root.getChildren().add(wall);
 					platforms.add(wall);
+					rectNodes.add((RectObject)wall);
 					break;
 				case '5':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
@@ -266,6 +292,7 @@ public class Game extends Application {
 					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(bEnemy);
 					enemies.add((BaseEnemy) bEnemy);
+					rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
@@ -274,6 +301,7 @@ public class Game extends Application {
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
 					root.getChildren().add(sPlatform.getSpike());
 					spikes.add(sPlatform.getSpike());
+					rectNodes.add((RectObject)sPlatform);
 					break;
 				
 				case '7':
@@ -283,14 +311,11 @@ public class Game extends Application {
 					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);
 					root.getChildren().add(supply);
 					supplies.add(supply);
+					rectNodes.add((RectObject)supply);
 					break;
 				}
 			}
 		}	
 		
-	}
-	public static void main(String[] args) {
-		launch(args);
-				
 	}
 }

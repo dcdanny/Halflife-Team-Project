@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.SpriteAnimation;
 import main.SpriteFollower;
 import network.Client;
 import network.Server;
@@ -15,13 +16,15 @@ public class MainMenuController {
 	
 	private Stage primaryStage;
 	private SpriteFollower sf;
-	
+	private SpriteAnimation sp= new SpriteAnimation();
 	private String serverLocation;
 	public Server server;
 	
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
+		this.primaryStage.setWidth(800);//So the menu works on bens laptop?
+		this.primaryStage.setHeight(600);//So the menu works on bens laptop?
 	}
 	
 		
@@ -29,17 +32,6 @@ public class MainMenuController {
 	// The "SINGLE-PLAYER" button, directing to the "SELECT GAME LEVEL" menu
 	@FXML
 	private void goSingle() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
-		Pane mainMenu = loader.load();
-		sf= new SpriteFollower(mainMenu);
-		mainMenu.getChildren().add(sf);
-		LevelMenuController controller = loader.getController();
-		controller.setStage(primaryStage, server);
-		Scene scene = new Scene(mainMenu);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		
 		System.out.println("Start server...");
 		//Can't use 0 - 1023, Use 1024 - 65 535
 		final int port = 1035;
@@ -53,6 +45,20 @@ public class MainMenuController {
 		//Can't use 0 - 1023, Use 1024 - 65 535
 		Client client = new Client(1035,"dan","localhost");
 		client.start();
+		
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
+		Pane mainMenu = loader.load();
+		sf= new SpriteFollower(mainMenu);
+		mainMenu.getChildren().add(sf);
+		LevelMenuController controller = loader.getController();
+		controller.setStage(primaryStage, server);
+		Scene scene = new Scene(mainMenu);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		
+		
 	}
 	
 	// The "MULTI-PLAYERS" button, directing to the "MULTI-PLAYERS" menu
@@ -82,8 +88,11 @@ public class MainMenuController {
 	// The "BACK" button, directing to the first "HALFLIFE" menu
 	@FXML
 	private void goBack() throws IOException {
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
+		sp.resizeView(300, -60,600);
+		mainMenu.getChildren().add(sp);
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);

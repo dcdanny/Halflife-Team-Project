@@ -13,6 +13,7 @@ import main.Ammo;
 import main.CheckCollision;
 import main.CountdownTimer;
 import main.Game;
+import main.GameClient;
 import main.GameConstants;
 import main.Lives;
 import main.WriteFile;
@@ -24,10 +25,10 @@ public class NetworkedPlayer extends Player {
 	private double velX = 0;
 	private double velY = 0;
 	private double gravity = 0;
-	private int ammoNo = 10; 
+//	private int ammoNo = 10; 
 	private boolean isJumping = false;
 	private boolean completedLevel;
-	private Ammo ammo;
+//	private Ammo ammo;
 	private CountdownTimer clock;
 	private Pane foreground=new Pane();
 
@@ -37,16 +38,16 @@ public class NetworkedPlayer extends Player {
 		collisionChecker = new CheckCollision();
 
 
-		ammo.setAmmo(ammoNo);
+//		Ammo.setAmmo(ammoNo);
 
 		movement(x, y);		
 		
 		completedLevel = false;
 		
-		ammo = new Ammo(0);
-		clock = new CountdownTimer();
-		foreground.getChildren().add(clock);
-		foreground.getChildren().add(ammo);
+//		ammo = new Ammo();
+//		clock = new CountdownTimer();
+//		foreground.getChildren().add(clock);
+//		foreground.getChildren().add(ammo);
 	}
 	
 	public Pane getForeground() {
@@ -54,11 +55,7 @@ public class NetworkedPlayer extends Player {
 	}
 
 	
-	public void tick(Pane root, Lives hearts) {
-//		if (lives == 0) {	
-//			setDead(true);
-//			
-//		}
+	public void tick(Pane root) {
 		
 		moveX((int)velX);
 		moveY((int)velY);	
@@ -68,10 +65,9 @@ public class NetworkedPlayer extends Player {
 		RectObject collidedObj = collisionChecker.checkForCollision(this, root);
 		if (collisionChecker.getCollided()) {
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
-				this.setFill(Color.RED);
+//				this.setFill(Color.RED);
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
-//				System.out.println("1");
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
@@ -98,18 +94,15 @@ public class NetworkedPlayer extends Player {
 			}
 		}
 	}
-//	public void loseLife(Pane root) {
-//		root.setLayoutX(0);
-//		if (lives > 0) {
-//			this.Fade();
-//			this.setTranslateX(200);
-//			this.setTranslateY(0);
-//			lives--;	
-//			heart.lostlife();
-//		}else
-//			setDead(true);
-//			Message mDead = new Message("", "hasDied");
-//	}
+	
+	@Override
+	public void loseLife(Pane root) {
+		this.Fade();
+		this.setTranslateX(200);
+		this.setTranslateY(0);
+		root.setLayoutX(0);
+	}
+
 	
 	public void setVelX(double v) {
 		this.velX = v;
@@ -156,16 +149,16 @@ public class NetworkedPlayer extends Player {
 		return collisionChecker.getCollided();
 	}
 	
-	public void shoot(Pane root) {
-		
-		if (ammoNo > 0) {
-			Bullet bullet = getBullet(this, Color.RED, root);
-			root.getChildren().add(bullet);
-			ammoNo--;
-		}else
-			System.out.println("No Bullets");
-		ammo.setAmmo(ammoNo);
-	}
+//	public void shoot(Pane root) {
+//		
+//		if (ammoNo > 0) {
+//			Bullet bullet = getBullet(this, Color.RED, root);
+//			root.getChildren().add(bullet);
+//			ammoNo--;
+//		}else
+//			System.out.println("No Bullets");
+//		Ammo.setAmmo(ammoNo);
+//	}
 	
 //respawn animation, flashing player
 	public void Fade() {
@@ -200,12 +193,12 @@ public class NetworkedPlayer extends Player {
 	public double getGravity() {
 		return gravity;
 	}
+//
+//	public int getAmmo() {
+//		return ammoNo;
+//	}
 
-	public int getAmmo() {
-		return ammoNo;
-	}
-
-	public void buttonPressing(Game game, Scene s) {
+	public void buttonPressing(GameClient game, Scene s) {
 	
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
@@ -237,14 +230,14 @@ public class NetworkedPlayer extends Player {
 					jump();
 				}
 				break;
-			case SPACE:
-				//message to server
-//				Message mShoot = new Message("","SPACE");
-				
-				
-				ammo.lostBullet();
-				shoot(game.root);
-				break;
+//			case SPACE:
+//				//message to server
+////				Message mShoot = new Message("","SPACE");
+//				
+//				
+//				ammo.lostBullet();
+//				shoot(game.root);
+//				break;
 			}
 			
 		});
@@ -272,10 +265,10 @@ public class NetworkedPlayer extends Player {
 		
 	}
 
-	public void checkPos(Game game) {
+	public void checkPos(GameClient gameClient) {
 		double x =getXLocation();
 		if (x>400) {
-			game.root.setLayoutX(game.root.getTranslateX()-(x-400));
+			gameClient.root.setLayoutX(gameClient.root.getTranslateX()-(x-400));
 		}
 		
 	}
