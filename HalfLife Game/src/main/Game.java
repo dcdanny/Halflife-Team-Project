@@ -42,7 +42,7 @@ public class Game extends Application {
 	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	private Player player= new Player(200,0,40,50,Color.WHITE,3);
+	//private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
@@ -55,7 +55,7 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 //	private NetworkedPlayer temp;
 	private Message coords;
-	
+	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 
 
@@ -77,7 +77,7 @@ public class Game extends Application {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
 
 		root.setPrefSize(800, 600);
-		root.getChildren().add(spplayer);
+	root.getChildren().add(spplayer);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -86,10 +86,13 @@ public class Game extends Application {
 		};
 		
 		timer.start();
-		display.getChildren().addAll(bg,root,player.getForeground());
+		display.getChildren().addAll(bg,root,spplayer.GetPlayer().getForeground());
 		
 		
 		s = network.Server.showConnected();
+		if (s.length>1) {
+			multiplayer=true;
+		}
 		Arrays.sort(s);
 		for (int i = 0; i <s.length-2;i++) {
 			System.out.println(s[i]);
@@ -103,7 +106,7 @@ public class Game extends Application {
 //			rectNodes.add(np);
 		}		
 		
-		root.getChildren().add(player);
+		//root.getChildren().add(spplayer.GetPlayer());
 		
 		root.getChildren().add(tempNP);
 
@@ -168,31 +171,33 @@ public class Game extends Application {
 	
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
-		player.tick(root);
+	//	player.tick(root);
 
 		
 		
-		spplayer.tick(root);
+		spplayer.GetPlayer().tick(root);
 		
 		for (BaseEnemy enemy : enemies) {
-			enemy.tick(player, root);
+			enemy.tick(spplayer.GetPlayer(), root);
 		}
 		for (Spike spike : spikes) {
-			spike.tick(player, root);
+			spike.tick(spplayer.GetPlayer(), root);
 		}
 		for (SupplyDrop supply : supplies) {
-			supply.tick(player, root);
+			supply.tick(spplayer.GetPlayer(), root);
 		}
 		for (NetworkedPlayer np : netPlayers) {
 			np.tick(root);
 		}
 		
-		player.checkPos(this);
-		if (player.isDead() && !player.getForeground().getChildren().contains(DeathShow)) {
-			player.getForeground().getChildren().add(DeathShow);
+		spplayer.GetPlayer().checkPos(this);
+		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
-		coords = new Message(player.getTranslateX(), player.getTranslateY());
+		
+		if (multiplayer) {
+		coords = new Message(spplayer.GetPlayer().getTranslateX(), spplayer.GetPlayer().getTranslateY());
 		server.sendToAll(coords);
 		
 		Message temp = null;
@@ -204,6 +209,7 @@ public class Game extends Application {
 		}
 		tempNP.setTranslateX(temp.getX());
 		tempNP.setTranslateY(temp.getY());
+		}
 	}
 	
 	
@@ -219,12 +225,12 @@ public class Game extends Application {
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
-//		spplayer.buttonPressing(this, scene);
-//		spplayer.buttonReleasing(scene);
+		spplayer.GetPlayer().buttonPressing(this, scene);
+	spplayer.GetPlayer().buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
-		player.buttonPressing(this, scene); 
-		player.buttonReleasing(scene);
+	//	player.buttonPressing(this, scene); 
+		//player.buttonReleasing(scene);
 		
 //		temp2.buttonPressing(this, scene);
 //		temp2.buttonReleasing(scene);
