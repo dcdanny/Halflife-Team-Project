@@ -55,7 +55,7 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 //	private NetworkedPlayer temp;
 	
-//	private NetworkedPlayer temp2;
+	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 
 
 
@@ -74,7 +74,6 @@ public class Game extends Application {
 
 	private Parent createContent() throws IOException {
 		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
-		rectNodes.add(bg);
 
 		root.setPrefSize(800, 600);
 		root.getChildren().add(spplayer);
@@ -104,7 +103,8 @@ public class Game extends Application {
 		}		
 		
 		root.getChildren().add(player);
-//		rectNodes.add(player);
+		
+		root.getChildren().add(tempNP);
 
 		return root;	
 	}
@@ -191,6 +191,15 @@ public class Game extends Application {
 			player.getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
+		Message temp = null;
+		try {
+			temp = server.getReceived().take();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tempNP.setTranslateX(temp.getX());
+		tempNP.setTranslateY(temp.getY());
 	}
 	
 	
@@ -203,8 +212,6 @@ public class Game extends Application {
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
-		Message nodes = new Message(rectNodes);
-		server.sendToAll(nodes);
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);

@@ -27,9 +27,13 @@ public class LevelMenuController {
 	private void go1() throws Exception {
 			Game game = new Game(server);
 			game.setCurrentLevel(Level_Info.LEVEL1);
-			game.start(primaryStage);
-			Message m = new Message("lvl1");
+			Message m = new Message(Level_Info.LEVEL1);
 			server.sendToAll(m);
+			game.start(primaryStage);
+			
+			
+			
+			
 	}
 	
 	// The "2" Button, directing to the Game "Level 2"
@@ -38,8 +42,8 @@ public class LevelMenuController {
 		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		game.start(primaryStage);
-//		Message m = new Message();
-//		server.sendToAll(m);
+		Message m = new Message(Level_Info.LEVEL2);
+		server.sendToAll(m);
 		
 	}
 	
