@@ -53,6 +53,7 @@ public class GameClient extends Application {
 	private String[] s = new String[ClientTable.size()];
 	private Client client;
 	private Message coords;
+	private NetworkedPlayer tempNP;
 
 
 
@@ -96,10 +97,11 @@ public class GameClient extends Application {
 //			root.getChildren().add(np);
 //		}		
 		
-		netPlayers.add(new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3));
-		for (NetworkedPlayer np : netPlayers) {
-			root.getChildren().add(np);
-		}
+//		netPlayers.add
+		tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3);
+//		for (NetworkedPlayer np : netPlayers) {
+			root.getChildren().add(tempNP);
+//		}
 		
 		root.getChildren().add(player);
 		return root;	
@@ -181,6 +183,16 @@ public class GameClient extends Application {
 		player.checkPos(this);
 		coords = new Message(player.getTranslateX(), player.getTranslateY());
 		client.sendToServer(coords);
+		
+		Message temp = null;
+		try {
+			temp = client.getRecieved().take();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tempNP.setTranslateX(temp.getX());
+		tempNP.setTranslateY(temp.getY());
 		
 	}
 	

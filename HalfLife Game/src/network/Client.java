@@ -92,4 +92,7 @@ public class Client extends Thread {
 	public void stopClient() {
 		//Stop client thread and remove from client table
 	}
+	public BlockingQueue<Message> getRecieved(){
+		return receiveQueue;
+	}
 }

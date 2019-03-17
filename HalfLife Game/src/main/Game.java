@@ -54,6 +54,7 @@ public class Game extends Application {
 	private Server server;
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 //	private NetworkedPlayer temp;
+	private Message coords;
 	
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 
@@ -191,6 +192,9 @@ public class Game extends Application {
 			player.getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
+		coords = new Message(player.getTranslateX(), player.getTranslateY());
+		server.sendToAll(coords);
+		
 		Message temp = null;
 		try {
 			temp = server.getReceived().take();
