@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Game;
+import main.GameClient;
 import main.GameConstants;
 import main.Level_Info;
 import network.Client;
@@ -33,27 +34,15 @@ public class WaitScreenController {
 	@FXML private TextField ipAddrInput;
 	private FutureTask msga1;
 	private Client client;
-	ArrayList<RectObject> msgR;
+	String[] msgR;
 	
 	public void setStage(Stage stage, Client client){
 		this.client = client;
 		primaryStage = stage;
-		//initialise(stage, client);
-		//CallableExample callableexample = new CallableExample();
 		try {
-			//callableexample.setClient(client);
-			//callableexample.call();
-			
-		      // Create the FutureTask with Callable 
-		      //msga1 = new FutureTask(callableexample); 
-			
-			
-		      // As it implements Runnable, create Thread 
-		      // with FutureTask
-			
-			 Task<Integer> task = new Task<Integer>() {
+			Task<Integer> task = new Task<Integer>() {
 		         @Override protected Integer call() throws Exception {
-		        	 msgR = client.waitForMessage().getNodes();
+		        	 msgR = client.waitForMessage().getLevel();
 		             System.out.println("msgRCeiVeDD " + msgR);
 		             return 0;
 		         }
@@ -62,7 +51,14 @@ public class WaitScreenController {
 		      Thread t = new Thread(task); 
 		      t.start();
 		      
-		      task.setOnSucceeded(event -> startGame(msgR));
+		      task.setOnSucceeded(event -> {
+				try {
+					startGame(msgR);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 
 		     System.out.println("m");
 
@@ -83,86 +79,6 @@ public class WaitScreenController {
 		System.out.println("STARTGAME");
 	}
 	
-	/*Object result;
-	Task<Integer> task2 = new Task<Integer>() {;
-	task2.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-	    @Override
-	    public void handle(WorkerStateEvent t) {
-	        result = task2.getValue();
-	    }
-	});
-	}*/
-
-
-	
-	/*Task<Integer> task = new Task<Integer>() {
-	    @Override protected Integer call() throws Exception {
-	    	String msg = null;
-	    	msg = client.waitForMessage().getText();
-
-	        return iterations;
-	    }
-	};*/
-	/*class CallableExample implements Callable { 
-	  
-		private Client client;
-		
-		public void setClient(Client c) {
-			client = c;
-		}
-		
-	    public Object call() throws Exception 
-	    { 
-	    	String msg = null;
-	        // Create random number generator 
-	    	System.out.println("heyyyy neww threaddd");
-//	    	Thread.sleep(2 * 1000);
-	    	System.out.println("ha");
-	    	msg = client.waitForMessage().getText();
-            /*Platform.runLater(() -> {
-            
-			switch (msg){
-				case "lvl1":
-					System.out.println("here 1234567890");
-//					FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
-//					Pane levelMenu = loader.load();
-//					MainMenuController controller = loader.getController();
-//					controller.setStage(primaryStage);
-//					Scene scene = new Scene(levelMenu);
-//					primaryStage.setScene(scene);
-//					primaryStage.show();
-					
-					
-					
-					Game game = new Game();
-					game.setCurrentLevel(Level_Info.LEVEL1);
-				try {
-					game.start(primaryStage);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					primaryStage.show();
-					break;
-				case "lvl2":
-					
-					break;
-				case "lvl3":
-					
-					break;
-				case "lvl4":
-					
-					break;					
-			}
-            });*//*
-	    	
-	        // To simulate a heavy computation, 
-	        // we delay the thread for some random time 
-//	        Thread.sleep(2 * 1000); 
-	  
-	        return 45; 
-	    } 
-	}*/
 	
 	// The "Disconnect" Button
 	@FXML
@@ -176,31 +92,12 @@ public class WaitScreenController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	private void startGame(ArrayList<RectObject> msgR2){
+	private void startGame(String[] msgR2) throws Exception{
 		System.out.println("message:"+msgR2);
-		Pane root = new Pane();
-
-		for (RectObject node : msgR2) {
-			if(node.getType().equals(GameConstants.TYPE_PLATFORM)) {
-//				System.out.println("X150!!!!!!!!");
-				node.setFill(Color.LIGHTSKYBLUE);
-//				System.out.println("FillCodeRun");
-			}
-			if(node.getType().equals(GameConstants.TYPE_BACKGROUND)) {
-//				System.out.println("ebruvbwriuvnqyvo");
-				RectObject bg = new RectObject(node.getTranslateX(), node.getTranslateY(), (int) node.getWidth(), (int) node.getHeight(), node.getType(), Color.valueOf("#4f7b8a"));
-				root.getChildren().add(bg);
-			}
-			//root.getChildren().add(node);
-			System.out.println(root);
-		}				
-		Scene scene = new Scene(root);
-		System.out.println("1");
-		primaryStage.setScene(scene);
-		System.out.println("2");
-		primaryStage.show();		
-		System.out.println("3");
 		
+		GameClient game = new GameClient(client);
+		game.setCurrentLevel(msgR2);
+		game.start(primaryStage);
+				
 	}
-
 }

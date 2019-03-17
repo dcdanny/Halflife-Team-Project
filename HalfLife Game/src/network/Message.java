@@ -15,17 +15,23 @@ public class Message implements java.io.Serializable{
 	
 	private String sender =null;
 	private String text=null;
+	private String[] level=null;
+	private Double x=null;
+	private Double y=null;
 
-	private ArrayList<RectObject> nodes;
 	  
 	  public Message(String text) {
 //		  this.sender = sender;
 		  this.text = text;
-	  }
+	  }	  
 
-	  public Message(ArrayList<RectObject> allNodes) {
-		  this.setNodes(allNodes);
-	  }
+	public Message(String[] level) {
+		this.setLevel(level);
+	}
+	public Message(Double x, Double y) {
+		this.setX(x);
+		this.setY(y);
+	}
 
 	public void setSender(String sender) {
 		  this.sender = sender;
@@ -42,12 +48,28 @@ public class Message implements java.io.Serializable{
 		  return "From " + sender + ": " + text;
 	  }
 
-	public ArrayList<RectObject> getNodes() {
-		return nodes;
+	public String[] getLevel() {
+		return level;
 	}
 
-	private void setNodes(ArrayList<RectObject> nodes) {
-		this.nodes = nodes;
+	private void setLevel(String[] level) {
+		this.level = level;
 	}
-	  
+
+	public Double getX() {
+		return x;
+	}
+
+	private void setX(Double x) {
+		this.x = x;
+	}
+
+	public Double getY() {
+		return y;
+	}
+
+	private void setY(Double y) {
+		this.y = y;
+	}
+
 }
