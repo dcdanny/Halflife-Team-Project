@@ -36,13 +36,13 @@ import main.CheckCollision;
 import network.*;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
 
-public class Game extends Application {
+public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
+	private NetworkedPlayer player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3);
 
-	private Player player= new Player(200,0,40,50,Color.WHITE,3);
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
@@ -51,24 +51,20 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	private Server server;
-	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
-//	private NetworkedPlayer temp;
+	private Client client;
 	private Message coords;
-	
-	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+	private NetworkedPlayer tempNP;
 
 
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
-	private SpriteAnimation sp= new SpriteAnimation();
+//	private SpriteAnimation sp= new SpriteAnimation();
 	
-	public Game(Server server) {
-		this.server = server;
+	public GameClient(Client client) {
+		this.client=client;
 	}
 
-	
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
 	}
@@ -86,27 +82,28 @@ public class Game extends Application {
 		};
 		
 		timer.start();
-		display.getChildren().addAll(bg,root,player.getForeground());
+		display.getChildren().addAll(bg,root);
 		
 		
-		s = network.Server.showConnected();
-		Arrays.sort(s);
-		for (int i = 0; i <s.length-2;i++) {
-			System.out.println(s[i]);
-			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
-			netPlayers.add(temp);
-		}
-
-		for (NetworkedPlayer np : netPlayers) {
-//			System.out.println(np.toString());
-			root.getChildren().add(np);
-//			rectNodes.add(np);
-		}		
+//		s = network.Server.showConnected();
+//		Arrays.sort(s);
+//		for (int i = 0; i <s.length-2;i++) {
+//			System.out.println(s[i]);
+//			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
+//			netPlayers.add(temp);
+//		}
+//
+//		for (NetworkedPlayer np : netPlayers) {
+//			root.getChildren().add(np);
+//		}		
+		
+//		netPlayers.add
+		tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3);
+//		for (NetworkedPlayer np : netPlayers) {
+			root.getChildren().add(tempNP);
+//		}
 		
 		root.getChildren().add(player);
-		
-		root.getChildren().add(tempNP);
-
 		return root;	
 	}
 	
@@ -167,12 +164,8 @@ public class Game extends Application {
 	}
 	
 	private void tick() {
-		//boolean deathScreenDisplayed = false;
+		
 		player.tick(root);
-
-		
-		
-		spplayer.tick(root);
 		
 		for (BaseEnemy enemy : enemies) {
 			enemy.tick(player, root);
@@ -183,27 +176,24 @@ public class Game extends Application {
 		for (SupplyDrop supply : supplies) {
 			supply.tick(player, root);
 		}
-		for (NetworkedPlayer np : netPlayers) {
-			np.tick(root);
-		}
+//		for (NetworkedPlayer np : netPlayers) {
+//			np.tick(root);
+//		}
 		
 		player.checkPos(this);
-		if (player.isDead() && !player.getForeground().getChildren().contains(DeathShow)) {
-			player.getForeground().getChildren().add(DeathShow);
-//			deathScreenDisplayed = true;
-		}
 		coords = new Message(player.getTranslateX(), player.getTranslateY());
-		server.sendToAll(coords);
+		client.sendToServer(coords);
 		
 		Message temp = null;
 		try {
-			temp = server.getReceived().take();
+			temp = client.getRecieved().take();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tempNP.setTranslateX(temp.getX());
 		tempNP.setTranslateY(temp.getY());
+		
 	}
 	
 	
@@ -216,6 +206,8 @@ public class Game extends Application {
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
+//		Message nodes = new Message(rectNodes);
+//		server.sendToAll(nodes);
 		stage.setTitle("HALFLIFE");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
@@ -255,14 +247,11 @@ public class Game extends Application {
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
-//				System.out.println(platform);
-				rectNodes.add((RectObject)platform);
 				break; 
 				case '2':
 					Node gPlatform =new GoalPlatform(j*150,i*100,150,30);
 					root.getChildren().add(gPlatform);
 					platforms.add(gPlatform);
-					rectNodes.add((RectObject)gPlatform);
 					break;
 				case '3': 
 					Node floor;
@@ -276,13 +265,11 @@ public class Game extends Application {
 					
 					root.getChildren().add(floor);
 					platforms.add(floor);
-					rectNodes.add((RectObject)floor);
 					break;
 				case '4': 
 					Node wall =new Wall(j*150,i*150,25,150);
 					root.getChildren().add(wall);
 					platforms.add(wall);
-					rectNodes.add((RectObject)wall);
 					break;
 				case '5':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
@@ -292,7 +279,6 @@ public class Game extends Application {
 					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(bEnemy);
 					enemies.add((BaseEnemy) bEnemy);
-					rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
@@ -301,7 +287,6 @@ public class Game extends Application {
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
 					root.getChildren().add(sPlatform.getSpike());
 					spikes.add(sPlatform.getSpike());
-					rectNodes.add((RectObject)sPlatform);
 					break;
 				
 				case '7':
@@ -311,11 +296,9 @@ public class Game extends Application {
 					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);
 					root.getChildren().add(supply);
 					supplies.add(supply);
-					rectNodes.add((RectObject)supply);
 					break;
 				}
 			}
-		}	
-		
+		}		
 	}
 }

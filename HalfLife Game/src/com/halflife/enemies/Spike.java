@@ -6,8 +6,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import main.GameConstants;
 
-public class Spike extends Polygon{
+public class Spike extends Polygon implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -926259170349714955L;
 	private final String type;
 	
 	public Spike(double[] points) {
