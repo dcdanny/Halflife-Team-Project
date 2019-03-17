@@ -24,7 +24,7 @@ public class StartMenu extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("HALFLIFE");
+		this.primaryStage.setTitle("POKO");
 		this.primaryStage.setWidth(800);
 		this.primaryStage.setHeight(600);
 		this.primaryStage.setMinWidth(250);

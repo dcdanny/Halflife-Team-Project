@@ -48,7 +48,7 @@ public class Player extends RectObject{
 
 		movement(x, y);		
 		
-		completedLevel = false;
+		completedLevel = true;
 		
 		heart = new Lives(GameConstants.MAX_LIVES);
 		heart.setLives(lives);
@@ -328,6 +328,9 @@ public class Player extends RectObject{
 			game.root.setLayoutX(game.root.getTranslateX()-(x-400));
 		}
 		
+	}
+	public boolean getLevelFinish() {
+		return completedLevel;
 	}
 
 

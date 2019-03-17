@@ -1,44 +1,40 @@
 package main;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import com.halflife.entities.RectObject;
-import com.sun.prism.paint.ImagePattern;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.event.EventHandler;
-import javafx.scene.image.*;
-
-import javafx.scene.paint.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
-public class DeathScreen extends StackPane {
-
-	 DeathScreen() {
-		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.valueOf("#333333"));
-		 Image youdied = new Image("youdied.png");
-         ImageView img= new ImageView(youdied);
-         img.setFitWidth(500);
-         img.setTranslateY(-100);
-         img.setPreserveRatio(true);
-         img.setSmooth(true);
-         img.setCache(true);
+public class VictoryScreen extends StackPane {
+	SpriteAnimation sp= new SpriteAnimation();
+	VictoryScreen(){
+		
+		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
+		 Image youwon = new Image("youwon.png");
+         ImageView img= new ImageView(youwon);
+         formatting(img, 0, -200, 500);
+        
 		 
-		 Fade(bg);
+    	 Image trophyimg = new Image("trophy.png");
+         ImageView trop= new ImageView(trophyimg);
+         formatting(trop,-300,0,300);
+    
+         
+         Image timeimg = new Image("time.png");
+         ImageView time= new ImageView(timeimg);
+       formatting(time,-50,0,300);
+		 
+		 sp.flip();
+		 sp.resizeView(500, 150, 300);
 				         
 	         Image restart = new Image("restart.png");
 	         ImageView resimg= new ImageView(restart);
-	         resimg.setFitWidth(400);
-	         resimg.setTranslateX(-150);
-	         resimg.setTranslateY(180);
-	         resimg.setPreserveRatio(true);
-	         resimg.setSmooth(true);
-	         resimg.setCache(true);
+	         formatting(resimg,-150,180,400);
+	
 	         RectObject resbutton=new RectObject(-150,180,250,100,"restart button",Color.TRANSPARENT);
 	       
 	         
@@ -67,12 +63,8 @@ public class DeathScreen extends StackPane {
 	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);
-	         exitimg.setFitWidth(400);
-	         exitimg.setTranslateX(140);
-	         exitimg.setTranslateY(180);
-	         exitimg.setPreserveRatio(true);
-	         exitimg.setSmooth(true);
-	         exitimg.setCache(true);
+	         formatting(exitimg,140,180,400);
+	 
 	         
 	         RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
 	         exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
@@ -97,7 +89,10 @@ public class DeathScreen extends StackPane {
 	         });
 	         
 	         this.getChildren().add(bg);
+	         this.getChildren().add(trop);
+	         this.getChildren().add(time);
 	         this.getChildren().add(img);
+	         this.getChildren().add(sp);
 			this.getChildren().add(resimg);
 			this.getChildren().add(resbutton);
 			
@@ -106,36 +101,18 @@ public class DeathScreen extends StackPane {
 			
 		
 }
-	 public void Fade(RectObject rec) {
-			if (rec.getType().equals("deathscreen")) {
-					
-				 FadeTransition ft = new FadeTransition(Duration.millis(2000), this);
-				//the fade may seem to quick but it is there, while the game is running you can see
-				 //the fade better
-				 ft.setFromValue(0.0);
-				 ft.setToValue(1.0);
-				 ft.setCycleCount(1);
-				 ft.setAutoReverse(false);
-				    
-				
-				 Double opa = this.getOpacity();
-		         if (opa.intValue() == 0) {
-		             return;
-		         }
-		            
-		         Animation.Status as = ft.getStatus();
-		         
-		         if (as == Animation.Status.RUNNING) {
-		             return;
-		         
-		         }
-		         if (as == Animation.Status.STOPPED) {
-		             ft.play();
-		         }           
-		         
-			}
-		}
+	
+	
+	private ImageView formatting(ImageView img ,int x,int y, int fitwidth) {
+		img.setTranslateX(x);
+		img.setTranslateY(y);
+		img.setFitWidth(fitwidth);
+		img.setPreserveRatio(true);
+        img.setSmooth(true);
+        img.setCache(true);
 		
-}
+		return img;
+	}
+	}
 
 

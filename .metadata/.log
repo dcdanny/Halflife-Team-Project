@@ -2517,3 +2517,6 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING
 	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:145)
 	at com.google.gson.Gson.fromJson(Gson.java:887)
 	... 6 more
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-03-17 21:43:54.735
+!MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/integration/4.7/.
