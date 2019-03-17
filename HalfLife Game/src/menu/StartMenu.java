@@ -1,5 +1,6 @@
 package menu;
 
+import java.io.File;
 //import java.io.File;
 import java.io.IOException;
 
@@ -7,6 +8,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -27,11 +30,11 @@ public class StartMenu extends Application {
 		this.primaryStage.setMinWidth(250);
 		this.primaryStage.setMinHeight(250);
 		this.primaryStage.setResizable(true);
-		/*String musicFile = "data/summerShort.wav";     // For example
+		String musicFile = "data/Sample - summer.mp3";     // For example
 
 		Media sound = new Media(new File(musicFile).toURI().toASCIIString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();*/
+		mediaPlayer.play();
 		showMainView();
 	}
 	
