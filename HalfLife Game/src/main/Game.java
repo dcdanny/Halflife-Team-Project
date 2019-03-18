@@ -226,7 +226,7 @@ public class Game extends Application {
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
-		stage.setTitle("HALFLIFE");
+		stage.setTitle("Poko");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 		spplayer.GetPlayer().buttonPressing(this, scene);
