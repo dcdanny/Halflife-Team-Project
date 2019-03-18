@@ -32,6 +32,14 @@ public class SpriteFollower extends Pane {
 	    		  public void handle(MouseEvent event) {
 	    		   x=event.getSceneX();
 	    		  x=x-50;
+	    		  if (sp.getTranslateX()>x) {
+	    			  sp.flip();
+	    		  }
+	    		  else {
+	    			  sp.flipnorm();
+	    				 
+	    			  
+	    		  }
 	    		  //  System.out.println(event.getScreenY());
 	    		  }
 	    		});
