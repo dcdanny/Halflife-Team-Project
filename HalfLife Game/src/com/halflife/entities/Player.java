@@ -179,10 +179,10 @@ public class Player extends RectObject{
 	
 	private void noBullets() {
 		Text t = new Text("No bullets remaining");
-		t.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+		t.setFont(Font.font("Verdana",FontWeight.BOLD, 18));
 		t.setFill(Color.WHITE);
-		t.setX(300);
-		t.setY(200);
+		t.setX(580);
+		t.setY(70);
 		ft = new FadeTransition(Duration.millis(400), t);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
