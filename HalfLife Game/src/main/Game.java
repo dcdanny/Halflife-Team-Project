@@ -259,11 +259,11 @@ public class Game extends Application {
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
-					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#333333"));
+					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.TRANSPARENT);
 					edgePlatR.setTranslateX(edgePlatR.getTranslateX()+1);
 					root.getChildren().add(edgePlatR);
 					platforms.add(edgePlatR);
-					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#333333"));
+					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.TRANSPARENT);
 					edgePlatL.setTranslateX(edgePlatL.getTranslateX()+148);
 					root.getChildren().add(edgePlatL);
 					platforms.add(edgePlatL);
