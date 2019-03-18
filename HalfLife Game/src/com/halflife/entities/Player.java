@@ -166,7 +166,7 @@ public class Player extends RectObject{
 	public void shoot(Pane root) {
 		
 		if (ammoNo > 0) {
-			Bullet bullet = getBullet(this, Color.RED, root);
+			Bullet bullet = getBullet(this, Color.GREEN, root);
 			root.getChildren().add(bullet);
 			ammoNo--;
 		}else {

@@ -40,7 +40,7 @@ public class RectObject extends Rectangle implements java.io.Serializable{
 		this.y=y;
 		this.w=width;
 		this.h=height;
-//		this.col=col;
+		this.col=col;
 
 		
 		//playerFade();
