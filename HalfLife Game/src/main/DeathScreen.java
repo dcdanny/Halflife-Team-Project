@@ -64,6 +64,7 @@ public class DeathScreen extends StackPane {
 	         
 	         resbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked!"); // change functionality
+	             remove();
 	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);
@@ -94,6 +95,7 @@ public class DeathScreen extends StackPane {
 	         });
 	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
+	             remove();
 	         });
 	         
 	         this.getChildren().add(bg);
@@ -135,6 +137,10 @@ public class DeathScreen extends StackPane {
 		         
 			}
 		}
+	 public void remove() {
+		 this.getChildren().clear();
+		// this.getChildren().remove(from, to);
+	 }
 		
 }
 
