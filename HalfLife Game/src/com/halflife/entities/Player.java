@@ -333,5 +333,8 @@ public class Player extends RectObject{
 		return completedLevel;
 	}
 
+	public CountdownTimer getTimer() {
+		return clock;
+	}
 
 }
