@@ -31,7 +31,6 @@ public class SupplyDrop extends RectObject{
 			ammoContents = 1;
 		if (livesContents == 0)
 			livesContents = 1;
-		System.out.println(ammoContents + "-"+livesContents);
 	}
 
 	public void tick(Player player, Pane root) {
