@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -163,6 +164,7 @@ public class GameClient extends Application {
 		}	
 	}
 	
+	Message temp = null;
 	private void tick() {
 		
 		player.tick(root);
@@ -184,15 +186,31 @@ public class GameClient extends Application {
 		coords = new Message(player.getTranslateX(), player.getTranslateY());
 		client.sendToServer(coords);
 		
-		Message temp = null;
-		try {
+		
+		
+		Task<Integer> task = new Task<Integer>() {
+			@Override protected Integer call() throws Exception {
+				temp = client.waitForMessage();
+				return 0;
+			}
+		};
+		
+		Thread t = new Thread(task); 
+		t.start();
+	      
+		task.setOnSucceeded(event -> {
+			tempNP.setTranslateX(temp.getX());
+			tempNP.setTranslateY(temp.getY());
+		});
+		
+		/*try {
 			temp = client.getRecieved().take();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tempNP.setTranslateX(temp.getX());
-		tempNP.setTranslateY(temp.getY());
+		tempNP.setTranslateY(temp.getY());*/
 		
 	}
 	
