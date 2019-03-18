@@ -181,12 +181,21 @@ public class Player extends RectObject{
 	
 	
 	private void noBullets() {
-		Text t = new Text("No bullets remaining");
-		t.setFont(Font.font("Verdana",FontWeight.BOLD, 18));
-		t.setFill(Color.WHITE);
-		t.setX(580);
-		t.setY(70);
-		ft = new FadeTransition(Duration.millis(400), t);
+//		Text t = new Text("No bullets remaining");
+//		t.setFont(Font.font("Verdana",FontWeight.BOLD, 18));
+//		t.setFill(Color.WHITE);
+//		t.setX(580);
+//		t.setY(70);
+		
+		Image noAmmo = new Image("No Ammo.png");
+        ImageView img= new ImageView(noAmmo);
+        img.setX(640);
+        img.setY(30);
+        img.setFitHeight(80);
+        img.setFitWidth(150);
+		
+		
+		ft = new FadeTransition(Duration.millis(400), img);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
 		ft.setCycleCount(5);
@@ -206,9 +215,9 @@ public class Player extends RectObject{
         }
         if (as == Animation.Status.STOPPED) {
             ft.play();
-            foreground.getChildren().remove(t);
+            foreground.getChildren().remove(img);
         }           
-		foreground.getChildren().add(t);
+		foreground.getChildren().add(img);
 		
 	}
 	
