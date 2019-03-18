@@ -11,7 +11,7 @@
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.StartMenuController">
 	<children>
-		<Text styleClass="title" text="HALFLIFE"></Text>
+		<Text styleClass="title" text="POKO"></Text>
 		<Label></Label><Label></Label> 
 		<Button layoutX="242.0" layoutY="190.0" mnemonicParsing="false" onAction="#goStart" text="START"></Button>
 		<Label></Label> 

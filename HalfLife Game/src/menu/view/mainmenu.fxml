@@ -13,7 +13,7 @@
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.MainMenuController" maxHeight="600" maxWidth="800">
 	<children>
-		<Text styleClass="title" text="HALFLIFE">
+		<Text styleClass="title" text="POKO">
 		</Text>
 		<Label></Label>
 		<Button onAction="#goSingle" text="SINGLE PLAYER"></Button>
