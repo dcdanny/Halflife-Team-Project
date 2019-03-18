@@ -3,16 +3,19 @@ package main;
 import com.halflife.entities.RectObject;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class VictoryScreen extends StackPane {
 	SpriteAnimation sp= new SpriteAnimation();
-	VictoryScreen(){
-		
+	private int timeint;
+	VictoryScreen(int timeGiven){
+		this.timeint=timeGiven;
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
 		 Image youwon = new Image("youwon.png");
          ImageView img= new ImageView(youwon);
@@ -23,11 +26,18 @@ public class VictoryScreen extends StackPane {
          ImageView trop= new ImageView(trophyimg);
          formatting(trop,-300,0,300);
     
+         //need if statement for multiplayer or single
          
          Image timeimg = new Image("time.png");
          ImageView time= new ImageView(timeimg);
-       formatting(time,-50,0,300);
-		 
+         formatting(time,-50,0,300);
+         
+         Label timeCount= new Label(""+timeGiven);
+         timeCount.setTranslateX(60);
+        
+		 timeCount.setFont(new Font ("Courier New",75));
+		 timeCount.setTextFill(Color.WHITE);
+         
 		 sp.flip();
 		 sp.resizeView(500, 150, 300);
 				         
@@ -92,6 +102,7 @@ public class VictoryScreen extends StackPane {
 	         this.getChildren().add(trop);
 	         this.getChildren().add(time);
 	         this.getChildren().add(img);
+	         this.getChildren().add(timeCount);
 	         this.getChildren().add(sp);
 			this.getChildren().add(resimg);
 			this.getChildren().add(resbutton);
@@ -113,6 +124,8 @@ public class VictoryScreen extends StackPane {
 		
 		return img;
 	}
+	
+
 	}
 
 

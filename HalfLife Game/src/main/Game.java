@@ -40,7 +40,7 @@ public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	private StackPane DeathShow=new DeathScreen();
-	private StackPane VictoryShow=new VictoryScreen();
+	
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
 	//private Player player= new Player(200,0,40,50,Color.WHITE,3);
@@ -59,7 +59,7 @@ public class Game extends Application {
 	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 
-
+	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
@@ -197,6 +197,7 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
+			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime());
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
 //			deathScreenDisplayed = true;
 		}
