@@ -139,6 +139,7 @@ public class DeathScreen extends StackPane {
 		}
 	 public void remove() {
 		 this.getChildren().clear();
+		 
 		// this.getChildren().remove(from, to);
 	 }
 		

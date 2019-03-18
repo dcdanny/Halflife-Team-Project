@@ -16,6 +16,9 @@ import javafx.scene.Scene;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -280,7 +283,8 @@ public class Player extends RectObject{
 			case D: 
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
-				game.root.setStyle("-fx-background-color: #4f7b8a;");
+			
+			
 				break;
 			case S: 
 				setVelY(5);

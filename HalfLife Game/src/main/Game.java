@@ -24,11 +24,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import javafx.scene.paint.CycleMethod;
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
 
@@ -58,10 +60,11 @@ public class Game extends Application {
 	private Message coords;
 	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
-
+	
 	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
+	Color bgcol =Color.valueOf("#333333");
 
 	private SpriteAnimation sp= new SpriteAnimation();
 	
@@ -75,8 +78,11 @@ public class Game extends Application {
 	}
 
 	private Parent createContent() throws IOException {
-		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
-
+		
+		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
+	        LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
+	        RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
+	        bg.setFill(lg1);
 		root.setPrefSize(800, 600);
 	root.getChildren().add(spplayer);
 		AnimationTimer timer = new AnimationTimer() {
@@ -253,11 +259,11 @@ public class Game extends Application {
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
-					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#4f7b8a"));
+					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#333333"));
 					edgePlatR.setTranslateX(edgePlatR.getTranslateX()+1);
 					root.getChildren().add(edgePlatR);
 					platforms.add(edgePlatR);
-					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#4f7b8a"));
+					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#333333"));
 					edgePlatL.setTranslateX(edgePlatL.getTranslateX()+148);
 					root.getChildren().add(edgePlatL);
 					platforms.add(edgePlatL);
