@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
@@ -32,9 +33,14 @@ public class StartMenu extends Application {
 		this.primaryStage.setResizable(true);
 		String musicFile = "data/Sample - summer.mp3";     // For example
 
-		Media sound = new Media(new File(musicFile).toURI().toASCIIString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+		try {
+			Media sound = new Media(new File(musicFile).toURI().toASCIIString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+			
+		}catch(MediaException e) {
+			System.out.println("Unable to play audio: "+e.getMessage());
+		}
 		showMainView();
 	}
 	
