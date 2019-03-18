@@ -21,7 +21,8 @@ public class StartMenu extends Application {
 	
 	private static Stage primaryStage;
 	private static Pane mainLayout;
-	private SpriteAnimation sp= new SpriteAnimation();
+	private SpriteAnimation sp1 = new SpriteAnimation();
+	private SpriteAnimation sp2 = new SpriteAnimation();
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -50,8 +51,11 @@ public class StartMenu extends Application {
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		
 		mainLayout = loader.load();
-		sp.resizeView(300, -60,600);
-		mainLayout.getChildren().add(sp);
+		sp1.resizeView(-10, -60, 300);
+		sp2.flip();
+		sp2.resizeView(500, -200, 300);
+		mainLayout.getChildren().add(sp1);
+		mainLayout.getChildren().add(sp2);
 		/*mainLayout.add(sp);*/
 		//System.out.println(mainLayout.getChildren());
 		
