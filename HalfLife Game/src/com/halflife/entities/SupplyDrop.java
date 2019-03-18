@@ -27,9 +27,14 @@ public class SupplyDrop extends RectObject{
 		Random r = new Random();
 		ammoContents = r.nextInt(10);
 		livesContents = r.nextInt(2);
+		if (ammoContents == 0)
+			ammoContents = 1;
+		if (livesContents == 0)
+			livesContents = 1;
 	}
 
 	public void tick(Player player, Pane root) {
+		
 		if (isCollidedWithPlayer(player) && ammoContents != 0 && livesContents != 0) {
 			player.addAmmo(ammoContents);
 			player.addLives(livesContents);

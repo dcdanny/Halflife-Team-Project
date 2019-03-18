@@ -16,7 +16,8 @@ public class MainMenuController {
 	
 	private Stage primaryStage;
 	private SpriteFollower sf;
-	private SpriteAnimation sp= new SpriteAnimation();
+	private SpriteAnimation sp1 = new SpriteAnimation();
+	private SpriteAnimation sp2 = new SpriteAnimation();
 	private String serverLocation;
 	public Server server;
 	
@@ -91,8 +92,11 @@ public class MainMenuController {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
-		sp.resizeView(300, -60,600);
-		mainMenu.getChildren().add(sp);
+		sp1.resizeView(-10, -60, 300);
+		sp2.flip();
+		sp2.resizeView(500, -200, 300);
+		mainMenu.getChildren().add(sp1);
+		mainMenu.getChildren().add(sp2);
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);

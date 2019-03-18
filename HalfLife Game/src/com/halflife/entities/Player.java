@@ -41,6 +41,7 @@ public class Player extends RectObject{
 	private Pane foreground=new Pane();
 	private Ammo ammo;
 	private CountdownTimer clock;
+	private boolean bulletDir;
 	
 	protected CheckCollision collisionChecker;
 	
@@ -289,12 +290,13 @@ public class Player extends RectObject{
 				setVelX(-5);
 				game.root.setLayoutX(game.root.getLayoutX()+10);
 				sppl.flipbackwards();
+				bulletDir = false;
 				break;
 			case D: 
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
 				sppl.flipforwards();
-			
+				bulletDir = true;
 				break;
 			case S: 
 				setVelY(5);
