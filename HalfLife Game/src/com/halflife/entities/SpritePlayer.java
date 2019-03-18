@@ -24,8 +24,9 @@ import main.WriteFile;
 public class SpritePlayer extends Pane {
 	Player pl;
 	SpriteAnimation ani;
-	
+	boolean forward;
 	public SpritePlayer() {
+		this.forward=true;
 		 this.pl=  new Player(200,0,40,50,Color.PINK,3);
 		//this.getChildren().add(pl);
 		this.ani=new SpriteAnimation();
@@ -42,6 +43,18 @@ public class SpritePlayer extends Pane {
 	
 	public Player GetPlayer() {
 		return pl;
+	}
+	public void flipbackwards() {
+		if (forward) {
+			ani.flip();
+		}
+		forward=false;
+	}
+	public void flipforwards() {
+		if (!forward) {
+			ani.flipnorm();
+		}
+		forward=true;
 	}
 }
 

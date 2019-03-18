@@ -66,6 +66,10 @@ public class SpriteAnimation extends Pane {
 		imageView.setScaleX((double)-1);
 		return imageView;
 	}
+	public ImageView flipnorm() {
+		imageView.setScaleX((double)1);
+		return imageView;
+	}
 
 	public ImageView resizeView(int x , int y , int fit) {
 		imageView.setFitHeight(fit);

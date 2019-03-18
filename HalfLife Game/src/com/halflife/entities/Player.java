@@ -41,7 +41,7 @@ public class Player extends RectObject{
 	private Pane foreground=new Pane();
 	private Ammo ammo;
 	private CountdownTimer clock;
-
+	
 	protected CheckCollision collisionChecker;
 	
 	public Player(double x, double y, int width, int height, Color col, int lives) {
@@ -272,18 +272,19 @@ public class Player extends RectObject{
 		heart.addLives();
 	}
 	
-	public void buttonPressing(Game game, Scene s) {
+	public void buttonPressing(Game game, Scene s, SpritePlayer sppl) {
 	
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
 				setVelX(-5);
 				game.root.setLayoutX(game.root.getLayoutX()+10);
+				sppl.flipbackwards();
 				break;
 			case D: 
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
-			
+				sppl.flipforwards();
 			
 				break;
 			case S: 

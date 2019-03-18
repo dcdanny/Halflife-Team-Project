@@ -236,7 +236,7 @@ public class Game extends Application {
 		stage.setTitle("Poko");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
-		spplayer.GetPlayer().buttonPressing(this, scene);
+		spplayer.GetPlayer().buttonPressing(this, scene,spplayer);
 	spplayer.GetPlayer().buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
