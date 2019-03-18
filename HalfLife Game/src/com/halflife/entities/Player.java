@@ -48,7 +48,7 @@ public class Player extends RectObject{
 
 		movement(x, y);		
 		
-		completedLevel = true;
+		completedLevel = false;
 		
 		heart = new Lives(GameConstants.MAX_LIVES);
 		heart.setLives(lives);
