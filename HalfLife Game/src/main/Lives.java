@@ -45,8 +45,8 @@ public class Lives extends Group {
 		}
 
 		for (int i = 0; i < lives; i++) {
-			hearts.get(i).setX(i * 50 + 25);
-			hearts.get(i).setY(50);
+			hearts.get(i).setX(i * 50 + 610);
+			hearts.get(i).setY(-10);
 			hearts.get(i).setFitHeight(100);
 			hearts.get(i).setFitWidth(100);
 			hearts.get(i).setPreserveRatio(true);

@@ -30,8 +30,8 @@ public class Ammo extends Group {
 	
 	public void setAmmoImages(List<ImageView> ammunition) {
 		for (int i = 0; i < no_of_bullets; i++) {
-	    	ammunition.get(i).setX(i*20 + 10);
-	    	ammunition.get(i).setY(10);
+	    	ammunition.get(i).setX(i*20 + 580);
+	    	ammunition.get(i).setY(60);
 	    	ammunition.get(i).setFitHeight(75);
 	    	ammunition.get(i).setFitWidth(40);
 	    	ammunition.get(i).setPreserveRatio(true);
