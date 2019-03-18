@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class CountdownTimer extends Pane{
@@ -13,9 +14,11 @@ public class CountdownTimer extends Pane{
 	
 	Label label=new Label("0");
 	
+	
 	public CountdownTimer() {
-		
+	
 	  label.setFont(javafx.scene.text.Font.font(50 ));
+	  label.setTextFill(Color.valueOf("#C2C1BB"));
 	label.setTranslateX(0 ); 
 	label.setTranslateY(0);
 	getChildren().add(label);
