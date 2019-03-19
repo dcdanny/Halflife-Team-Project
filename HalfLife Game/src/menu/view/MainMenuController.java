@@ -27,9 +27,7 @@ public class MainMenuController {
 		this.primaryStage.setWidth(800);//So the menu works on bens laptop?
 		this.primaryStage.setHeight(600);//So the menu works on bens laptop?
 	}
-	
-		
-	
+
 	// The "SINGLE-PLAYER" button, directing to the "SELECT GAME LEVEL" menu
 	@FXML
 	private void goSingle() throws IOException {

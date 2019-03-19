@@ -14,7 +14,7 @@
       <Label />
       <Label />
       <Label />
-      <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title/poko.png" />
          </image></ImageView><Label prefHeight="50.0" prefWidth="50.0" /> 
