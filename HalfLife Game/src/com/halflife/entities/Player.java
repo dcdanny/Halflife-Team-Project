@@ -41,7 +41,8 @@ public class Player extends RectObject{
 	private Pane foreground=new Pane();
 	private Ammo ammo;
 	private CountdownTimer clock;
-	private boolean bulletDir;
+	//true if bullet shoots right, false if left
+	private boolean bulletDir = true;
 	
 	protected CheckCollision collisionChecker;
 	
@@ -170,7 +171,7 @@ public class Player extends RectObject{
 	public void shoot(Pane root) {
 		
 		if (ammoNo > 0) {
-			Bullet bullet = getBullet(this, Color.GREEN, root);
+			Bullet bullet = getBullet(this, Color.GREEN, root, bulletDir);
 			root.getChildren().add(bullet);
 			ammoNo--;
 		}else {

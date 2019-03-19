@@ -11,18 +11,22 @@ import main.GameConstants;
 public class Bullet extends RectObject{
 
 	private CheckCollision collisionChecker;
-	public Bullet(double x, double y, int width, int height, String type, Color col, Pane root) {
-		super(x+30, y + 25, width, height, type, col);
+	public Bullet(double x, double y, int width, int height, String type, Color col, Pane root, Boolean bulletDir) {
+		super(x, y + 25, width, height, type, Color.GREEN);
 		collisionChecker = new CheckCollision();
-		startTimer(System.currentTimeMillis(), root);
+		startTimer(System.currentTimeMillis(), root, bulletDir);
 	}
 	
-	public void startTimer(long startTime, Pane root) {
+	public void startTimer(long startTime, Pane root, boolean bulletDir) {
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				long secondsElapsed = (System.currentTimeMillis()-startTime)/1000;
-				moveX(GameConstants.BULLET_SPEED);
+				if (bulletDir == true ) {
+					moveX(GameConstants.BULLET_SPEED);
+				} else {
+					moveX(-GameConstants.BULLET_SPEED);
+				}
 				if (secondsElapsed >= 3 || checkCollided(root)){
 					setDead(true);
 					stop();
