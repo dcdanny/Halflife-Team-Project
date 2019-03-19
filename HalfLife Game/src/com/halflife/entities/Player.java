@@ -191,8 +191,8 @@ public class Player extends RectObject{
 		Image noAmmo = new Image("No Ammo.png");
         ImageView img= new ImageView(noAmmo);
         img.setX(640);
-        img.setY(30);
-        img.setFitHeight(80);
+        img.setY(60);
+        img.setFitHeight(35);
         img.setFitWidth(150);
 		
 		

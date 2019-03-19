@@ -51,7 +51,7 @@ public class StartMenu extends Application {
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		
 		mainLayout = loader.load();
-		sp1.resizeView(-10, -60, 300);
+		sp1.resizeView(-10, -90, 300);
 		sp2.flip();
 		sp2.resizeView(500, -200, 300);
 		mainLayout.getChildren().add(sp1);
