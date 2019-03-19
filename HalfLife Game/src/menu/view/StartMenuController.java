@@ -14,11 +14,10 @@ public class StartMenuController {
 	
 	private Stage primaryStage;
 	
-	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
 	}
-	
+
 	// The "START" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goStart() throws IOException {
