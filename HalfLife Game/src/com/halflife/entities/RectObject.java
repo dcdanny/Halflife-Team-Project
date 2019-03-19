@@ -70,14 +70,13 @@ public class RectObject extends Rectangle implements java.io.Serializable{
 	
 
 	public Bullet getBullet(RectObject shooter, Color colour, Pane root, boolean bulletDir) {
-		colour.equals(Color.GREEN);
 		int moveBulletX = 0;
 		if (bulletDir == true) {
 			moveBulletX = 50;
 		} else {
 			moveBulletX = -30;
 		}
-		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", colour, root, bulletDir);
+		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", Color.GREEN, root, bulletDir);
 		return bullet;
 	}
 	public String getType() {
