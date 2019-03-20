@@ -39,6 +39,9 @@ public class CountdownTimer extends Pane{
 	public int getTime() {
 		return tmp;
 	}
+	public void resetTime() {
+		tmp=0;
 	}
+}
 
 
