@@ -191,7 +191,7 @@ public class Game extends Application {
 			spike.tick(spplayer.GetPlayer(), root);
 		}
 		for (SupplyDrop supply : supplies) {
-			supply.tick(spplayer.GetPlayer(), root);
+			supply.tick(spplayer.GetPlayer());
 		}
 		for (NetworkedPlayer np : netPlayers) {
 			np.tick(root);

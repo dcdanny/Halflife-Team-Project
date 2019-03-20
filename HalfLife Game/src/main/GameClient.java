@@ -182,7 +182,7 @@ public class GameClient extends Application {
 			spike.tick(player, root);
 		}
 		for (SupplyDrop supply : supplies) {
-			supply.tick(player, root);
+			supply.tick(player);
 		}
 //		for (NetworkedPlayer np : netPlayers) {
 //			np.tick(root);
