@@ -27,25 +27,35 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.*;
 
+/**
+ * Player --- Creates the main player object for when the 
+ * user plays single player games
+ * @author David
+ */
 public class Player extends RectObject{
+
+	private double velX = 0; //Velocity of the player in X direction
+	private double velY = 0; //Velocity of the player in Y direction
+	private double gravity = 0; //Value for the gravity in the game
+	private int ammoNo = 10; //Number of bullets the player starts with 
+	private int lives = 3; //Number of lives the player starts with
+	private Lives heart; //Heart object for displaying lives
+	private boolean completedLevel; //Determines whether player has completed the level
+	private Pane foreground=new Pane(); //Objects on the screen that are independent to the player
+	private Ammo ammo; //Ammo object for displaying bullets
+	private CountdownTimer clock; //Clock object for displaying the count down timer
+	private boolean bulletDir = true; //Determines which way the player is facing
+	protected CheckCollision collisionChecker; //Determines whether the player has collided with another object
 	
-	
-	private double velX = 0;
-	private double velY = 0;
-	private double gravity = 0;
-	private int ammoNo = 10; 
-	private int lives = 3;
-	private boolean isJumping = false;
-	private Lives heart;
-	private boolean completedLevel;
-	private Pane foreground=new Pane();
-	private Ammo ammo;
-	private CountdownTimer clock;
-	//true if bullet shoots right, false if left
-	private boolean bulletDir = true;
-	
-	protected CheckCollision collisionChecker;
-	
+	/**
+	 * Constructor of the player object
+	 * @param x X coordinate of the player object
+	 * @param y Y coordinate of the player object
+	 * @param width Width of the player object
+	 * @param height Height of the player object
+	 * @param col Colour of the player object
+	 * @param lives Number of lives the player object has
+	 */
 	public Player(double x, double y, int width, int height, Color col, int lives) {
 		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
 		
@@ -66,10 +76,20 @@ public class Player extends RectObject{
 
 	}
 	
+	/**
+	 * Returns the foreground objects to display on the screen
+	 * for the player
+	 * @return Returns the foreground pane
+	 */
 	public Pane getForeground() {
 		return foreground;
 	}
 	
+	/**
+	 * Constantly runs, from the Game class, to check how the player
+	 * object is interacting with other objects
+	 * @param root Contains all objects that the player could interact with
+	 */
 	public void tick(Pane root) {
 		if (lives == 0) {	
 			setDead(true);
@@ -86,7 +106,6 @@ public class Player extends RectObject{
 			if (collidedObj.getType().equals(GameConstants.TYPE_PLATFORM)) {
 				setVelY(0);
 				setTranslateY(collidedObj.getTranslateY() - 50);
-//				System.out.println("1");
 		    }
 			else if (collidedObj.getType().equals(GameConstants.TYPE_GOAL)) {
 				setVelY(0);
@@ -112,6 +131,11 @@ public class Player extends RectObject{
 			}
 		}
 	}
+	
+	/**
+	 * Determines what happens when the player loses a life
+	 * @param root Contains all objects that the player could interact with
+	 */
 	public void loseLife(Pane root) {
 		root.setLayoutX(0);
 		if (lives > 0) {
@@ -124,20 +148,41 @@ public class Player extends RectObject{
 			setDead(true);
 	}
 	
+	/**
+	 * Sets the velocity of the player in the X direction
+	 * @param v Velocity value to change by
+	 */
 	public void setVelX(double v) {
 		this.velX = v;
 	}
+	
+	/**
+	 * Sets the velocity of the player in the Y direction
+	 * @param v Velocity value to change by
+	 */
 	public void setVelY(double v) {
 		this.velY = v;
 	}
 	
+	/**
+	 * Returns the velocity of the player in the X direction
+	 * @return Velocity of the player in the X direction
+	 */
 	public double getVelX() {
 		return velX;
 	}
+	
+	/**
+	 * Returns the velocity of the player in the Y direction
+	 * @return Velocity of the player in the Y direction
+	 */
 	public double getVelY() {
 		return velY;
 	}
 	
+	/**
+	 * Determines what happens when the player presses the Jump button
+	 */
 	public void jump() {
 		double startingY = this.getTranslateY();
 		AnimationTimer jTimer = new AnimationTimer() {
@@ -153,10 +198,14 @@ public class Player extends RectObject{
 				}
 			}
 		};
-		
 		jTimer.start();
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void movement(double x, double y) {
 		if (isFalling() || isJumping()) {
 			y += gravity;
