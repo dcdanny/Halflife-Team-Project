@@ -61,7 +61,7 @@ public class Player extends RectObject{
 		
 		collisionChecker = new CheckCollision();
 
-		movement(x, y);		
+		movement(y);		
 		
 		completedLevel = false;
 		
@@ -202,21 +202,29 @@ public class Player extends RectObject{
 	}
 	
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Uses the gravity variable to make the player fall
+	 * @param y Y coordinate of the player object
 	 */
-	public void movement(double x, double y) {
+	public void movement(double y) {
 		if (isFalling() || isJumping()) {
 			y += gravity;
 		}
 	}
 
+	/**
+	 * Checks whether the player object has collided with another object
+	 * @param root Contains all objects that the player could interact with
+	 * @return Whether the player has collided or not
+	 */
 	public boolean hasCollided(Pane root) {
 		collisionChecker.checkForCollision(this, root);
 		return collisionChecker.getCollided();
 	}
 	
+	/**
+	 * Called when the player presses the shoot button
+	 * @param root Contains all objects that the player could interact with
+	 */
 	public void shoot(Pane root) {
 		
 		if (ammoNo > 0) {
@@ -230,14 +238,10 @@ public class Player extends RectObject{
 		ammo.setAmmo(ammoNo);
 	}
 	
-	
-	private void noBullets() {
-//		Text t = new Text("No bullets remaining");
-//		t.setFont(Font.font("Verdana",FontWeight.BOLD, 18));
-//		t.setFill(Color.WHITE);
-//		t.setX(580);
-//		t.setY(70);
-		
+	/**
+	 * Displays a message on the screen when the player has no bullets remaining
+	 */
+	private void noBullets() {	
 		Image noAmmo = new Image("No Ammo.png");
         ImageView img= new ImageView(noAmmo);
         img.setX(640);
@@ -245,15 +249,13 @@ public class Player extends RectObject{
         img.setFitHeight(35);
         img.setFitWidth(150);
 		
-		
 		ft = new FadeTransition(Duration.millis(400), img);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
 		ft.setCycleCount(5);
 		ft.setAutoReverse(true);
-		    
 		
-		 Double opa = this.getOpacity();
+		Double opa = this.getOpacity();
         if (opa.intValue() == 0) {
             return;
         }
@@ -267,12 +269,16 @@ public class Player extends RectObject{
         if (as == Animation.Status.STOPPED) {
             ft.play();
             foreground.getChildren().remove(img);
-        }           
+        }  
+        
 		foreground.getChildren().add(img);
 		
 	}
 	
-//respawn animation, flashing player
+	/**
+	 * Creates a flashing animation for certain objects, such as when
+	 * the player loses a life
+	 */
 	public void Fade() {
 		if (getType().equals(GameConstants.TYPE_PLAYER)) {
 				
@@ -302,14 +308,26 @@ public class Player extends RectObject{
 		}
 	}
 	
+	/**
+	 * Returns the gravity value for the player
+	 * @return Gravity value for the player
+	 */
 	public double getGravity() {
 		return gravity;
 	}
 
+	/**
+	 * Returns the number of bullets the player has
+	 * @return Number of bullets the player has
+	 */
 	public int getAmmo() {
 		return ammoNo;
 	}
 
+	/**
+	 * Adds ammo to the player when they pick up a supply drop
+	 * @param i Number of bullets to add to the player
+	 */
 	public void addAmmo(int i) {
 		System.out.println("OLD AMMO + " + ammoNo);
 		if (ammoNo + i > GameConstants.MAX_AMMO)
@@ -322,6 +340,10 @@ public class Player extends RectObject{
 		ammo.addBullets();
 	}
 
+	/**
+	 * Adds lives to the player when they pick up a supply drop
+	 * @param i Number of lives to add to the player
+	 */
 	public void addLives(int i) {
 		if (lives + i > GameConstants.MAX_LIVES)
 			lives = GameConstants.MAX_LIVES;
@@ -332,8 +354,14 @@ public class Player extends RectObject{
 		heart.addLives();
 	}
 	
+	/**
+	 * Detects when a user presses a button and decides what to do
+	 * in each case
+	 * @param game Main game object
+	 * @param s Scene object to display all the objects
+	 * @param sppl The sprite player object that displays the player animation
+	 */
 	public void buttonPressing(Game game, Scene s, SpritePlayer sppl) {
-	
 		s.setOnKeyPressed(e-> {
 			switch (e.getCode()) {
 			case A:
@@ -367,6 +395,10 @@ public class Player extends RectObject{
 		
 	}
 
+	/**
+	 * Detects when a user releases a button and decides what to do
+	 * @param s Scene object to display all the objects
+	 */
 	public void buttonReleasing(Scene s) {
 		
 		s.setOnKeyReleased(e-> {
@@ -388,6 +420,10 @@ public class Player extends RectObject{
 		
 	}
 
+	/**
+	 * Moves the screen so that the player can always be seen
+	 * @param game Main game object
+	 */
 	public void checkPos(Game game) {
 		double x =getXLocation();
 		if (x>400) {
@@ -395,10 +431,19 @@ public class Player extends RectObject{
 		}
 		
 	}
+	
+	/**
+	 * Returns whether the player has finished the current level
+	 * @return Whether the player has finished the current level
+	 */
 	public boolean getLevelFinish() {
 		return completedLevel;
 	}
 
+	/**
+	 * Returns the clock object in the foreground
+	 * @return Clock object in the foreground
+	 */
 	public CountdownTimer getTimer() {
 		return clock;
 	}
