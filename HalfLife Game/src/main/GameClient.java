@@ -62,16 +62,27 @@ public class GameClient extends Application {
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
-//	private SpriteAnimation sp= new SpriteAnimation();
-	
+	/**
+	 * Constructor for the GameClient class
+	 * @param client The client object 
+	 */
 	public GameClient(Client client) {
 		this.client=client;
 	}
 
+	/**
+	 * Setter for currentLevel,  
+	 * @param currentLevel The string array containing details on the chosen level
+	 */
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
 	}
-
+	
+	/**
+	 * Creates the visual content of the game such as the background and player
+	 * @return The constructed Pane root
+	 * @throws IOException
+	 */
 	private Parent createContent() throws IOException {
 		Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
         LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
@@ -113,13 +124,22 @@ public class GameClient extends Application {
 		return root;	
 	}
 	
-	
+	/**
+	 * Function to retrieve all nodes from a parent node including the parent node
+	 * @param root The root node
+	 * @return All nodes in the ArrayList including the parent
+	 */
 	public static ArrayList<Node> getAllNodes(Parent root) {
 	    ArrayList<Node> nodes = new ArrayList<Node>();
 	    addAllDescendents(root, nodes);
 	    return nodes;
 	}
-
+	
+	/** 
+	 * Adds all nodes that can be defined as a RectObject to an ArrayList recursively
+	 * @param parent The parent node
+	 * @param nodes The ArrayList of descendant nodes that's added to recursively 
+	 */
 	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
 	    for (Node node : parent.getChildrenUnmodifiable()) {
 	    	
@@ -141,6 +161,11 @@ public class GameClient extends Application {
 	int updates = 0;
 	int frames = 0;
 	long timer = System.currentTimeMillis();
+	
+	/**
+	 * Game loop function that calculates tick and frame rates 
+	 * Also detects objects marked as 'dead' and removes them from the game window
+	 */
 	private void update() {
 		long now = System.nanoTime();
 		delta += (now - lastTime) / ns;
@@ -170,6 +195,12 @@ public class GameClient extends Application {
 	}
 	
 	Message temp = null;
+	/**
+	 * Called on each game tick to handle game functionality 
+	 * Acts as a controller for all entity loops 
+	 * Handles incoming messages from the server
+	 * Useful to look at as the 'heart' of the game
+	 */
 	private void tick() {
 		
 		player.tick(root);
@@ -222,7 +253,9 @@ public class GameClient extends Application {
 	
 
 
-	
+	/**
+	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
+	 */
 	@Override
 	public void start(Stage stage) throws Exception {
 //		System.out.println("Game is Starting!!!!!!!!!!");
@@ -248,7 +281,12 @@ public class GameClient extends Application {
 		
 		
 	}
-		
+	
+	/**
+	 * Responsible for converting the String array given to a playable level
+	 * Each digit in the array corresponds to a different object 
+	 * @param lvl The encoded level
+	 */
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;	
 		

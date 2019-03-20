@@ -19,6 +19,10 @@ public class Lives extends Group {
 	private boolean isDead;
 	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>();
 
+	/**
+	 * Constructor for displaying hearts on the game window corresponding to lives remaining
+	 * @param _lives The number of lives to draw on the game window
+	 */
 	public Lives(int _lives) {
 
 		super();
@@ -26,6 +30,10 @@ public class Lives extends Group {
 		addLives();
 	}
 
+	/**
+	 * Adds heart images to the screen dependent on how many lives the player has
+	 * This is called when the class is instantiated to create the ImageView list
+	 */
 	public void addLives() {
 		this.getChildren().clear();
 		Image image = null;
@@ -57,7 +65,9 @@ public class Lives extends Group {
 		isDead = false;
 	}
 	
-	// Removes lives from display when called
+	/**
+	 * Removes heart image from display
+	 */
 	public void lostlife() {
 
 		if (lives > 0) {
@@ -69,10 +79,18 @@ public class Lives extends Group {
 		}
 	}
 
+	/**
+	 * Getter for isDead variable
+	 * @return Whether the player is dead
+	 */
 	public boolean isDead() {
 		return isDead;
 	}
 	
+	/**
+	 * Setter for the lives variable
+	 * @param _lives The number of lives to assign
+	 */
 	public void setLives(int _lives) {
 		lives = _lives;
 	}
