@@ -64,7 +64,7 @@ public class Game extends Application {
 	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
-	Color bgcol =Color.valueOf("#333333");
+	private Color bgcol =Color.valueOf("#333333");
 
 	private SpriteAnimation sp= new SpriteAnimation();
 	
@@ -236,19 +236,11 @@ public class Game extends Application {
 		stage.setTitle("Poko");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
+		
 		spplayer.GetPlayer().buttonPressing(this, scene,spplayer);
-	spplayer.GetPlayer().buttonReleasing(scene);
-		
-		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
-	//	player.buttonPressing(this, scene); 
-		//player.buttonReleasing(scene);
-		
-//		temp2.buttonPressing(this, scene);
-//		temp2.buttonReleasing(scene);
+		spplayer.GetPlayer().buttonReleasing(scene);
 		
 		stage.show();
-		
-		
 	}
 		
 	private void setUpLevel(String[] lvl) {

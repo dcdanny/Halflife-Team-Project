@@ -25,6 +25,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
@@ -55,7 +58,7 @@ public class GameClient extends Application {
 	private Client client;
 	private Message coords;
 	private NetworkedPlayer tempNP;
-
+	private Color bgcol =Color.valueOf("#333333");
 
 
 	private String[] currentLevel = Level_Info.LEVEL2;
@@ -71,7 +74,10 @@ public class GameClient extends Application {
 	}
 
 	private Parent createContent() throws IOException {
-		RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#4f7b8a"));
+		Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
+        LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
+        RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
+        bg.setFill(lg1);
 
 		root.setPrefSize(800, 600);
 		root.getChildren().add(spplayer);
