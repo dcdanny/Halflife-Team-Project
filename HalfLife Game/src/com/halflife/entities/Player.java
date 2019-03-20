@@ -389,6 +389,8 @@ public class Player extends RectObject{
 				ammo.lostBullet();
 				shoot(game.root);
 				break;
+			default:
+				break;
 			}
 			
 		});
@@ -413,6 +415,8 @@ public class Player extends RectObject{
 				setVelY(0);
 				break;
 			case W:
+				break;
+			default:
 				break;
 			}
 			
