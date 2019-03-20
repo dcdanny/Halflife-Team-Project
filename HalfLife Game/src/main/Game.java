@@ -205,7 +205,7 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
-			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime());
+			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(),spplayer.GetPlayer(),root);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
 //			deathScreenDisplayed = true;
 		}
@@ -245,14 +245,6 @@ public class Game extends Application {
 		stage.show();
 	}
 	
-	public void stopGame() {
-		try {
-			this.stop();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 		
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;	

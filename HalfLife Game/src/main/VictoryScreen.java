@@ -1,5 +1,6 @@
 package main;
 
+import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 
 import javafx.event.EventHandler;
@@ -7,14 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class VictoryScreen extends StackPane {
-	SpriteAnimation sp= new SpriteAnimation();
+	//SpriteAnimation sp= new SpriteAnimation();
 	private int timeint;
-	VictoryScreen(int timeGiven){
+	VictoryScreen(int timeGiven, Player player, Pane root){
 		this.timeint=timeGiven;
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
 		 Image youwon = new Image("youwon.png");
@@ -38,8 +40,8 @@ public class VictoryScreen extends StackPane {
 		 timeCount.setFont(new Font ("Courier New",75));
 		 timeCount.setTextFill(Color.WHITE);
          
-		 sp.flip();
-		 sp.resizeView(500, 150, 300);
+		 //sp.flip();
+	 	 //sp.resizeView(500, 150, 300);
 				         
 	         Image restart = new Image("restart.png");
 	         ImageView resimg= new ImageView(restart);
@@ -69,7 +71,15 @@ public class VictoryScreen extends StackPane {
 	         });
 	         
 	         resbutton.setOnMouseClicked((MouseEvent e) -> {
-	             System.out.println("Clicked!"); // change functionality
+	        	 remove();
+	        	 player.restartLevel();
+	        	 player.loseLife(root);
+	             player.addLives(3);	   
+	             player.addAmmo(10);
+	             player.getTimer().resetTime();
+	             player.setTranslateX(200);
+	             player.setTranslateY(0);
+	             player.getForeground().getChildren().remove(this);
 	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);
@@ -103,12 +113,11 @@ public class VictoryScreen extends StackPane {
 	         this.getChildren().add(time);
 	         this.getChildren().add(img);
 	         this.getChildren().add(timeCount);
-	         this.getChildren().add(sp);
-			this.getChildren().add(resimg);
-			this.getChildren().add(resbutton);
-			
-			this.getChildren().add(exitimg);
-			this.getChildren().add(exitbutton);
+	         //this.getChildren().add(sp);
+			 this.getChildren().add(resimg);
+			 this.getChildren().add(resbutton);			
+			 this.getChildren().add(exitimg);
+			 this.getChildren().add(exitbutton);
 			
 		
 }
@@ -125,7 +134,9 @@ public class VictoryScreen extends StackPane {
 		return img;
 	}
 	
-
-	}
-
-
+	public void remove() {
+		 this.getChildren().clear();
+		 
+		// this.getChildren().remove(from, to);
+	 }
+}

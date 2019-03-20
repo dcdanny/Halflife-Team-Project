@@ -144,8 +144,6 @@ public class Player extends RectObject{
 			this.setTranslateY(0);
 			lives--;	
 			heart.lostlife();
-			if (lives==0)
-				setDead(true);
 		}else
 			setDead(true);
 	}
@@ -441,6 +439,9 @@ public class Player extends RectObject{
 	 */
 	public boolean getLevelFinish() {
 		return completedLevel;
+	}
+	public void restartLevel() {
+		completedLevel=false;
 	}
 
 	/**
