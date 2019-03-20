@@ -65,7 +65,6 @@ public class DeathScreen extends StackPane {
 	         });
 	         
 	         resbutton.setOnMouseClicked((MouseEvent e) -> {
-	             System.out.println("Clicked!"); // change functionality
 	             remove();
 	             player.setDead(false);
 	             player.addLives(3);	   
