@@ -37,9 +37,9 @@ public class LevelMenuController {
 	private void go2() throws Exception {
 		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL2);
-		game.start(primaryStage);
 		Message m = new Message(Level_Info.LEVEL2);
 		server.sendToAll(m);
+		game.start(primaryStage);
 	}
 	
 	// The "3" Button, directing to the Game "Level 3"
@@ -47,9 +47,9 @@ public class LevelMenuController {
 	private void go3() throws Exception {
 		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL3);
-		game.start(primaryStage);
-		Message m = new Message("lvl3");
+		Message m = new Message(Level_Info.LEVEL3);
 		server.sendToAll(m);
+		game.start(primaryStage);
 	}
 	
 	// The "4" Button, directing to the Game "Level 4"
@@ -57,9 +57,9 @@ public class LevelMenuController {
 	private void go4() throws Exception {
 		Game game = new Game(server);
 		game.setCurrentLevel(Level_Info.LEVEL4);
-		game.start(primaryStage);
-		Message m = new Message("lvl4");
+		Message m = new Message(Level_Info.LEVEL4);
 		server.sendToAll(m);
+		game.start(primaryStage);
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
