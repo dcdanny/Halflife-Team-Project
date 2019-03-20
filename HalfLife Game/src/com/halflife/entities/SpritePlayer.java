@@ -1,55 +1,56 @@
 package com.halflife.entities;
 
-import java.io.IOException;
-
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import main.Ammo;
-import main.CheckCollision;
-import main.CountdownTimer;
-import main.Game;
-import main.GameConstants;
-import main.Lives;
 import main.SpriteAnimation;
-import main.WriteFile;
 
-
+/**
+ * Adds a sprite animation on top of a player object
+ * @author Halflife
+ */
 public class SpritePlayer extends Pane {
-	Player pl;
-	SpriteAnimation ani;
-	boolean forward;
+	
+	private Player pl; //Player object that is covered with the sprite
+	private SpriteAnimation ani; //Sprite animation
+	private boolean forward; //Direction the sprite is facing
+	
+	/**
+	 * Constructor of the sprite player
+	 */
 	public SpritePlayer() {
 		this.forward=true;
-		 this.pl=  new Player(200,0,40,50,Color.PINK,3);
-		//this.getChildren().add(pl);
+		this.pl=  new Player(200,0,40,50,Color.PINK,3);
 		this.ani=new SpriteAnimation();
 		ani.resizeView(-38, -45, 120);
-		//System.out.println(pl.translateXProperty());
-		//System.out.println(ani.translateXProperty());
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
 		ani.translateYProperty().bindBidirectional(pl.translateYProperty());
-		//this.getChildren().add(ani);
+		
 		Pane PlayerSprite= new Pane();
 		PlayerSprite.getChildren().addAll(ani);
 		this.getChildren().add(PlayerSprite);
 	}
 	
+	/**
+	 * Returns the player object that the sprite animation is on top of
+	 * @return Player object that the sprite animation is on top of
+	 */
 	public Player GetPlayer() {
 		return pl;
 	}
+	
+	/**
+	 * Flips the animation for when moving in the opposite direction
+	 */
 	public void flipbackwards() {
 		if (forward) {
 			ani.flip();
 		}
 		forward=false;
 	}
+	
+	/**
+	 * Flips the animation back to it's original when moving in the normal direction
+	 */
 	public void flipforwards() {
 		if (!forward) {
 			ani.flipnorm();
