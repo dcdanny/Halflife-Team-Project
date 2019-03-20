@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -41,7 +42,7 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-	private StackPane DeathShow=new DeathScreen();
+	private StackPane DeathShow;
 	
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
@@ -199,6 +200,7 @@ public class Game extends Application {
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+			DeathShow = new DeathScreen(this,spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
@@ -241,6 +243,15 @@ public class Game extends Application {
 		spplayer.GetPlayer().buttonReleasing(scene);
 		
 		stage.show();
+	}
+	
+	public void stopGame() {
+		try {
+			this.stop();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 	private void setUpLevel(String[] lvl) {

@@ -13,9 +13,9 @@ import main.GameConstants;
  */
 public class SupplyDrop extends RectObject{
 
-	private CheckCollision collisionChecker;
-	private int ammoContents;
-	private int livesContents;
+	private CheckCollision collisionChecker; //Checks collisions with other objects
+	private int ammoContents; //Amount of ammo in the supply drop
+	private int livesContents;//Amount of lives in the supply drop
 	
 	/**
 	 * Constructor for the supply drop object

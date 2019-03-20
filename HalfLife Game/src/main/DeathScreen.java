@@ -3,7 +3,9 @@ package main;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
+import com.halflife.entities.SpritePlayer;
 import com.sun.prism.paint.ImagePattern;
 
 import javafx.animation.Animation;
@@ -19,7 +21,7 @@ import javafx.util.Duration;
 
 public class DeathScreen extends StackPane {
 
-	 DeathScreen() {
+	 DeathScreen(Game game, Player player) {
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.valueOf("#333333"));
 		 Image youdied = new Image("youdied.png");
          ImageView img= new ImageView(youdied);
@@ -65,6 +67,15 @@ public class DeathScreen extends StackPane {
 	         resbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked!"); // change functionality
 	             remove();
+	             player.setDead(false);
+	             player.addLives(3);	   
+	             player.addAmmo(10);
+	             player.getTimer().resetTime();
+	             player.setTranslateX(200);
+	             player.setTranslateY(0);
+	             player.getForeground().getChildren().remove(this);
+	             
+	             
 	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);

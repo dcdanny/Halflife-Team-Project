@@ -9,9 +9,10 @@ import main.SpriteAnimation;
  * @author Halflife
  */
 public class SpritePlayer extends Pane {
-	private Player pl;
-	private SpriteAnimation ani;
-	private boolean forward;
+	
+	private Player pl; //Player object that is covered with the sprite
+	private SpriteAnimation ani; //Sprite animation
+	private boolean forward; //Direction the sprite is facing
 	
 	/**
 	 * Constructor of the sprite player

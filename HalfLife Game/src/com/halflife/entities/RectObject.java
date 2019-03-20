@@ -13,15 +13,15 @@ import javafx.scene.layout.Pane;
  */
 public class RectObject extends Rectangle{
 	
-	protected FadeTransition ft;
-    protected Rectangle rect;
-    public float gravity = 0.5f;
-	private boolean falling = true;
-	private boolean jumping = false;
-	protected boolean dead= false;
-	private final String type;
-	private double x,y,w,h;
-	private Color col;
+	protected FadeTransition ft; //Fading effect for certain objects 
+    protected Rectangle rect; //Rectangular shape of the object
+    public float gravity = 0.5f; //Gravity affecting objects
+	private boolean falling = true; //Whether the object is falling
+	private boolean jumping = false; //Whether the object is jumping
+	protected boolean dead= false; //Whether the object is dead
+	private final String type; //Type of the object
+	private double x,y,w,h; //Coordinates and dimensions of the object
+	private Color col; //Colour of the object
 
 	/**
 	 * Constructor of each rectangular object

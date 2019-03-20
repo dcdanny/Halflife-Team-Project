@@ -43,7 +43,6 @@ import network.*;
 public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-	private StackPane DeathShow=new DeathScreen();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 	private NetworkedPlayer player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3);
 

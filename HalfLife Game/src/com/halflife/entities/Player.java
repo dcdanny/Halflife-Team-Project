@@ -144,6 +144,8 @@ public class Player extends RectObject{
 			this.setTranslateY(0);
 			lives--;	
 			heart.lostlife();
+			if (lives==0)
+				setDead(true);
 		}else
 			setDead(true);
 	}
@@ -363,36 +365,47 @@ public class Player extends RectObject{
 	 */
 	public void buttonPressing(Game game, Scene s, SpritePlayer sppl) {
 		s.setOnKeyPressed(e-> {
-			switch (e.getCode()) {
-			case A:
-				setVelX(-5);
-				game.root.setLayoutX(game.root.getLayoutX()+10);
-				sppl.flipbackwards();
-				bulletDir = false;
-				break;
-			case D: 
-				setVelX(5);
-				game.root.setLayoutX(game.root.getLayoutX()-10);
-				sppl.flipforwards();
-				bulletDir = true;
-				break;
-			case S: 
-				setVelY(5);
-				break;
-			case W:
-				if (getGravity() == 0 && hasCollided(game.root)) {
-					setTranslateY(getTranslateY() - 10);
-					jump();
+				switch (e.getCode()) {
+				case A:
+					setVelX(-5);
+					game.root.setLayoutX(game.root.getLayoutX()+10);
+					sppl.flipbackwards();
+					bulletDir = false;
+					break;
+				case D: 
+					setVelX(5);
+					game.root.setLayoutX(game.root.getLayoutX()-10);
+					sppl.flipforwards();
+					bulletDir = true;
+					break;
+				case S: 
+					setVelY(5);
+					break;
+				case W:
+					if (getGravity() == 0 && hasCollided(game.root)) {
+						setTranslateY(getTranslateY() - 10);
+						jump();
+					}
+					break;
+				case SPACE:
+					ammo.lostBullet();
+					shoot(game.root);
+					break;
 				}
+<<<<<<< HEAD
 				break;
 			case SPACE:
 				ammo.lostBullet();
 				shoot(game.root);
 				break;
+			default:
+				break;
 			}
+=======
+				
+			});
+>>>>>>> branch 'master' of https://git-teaching.cs.bham.ac.uk/mod-team-proj-2018/halflife
 			
-		});
-		
 	}
 
 	/**
@@ -400,7 +413,6 @@ public class Player extends RectObject{
 	 * @param s Scene object to display all the objects
 	 */
 	public void buttonReleasing(Scene s) {
-		
 		s.setOnKeyReleased(e-> {
 			switch (e.getCode()) {
 			case A:
@@ -414,9 +426,12 @@ public class Player extends RectObject{
 				break;
 			case W:
 				break;
+			default:
+				break;
 			}
 			
 		});
+		
 		
 	}
 
