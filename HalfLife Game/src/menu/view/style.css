@@ -1,9 +1,15 @@
+@font-face {
+	font-family:"Press Start 2P";
+	src:url("file:src/menu/view/PressStart2P.ttf");
+}
 
 .root {
 	-fx-alignment: center ;
 	-fx-background-color: #333;
 }
+
 .button{
+	-fx-font-family: "Press Start 2P";
 	-fx-background-color: #FFF;
 	-fx-background-insets: 0,1,2;
 	-fx-background-radius: 3,2,1;
