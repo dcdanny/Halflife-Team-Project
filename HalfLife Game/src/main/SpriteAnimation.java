@@ -23,14 +23,14 @@ public class SpriteAnimation extends Pane {
 		Image frame1 = new Image("player1.png");
 		Image frame2 = new Image("player2.png");
 		Image frame3 = new Image("player3.png");
-		Image frame4 = new Image("player4.png");
+		//Image frame4 = new Image("player4.png");
 		
 		
 		ArrayList<Image> images = new ArrayList<>();
 		images.add(frame1);
 		images.add(frame2);
 		images.add(frame3);
-		images.add(frame4);
+		//images.add(frame4);
 		
 		Timeline timeline= new Timeline();
 		format(imageView);
