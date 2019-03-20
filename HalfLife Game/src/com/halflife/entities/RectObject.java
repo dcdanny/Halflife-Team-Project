@@ -15,11 +15,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
-public class RectObject extends Rectangle implements java.io.Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2072511921833351490L;
+public class RectObject extends Rectangle{
 	protected FadeTransition ft;
     protected Rectangle rect;
 
