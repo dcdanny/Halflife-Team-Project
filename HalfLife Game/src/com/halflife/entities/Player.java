@@ -390,9 +390,11 @@ public class Player extends RectObject{
 			case SPACE:
 				ammo.lostBullet();
 				shoot(game.root);
-				Media sound = new Media(new File("data/shootSound.mp3").toURI().toASCIIString());
-				MediaPlayer mediaPlayer = new MediaPlayer(sound);
-				mediaPlayer.play();
+				if (ammo.getAmmo() > 0) {
+					Media sound = new Media(new File("data/shootSound.mp3").toURI().toASCIIString());
+					MediaPlayer mediaPlayer = new MediaPlayer(sound);
+					mediaPlayer.play();
+				}
 				break;
 			default:
 				break;

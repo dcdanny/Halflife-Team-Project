@@ -98,7 +98,7 @@ public class Ammo extends Group {
 	 * Getter for no_of_bullets
 	 * @return The number of bullets the player has 
 	 */
-	private int getAmmo() {
+	public int getAmmo() {
 		return no_of_bullets;
 	}
 }
