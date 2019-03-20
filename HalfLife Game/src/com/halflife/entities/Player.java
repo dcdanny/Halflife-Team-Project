@@ -364,35 +364,27 @@ public class Player extends RectObject{
 	 * @param sppl The sprite player object that displays the player animation
 	 */
 	public void buttonPressing(Game game, Scene s, SpritePlayer sppl) {
-		s.setOnKeyPressed(e-> {
-				switch (e.getCode()) {
-				case A:
-					setVelX(-5);
-					game.root.setLayoutX(game.root.getLayoutX()+10);
-					sppl.flipbackwards();
-					bulletDir = false;
-					break;
-				case D: 
-					setVelX(5);
-					game.root.setLayoutX(game.root.getLayoutX()-10);
-					sppl.flipforwards();
-					bulletDir = true;
-					break;
-				case S: 
-					setVelY(5);
-					break;
-				case W:
-					if (getGravity() == 0 && hasCollided(game.root)) {
-						setTranslateY(getTranslateY() - 10);
-						jump();
-					}
-					break;
-				case SPACE:
-					ammo.lostBullet();
-					shoot(game.root);
-					break;
+		s.setOnKeyPressed(e -> {
+			switch (e.getCode()) {
+			case A:
+				setVelX(-5);
+				game.root.setLayoutX(game.root.getLayoutX() + 10);
+				sppl.flipbackwards();
+				bulletDir = false;
+				break;
+			case D:
+				setVelX(5);
+				game.root.setLayoutX(game.root.getLayoutX() - 10);
+				sppl.flipforwards();
+				bulletDir = true;
+			case S:
+				setVelY(5);
+				break;
+			case W:
+				if (getGravity() == 0 && hasCollided(game.root)) {
+					setTranslateY(getTranslateY() - 10);
+					jump();
 				}
-<<<<<<< HEAD
 				break;
 			case SPACE:
 				ammo.lostBullet();
@@ -401,11 +393,7 @@ public class Player extends RectObject{
 			default:
 				break;
 			}
-=======
-				
-			});
->>>>>>> branch 'master' of https://git-teaching.cs.bham.ac.uk/mod-team-proj-2018/halflife
-			
+		});
 	}
 
 	/**
