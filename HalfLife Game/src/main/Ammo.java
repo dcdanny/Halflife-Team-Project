@@ -21,13 +21,20 @@ public class Ammo extends Group {
 	
 	private ArrayList<ImageView>ammoList=new ArrayList<ImageView>();
 	
-	// Main method
+	/**
+	 * Constructor for displaying ammunition (leaves) on the game window
+	 * @param bullets Number of bullets to display on the game window
+	 */
 	public Ammo(int bullets){ 	
 		no_of_bullets = bullets;
 		addBullets();
 	}
 	
-	
+	/**
+	 * Sets the position of each ammo image to be displayed on the game window 
+	 * The constants used ensure the images are sufficiently spaced from eachother
+	 * @param ammunition A list of each ammo image displayed on the game window
+	 */
 	public void setAmmoImages(List<ImageView> ammunition) {
 		for (int i = 0; i < no_of_bullets; i++) {
 			ammunition.get(i).setRotate(90);
@@ -39,6 +46,9 @@ public class Ammo extends Group {
 	    }
 	}
 
+	/**
+	 * Removes a bullet image from the display
+	 */
 	public void lostBullet() {
 		
 		if (no_of_bullets>0) {
@@ -48,6 +58,10 @@ public class Ammo extends Group {
 		}
 	}
 	
+	/**
+	 * Adds bullet images to the screen dependent on how much ammo the player has
+	 * This is called when the class is instantiated to create the ImageView list
+	 */
 	public void addBullets() {
 		this.getChildren().clear();
 		no_of_bullets = getAmmo();
@@ -71,10 +85,19 @@ public class Ammo extends Group {
 	    }	   	   
 
 	}
+	
+	/**
+	 * Setter for no_of_bullets
+	 * @param i The number of bullets to assign 'no_of_bullets'
+	 */
 	public void setAmmo(int i) {
 		no_of_bullets = i;
 	}
 	
+	/**
+	 * Getter for no_of_bullets
+	 * @return The number of bullets the player has 
+	 */
 	private int getAmmo() {
 		return no_of_bullets;
 	}

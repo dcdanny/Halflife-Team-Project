@@ -11,12 +11,14 @@ import main.Game;
 import com.halflife.entities.*;
 public class CheckCollision {
 
-	private  boolean collided;
-	
-	public CheckCollision() {
+	private  boolean collided; // Determines whether the given object has collided with another
 
-	}
-
+	/**
+	 * Given an object checks whether it has collided with another
+	 * @param block The object to check collision with 
+	 * @param root The main game Pane, holds details on all current objects within the game
+	 * @return The object of which the given object has collided with 
+	 */
 	public  RectObject checkForCollision(Shape block, Pane root) {
 		collided = false;
 		  for (Node static_bloc : Game.getAllNodes(root)) {
@@ -42,10 +44,11 @@ public class CheckCollision {
 		    
 	}
 
-
+	/**
+	 * Getter for collided 
+	 * @return Whether the associated object is collided with anything
+	 */
 	public  boolean getCollided() {
 		return collided;
 	}
-//
-
 }
