@@ -1,18 +1,9 @@
 package com.halflife.entities;
 
-import java.io.FileInputStream;
 
-import java.io.FileNotFoundException;
-
-import javax.swing.plaf.synth.SynthSplitPaneUI;
-
-import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
 /**
@@ -86,7 +77,7 @@ public class RectObject extends Rectangle{
 		} else {
 			moveBulletX = -30;
 		}
-		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", Color.GREEN, root, bulletDir);
+		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", col, root, bulletDir);
 		return bullet;
 	}
 	

@@ -215,7 +215,6 @@ public class NetworkedPlayer extends Player {
 				
 				setVelX(5);
 				game.root.setLayoutX(game.root.getLayoutX()-10);
-				game.root.setStyle("-fx-background-color: #4f7b8a;");
 				break;
 			case S: 
 				//setVelY(5);
