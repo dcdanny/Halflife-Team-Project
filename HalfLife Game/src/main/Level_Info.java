@@ -10,6 +10,7 @@ public class Level_Info {
 	 * 4 - Left Wall
 	 * 5 - Enemy
 	 * 6 - Spike
+	 * 7 - Supply Drop
 	 */
 
 	public static final String[] LEVEL1=new String[] {

@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -42,26 +41,25 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-	private StackPane DeathShow;
-	
-	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
 
-	//private Player player= new Player(200,0,40,50,Color.WHITE,3);
+
 	private SpritePlayer spplayer= new SpritePlayer();
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
+	
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
 	private Server server;
+	
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
-//	private NetworkedPlayer temp;
 	private Message coords;
 	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 	
+	private StackPane DeathShow=new DeathScreen(this, spplayer.GetPlayer());
 	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
@@ -69,19 +67,30 @@ public class Game extends Application {
 
 	private SpriteAnimation sp= new SpriteAnimation();
 	
+	/**
+	 * Constructor for the Game class
+	 * @param server Contains server information needed for multiplayer functionality
+	 */
 	public Game(Server server) {
 		this.server = server;
 	}
 
-	
+	/**
+	 * Setter for currentLevel,  
+	 * @param currentLevel The string array containing details on the chosen level
+	 */
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
 	}
 
-	private Parent createContent() throws IOException {
-		
+	/**
+	 * Creates the visual content of the game such as the background and player
+	 * @return The constructed Pane root
+	 * @throws IOException
+	 */
+	private Parent createContent() throws IOException {	
 		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
-	        LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
+	     LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
 	        RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
 	        bg.setFill(lg1);
 		root.setPrefSize(800, 600);
@@ -121,13 +130,22 @@ public class Game extends Application {
 		return root;	
 	}
 	
-	
+	/**
+	 * Function to retrieve all nodes from a parent node including the parent node
+	 * @param root The root node
+	 * @return All nodes in the ArrayList including the parent
+	 */
 	public static ArrayList<Node> getAllNodes(Parent root) {
 	    ArrayList<Node> nodes = new ArrayList<Node>();
 	    addAllDescendents(root, nodes);
 	    return nodes;
 	}
 
+	/** 
+	 * Adds all nodes that can be defined as a RectObject to an ArrayList recursively
+	 * @param parent The parent node
+	 * @param nodes The ArrayList of descendant nodes that's added to recursively 
+	 */
 	private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
 	    for (Node node : parent.getChildrenUnmodifiable()) {
 	    	
@@ -149,6 +167,11 @@ public class Game extends Application {
 	int updates = 0;
 	int frames = 0;
 	long timer = System.currentTimeMillis();
+	
+	/**
+	 * Game loop function that calculates tick and frame rates 
+	 * Also detects objects marked as 'dead' and removes them from the game window
+	 */
 	private void update() {
 		long now = System.nanoTime();
 		delta += (now - lastTime) / ns;
@@ -177,6 +200,11 @@ public class Game extends Application {
 		}	
 	}
 	
+	/**
+	 * Called on each game tick to handle game functionality 
+	 * Acts as a controller for all entity loops 
+	 * Useful to look at as the 'heart' of the game
+	 */
 	private void tick() {
 		//boolean deathScreenDisplayed = false;
 	//	player.tick(root);
@@ -200,12 +228,11 @@ public class Game extends Application {
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
-			DeathShow = new DeathScreen(this,spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
-			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(),spplayer.GetPlayer(),root);
+			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
 //			deathScreenDisplayed = true;
 		}
@@ -228,7 +255,9 @@ public class Game extends Application {
 	
 
 
-	
+	/**
+	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
+	 */
 	@Override
 	public void start(Stage stage) throws Exception {
 //		System.out.println("Game is Starting!!!!!!!!!!");
@@ -244,8 +273,12 @@ public class Game extends Application {
 		
 		stage.show();
 	}
-	
 		
+	/**
+	 * Responsible for converting the String array given to a playable level
+	 * Each digit in the array corresponds to a different object 
+	 * @param lvl The encoded level
+	 */
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;	
 		
