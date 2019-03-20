@@ -8,8 +8,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<!--<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.MainMenuController">-->
-
 <VBox maxHeight="600" maxWidth="800" stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.MainMenuController">
 	<children>
       <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -17,19 +15,13 @@
             <Image url="@title/poko.png" />
          </image>
       </ImageView>
-      	<Label />
-      	<Label />
+      	<Label /> <Label /> <Label />
 		<Button onAction="#goSingle" text="SINGLE PLAYER" />
 		<Label />
 		<Button onAction="#goMulti" text="MULTIPLAYER" />
 		<Label />
 		<Button onAction="#goSettings" text="SETTINGS" />
 		<Label />
-		<Label />
-		<HBox>
-			<Button onAction="#goBack" text="BACK" />
-			<Region HBox.hgrow="ALWAYS" />
-		</HBox>
-
+		<Button onAction="#goBack" text="BACK" />
 	</children>
 </VBox>

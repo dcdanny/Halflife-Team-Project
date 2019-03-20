@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.Region?>
-
-<!--<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.SettingsMenuController">-->
+<?import javafx.scene.layout.VBox?>
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.SettingsMenuController">
 	<children>
-		<Text styleClass="title" text="SETTINGS"></Text>
-		<Label></Label>
-		
-		<HBox>
-			<Region HBox.hgrow="ALWAYS" />
-				<Text styleClass="subTitle" text="SOUND FX "></Text>
-				<ScrollBar layoutX="226.0" layoutY="155.0" prefHeight="17.0" prefWidth="288.0" />
-			<Region HBox.hgrow="ALWAYS" />
-		</HBox>
-		<Label></Label>
-		<HBox>
-			<Region HBox.hgrow="ALWAYS" />
-			<Text styleClass="subTitle" text="MUSIC "></Text>
-			<ScrollBar layoutX="226.0" layoutY="217.0" prefHeight="17.0" prefWidth="288.0" />
-			<Region HBox.hgrow="ALWAYS" />
-		</HBox>
-		
-		<Label></Label><Label></Label>
+      <ImageView fitHeight="900.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@title/settings.png" />
+         </image>
+      </ImageView>
+		<Label /> <Label /> <Label /> <Label /> <Label /> 
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+               <ImageView fitHeight="175.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@title/soundfx.png" />
+                  </image>
+               </ImageView>
+      				<ScrollBar prefHeight="20.0" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+               <ImageView fitHeight="80.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@title/music.png" />
+                  </image>
+               </ImageView>
+         			<ScrollBar prefHeight="20.0" prefWidth="200.0" />
+         </children>
+      </HBox>
+         <Label />
       <Button onAction="#goBack" text="BACK">
       </Button>
    </children>

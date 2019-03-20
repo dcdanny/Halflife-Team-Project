@@ -6,20 +6,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<!--<VBox stylesheets="menu/view/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.StartMenuController">-->
-
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.StartMenuController">
 	<children>
-      <Label />
-      <Label />
-      <Label />
-      <Label />
-      <ImageView fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+      <Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label />
+      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title/poko.png" />
-         </image></ImageView><Label prefHeight="50.0" prefWidth="50.0" /> 
-         <Label />
-         <Label />
+         </image></ImageView>
+         <Label prefHeight="100.0" prefWidth="100.0" /> 
+         <Label /> <Label />
 		<Button layoutX="242.0" layoutY="190.0" mnemonicParsing="false" onAction="#goStart" text="START" />
 		<Label /> 
 		<Button layoutX="243.0" layoutY="255.0" mnemonicParsing="false" onAction="#goExit" text="EXIT" />

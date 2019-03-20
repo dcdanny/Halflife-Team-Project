@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<!--<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.LevelMenuController">-->
-
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.LevelMenuController">
 	<children>
-      <ImageView fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+		<Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label />
+      <ImageView fitHeight="900.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title/selectgamelevel.png" />
          </image>
       </ImageView>
 		<Text strokeWidth="0.0" styleClass="subTitle" />
-		<Label />
+		<Label /> <Label /> <Label />
 		<HBox>
 		<Region prefHeight="75.0" HBox.hgrow="ALWAYS" />
 		<Button onAction="#go1" styleClass="levelBtn" text="1" />
@@ -31,7 +30,7 @@
 		<Button onAction="#go4" styleClass="levelBtn" text="4" />
 		<Region HBox.hgrow="ALWAYS" />
 		</HBox>
-		<Label />
+		<Label /> <Label /> <Label /> <Label />
 		<Button onAction="#goBack" text="BACK" />
 	</children>
 </VBox>

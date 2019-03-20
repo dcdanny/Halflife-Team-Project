@@ -30,10 +30,6 @@ public class LevelMenuController {
 			Message m = new Message(Level_Info.LEVEL1);
 			server.sendToAll(m);
 			game.start(primaryStage);
-			
-			
-			
-			
 	}
 	
 	// The "2" Button, directing to the Game "Level 2"
@@ -44,7 +40,6 @@ public class LevelMenuController {
 		game.start(primaryStage);
 		Message m = new Message(Level_Info.LEVEL2);
 		server.sendToAll(m);
-		
 	}
 	
 	// The "3" Button, directing to the Game "Level 3"
@@ -66,7 +61,6 @@ public class LevelMenuController {
 		Message m = new Message("lvl4");
 		server.sendToAll(m);
 	}
-	
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
