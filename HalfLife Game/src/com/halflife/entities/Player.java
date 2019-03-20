@@ -1,5 +1,6 @@
 package com.halflife.entities;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.animation.Animation;
@@ -15,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -387,6 +390,9 @@ public class Player extends RectObject{
 			case SPACE:
 				ammo.lostBullet();
 				shoot(game.root);
+				Media sound = new Media(new File("data/shootSound.mp3").toURI().toASCIIString());
+				MediaPlayer mediaPlayer = new MediaPlayer(sound);
+				mediaPlayer.play();
 				break;
 			default:
 				break;
