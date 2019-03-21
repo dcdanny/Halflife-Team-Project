@@ -8,4 +8,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="menu.StartMenu"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="HalfLife Game"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms512m"/>
 </launchConfiguration>

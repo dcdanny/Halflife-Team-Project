@@ -72,6 +72,7 @@ public class SpriteAnimation extends Pane {
 			 frame2 = new Image("enemy-2.png");
 			 frame3=new Image("enemy-1.png");
 			 t=.500;
+			 System.out.println("AN ENEMY");
 		}
 		if(type.equals("player")) {
 			
@@ -106,7 +107,9 @@ public class SpriteAnimation extends Pane {
 		
 	    timeline.getKeyFrames().add(nextframe);
 		timeline.setCycleCount(Timeline.INDEFINITE);
+		
 		timeline.play();
+		
 		this.getChildren().add(imageView);
 		playingAnimations.addToList(this);
 		
@@ -116,7 +119,11 @@ public class SpriteAnimation extends Pane {
 	public void stopAnimation() {
 		timeline.stop();
 		
+		
 		System.out.println("HAS STOPPED");
+	}
+	public Timeline getTimeline() {
+		return timeline;
 	}
 	private ImageView format (ImageView img) {
 		img.setFitWidth(120);
@@ -149,6 +156,9 @@ public class SpriteAnimation extends Pane {
 	}
 	public void removeAllOthers() {
 		playingAnimations.wipeList();
+	}
+	public void keepitself() {
+		playingAnimations.keepOnly(this);
 	}
 }
 

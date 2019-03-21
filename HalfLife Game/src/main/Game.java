@@ -45,7 +45,7 @@ public class Game extends Application {
 
 	private SpritePlayer spplayer= new SpritePlayer();
 	
-	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
+	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
@@ -96,7 +96,8 @@ public class Game extends Application {
 	        bg.setFill(lg1);
 		root.setPrefSize(800, 600);
 	root.getChildren().add(spplayer);
-	spplayer.GetAnimation().removeAllOthers();
+	//spplayer.GetAnimation().keepitself();
+
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -215,8 +216,11 @@ public class Game extends Application {
 		
 		spplayer.GetPlayer().tick(root);
 		
-		for (BaseEnemy enemy : enemies) {
-			enemy.tick(spplayer.GetPlayer(), root);
+		for (SpriteEnemy enemy : enemies) {
+			enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
+			if (enemy.GetEnemy().isDead()) {
+				enemy.getChildren().clear();
+			}
 		}
 		for (Spike spike : spikes) {
 			spike.tick(spplayer.GetPlayer(), root);
@@ -335,12 +339,12 @@ public class Game extends Application {
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
-					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
-					//SpriteEnemy spenemy=new SpriteEnemy(j*150,i*100-30,30,30);
-					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
-					root.getChildren().add(bEnemy);
-					enemies.add((BaseEnemy) bEnemy);
-					rectNodes.add((RectObject)bEnemy);
+					//Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
+					SpriteEnemy spenemy=new SpriteEnemy(j*150+120,i*100-30,30,30);
+				//	bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
+					root.getChildren().add(spenemy);
+					enemies.add((SpriteEnemy) spenemy);
+				//	rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);

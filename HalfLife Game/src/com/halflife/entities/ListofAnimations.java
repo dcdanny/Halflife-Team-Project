@@ -23,6 +23,14 @@ public class ListofAnimations {
 		System.out.println("currently this many animations: "+anilist.size());
 		
 	}
+	public void keepOnly(SpriteAnimation sp) {
+		for (int i = 0; i < anilist.size(); i++) {
+			if (!anilist.get(i).equals(sp)) {
+				anilist.remove(i);
+			}
+		}
+		System.out.println("currently this many animations: "+anilist.size());
+	}
 	public void wipeList() {
 		for (int i = 0; i < anilist.size(); i++) {
 			anilist.get(i).stopAnimation();

@@ -25,7 +25,7 @@ public class StartMenu extends Application {
 	private static Pane mainLayout;
 	private SpriteAnimation sp1 = new SpriteAnimation("player");
 	private SpriteAnimation sp2 = new SpriteAnimation("player");
-	private SpriteEnemy spenemy=new SpriteEnemy(150,100-30,30,30);
+	private SpriteEnemy spenemy=new SpriteEnemy(0,0-30,30,30);
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -58,8 +58,8 @@ public class StartMenu extends Application {
 		sp2.flip();
 		sp2.resizeView(500, -200, 300);
 		mainLayout.getChildren().add(spenemy);
-		mainLayout.getChildren().add(sp1);
-		mainLayout.getChildren().add(sp2);
+		//mainLayout.getChildren().add(sp1);
+	//	mainLayout.getChildren().add(sp2);
 		/*mainLayout.add(sp);*/
 		//System.out.println(mainLayout.getChildren());
 		

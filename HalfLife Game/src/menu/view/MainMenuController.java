@@ -16,8 +16,7 @@ public class MainMenuController {
 	
 	private Stage primaryStage;
 	private SpriteFollower sf;
-	private SpriteAnimation sp1 = new SpriteAnimation("player");
-	private SpriteAnimation sp2 = new SpriteAnimation("player");
+	
 	private String serverLocation;
 	public Server server;
 	
@@ -88,7 +87,8 @@ public class MainMenuController {
 	// The "BACK" button, directing to the first "HALFLIFE" menu
 	@FXML
 	private void goBack() throws IOException {
-		
+		SpriteAnimation sp1 = new SpriteAnimation("player");
+		SpriteAnimation sp2 = new SpriteAnimation("player");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
 		sp1.keepAllbut(2);
