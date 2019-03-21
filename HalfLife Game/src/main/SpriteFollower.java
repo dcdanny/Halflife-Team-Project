@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class SpriteFollower extends Pane {
-	SpriteAnimation sp= new SpriteAnimation();
+	SpriteAnimation sp= new SpriteAnimation("player");
 	double x;
 	double y;
 	
@@ -58,6 +58,9 @@ public class SpriteFollower extends Pane {
 
 	    timer.start();
 	    getChildren().add(sp);
+	}
+	public SpriteAnimation getSpriteAnimation(){
+		return sp;
 	}
 	
 }

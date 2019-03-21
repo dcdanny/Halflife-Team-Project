@@ -16,8 +16,8 @@ public class MainMenuController {
 	
 	private Stage primaryStage;
 	private SpriteFollower sf;
-	private SpriteAnimation sp1 = new SpriteAnimation();
-	private SpriteAnimation sp2 = new SpriteAnimation();
+	private SpriteAnimation sp1 = new SpriteAnimation("player");
+	private SpriteAnimation sp2 = new SpriteAnimation("player");
 	private String serverLocation;
 	public Server server;
 	
@@ -49,6 +49,7 @@ public class MainMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane mainMenu = loader.load();
 		sf= new SpriteFollower(mainMenu);
+		sf.getSpriteAnimation().removeAllOthers();
 		mainMenu.getChildren().add(sf);
 		LevelMenuController controller = loader.getController();
 		controller.setStage(primaryStage, server);
@@ -90,6 +91,7 @@ public class MainMenuController {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
+		sp1.keepAllbut(2);
 		sp1.resizeView(-10, -60, 300);
 		sp2.flip();
 		sp2.resizeView(500, -200, 300);

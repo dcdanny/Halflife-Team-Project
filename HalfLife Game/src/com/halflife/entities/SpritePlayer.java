@@ -20,7 +20,7 @@ public class SpritePlayer extends Pane {
 	public SpritePlayer() {
 		this.forward=true;
 		this.pl=  new Player(200,0,40,50,Color.PINK,3);
-		this.ani=new SpriteAnimation();
+		this.ani=new SpriteAnimation("player");
 		ani.resizeView(-38, -45, 120);
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
 		ani.translateYProperty().bindBidirectional(pl.translateYProperty());
@@ -56,6 +56,9 @@ public class SpritePlayer extends Pane {
 			ani.flipnorm();
 		}
 		forward=true;
+	}
+	public SpriteAnimation GetAnimation() {
+		return ani;
 	}
 }
 
