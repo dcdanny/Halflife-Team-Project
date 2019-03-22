@@ -4,6 +4,7 @@ package com.halflife.entities;
 import javafx.animation.FadeTransition;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import main.GameConstants;
 import javafx.scene.layout.Pane;
 
 /**
@@ -43,6 +44,7 @@ public class RectObject extends Rectangle{
 
 	 	setTranslateX(x);
 		setTranslateY(y);
+	
 	}
 	
 	/**
