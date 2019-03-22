@@ -21,7 +21,7 @@ public class SpriteEnemy extends Pane {
 		this.enemy=  new BaseEnemy(x,y,width,height);
 		this.ani=new SpriteAnimation("enemy");
 		System.out.println("created animation");
-		ani.resizeView(-38, -45, 120);
+		ani.resizeView(-38, -45, 100);
 		ani.translateXProperty().bindBidirectional(enemy.translateXProperty());
 		ani.translateYProperty().bindBidirectional(enemy.translateYProperty());
 		
