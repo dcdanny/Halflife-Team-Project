@@ -15,6 +15,7 @@ import javafx.application.Application;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -233,6 +234,12 @@ public class Game extends Application {
 		}		
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	/**
 	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
 	 */
@@ -244,6 +251,7 @@ public class Game extends Application {
 		createContent();
 		stage.setTitle("Poko");
 		Scene scene = new Scene(display);
+		setCursor(scene);
 		stage.setScene(scene);
 		
 		spplayer.GetPlayer().buttonPressing(this, scene,spplayer);

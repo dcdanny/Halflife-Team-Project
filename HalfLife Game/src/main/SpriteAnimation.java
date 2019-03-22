@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+
 import com.halflife.entities.ListofAnimations;
 
 import javafx.animation.Timeline;
@@ -22,45 +23,11 @@ public class SpriteAnimation extends Pane {
 	private ImageView enemyimg=new ImageView();
 	ArrayList<Image> images = new ArrayList<>();
 	Timeline timeline= new Timeline();
-	ListofAnimations playingAnimations= new ListofAnimations();
-	// ...
-/*	public SpriteAnimation() {
-		
-		Image frame1 = new Image("player1.png");
-		Image frame2 = new Image("player2.png");
-		Image frame3 = new Image("player3.png");
-	//	Image frame4 = new Image("player4.png");
-		
-		
-		ArrayList<Image> images = new ArrayList<>();
-		images.add(frame1);
-		images.add(frame2);
-		images.add(frame3);
-		//images.add(frame4);
-		
-		Timeline timeline= new Timeline();
-		format(imageView);
-	    KeyFrame nextframe = new KeyFrame(Duration.seconds(.300),
-	    
-                new EventHandler<ActionEvent>() {
 
-                    public void handle(ActionEvent event) {
-                    if (imageIndex==images.size()) {
-                    	imageIndex=0;
-                    }
-                    imageView.setImage(images.get(imageIndex));
-					imageIndex++;
-					
-                    }
-                });
-		
-	    this.setPickOnBounds(false);
-		
-	    timeline.getKeyFrames().add(nextframe);
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
-		this.getChildren().add(imageView);
-	}*/
+	ListofAnimations playingAnimations= new ListofAnimations();
+
+	
+
 	public SpriteAnimation(String type) {
 		
 		Image frame1=null;

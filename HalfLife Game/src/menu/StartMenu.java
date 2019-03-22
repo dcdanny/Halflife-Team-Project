@@ -1,6 +1,7 @@
 package menu;
 
 import java.io.File;
+
 //import java.io.File;
 import java.io.IOException;
 
@@ -8,7 +9,9 @@ import com.halflife.enemies.SpriteEnemy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
@@ -16,6 +19,7 @@ import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import main.ReadLevel;
 import main.SpriteAnimation;
 import menu.view.*;
 
@@ -53,6 +57,12 @@ public class StartMenu extends Application {
 		sp2.resizeView(470, -220, 300);
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	// Loading the first "HALFLIFE" menu
 	public void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -64,13 +74,16 @@ public class StartMenu extends Application {
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainLayout);
-		
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
 	}
 	
 	public static void main(String[] args) {
+		ReadLevel fReader = new ReadLevel();
+
 		launch(args);
+
 	}
 }
