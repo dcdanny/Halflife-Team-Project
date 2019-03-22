@@ -5,7 +5,7 @@
 
 .root {
 	-fx-alignment: center ;
-	-fx-background-color: #333333;
+	-fx-background-color: linear-gradient(#333333, #8096ba);
 }
 
 .button{
