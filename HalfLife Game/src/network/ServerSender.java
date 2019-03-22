@@ -5,25 +5,35 @@ import java.util.concurrent.*;
 
 // Continuously reads from message queue for a particular client,
 // forwarding to the client.
-
+/**
+ * ServerSender --- Continuously reads from message queue for a particular client,
+ * @author daniel
+ *
+ */
 public class ServerSender extends Thread {
 	private BlockingQueue<Message> clientQueue;
 	private ObjectOutputStream client;
 	private ClientTable clientTable;
 	
+	/**
+	 * Constructor for ServerSender
+	 * @param q Queue of messages to send
+	 * @param c ObjectOutputStream writing to the open socket to client
+	 * @param t
+	 */
 	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, ClientTable t) {
 		clientQueue = q;   
 		client = c;
 		clientTable = t;
 	}
 
+	/**
+	 * Run sender loop as separate thread
+	 */
 	public void run() {
-		// So that we can use the method readLine:
-		//BufferedReader user = new BufferedReader(new InputStreamReader(System.in));
-
 		try {
 			while (clientTable.getServerRunning()) {
-		        Message msg = clientQueue.take(); // Matches EEEEE in ServerReceiver
+		        Message msg = clientQueue.take();
 				client.writeObject(msg);
 				client.flush();
 			}
