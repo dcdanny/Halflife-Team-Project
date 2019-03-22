@@ -25,11 +25,6 @@ public class StartMenu extends Application {
 	private static Pane mainLayout;
 	private SpriteAnimation sp1 = new SpriteAnimation("player");
 	private SpriteAnimation sp2 = new SpriteAnimation("player");
-	private SpriteEnemy spEnemy1 = new SpriteEnemy(0,0,30,30);
-	private SpriteEnemy spEnemy2 = new SpriteEnemy(0,0,30,30);
-	private SpriteEnemy spEnemy3 = new SpriteEnemy(0,0,30,30);
-	private SpriteEnemy spEnemy4 = new SpriteEnemy(0,0,30,30);
-	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -56,14 +51,6 @@ public class StartMenu extends Application {
 		sp1.resizeView(10, -135, 300);
 		sp2.flip();
 		sp2.resizeView(470, -220, 300);
-		spEnemy1.setTranslateX(20);
-		spEnemy1.setTranslateY(-310);
-		spEnemy2.setTranslateX(720);
-		spEnemy2.setTranslateY(-310);
-		spEnemy3.setTranslateX(720);
-		spEnemy3.setTranslateY(140);
-		spEnemy4.setTranslateX(20);
-		spEnemy4.setTranslateY(140);
 	}
 	
 	// Loading the first "HALFLIFE" menu
@@ -74,10 +61,6 @@ public class StartMenu extends Application {
 		mainLayout = loader.load();
 		mainLayout.getChildren().add(sp1);
 		mainLayout.getChildren().add(sp2);
-		mainLayout.getChildren().add(spEnemy1);
-		mainLayout.getChildren().add(spEnemy2);
-		mainLayout.getChildren().add(spEnemy3);
-		mainLayout.getChildren().add(spEnemy4);
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainLayout);
