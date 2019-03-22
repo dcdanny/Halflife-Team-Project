@@ -41,33 +41,22 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-
-
 	private SpritePlayer spplayer= new SpritePlayer();
-	
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
-	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
-	
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
 	private Server server;
-	
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
-	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
-	
+	private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
-
 	private String[] currentLevel = Level_Info.LEVEL2;
-	private Color bgcol =Color.valueOf("#333333");
-
-	//private SpriteAnimation sp= new SpriteAnimation();
-	
+	private Color bgcol =Color.valueOf("#333333");	
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
@@ -86,6 +75,7 @@ public class Game extends Application {
 
 	/**
 	 * Creates the visual content of the game such as the background and player
+	 * if you are playing multiplayer it also adds the second player
 	 * @return The constructed Pane root
 	 * @throws IOException
 	 */
@@ -107,29 +97,15 @@ public class Game extends Application {
 		
 		timer.start();
 		display.getChildren().addAll(bg,root,spplayer.GetPlayer().getForeground());
-		
-		
 		s = network.Server.showConnected();
 		if (s.length>1) {
 			multiplayer=true;
 		}
 		Arrays.sort(s);
-		for (int i = 0; i <s.length-2;i++) {
-			System.out.println(s[i]);
-			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
-			netPlayers.add(temp);
+		if (multiplayer) {
+			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+			root.getChildren().add(player2);
 		}
-
-		for (NetworkedPlayer np : netPlayers) {
-//			System.out.println(np.toString());
-			root.getChildren().add(np);
-//			rectNodes.add(np);
-		}		
-		
-		//root.getChildren().add(spplayer.GetPlayer());
-		
-		root.getChildren().add(tempNP);
-
 		return root;	
 	}
 	
@@ -158,8 +134,7 @@ public class Game extends Application {
 	            addAllDescendents((Parent)node, nodes);
 	    	}
 	    }
-	}
-	
+	}	
 	
 	
 	// Game loop variables
@@ -193,8 +168,7 @@ public class Game extends Application {
 			System.out.println(updates + " Ticks, Fps " + frames);
 			updates = 0;
 			frames = 0;
-		}
-		
+		}		
 
 		for (Node object : getAllNodes(root)) {
 			RectObject newObj = (RectObject) object;
@@ -209,10 +183,6 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		//boolean deathScreenDisplayed = false;
-	//	player.tick(root);
-
-		
 		
 		spplayer.GetPlayer().tick(root);
 		
@@ -228,8 +198,9 @@ public class Game extends Application {
 		for (SupplyDrop supply : supplies) {
 			supply.tick(spplayer.GetPlayer());
 		}
-		for (NetworkedPlayer np : netPlayers) {
-			np.tick(root);
+		
+		if (multiplayer) {
+			player2.tick(root);
 		}
 		
 		spplayer.GetPlayer().checkPos(this);
@@ -244,26 +215,21 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (multiplayer) {
-		coords = new Message(spplayer.GetPlayer().getTranslateX(), spplayer.GetPlayer().getTranslateY());
-		server.sendToAll(coords);
+			coords = new Message(spplayer.GetPlayer().getTranslateX(), spplayer.GetPlayer().getTranslateY());
+			server.sendToAll(coords);
 		
-		Message temp = null;
-		try {
-			temp = server.getReceived().take();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		tempNP.setTranslateX(temp.getX());
-		tempNP.setTranslateY(temp.getY());
-		}
-		
-		
+			Message temp = null;
+			try {
+				temp = server.getReceived().take();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		player2.setTranslateX(temp.getX());
+		player2.setTranslateY(temp.getY());
+		}		
 	}
 	
-	
-
-
 	/**
 	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
 	 */
@@ -309,7 +275,6 @@ public class Game extends Application {
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
-//				System.out.println(platform);
 				rectNodes.add((RectObject)platform);
 				break; 
 				case '2':
@@ -347,7 +312,6 @@ public class Game extends Application {
 				//	bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(spenemy);
 					enemies.add((SpriteEnemy) spenemy);
-				//	rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
