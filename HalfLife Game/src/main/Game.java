@@ -36,7 +36,7 @@ import com.halflife.entities.*;
 
 import main.CheckCollision;
 import network.*;
-//IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
+
 
 public class Game extends Application {
 	public Pane root= new Pane();
@@ -89,8 +89,7 @@ public class Game extends Application {
 	        bg.setFill(lg1);
 		root.setPrefSize(800, 600);
 	root.getChildren().add(spplayer);
-	//spplayer.GetAnimation().keepitself();
-
+	
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -213,7 +212,7 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
-			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root);
+			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root,this);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
 //			deathScreenDisplayed = true;
 		}
@@ -251,6 +250,7 @@ public class Game extends Application {
 		
 		stage.show();
 	}
+	
 		
 	/**
 	 * Responsible for converting the String array given to a playable level

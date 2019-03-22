@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 public class VictoryScreen extends StackPane {
 	//SpriteAnimation sp= new SpriteAnimation();
 	private int timeint;
-	VictoryScreen(int timeGiven, Player player, Pane root){
+	VictoryScreen(int timeGiven, Player player, Pane root,Game game){
 		this.timeint=timeGiven;
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
 		 Image youwon = new Image("youwon.png");
@@ -80,6 +80,9 @@ public class VictoryScreen extends StackPane {
 	             player.setTranslateX(200);
 	             player.setTranslateY(0);
 	             player.getForeground().getChildren().remove(this);
+	             game.setUpLevel(game.GetCurrentLevel());
+	             
+	             
 	         });
 	         Image exit= new Image("exit.png");
 	         ImageView exitimg= new ImageView(exit);
@@ -106,6 +109,7 @@ public class VictoryScreen extends StackPane {
 	         });
 	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
+	             
 	         });
 	         
 	         this.getChildren().add(bg);

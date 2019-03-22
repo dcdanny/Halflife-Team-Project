@@ -107,6 +107,7 @@ public class DeathScreen extends StackPane {
 	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
 	             remove();
+	             
 	         });
 	         
 	         this.getChildren().add(bg);
