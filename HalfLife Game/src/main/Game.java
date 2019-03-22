@@ -48,7 +48,7 @@ public class Game extends Application {
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
-	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
+//	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	
 	private int levelWidth;
@@ -58,7 +58,7 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
-	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+	private NetworkedPlayer player2;
 	
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
@@ -86,6 +86,7 @@ public class Game extends Application {
 
 	/**
 	 * Creates the visual content of the game such as the background and player
+	 * if you are playing multiplayer it also adds the second player
 	 * @return The constructed Pane root
 	 * @throws IOException
 	 */
@@ -114,21 +115,10 @@ public class Game extends Application {
 			multiplayer=true;
 		}
 		Arrays.sort(s);
-		for (int i = 0; i <s.length-2;i++) {
-			System.out.println(s[i]);
-			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
-			netPlayers.add(temp);
+		if (multiplayer) {
+			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+			root.getChildren().add(player2);
 		}
-
-		for (NetworkedPlayer np : netPlayers) {
-//			System.out.println(np.toString());
-			root.getChildren().add(np);
-//			rectNodes.add(np);
-		}		
-		
-		//root.getChildren().add(spplayer.GetPlayer());
-		
-		root.getChildren().add(tempNP);
 
 		return root;	
 	}
@@ -228,9 +218,14 @@ public class Game extends Application {
 		for (SupplyDrop supply : supplies) {
 			supply.tick(spplayer.GetPlayer());
 		}
-		for (NetworkedPlayer np : netPlayers) {
-			np.tick(root);
+		
+		if (multiplayer) {
+			player2.tick(root);
 		}
+			
+//		for (NetworkedPlayer np : netPlayers) {
+//			np.tick(root);
+//		}
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
@@ -244,18 +239,18 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (multiplayer) {
-		coords = new Message(spplayer.GetPlayer().getTranslateX(), spplayer.GetPlayer().getTranslateY());
-		server.sendToAll(coords);
+			coords = new Message(spplayer.GetPlayer().getTranslateX(), spplayer.GetPlayer().getTranslateY());
+			server.sendToAll(coords);
 		
-		Message temp = null;
-		try {
-			temp = server.getReceived().take();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		tempNP.setTranslateX(temp.getX());
-		tempNP.setTranslateY(temp.getY());
+			Message temp = null;
+			try {
+				temp = server.getReceived().take();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		player2.setTranslateX(temp.getX());
+		player2.setTranslateY(temp.getY());
 		}
 	}
 	
