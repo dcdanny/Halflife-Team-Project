@@ -1,6 +1,4 @@
-package com.halflife.entities;
-
-import com.halflife.enemies.BaseEnemy;
+package com.halflife.enemies;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

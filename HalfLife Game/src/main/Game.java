@@ -257,6 +257,8 @@ public class Game extends Application {
 		tempNP.setTranslateX(temp.getX());
 		tempNP.setTranslateY(temp.getY());
 		}
+		
+		
 	}
 	
 	
