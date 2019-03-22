@@ -9,38 +9,26 @@
 }
 
 .button{
-	-fx-font-weight: bold;
-	-fx-background-color: white;
-	-fx-background-radius: 30;
-	-fx-font-size: 14;
-	-fx-text-fill: #191970;
 	-fx-font-family: "Press Start 2P";
-	-fx-border-width: 5;
-	-fx-pref-width: 300.0;
-	-fx-pref-height: 48.0;
-}
-
-.button:hover{
-	-fx-font-weight: bold;
 	-fx-background-color: white;
 	-fx-background-radius: 30;
-	-fx-font-size: 14;
-	-fx-text-fill: #191970;
-	-fx-border-color: #32CD32;
-	-fx-border-radius: 30;
-	-fx-border-width: 5;
+	-fx-background-insets: 0;
+	-fx-border-outsets: 5px;
+	-fx-text-fill: #585858;
+	-fx-font-size: 14px;
+	-fx-pref-width: 300.0;
+	-fx-pref-height:48.0;
+}
+.button:hover{
+	-fx-pref-width: 320.0;
 }
 .button:pressed{
-	-fx-font-weight: bold;
-	-fx-background-color: #32CD32;
-	-fx-background-radius: 30;
-	-fx-font-size: 14;
-	-fx-text-fill: white;
-	-fx-border-color: #32CD32;
-	-fx-border-radius: 30;
-	-fx-border-width: 5;
+	-fx-background-color: #FFED90;
 }
-
+.button:focused {
+	-fx-border-color:#585858;
+	-fx-border-width: 3;
+}
 .levelBtn{
 	-fx-padding: 10 50;
 	-fx-pref-width:60.0;
@@ -72,4 +60,7 @@ SpriteAnimation{
 }
 TextField{
 	-fx-font: 25px Tahoma;
+}
+ImageView{
+	-fx-fit-height:400px;
 }

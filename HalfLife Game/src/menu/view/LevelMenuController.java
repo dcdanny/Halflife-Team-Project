@@ -89,7 +89,7 @@ public class LevelMenuController {
 	@FXML
 	private ListView listview;
 	
-	public void goUpload(ActionEvent event) {
+	public void goUpload(ActionEvent event) throws Exception {
 		FileChooser fc = new FileChooser();
 		File selectedFile = fc.showOpenDialog(primaryStage);
 		if (selectedFile != null) {
@@ -97,7 +97,15 @@ public class LevelMenuController {
 		} else {
 			System.out.println("File is not valid");
 		}
-		System.out.println(selectedFile);
+		System.out.println(selectedFile.getPath());
+		ReadLevel readLevel = new ReadLevel(selectedFile.getPath());
+		readLevel.read();
+		
+		Game game = new Game(server);
+		game.setCurrentLevel(readLevel.getValidatedLevel());
+		Message m = new Message(readLevel.getValidatedLevel());
+		server.sendToAll(m);
+		game.start(primaryStage);
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
