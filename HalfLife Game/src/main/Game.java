@@ -60,7 +60,7 @@ public class Game extends Application {
 	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 	
-	private StackPane DeathShow=new DeathScreen(this, spplayer.GetPlayer());
+	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
@@ -234,6 +234,7 @@ public class Game extends Application {
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
