@@ -1,12 +1,16 @@
 package menu.view;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.Game;
 import main.Level_Info;
@@ -60,6 +64,21 @@ public class LevelMenuController {
 		Message m = new Message(Level_Info.LEVEL4);
 		server.sendToAll(m);
 		game.start(primaryStage);
+	}
+	
+	// The "Upload" Button
+	@FXML
+	private ListView listview;
+	
+	public void goUpload(ActionEvent event) {
+		FileChooser fc = new FileChooser();
+		File selectedFile = fc.showOpenDialog(primaryStage);
+		if (selectedFile != null) {
+			String fileName=fc.getInitialFileName();
+		} else {
+			System.out.println("File is not valid");
+		}
+		System.out.println(selectedFile);
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
