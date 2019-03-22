@@ -3,11 +3,10 @@ import java.net.*;
 import java.io.*;
 import java.util.concurrent.*;
 
-// Continuously reads from message queue for a particular client,
-// forwarding to the client.
+
 /**
- * ServerSender --- Continuously reads from message queue for a particular client,
- * @author daniel
+ * ServerSender --- Continuously reads from message queue for a particular client, forwarding to that client
+ * @author Daniel
  *
  */
 public class ServerSender extends Thread {
