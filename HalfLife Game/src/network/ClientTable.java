@@ -69,7 +69,7 @@ public class ClientTable {
 	 * 
 	 * @return Boolean true if the server is running, false if now
 	 */
-	protected boolean getServerRunning() {
+	boolean getServerRunning() {
 		return running;
 	}
 	/** Called if server is stopping. This stops all sender and receiver threads

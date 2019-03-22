@@ -18,7 +18,7 @@ public class ServerSender extends Thread {
 	 * Constructor for ServerSender
 	 * @param q Queue of messages to send
 	 * @param c ObjectOutputStream writing to the open socket to client
-	 * @param t
+	 * @param t Pointer to ClientTable
 	 */
 	public ServerSender(BlockingQueue<Message> q, ObjectOutputStream c, ClientTable t) {
 		clientQueue = q;   
