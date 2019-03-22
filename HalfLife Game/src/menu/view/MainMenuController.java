@@ -48,7 +48,7 @@ public class MainMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("levelmenu.fxml"));
 		Pane mainMenu = loader.load();
 		sf= new SpriteFollower(mainMenu);
-		sf.getSpriteAnimation().removeAllOthers();
+		sf.getSpriteAnimation().keepitself();
 		mainMenu.getChildren().add(sf);
 		LevelMenuController controller = loader.getController();
 		controller.setStage(primaryStage, server);

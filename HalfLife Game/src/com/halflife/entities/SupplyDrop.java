@@ -2,8 +2,11 @@ package com.halflife.entities;
 
 import java.util.Random;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import main.CheckCollision;
 import main.GameConstants;
 
@@ -25,7 +28,17 @@ public class SupplyDrop extends RectObject{
 	 * @param height Height of the supply drop
 	 */
 	public SupplyDrop(double x, double y, int width, int height) {
+		
 		super(x, y, width, height, GameConstants.TYPE_SUPPLY_DROP, Color.INDIGO);
+		Image supply= new Image("supplycrate.png",height*2,width*2,false,true);
+		
+		ImageView img=new ImageView(supply);
+		ImagePattern texture=new ImagePattern(supply,0,0,height,width,false);
+		
+	
+		
+		
+		this.setFill(texture);
 		collisionChecker = new CheckCollision();
 		generateContents();
 	}
