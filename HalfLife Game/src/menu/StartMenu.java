@@ -4,7 +4,7 @@ import java.io.File;
 //import java.io.File;
 import java.io.IOException;
 
-import com.halflife.entities.SpriteEnemy;
+import com.halflife.enemies.SpriteEnemy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

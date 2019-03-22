@@ -60,7 +60,7 @@ public class Game extends Application {
 	private boolean multiplayer=false;
 	private NetworkedPlayer tempNP = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 	
-	private StackPane DeathShow=new DeathScreen(this, spplayer.GetPlayer());
+	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
@@ -90,7 +90,7 @@ public class Game extends Application {
 	 * @throws IOException
 	 */
 	private Parent createContent() throws IOException {	
-		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
+		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("#333333"))};
 	     LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
 	        RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
 	        bg.setFill(lg1);
@@ -234,6 +234,7 @@ public class Game extends Application {
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
@@ -256,6 +257,8 @@ public class Game extends Application {
 		tempNP.setTranslateX(temp.getX());
 		tempNP.setTranslateY(temp.getY());
 		}
+		
+		
 	}
 	
 	
@@ -303,7 +306,7 @@ public class Game extends Application {
 					platforms.add(edgePlatL);
 					break;
 				case '1':
-				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
+				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
 //				System.out.println(platform);
@@ -336,7 +339,7 @@ public class Game extends Application {
 					rectNodes.add((RectObject)wall);
 					break;
 				case '5':
-					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					//Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
@@ -347,7 +350,7 @@ public class Game extends Application {
 				//	rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
-					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					SpikePlatform sPlatform =new SpikePlatform(j*150,i*100,30,10);
@@ -357,7 +360,7 @@ public class Game extends Application {
 					break;
 				
 				case '7':
-					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);

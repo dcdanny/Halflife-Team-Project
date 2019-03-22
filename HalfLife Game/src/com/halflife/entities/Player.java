@@ -391,7 +391,7 @@ public class Player extends RectObject{
 				ammo.lostBullet();
 				shoot(game.root);
 				if (ammo.getAmmo() > 0) {
-					Media sound = new Media(new File("data/shootSound.mp3").toURI().toASCIIString());
+					Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
 					MediaPlayer mediaPlayer = new MediaPlayer(sound);
 					mediaPlayer.play();
 				}
