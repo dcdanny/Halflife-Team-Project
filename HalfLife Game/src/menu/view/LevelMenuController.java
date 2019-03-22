@@ -9,11 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.ListView;
-=======
 import javafx.scene.image.Image;
->>>>>>> ab711d56e363722fb75edff3667908c0a18a701e
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
