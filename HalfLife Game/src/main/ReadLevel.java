@@ -9,6 +9,16 @@ import java.io.PrintWriter;
 public class ReadLevel {
 	private String path = System.getenv("APPDATA");
 	private String[] userLevel;
+	
+	private boolean CHECK_LENGTH = true;
+	private boolean CHECK_ROWLENGTH = true;
+	private boolean CHECK_CEILING = true;
+	private boolean CHECK_FLOOR = true;
+	private boolean CHECK_WALL = true;
+	private boolean CHECK_GOAL = true;
+	private boolean CHECK_STARTPLAT = true;
+
+	
 	/**
 	 * 1st Constructor for the WriteFile class
 	 * @param _path The path to write to 
@@ -45,35 +55,38 @@ public class ReadLevel {
 	
 	public String[] getLevel() {
 		try {
-			if (validateLevel(read()))
+			setLevel(read());
+			if (isValid())
 				return userLevel;
+			else
+				return returnErrors();
+				
 		} catch (IOException e) {
-			return new String[] {"Level contains errors"};
+			return returnErrors();
 		}
-		return new String[] {"Level contains errors"};
 	}
 	
-	public boolean validateLevel(String[] level) {
+	public void setLevel(String[] level) {
 		if (level.length !=6)
-			return false;
+			CHECK_LENGTH = false;
 		
 		//Row Length
 		int rowLength = level[0].length();
 		for (int i = 1; i < level.length; i++) {
 			if (level[i].length() != rowLength)
-				return false;
+				CHECK_ROWLENGTH = false;
 		}
 		
 		String topRow = level[0].substring(1);
 		for (char c : topRow.toCharArray()) {
 			if (c != '0')
-				return false; // Air in top row
+				CHECK_CEILING = false; // Air in top row
 		}		
 
 		String bottomRow = level[5].substring(1);
 		for (char c : bottomRow.toCharArray()) {
 			if (c != '3')
-				return false; // No floor
+				CHECK_FLOOR = false; // No floor
 		}
 		
 		boolean hasStartPlat = false;
@@ -82,7 +95,7 @@ public class ReadLevel {
 				hasStartPlat = true;
 		}
 		if (!hasStartPlat)
-			return false;
+			CHECK_STARTPLAT = false;
 		
 		boolean hasGoal = false;
 		for (int i = 1; i < 5; i++) {
@@ -91,15 +104,26 @@ public class ReadLevel {
 			}
 		}
 		if (!hasGoal)
-			return false;
+			CHECK_GOAL = false;
 		
 		//Checking all 4 at start of each string
 		for (int i = 0; i < level.length; i++) {
 			if (level[i].charAt(0) != '4')
-				return false;
+				CHECK_WALL = false;
 		}
 		
 		userLevel = level;
-		return true;
+	}
+	
+	public boolean isValid() {
+		if  (CHECK_CEILING&&CHECK_FLOOR&&CHECK_GOAL&&CHECK_LENGTH&&CHECK_ROWLENGTH&&CHECK_STARTPLAT&&CHECK_WALL)
+			return true;
+		else
+			return false;
+	}
+	
+	public String[] returnErrors() {
+		return new String[] {"Errors in user defined level: \n" + "LENGTH CHECK: " + CHECK_LENGTH + "\n ROW LENGTH CHECK: " + CHECK_ROWLENGTH + "\n CEILING CHECK: " + CHECK_CEILING
+				+ "\n FLOOR CHECK: " + CHECK_FLOOR + "\n WALL CHECK: " + CHECK_WALL + "\n START PLATFORM CHECK: " + CHECK_STARTPLAT + "\n GOAL STATE CHECK: " + CHECK_GOAL};
 	}
 }
