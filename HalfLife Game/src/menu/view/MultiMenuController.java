@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -16,6 +18,12 @@ public class MultiMenuController {
 		primaryStage = stage;
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	// The "HOST GAME" button, directing to the "HOST GAME" menu
 	@FXML
 	private void goHost() throws IOException {
@@ -24,6 +32,7 @@ public class MultiMenuController {
 		HostMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(multiMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -36,6 +45,7 @@ public class MultiMenuController {
 		JoinMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(multiMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -48,6 +58,7 @@ public class MultiMenuController {
 		MainMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(multiMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

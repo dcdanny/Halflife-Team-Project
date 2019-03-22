@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.SpriteAnimation;
@@ -25,6 +27,12 @@ public class MainMenuController {
 		primaryStage = stage;
 		this.primaryStage.setWidth(800);//So the menu works on bens laptop?
 		this.primaryStage.setHeight(600);//So the menu works on bens laptop?
+	}
+	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
 	}
 
 	// The "SINGLE-PLAYER" button, directing to the "SELECT GAME LEVEL" menu
@@ -53,6 +61,7 @@ public class MainMenuController {
 		LevelMenuController controller = loader.getController();
 		controller.setStage(primaryStage, server);
 		Scene scene = new Scene(mainMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -68,6 +77,7 @@ public class MainMenuController {
 		MultiMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -80,6 +90,7 @@ public class MainMenuController {
 		SettingsMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -100,6 +111,7 @@ public class MainMenuController {
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

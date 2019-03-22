@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.SpriteAnimation;
@@ -18,6 +20,12 @@ public class StartMenuController {
 		primaryStage = stage;
 	}
 
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	// The "START" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goStart() throws IOException {
@@ -27,6 +35,7 @@ public class StartMenuController {
 		MainMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		this.primaryStage.setOnCloseRequest((WindowEvent event) -> {
 	        System.exit(0);

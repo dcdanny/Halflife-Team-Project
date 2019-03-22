@@ -1,15 +1,25 @@
 package menu.view;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+<<<<<<< HEAD
+import javafx.scene.control.ListView;
+=======
+import javafx.scene.image.Image;
+>>>>>>> ab711d56e363722fb75edff3667908c0a18a701e
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.Game;
 import main.Level_Info;
+import main.ReadLevel;
 import network.*;
 
 public class LevelMenuController {
@@ -45,21 +55,52 @@ public class LevelMenuController {
 	// The "3" Button, directing to the Game "Level 3"
 	@FXML
 	private void go3() throws Exception {
-		Game game = new Game(server);
-		game.setCurrentLevel(Level_Info.LEVEL3);
-		Message m = new Message(Level_Info.LEVEL3);
-		server.sendToAll(m);
-		game.start(primaryStage);
+		ReadLevel levelReader = new ReadLevel();
+		levelReader.getLevel();
+		if (levelReader.isValid()) {
+			Game game = new Game(server);
+			game.setCurrentLevel(levelReader.getValidatedLevel());
+			Message m = new Message(levelReader.getValidatedLevel());
+			server.sendToAll(m);
+			game.start(primaryStage);
+		}
+		else
+			System.out.println(levelReader.returnErrors()[0]);
 	}
 	
 	// The "4" Button, directing to the Game "Level 4"
 	@FXML
 	private void go4() throws Exception {
-		Game game = new Game(server);
-		game.setCurrentLevel(Level_Info.LEVEL4);
-		Message m = new Message(Level_Info.LEVEL4);
-		server.sendToAll(m);
-		game.start(primaryStage);
+		ReadLevel levelReader = new ReadLevel();
+		levelReader.getLevel();
+		if (levelReader.isValid()) {
+			Game game = new Game(server);
+			game.setCurrentLevel(levelReader.getValidatedLevel());
+			Message m = new Message(levelReader.getValidatedLevel());
+			server.sendToAll(m);
+			game.start(primaryStage);
+		}
+	}
+	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
+	// The "Upload" Button
+	@FXML
+	private ListView listview;
+	
+	public void goUpload(ActionEvent event) {
+		FileChooser fc = new FileChooser();
+		File selectedFile = fc.showOpenDialog(primaryStage);
+		if (selectedFile != null) {
+			String fileName=fc.getInitialFileName();
+		} else {
+			System.out.println("File is not valid");
+		}
+		System.out.println(selectedFile);
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
@@ -71,6 +112,7 @@ public class LevelMenuController {
 		MainMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(levelMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
