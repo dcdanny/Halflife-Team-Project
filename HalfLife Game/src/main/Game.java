@@ -41,33 +41,22 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-
-
 	private SpritePlayer spplayer= new SpritePlayer();
-	
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
-//	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
 	private ArrayList<Node> platforms=new ArrayList<Node>();
-	
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
 	private Server server;
-	
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
 	private NetworkedPlayer player2;
-	
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
-
 	private String[] currentLevel = Level_Info.LEVEL2;
-	private Color bgcol =Color.valueOf("#333333");
-
-	//private SpriteAnimation sp= new SpriteAnimation();
-	
+	private Color bgcol =Color.valueOf("#333333");	
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
@@ -108,8 +97,6 @@ public class Game extends Application {
 		
 		timer.start();
 		display.getChildren().addAll(bg,root,spplayer.GetPlayer().getForeground());
-		
-		
 		s = network.Server.showConnected();
 		if (s.length>1) {
 			multiplayer=true;
@@ -119,7 +106,6 @@ public class Game extends Application {
 			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 			root.getChildren().add(player2);
 		}
-
 		return root;	
 	}
 	
@@ -148,8 +134,7 @@ public class Game extends Application {
 	            addAllDescendents((Parent)node, nodes);
 	    	}
 	    }
-	}
-	
+	}	
 	
 	
 	// Game loop variables
@@ -183,8 +168,7 @@ public class Game extends Application {
 			System.out.println(updates + " Ticks, Fps " + frames);
 			updates = 0;
 			frames = 0;
-		}
-		
+		}		
 
 		for (Node object : getAllNodes(root)) {
 			RectObject newObj = (RectObject) object;
@@ -199,10 +183,6 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		//boolean deathScreenDisplayed = false;
-	//	player.tick(root);
-
-		
 		
 		spplayer.GetPlayer().tick(root);
 		
@@ -222,10 +202,6 @@ public class Game extends Application {
 		if (multiplayer) {
 			player2.tick(root);
 		}
-			
-//		for (NetworkedPlayer np : netPlayers) {
-//			np.tick(root);
-//		}
 		
 		spplayer.GetPlayer().checkPos(this);
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
@@ -251,14 +227,9 @@ public class Game extends Application {
 			}
 		player2.setTranslateX(temp.getX());
 		player2.setTranslateY(temp.getY());
-		}
-		
-		
+		}		
 	}
 	
-	
-
-
 	/**
 	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
 	 */
@@ -304,7 +275,6 @@ public class Game extends Application {
 				Node platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 				root.getChildren().add(platform);
 				platforms.add(platform);
-//				System.out.println(platform);
 				rectNodes.add((RectObject)platform);
 				break; 
 				case '2':
@@ -342,7 +312,6 @@ public class Game extends Application {
 				//	bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(spenemy);
 					enemies.add((SpriteEnemy) spenemy);
-				//	rectNodes.add((RectObject)bEnemy);
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
