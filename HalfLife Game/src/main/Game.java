@@ -363,7 +363,7 @@ public class Game extends Application {
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
-					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);
+					SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
 					root.getChildren().add(supply);
 					supplies.add(supply);
 					rectNodes.add((RectObject)supply);
