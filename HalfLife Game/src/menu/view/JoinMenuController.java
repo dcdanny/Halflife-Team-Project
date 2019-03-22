@@ -6,8 +6,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -24,6 +26,12 @@ public class JoinMenuController {
 		primaryStage = stage;
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	// The "BACK" Button, directing to the "MULTI-PLAYERS" menu
 	@FXML
 	private void goBack() throws IOException {
@@ -32,6 +40,7 @@ public class JoinMenuController {
 		MultiMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(joinMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -52,6 +61,7 @@ public class JoinMenuController {
 		WaitScreenController controller = loader.getController();
 		controller.setStage(primaryStage, client);
 		Scene scene = new Scene(joinMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		
 //		primaryStage.setOnShowing((WindowEvent e) -> {

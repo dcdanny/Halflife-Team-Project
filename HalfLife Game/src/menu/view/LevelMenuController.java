@@ -5,7 +5,9 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
@@ -73,6 +75,12 @@ public class LevelMenuController {
 		}
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
+	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
 	@FXML
 	private void goBack() throws IOException {
@@ -82,6 +90,7 @@ public class LevelMenuController {
 		MainMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(levelMenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

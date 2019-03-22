@@ -14,9 +14,11 @@ import javafx.event.EventHandler;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -79,6 +81,11 @@ public class WaitScreenController {
 		System.out.println("STARTGAME");
 	}
 	
+	private Scene setCursor(Scene s) {
+		Image cursor = new Image("cursor.png");
+		s.setCursor(new ImageCursor(cursor));
+		return s;
+	}
 	
 	// The "Disconnect" Button
 	@FXML
@@ -89,6 +96,7 @@ public class WaitScreenController {
 		JoinMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(joinmenu);
+		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
