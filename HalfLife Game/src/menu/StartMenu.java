@@ -1,6 +1,7 @@
 package menu;
 
 import java.io.File;
+
 //import java.io.File;
 import java.io.IOException;
 
@@ -16,6 +17,7 @@ import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import main.ReadLevel;
 import main.SpriteAnimation;
 import menu.view.*;
 
@@ -71,6 +73,11 @@ public class StartMenu extends Application {
 	}
 	
 	public static void main(String[] args) {
+		ReadLevel fReader = new ReadLevel();
+		System.out.println("Readinbgf");
+		System.out.println(fReader.getLevel()[0]);
+
 		launch(args);
+
 	}
 }

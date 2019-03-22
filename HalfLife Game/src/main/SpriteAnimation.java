@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+
 import com.halflife.entities.ListofAnimations;
 
 import javafx.animation.Timeline;
@@ -22,7 +23,10 @@ public class SpriteAnimation extends Pane {
 	private ImageView enemyimg=new ImageView();
 	ArrayList<Image> images = new ArrayList<>();
 	Timeline timeline= new Timeline();
+
 	ListofAnimations playingAnimations= new ListofAnimations();
+
+	
 
 	public SpriteAnimation(String type) {
 		
