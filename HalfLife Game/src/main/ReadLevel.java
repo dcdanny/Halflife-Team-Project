@@ -18,14 +18,23 @@ public class ReadLevel {
 	private boolean CHECK_GOAL = true;
 	private boolean CHECK_STARTPLAT = true;
 
-
+	/**
+	 * Constructor for ReadLevel allowing user to specify path of file
+	 * @param _path The path of the file to read in from
+	 */
 	public ReadLevel(String _path) {
 		path = _path;
 	}
 
+	/**
+	 * Constructor for ReadLevel where the default path is used
+	 */
 	public ReadLevel() {
 	}
 	
+	/**
+	 * @return The userLevel string array
+	 */
 	public String[] getValidatedLevel() {
 		return userLevel;
 	}
@@ -46,7 +55,9 @@ public class ReadLevel {
 		return level;
 	}
 	
-	
+	/**
+	 * @return The user defined level if valid or the checks which failed if not
+	 */
 	public String[] getLevel() {
 		try {
 			setLevel(read());
@@ -60,6 +71,10 @@ public class ReadLevel {
 		}
 	}
 	
+	/**
+	 * Sets the boolean flags for validating the level, ensures it fits the given criteria
+	 * @param level The user defined level
+	 */
 	public void setLevel(String[] level) {
 		if (level.length !=6)
 			CHECK_LENGTH = false;
@@ -109,6 +124,10 @@ public class ReadLevel {
 		userLevel = level;
 	}
 	
+	/**
+	 * Checks whether any boolean flags have failed the checks
+	 * @return Whether or not the given level is valid
+	 */
 	public boolean isValid() {
 		if  (CHECK_CEILING&&CHECK_FLOOR&&CHECK_GOAL&&CHECK_LENGTH&&CHECK_ROWLENGTH&&CHECK_STARTPLAT&&CHECK_WALL)
 			return true;
@@ -116,6 +135,10 @@ public class ReadLevel {
 			return false;
 	}
 	
+	/**
+	 * Constructs a string of all the checks and which ones failed
+	 * @return A string with all boolean flags and their values
+	 */
 	public String[] returnErrors() {
 		return new String[] {"Errors in user defined level: \n" + "LENGTH CHECK: " + CHECK_LENGTH + "\n ROW LENGTH CHECK: " + CHECK_ROWLENGTH + "\n CEILING CHECK: " + CHECK_CEILING
 				+ "\n FLOOR CHECK: " + CHECK_FLOOR + "\n WALL CHECK: " + CHECK_WALL + "\n START PLATFORM CHECK: " + CHECK_STARTPLAT + "\n GOAL STATE CHECK: " + CHECK_GOAL};
