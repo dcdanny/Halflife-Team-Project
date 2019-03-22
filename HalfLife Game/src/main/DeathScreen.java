@@ -73,6 +73,7 @@ public class DeathScreen extends StackPane {
 	             player.setTranslateX(200);
 	             player.setTranslateY(0);
 	             player.getForeground().getChildren().remove(this);
+	             game.setUpLevel(game.GetCurrentLevel());
 	             
 	             
 	         });

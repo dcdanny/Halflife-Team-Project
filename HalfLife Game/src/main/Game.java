@@ -72,6 +72,9 @@ public class Game extends Application {
 	public void setCurrentLevel(String[] currentLevel) {
 		this.currentLevel = currentLevel;
 	}
+	public String[] GetCurrentLevel() {
+		return currentLevel;
+	}
 
 	/**
 	 * Creates the visual content of the game such as the background and player
@@ -254,7 +257,7 @@ public class Game extends Application {
 	 * Each digit in the array corresponds to a different object 
 	 * @param lvl The encoded level
 	 */
-	private void setUpLevel(String[] lvl) {
+	public void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;	
 		
 		for (int i = 0; i < lvl.length; i++) {
@@ -312,6 +315,7 @@ public class Game extends Application {
 				//	bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
 					root.getChildren().add(spenemy);
 					enemies.add((SpriteEnemy) spenemy);
+					rectNodes.add((RectObject)spenemy.GetEnemy());
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
