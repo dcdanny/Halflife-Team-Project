@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.Game;
 import main.Level_Info;
+import main.ReadLevel;
 import network.*;
 
 public class LevelMenuController {
@@ -45,21 +46,31 @@ public class LevelMenuController {
 	// The "3" Button, directing to the Game "Level 3"
 	@FXML
 	private void go3() throws Exception {
-		Game game = new Game(server);
-		game.setCurrentLevel(Level_Info.LEVEL3);
-		Message m = new Message(Level_Info.LEVEL3);
-		server.sendToAll(m);
-		game.start(primaryStage);
+		ReadLevel levelReader = new ReadLevel();
+		levelReader.getLevel();
+		if (levelReader.isValid()) {
+			Game game = new Game(server);
+			game.setCurrentLevel(levelReader.getValidatedLevel());
+			Message m = new Message(levelReader.getValidatedLevel());
+			server.sendToAll(m);
+			game.start(primaryStage);
+		}
+		else
+			System.out.println(levelReader.returnErrors()[0]);
 	}
 	
 	// The "4" Button, directing to the Game "Level 4"
 	@FXML
 	private void go4() throws Exception {
-		Game game = new Game(server);
-		game.setCurrentLevel(Level_Info.LEVEL4);
-		Message m = new Message(Level_Info.LEVEL4);
-		server.sendToAll(m);
-		game.start(primaryStage);
+		ReadLevel levelReader = new ReadLevel();
+		levelReader.getLevel();
+		if (levelReader.isValid()) {
+			Game game = new Game(server);
+			game.setCurrentLevel(levelReader.getValidatedLevel());
+			Message m = new Message(levelReader.getValidatedLevel());
+			server.sendToAll(m);
+			game.start(primaryStage);
+		}
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"

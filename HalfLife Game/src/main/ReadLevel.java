@@ -18,22 +18,16 @@ public class ReadLevel {
 	private boolean CHECK_GOAL = true;
 	private boolean CHECK_STARTPLAT = true;
 
-	
-	/**
-	 * 1st Constructor for the WriteFile class
-	 * @param _path The path to write to 
-	 * @param _append Whether or not the writer should append any data to the end of an existing file or overwrite it
-	 */
+
 	public ReadLevel(String _path) {
 		path = _path;
 	}
-	
-	/**
-	 * 2nd Constructor for the WriteFile class
-	 * No path needed in this one, uses the default APPDATA location
-	 * @param _append Whether or not the writer should append any data to the end of an existing file or overwrite it
-	 */
+
 	public ReadLevel() {
+	}
+	
+	public String[] getValidatedLevel() {
+		return userLevel;
 	}
 	
 	/**

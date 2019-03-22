@@ -74,8 +74,6 @@ public class StartMenu extends Application {
 	
 	public static void main(String[] args) {
 		ReadLevel fReader = new ReadLevel();
-		System.out.println("Readinbgf");
-		System.out.println(fReader.getLevel()[0]);
 
 		launch(args);
 
