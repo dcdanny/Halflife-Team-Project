@@ -148,7 +148,7 @@ public class Server extends Thread {
 	
 	/**
 	 * Gets message queue of messages received by the server
-	 * @return  BlockingQueue of message objects
+	 * @return BlockingQueue of message objects
 	 */
 	public BlockingQueue<Message> getReceived() {
 		String recipient = "server";
