@@ -9,9 +9,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+/**
+ * ReadJSONFile --- A class to help with reading game levels from a JSON file
+ * -- Not currently used in the final game implementation --
+ * @author Daniel
+ *
+ */
 public class ReadJSONFile {
 	//TODO remove main class and replace with constructor in calling class (Main here just gives example of usage)
+	/**
+	 * Main method to test this implementation
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			//path to json file may be incorrect. Stored in git repo halflife/HalfLife Game/data/level1.json
@@ -21,6 +30,10 @@ public class ReadJSONFile {
 	        e.printStackTrace();
 		}
 	}
+	/**
+	 * Method to read in a json file and parse it
+	 * @param fileToRead Filereader object representing the file to be read
+	 */
 	public ReadJSONFile(FileReader fileToRead){
 		JSONParser parser = new JSONParser();
 		

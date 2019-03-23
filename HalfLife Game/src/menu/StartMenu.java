@@ -79,7 +79,10 @@ public class StartMenu extends Application {
 		primaryStage.show();
 		
 	}
-	
+	/**
+	 * Main Class to start the game
+	 * @param args Command line arguments passed - None needed
+	 */
 	public static void main(String[] args) {
 		ReadLevel fReader = new ReadLevel();
 

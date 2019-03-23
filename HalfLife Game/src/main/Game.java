@@ -38,6 +38,11 @@ import com.halflife.entities.*;
 import main.CheckCollision;
 import network.*;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
+/**
+ * Game --- A class to represent the entire game as seen on the host or in single player mode
+ * @author Halflife
+ *
+ */
 
 public class Game extends Application {
 	public Pane root= new Pane();

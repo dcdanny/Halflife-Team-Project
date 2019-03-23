@@ -39,7 +39,11 @@ import com.halflife.entities.*;
 import main.CheckCollision;
 import network.*;
 //IF YOU WANT TO TEST WITH THE SPRITE go to the start method and comment out where necessary
-
+/**
+ * GameClient --- A class to represent the entire game as seen on the multiplayer client
+ * @author Halflife
+ *
+ */
 public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
