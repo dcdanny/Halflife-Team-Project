@@ -115,6 +115,13 @@ public class Game extends Application {
 			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
 			root.getChildren().add(player2);
 		}
+		
+		ImageView controls = new ImageView(new Image("controls.png"));
+		controls.setX(-30);
+		controls.setY(350);
+		controls.setFitHeight(250);
+		controls.setFitWidth(250);
+		root.getChildren().add(controls);
 		return root;	
 	}
 	
