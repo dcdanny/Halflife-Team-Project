@@ -203,6 +203,7 @@ public class Game extends Application {
 	private void tick() {
 		paused = spplayer.GetPlayer().getPaused();
 		if (!paused) {
+			spplayer.GetPlayer().getClock();
 			pauseShowing = false;
 			spplayer.GetPlayer().tick(root);
 			for (SpriteEnemy enemy : enemies) {

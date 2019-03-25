@@ -107,7 +107,6 @@ public class Player extends RectObject{
 	public void tick(Pane root) {
 		if (lives == 0) {	
 			setDead(true);
-			
 		}
 		
 		moveX((int)velX);
@@ -257,6 +256,10 @@ public class Player extends RectObject{
 	public boolean hasCollided(Pane root) {
 		collisionChecker.checkForCollision(this, root);
 		return collisionChecker.getCollided();
+	}
+	
+	public void getClock() {
+		clock.continueTime();
 	}
 	
 	/**
@@ -486,6 +489,7 @@ public class Player extends RectObject{
 	 */
 	private void pauseGame() {
 		paused = true;
+		clock.pauseTime();
 	}
 	
 	/**

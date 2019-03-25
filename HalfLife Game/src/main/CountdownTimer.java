@@ -14,20 +14,15 @@ public class CountdownTimer extends Pane{
 	
 	Label label=new Label("0");
 	
-	
 	public CountdownTimer() {
-	
-	  label.setFont(javafx.scene.text.Font.font(50 ));
-	  label.setTextFill(Color.valueOf("#C2C1BB"));
-	label.setTranslateX(0 ); 
-	label.setTranslateY(0);
-	getChildren().add(label);
-	ticker= new Timeline(new KeyFrame(Duration.seconds(1), e-> timelabel()));
-	
-	ticker.setCycleCount(Timeline.INDEFINITE); //change the clock
-	ticker.play(); 
-	
-	  
+		label.setFont(javafx.scene.text.Font.font(50 ));
+		label.setTextFill(Color.valueOf("#C2C1BB"));
+		label.setTranslateX(0 ); 
+		label.setTranslateY(0);
+		getChildren().add(label);
+		ticker= new Timeline(new KeyFrame(Duration.seconds(1), e-> timelabel()));
+		ticker.setCycleCount(Timeline.INDEFINITE); //change the clock
+		ticker.play();  
 	}
 	private void timelabel() {
 		if (tmp>-1) {
@@ -36,11 +31,21 @@ public class CountdownTimer extends Pane{
 		emp=tmp+"";
 		label.setText(emp);
 		}
+	
 	public int getTime() {
 		return tmp;
 	}
+	
 	public void resetTime() {
 		tmp=0;
+	}
+	
+	public void pauseTime() {
+		ticker.pause();
+	}
+	
+	public void continueTime() {
+		ticker.play();
 	}
 }
 
