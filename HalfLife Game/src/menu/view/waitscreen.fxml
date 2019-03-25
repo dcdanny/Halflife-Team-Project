@@ -8,12 +8,12 @@
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.WaitScreenController">
 	<children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="700.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title/waiting.png" />
          </image>
       </ImageView>
-		<Label />
-		<Button onAction="#goBack" text="Disconnect" />
+		<Label /> <Label /> <Label />
+		<Button onAction="#goBack" text="DISCONNECT" />
    </children>
 </VBox>
