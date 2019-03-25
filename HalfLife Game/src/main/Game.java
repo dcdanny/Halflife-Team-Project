@@ -47,7 +47,7 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-	private SpritePlayer spplayer= new SpritePlayer();
+	private SpritePlayer spplayer;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -63,12 +63,15 @@ public class Game extends Application {
 	private VictoryScreen VictoryShow;
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
+	private int levelNumber;
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
 	 */
-	public Game(Server server) {
+	public Game(Server server, int lvlNum) {
 		this.server = server;
+		levelNumber = lvlNum;
+		spplayer = new SpritePlayer(levelNumber);
 	}
 
 	/**
@@ -112,7 +115,7 @@ public class Game extends Application {
 		}
 		Arrays.sort(s);
 		if (multiplayer) {
-			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3, levelNumber);
 			root.getChildren().add(player2);
 		}
 		

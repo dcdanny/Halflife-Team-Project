@@ -1,6 +1,9 @@
 package com.halflife.entities;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javafx.animation.Animation;
@@ -49,7 +52,8 @@ public class Player extends RectObject{
 	private CountdownTimer clock; //Clock object for displaying the count down timer
 	private boolean bulletDir = true; //Determines which way the player is facing
 	protected CheckCollision collisionChecker; //Determines whether the player has collided with another object
-	
+	private int levelNumber; 
+	private boolean hasWritten = false;
 	/**
 	 * Constructor of the player object
 	 * @param x X coordinate of the player object
@@ -59,8 +63,10 @@ public class Player extends RectObject{
 	 * @param col Colour of the player object
 	 * @param lives Number of lives the player object has
 	 */
-	public Player(double x, double y, int width, int height, Color col, int lives) {
+	public Player(double x, double y, int width, int height, Color col, int lives, int lvlNum) {
 		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
+		
+		levelNumber = lvlNum;
 		
 		collisionChecker = new CheckCollision();
 
@@ -117,14 +123,38 @@ public class Player extends RectObject{
 					System.out.println("Winner");
 				}
 				
-				
+				if (!hasWritten) {
 				WriteFile wr = new WriteFile(false);
+				FileReader fr;
+				String[] levels = new String[4];
 				try {
-					wr.write("level1=true");
+					fr = new FileReader(wr.getPath()+ "/levels.txt");
+					BufferedReader r =  new BufferedReader(fr);
+					
+					for (int i = 0; i < 4; i++) {
+						levels[i] = r.readLine();
+					}
+					System.out.println("LEVELS:" + levels[0]);
+					System.out.println("LEVELS:" + levels[1]);
+					System.out.println("LEVELS:" + levels[2]);
+					System.out.println("LEVELS:" + levels[3]);
+					levels[levelNumber-1] = "level"+levelNumber+"=true";
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				try {
+					
+					for (int i = 0; i <4; i++) {
+						wr.write(levels);
+					}
+					hasWritten = true;
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+				}
 			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife(root);

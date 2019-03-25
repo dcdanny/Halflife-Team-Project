@@ -1,5 +1,10 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -28,17 +33,39 @@ public class WriteFile {
 		append = _append;
 	}
 	
+	public void firstTimeStart() throws FileNotFoundException {
+		File fileChecker = new File(path + "/levels.txt");
+		
+		if (!fileChecker.exists()) {
+			try {
+				String[] skeletonText = new String[] {"level1=false","level2=false","level3=false","level4=false"};
+				write(skeletonText);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public String getPath() {
+		return path;
+	}
+	
 	/**
 	 * Writes level completion data to the given path
 	 * @param text The text to write into the file
 	 * @throws IOException
 	 */
-	public void write(String text) throws IOException {
+	public void write(String[] text) throws IOException {
 		FileWriter writer = new FileWriter(path + "/levels.txt", append);
-		PrintWriter pWriter = new PrintWriter(writer);
+		BufferedWriter bw = new BufferedWriter(writer);
 		
-		pWriter.printf( "%s" + "%n" , text);
-		pWriter.close();
+		for (String str : text) {
+			bw.write(str);
+			bw.newLine();
+		}
+		
+		bw.close();
 	}
 	
 }

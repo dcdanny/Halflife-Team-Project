@@ -32,7 +32,7 @@ public class LevelMenuController {
 	// The "1" Button, directing to the Game "Level 1"
 	@FXML
 	private void go1() throws Exception {
-			Game game = new Game(server);
+			Game game = new Game(server,1);
 			game.setCurrentLevel(Level_Info.LEVEL1);
 			Message m = new Message(Level_Info.LEVEL1);
 			server.sendToAll(m);
@@ -42,7 +42,7 @@ public class LevelMenuController {
 	// The "2" Button, directing to the Game "Level 2"
 	@FXML
 	private void go2() throws Exception {
-		Game game = new Game(server);
+		Game game = new Game(server,2);
 		game.setCurrentLevel(Level_Info.LEVEL2);
 		Message m = new Message(Level_Info.LEVEL2);
 		server.sendToAll(m);
@@ -52,7 +52,7 @@ public class LevelMenuController {
 	// The "3" Button, directing to the Game "Level 3"
 	@FXML
 	private void go3() throws Exception {
-		Game game = new Game(server);
+		Game game = new Game(server,3);
 		game.setCurrentLevel(Level_Info.LEVEL3);
 		Message m = new Message(Level_Info.LEVEL3);
 		server.sendToAll(m);
@@ -62,7 +62,7 @@ public class LevelMenuController {
 	// The "4" Button, directing to the Game "Level 4"
 	@FXML
 	private void go4() throws Exception {
-		Game game = new Game(server);
+		Game game = new Game(server, 4);
 		game.setCurrentLevel(Level_Info.LEVEL4);
 		Message m = new Message(Level_Info.LEVEL4);
 		server.sendToAll(m);
@@ -92,7 +92,7 @@ public class LevelMenuController {
 		readLevel.getLevel();
 		
 		if (readLevel.isValid()) {
-			Game game = new Game(server);
+			Game game = new Game(server,0);
 			game.setCurrentLevel(readLevel.getValidatedLevel());
 			System.out.println("LVL TO LOAD: " + readLevel.getValidatedLevel());
 			Message m = new Message(readLevel.getValidatedLevel());

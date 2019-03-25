@@ -48,9 +48,9 @@ public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
-	private NetworkedPlayer player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3);
+	private NetworkedPlayer player;
 
-	private SpritePlayer spplayer= new SpritePlayer();
+	private SpritePlayer spplayer;
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -62,7 +62,7 @@ public class GameClient extends Application {
 	private Message coords;
 	private NetworkedPlayer tempNP;
 	private Color bgcol =Color.valueOf("#333333");
-
+	private int levelNumber;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
@@ -70,8 +70,11 @@ public class GameClient extends Application {
 	 * Constructor for the GameClient class
 	 * @param client The client object 
 	 */
-	public GameClient(Client client) {
+	public GameClient(Client client, int lvlNum) {
 		this.client=client;
+		levelNumber = lvlNum;
+		spplayer= new SpritePlayer(levelNumber);
+		player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3, levelNumber);
 	}
 
 	/**
@@ -119,7 +122,7 @@ public class GameClient extends Application {
 //		}		
 		
 //		netPlayers.add
-		tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3);
+		tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3, levelNumber);
 //		for (NetworkedPlayer np : netPlayers) {
 			root.getChildren().add(tempNP);
 //		}

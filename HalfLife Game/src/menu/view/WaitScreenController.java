@@ -103,7 +103,7 @@ public class WaitScreenController {
 	private void startGame(String[] msgR2) throws Exception{
 		System.out.println("message:"+msgR2);
 		
-		GameClient game = new GameClient(client);
+		GameClient game = new GameClient(client,0);
 		game.setCurrentLevel(msgR2);
 		game.start(primaryStage);
 				
