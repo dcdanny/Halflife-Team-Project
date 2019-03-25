@@ -51,7 +51,7 @@ public class GameClient extends Application {
 	
 	private SpritePlayer spriteNP;
 	private SpritePlayer spplayer;
-	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
+	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
@@ -215,8 +215,11 @@ public class GameClient extends Application {
 		
 		spplayer.GetNetPlayer().tick(root);
 		
-		for (BaseEnemy enemy : enemies) {
-			enemy.tick(spplayer.GetNetPlayer(), root);
+		for (SpriteEnemy enemy : enemies) {
+			enemy.GetEnemy().tick(spplayer.GetNetPlayer(), root);
+			if (enemy.GetEnemy().isDead()) {
+				enemy.getChildren().clear();
+			}
 		}
 		for (Spike spike : spikes) {
 			spike.tick(spplayer.GetNetPlayer(), root);
@@ -305,11 +308,11 @@ public class GameClient extends Application {
 			for (int j = 0; j < line.length(); j++) {
 				switch(line.charAt(j)) {
 				case '0':
-					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.valueOf("#4f7b8a"));
+					Node edgePlatR =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_RIGHT,Color.TRANSPARENT);
 					edgePlatR.setTranslateX(edgePlatR.getTranslateX()+1);
 					root.getChildren().add(edgePlatR);
 					platforms.add(edgePlatR);
-					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.valueOf("#4f7b8a"));
+					Node edgePlatL =new RectObject(j*150,i*100,1,1,GameConstants.TYPE_EDGE_PLATFORM_LEFT,Color.TRANSPARENT);
 					edgePlatL.setTranslateX(edgePlatL.getTranslateX()+148);
 					root.getChildren().add(edgePlatL);
 					platforms.add(edgePlatL);
@@ -347,9 +350,11 @@ public class GameClient extends Application {
 					root.getChildren().add(platform);
 					platforms.add(platform);
 					Node bEnemy = new BaseEnemy(j*150,i*100-30,30,30);
-					bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
-					root.getChildren().add(bEnemy);
-					enemies.add((BaseEnemy) bEnemy);
+					SpriteEnemy spenemy=new SpriteEnemy(j*150+120,i*100-30,30,30);
+					//	bEnemy.setTranslateX(bEnemy.getTranslateX()+120);
+						root.getChildren().add(spenemy);
+						enemies.add((SpriteEnemy) spenemy);
+						
 					break;
 				case '6':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
@@ -364,7 +369,7 @@ public class GameClient extends Application {
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
 					platforms.add(platform);
-					SupplyDrop supply =new SupplyDrop(j*150,i*100-30,30,30);
+					SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
 					root.getChildren().add(supply);
 					supplies.add(supply);
 					break;
