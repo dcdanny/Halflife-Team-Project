@@ -222,6 +222,7 @@ public class Game extends Application {
 			spplayer.GetPlayer().checkPos(this);
 		} else if (!spplayer.GetPlayer().getForeground().getChildren().contains(pauseScreen)) {
 			pauseScreen = new PauseScreen();
+			spplayer.GetPlayer().getForeground().getChildren().add(pauseScreen);
 		}
 		
 		

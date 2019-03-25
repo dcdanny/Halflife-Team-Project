@@ -445,6 +445,7 @@ public class Player extends RectObject{
 				
 				break;
 			case ESCAPE:
+				pauseGame();
 				break;
 			default:
 				break;
@@ -471,7 +472,6 @@ public class Player extends RectObject{
 			case W:
 				break;
 			case ESCAPE:
-				pauseGame();
 				break;
 			default:
 				break;
