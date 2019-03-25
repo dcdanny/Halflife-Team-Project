@@ -58,9 +58,11 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
+	private boolean paused = false;
 	private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
+	private StackPane pauseScreen;
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
 	private int levelNumber;
@@ -202,27 +204,33 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		
-		spplayer.GetPlayer().tick(root);
-		
-		for (SpriteEnemy enemy : enemies) {
-			enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
-			if (enemy.GetEnemy().isDead()) {
-				enemy.getChildren().clear();
+		paused = spplayer.GetPlayer().getPaused();
+		if (!paused) {
+			spplayer.GetPlayer().tick(root);
+			for (SpriteEnemy enemy : enemies) {
+				enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
+				if (enemy.GetEnemy().isDead()) {
+					enemy.getChildren().clear();
+				}
 			}
+			for (Spike spike : spikes) {
+				spike.tick(spplayer.GetPlayer(), root);
+			}
+			for (SupplyDrop supply : supplies) {
+				supply.tick(spplayer.GetPlayer());
+			}
+			spplayer.GetPlayer().checkPos(this);
+		} else if (!spplayer.GetPlayer().getForeground().getChildren().contains(pauseScreen)) {
+			pauseScreen = new PauseScreen();
 		}
-		for (Spike spike : spikes) {
-			spike.tick(spplayer.GetPlayer(), root);
-		}
-		for (SupplyDrop supply : supplies) {
-			supply.tick(spplayer.GetPlayer());
-		}
+		
+		
 		
 		if (multiplayer) {
 			player2.tick(root);
 		}
 		
-		spplayer.GetPlayer().checkPos(this);
+		
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
 			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
