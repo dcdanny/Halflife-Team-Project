@@ -14,12 +14,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Ammo --- Adds the ammunition images to the player's screen, and controls
+ * how much ammo the player has
+ * @author Halflife
+ */
 public class Ammo extends Group {
 	
-	// Number of bullets the player starts with
-	private int no_of_bullets;
+	private int no_of_bullets; //Number of bullets the player starts with
 	
-	private ArrayList<ImageView>ammoList=new ArrayList<ImageView>();
+	private ArrayList<ImageView>ammoList=new ArrayList<ImageView>(); //Stores the ammo images
 	
 	/**
 	 * Constructor for displaying ammunition (leaves) on the game window

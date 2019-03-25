@@ -9,6 +9,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import main.Game;
 import com.halflife.entities.*;
+
+/**
+ * CheckCollision --- Checks whether two given objects have collided
+ * @author Halflife
+ */
 public class CheckCollision {
 
 	private  boolean collided; // Determines whether the given object has collided with another

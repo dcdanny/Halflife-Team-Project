@@ -19,9 +19,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * Displays a new screen when the player has lost all of their lives
+ * @author Halflife
+ */
 public class DeathScreen extends StackPane {
 
-	 DeathScreen(Game game, Player player) {
+	/**
+	 * Constructor for the death screen, creates all buttons
+	 * @param game Game object to reset the player
+	 * @param player Player to be reset
+	 */
+	public DeathScreen(Game game, Player player) {
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.valueOf("#333333"));
 		 Image youdied = new Image("youdied.png");
          ImageView img= new ImageView(youdied);
@@ -33,20 +42,17 @@ public class DeathScreen extends StackPane {
 		 
 		 Fade(bg);
 				         
-	         Image restart = new Image("restart.png");
-	         ImageView resimg= new ImageView(restart);
-	         resimg.setFitWidth(400);
-	         resimg.setTranslateX(-150);
-	         resimg.setTranslateY(180);
-	         resimg.setPreserveRatio(true);
-	         resimg.setSmooth(true);
-	         resimg.setCache(true);
-	         RectObject resbutton=new RectObject(-150,180,250,100,"restart button",Color.TRANSPARENT);
+		 Image restart = new Image("restart.png");
+	     ImageView resimg= new ImageView(restart);
+	     resimg.setFitWidth(400);
+	     resimg.setTranslateX(-150);
+	     resimg.setTranslateY(180);
+	     resimg.setPreserveRatio(true);
+	     resimg.setSmooth(true);
+	     resimg.setCache(true);
+	     RectObject resbutton=new RectObject(-150,180,250,100,"restart button",Color.TRANSPARENT);
 	       
-	         
-	      //  resbutton.setFill(new javafx.scene.paint.ImagePattern(restart));
-	         
-	         resbutton.setOnMouseEntered(new EventHandler<MouseEvent>
+	     resbutton.setOnMouseEntered(new EventHandler<MouseEvent>
 	         () {
 
 	             @Override
@@ -55,7 +61,7 @@ public class DeathScreen extends StackPane {
 	             }
 	         });
 
-	         resbutton.setOnMouseExited(new EventHandler<MouseEvent>
+	     resbutton.setOnMouseExited(new EventHandler<MouseEvent>
 	         () {
 
 	             @Override
@@ -64,7 +70,7 @@ public class DeathScreen extends StackPane {
 	             }
 	         });
 	         
-	         resbutton.setOnMouseClicked((MouseEvent e) -> {
+	     resbutton.setOnMouseClicked((MouseEvent e) -> {
 	             remove();
 	             player.setDead(false);
 	             player.addLives(3);	   
@@ -77,17 +83,17 @@ public class DeathScreen extends StackPane {
 	             
 	             
 	         });
-	         Image exit= new Image("exit.png");
-	         ImageView exitimg= new ImageView(exit);
-	         exitimg.setFitWidth(400);
-	         exitimg.setTranslateX(140);
-	         exitimg.setTranslateY(180);
-	         exitimg.setPreserveRatio(true);
-	         exitimg.setSmooth(true);
-	         exitimg.setCache(true);
+	     Image exit= new Image("exit.png");
+	     ImageView exitimg= new ImageView(exit);
+	     exitimg.setFitWidth(400);
+	     exitimg.setTranslateX(140);
+	     exitimg.setTranslateY(180);
+	     exitimg.setPreserveRatio(true);
+	     exitimg.setSmooth(true);
+	     exitimg.setCache(true);
 	         
-	         RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
-	         exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
+	     RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
+	     exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
 	         () {
 
 	             @Override
@@ -96,7 +102,7 @@ public class DeathScreen extends StackPane {
 	             }
 	         });
 
-	         exitbutton.setOnMouseExited(new EventHandler<MouseEvent>
+	     exitbutton.setOnMouseExited(new EventHandler<MouseEvent>
 	         () {
 
 	             @Override
@@ -104,34 +110,31 @@ public class DeathScreen extends StackPane {
 	                exitimg.setFitWidth(400);
 	             }
 	         });
-	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
+	     exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
 	             remove();
 	             
 	         });
 	         
-	         this.getChildren().add(bg);
-	         this.getChildren().add(img);
-			this.getChildren().add(resimg);
-			this.getChildren().add(resbutton);
-			
-			this.getChildren().add(exitimg);
-			this.getChildren().add(exitbutton);
-			
-		
-}
-	 public void Fade(RectObject rec) {
-			if (rec.getType().equals("deathscreen")) {
-					
+	     this.getChildren().add(bg);
+	     this.getChildren().add(img);
+		 this.getChildren().add(resimg);
+		 this.getChildren().add(resbutton);
+		 this.getChildren().add(exitimg);
+		 this.getChildren().add(exitbutton);	
+	}
+	
+	/**
+	 * Adds a fade to when the death screen is displayed
+	 * @param rec Background object that fades
+	 */
+	public void Fade(RectObject rec) {
+			if (rec.getType().equals("deathscreen")) {					
 				 FadeTransition ft = new FadeTransition(Duration.millis(2000), this);
-				//the fade may seem to quick but it is there, while the game is running you can see
-				 //the fade better
 				 ft.setFromValue(0.0);
 				 ft.setToValue(1.0);
 				 ft.setCycleCount(1);
 				 ft.setAutoReverse(false);
-				    
-				
 				 Double opa = this.getOpacity();
 		         if (opa.intValue() == 0) {
 		             return;
@@ -141,18 +144,18 @@ public class DeathScreen extends StackPane {
 		         
 		         if (as == Animation.Status.RUNNING) {
 		             return;
-		         
 		         }
 		         if (as == Animation.Status.STOPPED) {
 		             ft.play();
 		         }           
-		         
 			}
 		}
+	
+	/**
+	 * Removes the death screen when the user clicks either button
+	 */
 	 public void remove() {
 		 this.getChildren().clear();
-		 
-		// this.getChildren().remove(from, to);
 	 }
 		
 }

@@ -258,6 +258,9 @@ public class Player extends RectObject{
 		return collisionChecker.getCollided();
 	}
 	
+	/**
+	 * Continues the clock when the game is unpaused
+	 */
 	public void getClock() {
 		clock.continueTime();
 	}
@@ -445,7 +448,6 @@ public class Player extends RectObject{
 						mediaPlayer.play();
 					}
 				}
-				
 				break;
 			case ESCAPE:
 				pauseGame();

@@ -13,9 +13,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * PauseScreen --- Creates a small overlay that appears when the user pauses
+ * the game.
+ * @author Halflife
+ */
 public class PauseScreen extends StackPane {
 	
-	PauseScreen(Player player){
+	/**
+	 * Constructor for the pause screen, creates all buttons
+	 * @param player player object to be paused
+	 */
+	public PauseScreen(Player player){
 		 RectObject bg=new RectObject(265,150,250,300,"pausescreen",Color.rgb(1, 1, 1, 0.5));
 		 
 		 Image resume = new Image("pauseResume.png");
@@ -86,6 +95,9 @@ public class PauseScreen extends StackPane {
          this.getChildren().add(exitButton);
 	}
 	
+	/**
+	 * Removes the pause screen when the user presses 'resume'
+	 */
 	 public void remove() {
 		 this.getChildren().clear();
 	 }
