@@ -8,13 +8,12 @@
 
 <VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.StartMenuController">
 	<children>
-      <Label /> <Label /> <Label />
-      <ImageView fitHeight="130.0" pickOnBounds="true" preserveRatio="true">
+      <Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label />
+      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@title/poko.png" />
          </image></ImageView>
-         <Label prefHeight="100.0"/> 
-         <Label />
+         <Label /> <Label /> <Label />
 		<Button onAction="#goStart" text="START" />
 		<Label />
 		<Button onAction="#goExit" text="EXIT" />
