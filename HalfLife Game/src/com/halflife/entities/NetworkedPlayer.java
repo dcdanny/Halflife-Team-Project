@@ -37,8 +37,8 @@ public class NetworkedPlayer extends Player {
 	 * @param col Colour of the player object
 	 * @param lives Number of lives the player object has
 	 */
-	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives) {
-		super(x,y,width,height, col, 3);
+	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives, int lvlNum) {
+		super(x,y,width,height, col, 3, lvlNum);
 		collisionChecker = new CheckCollision();
 		movement(x, y);		
 		completedLevel = false;
@@ -76,11 +76,11 @@ public class NetworkedPlayer extends Player {
 					completedLevel = true;
 				}
 				WriteFile wr = new WriteFile(false);
-				try {
-					wr.write("level1=true");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					wr.write("level1=true");
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife(root);

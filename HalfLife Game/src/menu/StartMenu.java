@@ -1,7 +1,7 @@
 package menu;
 
 import java.io.File;
-
+import java.io.FileNotFoundException;
 //import java.io.File;
 import java.io.IOException;
 
@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import main.ReadLevel;
 import main.SpriteAnimation;
+import main.WriteFile;
 import menu.view.*;
 
 public class StartMenu extends Application {
@@ -79,10 +80,17 @@ public class StartMenu extends Application {
 		primaryStage.show();
 		
 	}
-	
+	/**
+	 * Main Class to start the game
+	 * @param args Command line arguments passed - None needed
+	 */
 	public static void main(String[] args) {
-		ReadLevel fReader = new ReadLevel();
-
+		WriteFile firstRunCheck = new WriteFile(true);
+		try {
+			firstRunCheck.firstTimeStart();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		launch(args);
 
 	}

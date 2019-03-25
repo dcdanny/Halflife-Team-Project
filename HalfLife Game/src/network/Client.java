@@ -8,6 +8,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import main.Game;
 import main.Level_Info;
 
+/**
+ * Client --- Attempt to connect to a Server and set up communication threads to it
+ * 
+ * @author Daniel
+ *
+ */
 public class Client extends Thread {
 	ObjectOutputStream toServer;
 	ObjectInputStream fromServer;
@@ -19,6 +25,13 @@ public class Client extends Thread {
 	private BlockingQueue<Message> sendQueue;
 	private BlockingQueue<Message> receiveQueue;
 	
+	/**
+	 * Constructor for client
+	 * 
+	 * @param port Port number to connect to server on
+	 * @param nickname My client nickname
+	 * @param hostname Hostname of server to connect to
+	 */
 	public Client(int port,String nickname,String hostname) {
 
 		// Open sockets:
@@ -33,13 +46,13 @@ public class Client extends Thread {
 		this.receiveQueue = new LinkedBlockingQueue<Message>();
 		
 	}
+	/**
+	 * Run client in separate thread
+	 */
 	public void run(){
-	
 		try {
-			server = new Socket(hostname, port); // Matches AAAAA in Server.java
-			//toServer = new PrintStream(server.getOutputStream());
+			server = new Socket(hostname, port);
 			toServer = new ObjectOutputStream(server.getOutputStream());
-			//fromServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
 			fromServer = new ObjectInputStream(server.getInputStream());
 			clientStart = true;
 		}
@@ -75,23 +88,35 @@ public class Client extends Thread {
 			}
 		}
 	}
+	/**
+	 * Method to send a message object to server
+	 * @param message Message object to send
+	 */
 	public void sendToServer(Message message) {
-		BlockingQueue<Message> recipientsQueue = sendQueue; // Matches EEEEE in ServerSender.java
+		BlockingQueue<Message> recipientsQueue = sendQueue;
 		recipientsQueue.offer(message);
-		System.out.println("Sent to: servaa");//DEBUG----------------------
 	}
+	/**
+	 * Method to receive message from server
+	 * Beware: Hangs current thread until message is received.
+	 * This method should only be called in its own thread
+	 * 
+	 * @return Message object received
+	 * @throws InterruptedException
+	 */
 	public Message waitForMessage() throws InterruptedException {
 		System.out.println("cliWait");
-		Message msg = receiveQueue.take(); // Matches EEEEE in ServerReceiver
+		Message msg = receiveQueue.take();
 		//Message msg = new Message("asdfghjk");
 		System.out.println("cliGot");
 		System.out.println(msg.getText());
 		
 		return msg;
 	}
-	public void stopClient() {
-		//Stop client thread and remove from client table
-	}
+	/**
+	 * Gets the queue of messages received by this client
+	 * @return BlockingQueue of message objects
+	 */
 	public BlockingQueue<Message> getRecieved(){
 		return receiveQueue;
 	}

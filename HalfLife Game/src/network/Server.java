@@ -6,7 +6,14 @@ import java.util.Enumeration;
 import java.util.concurrent.*;
 
 import main.Game;
-//Class to deal with creating threads for new clients
+
+/**
+ * Server --- Receives incoming connections from new clients and sets up
+ * communication threads for them
+ * 
+ * @author Daniel
+ *
+ */
 public class Server extends Thread {
 	private volatile boolean allowNewPlayers;
 	static ClientTable clientTable;
@@ -15,9 +22,12 @@ public class Server extends Thread {
 	ServerSocket serverSocket;
 	private ServerReceiver receiver;
 	private ServerSender sender;
-	//Boolean running;
 	Socket socket;
 	
+	/**
+	 * Constructor for server
+	 * @param port Port to open server on
+	 */
 	public Server(int port) {
 		//Initialise and open Socket
 		//Boolean, true if new connections to host are allowed
@@ -29,6 +39,9 @@ public class Server extends Thread {
 		serverSocket = null;
 		//running = true;
 	}
+	/**
+	 * Run server loop on separate thread
+	 */
 	public void run() {
 		try {
 			serverSocket = new ServerSocket(port);
@@ -39,50 +52,45 @@ public class Server extends Thread {
 		// Start loop of waiting for new connections
 		try { 
 			while (allowNewPlayers) {
-				//System.out.println("Ip: "+socket.getLocalAddress().getHostAddress());
 				// Listen to the socket waiting for new clients wanting to connect
 				socket = serverSocket.accept();
-
 				//if(!allowNewPlayers) break;
-				
-				//TODO:Make it so IDs can be freed up if player quits. Currently just adds one to highest player id
 				String clientName = "Player" + numClients;
 				numClients++;
 				
 				// We add the client to the table checking if already exists:
 				if(clientTable.add(clientName)) {
-					//BufferedReader fromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					ObjectInputStream fromClient = new ObjectInputStream(socket.getInputStream());
 					
 					System.out.println(clientName + " connected");
 				
 					//Once client is connected, hand over to sender receiver threads
-					//receiver = new ServerReceiver(clientName, fromClient, clientTable);
-					//receiver.start();
 					(new ServerReceiver(clientName, fromClient, clientTable)).start();
 	
 					// Create and start a new thread to write to the client:
 					ObjectOutputStream toClient = new ObjectOutputStream(socket.getOutputStream());
-					//sender = new ServerSender(clientTable.getQueue(clientName), toClient);
-					//sender.start();
 					(new ServerSender(clientTable.getQueue(clientName), toClient, clientTable)).start();
 				}else {
 					Report.error("client name already in use");
 				}
-			}
-			//start game object here
-//			System.out.println("Starting game...");
-//			Game game = new Game();
-			
+			}	
 		}catch (IOException e) {
 			Report.error("Network error " + e.getMessage());
 		}
 	}
 	
+	/**
+	 * Toggle whether new players can connect to the server or not
+	 * @param allowNewPlayers Boolean true if new players allowed
+	 */
 	public void setAllowNewPlayers(boolean allowNewPlayers) {
 		this.allowNewPlayers = allowNewPlayers;
 	}
-	//Returns array of all players currently connected
+	/**
+	 * Returns array of the names (player0, player1 etc...) of players currently connected
+	 * Will be returned in any order
+	 * @return String array of player names
+	 */
 	public static String[] showConnected() {
 		String[] outArr;
 		//If client (client table wont exist) etc return empty array
@@ -100,6 +108,9 @@ public class Server extends Thread {
 		return outArr;
 	}
 	
+	/**
+	 * Stops the server and disconnects all clients
+	 */
 	public void stopServer() {
 		System.out.println("Server stopping...");
 		allowNewPlayers = false;
@@ -115,32 +126,44 @@ public class Server extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Server Running: "+this.clientTable.getServerRunning());
-		
+		Report.behaviour("Server stopped");
+		//System.out.println("Server Running: "+this.clientTable.getServerRunning());
 	}
 	
+	/**
+	 * Method to send a message object to all connected clients
+	 * @param message The message to be sent
+	 */
 	public void sendToAll(Message message) {
 		for(String client : clientTable.showAll()) {
-			BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client); // Matches EEEEE in ServerSender.java
+			BlockingQueue<Message> recipientsQueue = clientTable.getQueue(client);
 			if(client == "server") {
 			}else if (recipientsQueue != null && client != "server") {
 				recipientsQueue.offer(message);
-				System.out.println("Sent to: "+client);//DEBUG----------------------
 			}
 			else
 				Report.error("Can't/won't send to "+ client + ": " + message);//DEBUG----------------------
 		}
 	}
+	
+	/**
+	 * Gets message queue of messages received by the server
+	 * @return BlockingQueue of message objects
+	 */
 	public BlockingQueue<Message> getReceived() {
-		//Gets message queue of messages received by the server
 		String recipient = "server";
-		BlockingQueue<Message> recipientsQueue = clientTable.getQueue(recipient); // Matches EEEEE in ServerSender.java
-
+		BlockingQueue<Message> recipientsQueue = clientTable.getQueue(recipient);
 		return recipientsQueue;
 	}
+	/*
 	public ClientTable getclientTable() {
 		return clientTable;
-	}
+	}*/
+	
+	/**
+	 * Get the current LAN IP address of the device
+	 * @return LAN IP Address as a String
+	 */
 	public String getIpAddress() {
 		String currentHostIpAddress = "";
 		Enumeration e;
@@ -162,6 +185,11 @@ public class Server extends Thread {
 		}
 		return currentHostIpAddress;
 	}
+	
+	/**
+	 * Get the port the server is currently hosted on
+	 * @return port number as an Int
+	 */
 	public int getPort() {
 		return port;
 	}

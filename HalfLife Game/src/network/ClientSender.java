@@ -4,7 +4,11 @@ import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
-
+/**
+ * ClientSender --- Waits in loop for message and sends it to server
+ * @author Daniel
+ *
+ */
 //Repeatedly reads recipient's nickname and text from the user in two
 //separate lines, sending them to the server (read by ServerReceiver
 //thread).
@@ -15,7 +19,13 @@ private String nickname;
 private ObjectOutputStream toServer;
 private Socket server;
 private BlockingQueue<Message> sendQueue;
-
+/** Constructor for ClientSender
+ * 
+ * @param q Queue of messages to send
+ * @param nickname Our client Nickname
+ * @param toServer ObjectOutputStream writing to the open socket to server
+ * @param server Socket connected to server to send data through
+ */
 ClientSender(BlockingQueue<Message> q, String nickname, ObjectOutputStream toServer, Socket server) {
 	this.nickname = nickname;
 	this.toServer = toServer;
@@ -23,6 +33,9 @@ ClientSender(BlockingQueue<Message> q, String nickname, ObjectOutputStream toSer
 	this.sendQueue = q;
 }
 
+/**
+ * Run sender loop as separate thread
+ */
 public void run() {
 	System.out.println("clientSender");
 	// So that we can use the method readLine:

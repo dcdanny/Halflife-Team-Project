@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="menu.view.LevelMenuController">
+<VBox stylesheets="menu/view/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.view.LevelMenuController">
 	<children>
 		<Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label /> <Label />
       <ImageView fitHeight="900.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">

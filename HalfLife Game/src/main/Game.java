@@ -42,7 +42,7 @@ import network.*;
 public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
-	private SpritePlayer spplayer= new SpritePlayer();
+	private SpritePlayer spplayer;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -53,17 +53,23 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
+	private boolean paused = false;
 	private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
+	private StackPane pauseScreen;
+	private boolean pauseShowing = false;
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
+	private int levelNumber;
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
 	 */
-	public Game(Server server) {
+	public Game(Server server, int lvlNum) {
 		this.server = server;
+		levelNumber = lvlNum;
+		spplayer = new SpritePlayer(levelNumber);
 	}
 
 	/**
@@ -106,9 +112,16 @@ public class Game extends Application {
 		}
 		Arrays.sort(s);
 		if (multiplayer) {
-			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3);
+			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3, levelNumber);
 			root.getChildren().add(player2);
 		}
+		
+		ImageView controls = new ImageView(new Image("controls.png"));
+		controls.setX(-30);
+		controls.setY(350);
+		controls.setFitHeight(250);
+		controls.setFitWidth(250);
+		root.getChildren().add(controls);
 		return root;	
 	}
 	
@@ -186,27 +199,36 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		
-		spplayer.GetPlayer().tick(root);
-		
-		for (SpriteEnemy enemy : enemies) {
-			enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
-			if (enemy.GetEnemy().isDead()) {
-				enemy.getChildren().clear();
+		paused = spplayer.GetPlayer().getPaused();
+		if (!paused) {
+			pauseShowing = false;
+			spplayer.GetPlayer().tick(root);
+			for (SpriteEnemy enemy : enemies) {
+				enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
+				if (enemy.GetEnemy().isDead()) {
+					enemy.getChildren().clear();
+				}
 			}
+			for (Spike spike : spikes) {
+				spike.tick(spplayer.GetPlayer(), root);
+			}
+			for (SupplyDrop supply : supplies) {
+				supply.tick(spplayer.GetPlayer());
+			}
+			spplayer.GetPlayer().checkPos(this);
+		} else if (!pauseShowing) {
+			pauseShowing = true;
+			pauseScreen = new PauseScreen(spplayer.GetPlayer());
+			spplayer.GetPlayer().getForeground().getChildren().add(pauseScreen);
 		}
-		for (Spike spike : spikes) {
-			spike.tick(spplayer.GetPlayer(), root);
-		}
-		for (SupplyDrop supply : supplies) {
-			supply.tick(spplayer.GetPlayer());
-		}
+		
+		
 		
 		if (multiplayer) {
 			player2.tick(root);
 		}
 		
-		spplayer.GetPlayer().checkPos(this);
+		
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
 			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);

@@ -44,7 +44,7 @@ public class ReadLevel {
 	 * @throws IOException
 	 */
 	public String[] read() throws IOException {
-		FileReader reader = new FileReader(path + "/userLevel.txt");
+		FileReader reader = new FileReader(path);
 		BufferedReader r =  new BufferedReader(reader);
 		
 		String[] level = new String[6];
@@ -63,8 +63,10 @@ public class ReadLevel {
 			setLevel(read());
 			if (isValid())
 				return userLevel;
-			else
+			else {
+				userLevel = returnErrors();
 				return returnErrors();
+			}
 				
 		} catch (IOException e) {
 			return returnErrors();
@@ -91,6 +93,7 @@ public class ReadLevel {
 			if (c != '0')
 				CHECK_CEILING = false; // Air in top row
 		}		
+		System.out.println("CHECKING CEILING: " + CHECK_CEILING);
 
 		String bottomRow = level[5].substring(1);
 		for (char c : bottomRow.toCharArray()) {

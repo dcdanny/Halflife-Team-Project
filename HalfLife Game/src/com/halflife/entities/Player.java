@@ -1,6 +1,9 @@
 package com.halflife.entities;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javafx.animation.Animation;
@@ -49,7 +52,13 @@ public class Player extends RectObject{
 	private CountdownTimer clock; //Clock object for displaying the count down timer
 	private boolean bulletDir = true; //Determines which way the player is facing
 	protected CheckCollision collisionChecker; //Determines whether the player has collided with another object
+
+	private int levelNumber; 
+	private boolean hasWritten = false;
+
+	public boolean paused = false;
 	
+
 	/**
 	 * Constructor of the player object
 	 * @param x X coordinate of the player object
@@ -59,8 +68,10 @@ public class Player extends RectObject{
 	 * @param col Colour of the player object
 	 * @param lives Number of lives the player object has
 	 */
-	public Player(double x, double y, int width, int height, Color col, int lives) {
+	public Player(double x, double y, int width, int height, Color col, int lives, int lvlNum) {
 		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
+		
+		levelNumber = lvlNum;
 		
 		collisionChecker = new CheckCollision();
 
@@ -117,14 +128,38 @@ public class Player extends RectObject{
 					System.out.println("Winner");
 				}
 				
-				
+				if (!hasWritten) {
 				WriteFile wr = new WriteFile(false);
+				FileReader fr;
+				String[] levels = new String[4];
 				try {
-					wr.write("level1=true");
+					fr = new FileReader(wr.getPath()+ "/levels.txt");
+					BufferedReader r =  new BufferedReader(fr);
+					
+					for (int i = 0; i < 4; i++) {
+						levels[i] = r.readLine();
+					}
+					System.out.println("LEVELS:" + levels[0]);
+					System.out.println("LEVELS:" + levels[1]);
+					System.out.println("LEVELS:" + levels[2]);
+					System.out.println("LEVELS:" + levels[3]);
+					levels[levelNumber-1] = "level"+levelNumber+"=true";
+					
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				try {
+					
+					for (int i = 0; i <4; i++) {
+						wr.write(levels);
+					}
+					hasWritten = true;
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+				}
 			}	
 			else if (collidedObj.getType().equals(GameConstants.TYPE_FLOOR)) {
 				loseLife(root);
@@ -368,33 +403,49 @@ public class Player extends RectObject{
 		s.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case A:
-				setVelX(-5);
-				game.root.setLayoutX(game.root.getLayoutX() + 10);
-				sppl.flipbackwards();
-				bulletDir = false;
+				if (!paused) {
+					setVelX(-5);
+					game.root.setLayoutX(game.root.getLayoutX() + 10);
+					sppl.flipbackwards();
+					bulletDir = false;
+				}
 				break;
 			case D:
-				setVelX(5);
-				game.root.setLayoutX(game.root.getLayoutX() - 10);
-				sppl.flipforwards();
-				bulletDir = true;
+				if (!paused) {
+					setVelX(5);
+					game.root.setLayoutX(game.root.getLayoutX() - 10);
+					sppl.flipforwards();
+					bulletDir = true;
+				}
+				break;
 			case S:
-				setVelY(5);
+				if (!paused) {
+					setVelY(5);
+				}
 				break;
 			case W:
-				if (getGravity() == 0 && hasCollided(game.root)) {
-					setTranslateY(getTranslateY() - 10);
-					jump();
+				if (!paused) {
+					if (getGravity() == 0 && hasCollided(game.root)) {
+						setTranslateY(getTranslateY() - 10);
+						jump();
+					}
 				}
+				
 				break;
 			case SPACE:
-				ammo.lostBullet();
-				shoot(game.root);
-				if (ammo.getAmmo() > 0) {
-					Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
-					MediaPlayer mediaPlayer = new MediaPlayer(sound);
-					mediaPlayer.play();
+				if (!paused) {
+					ammo.lostBullet();
+					shoot(game.root);
+					if (ammo.getAmmo() > 0) {
+						Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
+						MediaPlayer mediaPlayer = new MediaPlayer(sound);
+						mediaPlayer.play();
+					}
 				}
+				
+				break;
+			case ESCAPE:
+				pauseGame();
 				break;
 			default:
 				break;
@@ -420,15 +471,40 @@ public class Player extends RectObject{
 				break;
 			case W:
 				break;
+			case ESCAPE:
+				break;
 			default:
 				break;
 			}
 			
 		});
 		
-		
+	}
+	
+	/**
+	 * Sets the game to paused
+	 */
+	private void pauseGame() {
+		paused = true;
+	}
+	
+	/**
+	 * Sets whether the game is paused or not
+	 * @param b Whether the game is paused or not
+	 */
+	public void setPaused(boolean b) {
+		paused = b;
 	}
 
+	/**
+	 * Returns whether the game is paused or not
+	 * @return whether the game is paused or not
+	 */
+	public boolean getPaused() {
+		return paused;
+	}
+	
+	
 	/**
 	 * Moves the screen so that the player can always be seen
 	 * @param game Main game object

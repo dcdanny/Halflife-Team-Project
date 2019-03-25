@@ -1,7 +1,10 @@
 package main;
 
 public class GameConstants {
-
+	/**
+	 * GameConstants --- Contains constant values used by the Game class
+	 * @author Halflife
+	 */
 	public static final int MAX_AMMO = 10;
 	public static final int MAX_LIVES = 3;
 	public static final int BULLET_SPEED = 8;

@@ -5,7 +5,7 @@
 
 .root {
 	-fx-alignment: center ;
-	-fx-background-color: #333333;
+	-fx-background-color: linear-gradient(#333333, #8096ba);
 }
 
 .button{
@@ -13,32 +13,20 @@
 	-fx-background-color: white;
 	-fx-background-radius: 30;
 	-fx-font-size: 14;
-	-fx-text-fill: #191970;
+	-fx-text-fill: #696969;
 	-fx-font-family: "Press Start 2P";
-	-fx-border-width: 5;
 	-fx-pref-width: 300.0;
 	-fx-pref-height: 48.0;
+
+}
+.button:hover{
+	-fx-border-color: #696969;
+	-fx-border-radius: 30;
+	-fx-border-width: 5;
 }
 
-.button:hover{
-	-fx-font-weight: bold;
-	-fx-background-color: white;
-	-fx-background-radius: 30;
-	-fx-font-size: 14;
-	-fx-text-fill: #191970;
-	-fx-border-color: #32CD32;
-	-fx-border-radius: 30;
-	-fx-border-width: 5;
-}
 .button:pressed{
-	-fx-font-weight: bold;
-	-fx-background-color: #32CD32;
-	-fx-background-radius: 30;
-	-fx-font-size: 14;
-	-fx-text-fill: white;
-	-fx-border-color: #32CD32;
-	-fx-border-radius: 30;
-	-fx-border-width: 5;
+	-fx-background-color: #FFED90;
 }
 
 .levelBtn{
@@ -72,4 +60,7 @@ SpriteAnimation{
 }
 TextField{
 	-fx-font: 25px Tahoma;
+}
+ImageView{
+	-fx-fit-height:400px;
 }

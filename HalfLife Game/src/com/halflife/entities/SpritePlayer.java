@@ -17,9 +17,9 @@ public class SpritePlayer extends Pane {
 	/**
 	 * Constructor of the sprite player
 	 */
-	public SpritePlayer() {
+	public SpritePlayer(int lvlNum) {
 		this.forward=true;
-		this.pl=  new Player(200,0,40,50,Color.PINK,3);
+		this.pl=  new Player(200,0,40,50,Color.PINK,3, lvlNum);
 		this.ani=new SpriteAnimation("player");
 		ani.resizeView(-38, -45, 120);
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
