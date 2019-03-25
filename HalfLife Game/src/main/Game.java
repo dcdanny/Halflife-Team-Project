@@ -63,6 +63,7 @@ public class Game extends Application {
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
 	private StackPane pauseScreen;
+	private boolean pauseShowing = false;
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
 	private int levelNumber;
@@ -206,6 +207,7 @@ public class Game extends Application {
 	private void tick() {
 		paused = spplayer.GetPlayer().getPaused();
 		if (!paused) {
+			pauseShowing = false;
 			spplayer.GetPlayer().tick(root);
 			for (SpriteEnemy enemy : enemies) {
 				enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
@@ -220,8 +222,9 @@ public class Game extends Application {
 				supply.tick(spplayer.GetPlayer());
 			}
 			spplayer.GetPlayer().checkPos(this);
-		} else if (!spplayer.GetPlayer().getForeground().getChildren().contains(pauseScreen)) {
-			pauseScreen = new PauseScreen();
+		} else if (!pauseShowing) {
+			pauseShowing = true;
+			pauseScreen = new PauseScreen(spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(pauseScreen);
 		}
 		

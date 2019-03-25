@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 
 public class PauseScreen extends StackPane {
 	
-	PauseScreen(){
+	PauseScreen(Player player){
 		 RectObject bg=new RectObject(270,150,250,300,"pausescreen",Color.valueOf("#000000"));
 		 
 		 Image resume = new Image("pauseResume.png");
@@ -74,6 +74,11 @@ public class PauseScreen extends StackPane {
              public void handle(MouseEvent t) {
                 exitImg.setFitWidth(200);
              }
+         });
+         
+         resumeButton.setOnMouseClicked((MouseEvent e) -> {
+             remove();
+             player.setPaused(false);
          });
          
          

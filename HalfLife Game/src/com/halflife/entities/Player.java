@@ -481,10 +481,25 @@ public class Player extends RectObject{
 		
 	}
 	
+	/**
+	 * Sets the game to paused
+	 */
 	private void pauseGame() {
 		paused = true;
 	}
+	
+	/**
+	 * Sets whether the game is paused or not
+	 * @param b Whether the game is paused or not
+	 */
+	public void setPaused(boolean b) {
+		paused = b;
+	}
 
+	/**
+	 * Returns whether the game is paused or not
+	 * @return whether the game is paused or not
+	 */
 	public boolean getPaused() {
 		return paused;
 	}
