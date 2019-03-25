@@ -58,6 +58,7 @@ public class Game extends Application {
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
+	private boolean paused = false;
 	private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
@@ -200,7 +201,9 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		if (!spplayer.GetPlayer().getPaused()) {
+		paused = spplayer.GetPlayer().getPaused();
+		if (!paused) {
+			spplayer.GetPlayer().tick(root);
 			for (SpriteEnemy enemy : enemies) {
 				enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
 				if (enemy.GetEnemy().isDead()) {
@@ -213,16 +216,18 @@ public class Game extends Application {
 			for (SupplyDrop supply : supplies) {
 				supply.tick(spplayer.GetPlayer());
 			}
-			
+			spplayer.GetPlayer().checkPos(this);
+		} else if (!spplayer.GetPlayer().getForeground().getChildren().contains(pauseScreen)) {
+			pauseScreen = new PauseScreen();
 		}
-		spplayer.GetPlayer().tick(root);
+		
 		
 		
 		if (multiplayer) {
 			player2.tick(root);
 		}
 		
-		spplayer.GetPlayer().checkPos(this);
+		
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
 			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);

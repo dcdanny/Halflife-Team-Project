@@ -369,33 +369,46 @@ public class Player extends RectObject{
 		s.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 			case A:
-				setVelX(-5);
-				game.root.setLayoutX(game.root.getLayoutX() + 10);
-				sppl.flipbackwards();
-				bulletDir = false;
+				if (!paused) {
+					setVelX(-5);
+					game.root.setLayoutX(game.root.getLayoutX() + 10);
+					sppl.flipbackwards();
+					bulletDir = false;
+				}
 				break;
 			case D:
-				setVelX(5);
-				game.root.setLayoutX(game.root.getLayoutX() - 10);
-				sppl.flipforwards();
-				bulletDir = true;
+				if (!paused) {
+					setVelX(5);
+					game.root.setLayoutX(game.root.getLayoutX() - 10);
+					sppl.flipforwards();
+					bulletDir = true;
+				}
+				break;
 			case S:
-				setVelY(5);
+				if (!paused) {
+					setVelY(5);
+				}
 				break;
 			case W:
-				if (getGravity() == 0 && hasCollided(game.root)) {
-					setTranslateY(getTranslateY() - 10);
-					jump();
+				if (!paused) {
+					if (getGravity() == 0 && hasCollided(game.root)) {
+						setTranslateY(getTranslateY() - 10);
+						jump();
+					}
 				}
+				
 				break;
 			case SPACE:
-				ammo.lostBullet();
-				shoot(game.root);
-				if (ammo.getAmmo() > 0) {
-					Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
-					MediaPlayer mediaPlayer = new MediaPlayer(sound);
-					mediaPlayer.play();
+				if (!paused) {
+					ammo.lostBullet();
+					shoot(game.root);
+					if (ammo.getAmmo() > 0) {
+						Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
+						MediaPlayer mediaPlayer = new MediaPlayer(sound);
+						mediaPlayer.play();
+					}
 				}
+				
 				break;
 			case ESCAPE:
 				break;
