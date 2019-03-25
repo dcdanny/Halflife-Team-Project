@@ -61,6 +61,7 @@ public class Game extends Application {
 	private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
+	private StackPane pauseScreen;
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
 	/**
@@ -199,21 +200,23 @@ public class Game extends Application {
 	 * Useful to look at as the 'heart' of the game
 	 */
 	private void tick() {
-		
+		if (!spplayer.GetPlayer().getPaused()) {
+			for (SpriteEnemy enemy : enemies) {
+				enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
+				if (enemy.GetEnemy().isDead()) {
+					enemy.getChildren().clear();
+				}
+			}
+			for (Spike spike : spikes) {
+				spike.tick(spplayer.GetPlayer(), root);
+			}
+			for (SupplyDrop supply : supplies) {
+				supply.tick(spplayer.GetPlayer());
+			}
+			
+		}
 		spplayer.GetPlayer().tick(root);
 		
-		for (SpriteEnemy enemy : enemies) {
-			enemy.GetEnemy().tick(spplayer.GetPlayer(), root);
-			if (enemy.GetEnemy().isDead()) {
-				enemy.getChildren().clear();
-			}
-		}
-		for (Spike spike : spikes) {
-			spike.tick(spplayer.GetPlayer(), root);
-		}
-		for (SupplyDrop supply : supplies) {
-			supply.tick(spplayer.GetPlayer());
-		}
 		
 		if (multiplayer) {
 			player2.tick(root);
