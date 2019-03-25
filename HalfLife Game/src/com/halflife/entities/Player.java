@@ -49,6 +49,7 @@ public class Player extends RectObject{
 	private CountdownTimer clock; //Clock object for displaying the count down timer
 	private boolean bulletDir = true; //Determines which way the player is facing
 	protected CheckCollision collisionChecker; //Determines whether the player has collided with another object
+	public boolean paused = false;
 	
 	/**
 	 * Constructor of the player object
@@ -396,6 +397,8 @@ public class Player extends RectObject{
 					mediaPlayer.play();
 				}
 				break;
+			case ESCAPE:
+				break;
 			default:
 				break;
 			}
@@ -420,15 +423,26 @@ public class Player extends RectObject{
 				break;
 			case W:
 				break;
+			case ESCAPE:
+				pauseGame();
+				break;
 			default:
 				break;
 			}
 			
 		});
 		
-		
+	}
+	
+	private void pauseGame() {
+		paused = true;
 	}
 
+	public boolean getPaused() {
+		return paused;
+	}
+	
+	
 	/**
 	 * Moves the screen so that the player can always be seen
 	 * @param game Main game object
