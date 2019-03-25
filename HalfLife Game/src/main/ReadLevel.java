@@ -44,7 +44,7 @@ public class ReadLevel {
 	 * @throws IOException
 	 */
 	public String[] read() throws IOException {
-		FileReader reader = new FileReader(path + "/userLevel.txt");
+		FileReader reader = new FileReader(path);
 		BufferedReader r =  new BufferedReader(reader);
 		
 		String[] level = new String[6];

@@ -99,10 +99,11 @@ public class LevelMenuController {
 		}
 		System.out.println(selectedFile.getPath());
 		ReadLevel readLevel = new ReadLevel(selectedFile.getPath());
-		readLevel.read();
+		readLevel.getLevel();
 		
 		Game game = new Game(server);
 		game.setCurrentLevel(readLevel.getValidatedLevel());
+		System.out.println("LVL TO LOAD: " + readLevel.getValidatedLevel());
 		Message m = new Message(readLevel.getValidatedLevel());
 		server.sendToAll(m);
 		game.start(primaryStage);
