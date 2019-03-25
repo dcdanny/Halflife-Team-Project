@@ -91,12 +91,16 @@ public class LevelMenuController {
 		ReadLevel readLevel = new ReadLevel(selectedFile.getPath());
 		readLevel.getLevel();
 		
-		Game game = new Game(server);
-		game.setCurrentLevel(readLevel.getValidatedLevel());
-		System.out.println("LVL TO LOAD: " + readLevel.getValidatedLevel());
-		Message m = new Message(readLevel.getValidatedLevel());
-		server.sendToAll(m);
-		game.start(primaryStage);
+		if (readLevel.isValid()) {
+			Game game = new Game(server);
+			game.setCurrentLevel(readLevel.getValidatedLevel());
+			System.out.println("LVL TO LOAD: " + readLevel.getValidatedLevel());
+			Message m = new Message(readLevel.getValidatedLevel());
+			server.sendToAll(m);
+			game.start(primaryStage);
+		 }else {
+			 System.out.println(readLevel.returnErrors()[0]);
+		 }
 	}
 	
 	// The "BACK" Button, directing to the main menu "HALFLIFE"
