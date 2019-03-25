@@ -43,6 +43,7 @@ public class Game extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	private SpritePlayer spplayer;
+	private SpritePlayer spriteNP;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -54,7 +55,7 @@ public class Game extends Application {
 	private Message coords;
 	private boolean multiplayer=false;
 	private boolean paused = false;
-	private NetworkedPlayer player2;
+	//private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
 	private StackPane pauseScreen;
@@ -69,7 +70,7 @@ public class Game extends Application {
 	public Game(Server server, int lvlNum) {
 		this.server = server;
 		levelNumber = lvlNum;
-		spplayer = new SpritePlayer(levelNumber);
+		spplayer = new SpritePlayer(levelNumber,false);
 	}
 
 	/**
@@ -112,8 +113,9 @@ public class Game extends Application {
 		}
 		Arrays.sort(s);
 		if (multiplayer) {
-			player2 = new NetworkedPlayer(200,0,40,50,Color.BLACK,3, levelNumber);
-			root.getChildren().add(player2);
+			spriteNP = new SpritePlayer(levelNumber,true);
+			root.getChildren().add(spriteNP);
+			spriteNP.setOpacity(0.5);
 		}
 		
 		ImageView controls = new ImageView(new Image("controls.png"));
@@ -225,7 +227,7 @@ public class Game extends Application {
 		
 		
 		if (multiplayer) {
-			player2.tick(root);
+			spriteNP.GetNetPlayer().tick(root);
 		}
 		
 		
@@ -250,8 +252,8 @@ public class Game extends Application {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		player2.setTranslateX(temp.getX());
-		player2.setTranslateY(temp.getY());
+		spriteNP.GetNetPlayer().setTranslateX(temp.getX());
+		spriteNP.GetNetPlayer().setTranslateY(temp.getY());
 		}		
 	}
 	

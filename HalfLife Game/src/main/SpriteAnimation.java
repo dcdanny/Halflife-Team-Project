@@ -83,6 +83,8 @@ public class SpriteAnimation extends Pane {
 		
 	
 	}
+	
+	
 	public void stopAnimation() {
 		timeline.stop();
 		

@@ -48,8 +48,8 @@ public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
-	private NetworkedPlayer player;
-
+	
+	private SpritePlayer spriteNP;
 	private SpritePlayer spplayer;
 	private List<BaseEnemy> enemies = new ArrayList<BaseEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
@@ -60,7 +60,7 @@ public class GameClient extends Application {
 	private String[] s = new String[ClientTable.size()];
 	private Client client;
 	private Message coords;
-	private NetworkedPlayer tempNP;
+	//private NetworkedPlayer tempNP;
 	private Color bgcol =Color.valueOf("#333333");
 	private int levelNumber;
 
@@ -73,8 +73,8 @@ public class GameClient extends Application {
 	public GameClient(Client client, int lvlNum) {
 		this.client=client;
 		levelNumber = lvlNum;
-		spplayer= new SpritePlayer(levelNumber);
-		player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3, levelNumber);
+		spplayer= new SpritePlayer(levelNumber,true);
+		//player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3, levelNumber);
 	}
 
 	/**
@@ -122,12 +122,15 @@ public class GameClient extends Application {
 //		}		
 		
 //		netPlayers.add
-		tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3, levelNumber);
+		spriteNP=new SpritePlayer(levelNumber, true);
+		spriteNP.setOpacity(0.5);
+		//tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3, levelNumber);
 //		for (NetworkedPlayer np : netPlayers) {
-			root.getChildren().add(tempNP);
+			root.getChildren().add(spriteNP);
+			
 //		}
 		
-		root.getChildren().add(player);
+		//root.getChildren().add(player);
 		return root;	
 	}
 	
@@ -210,23 +213,23 @@ public class GameClient extends Application {
 	 */
 	private void tick() {
 		
-		player.tick(root);
+		spplayer.GetNetPlayer().tick(root);
 		
 		for (BaseEnemy enemy : enemies) {
-			enemy.tick(player, root);
+			enemy.tick(spplayer.GetNetPlayer(), root);
 		}
 		for (Spike spike : spikes) {
-			spike.tick(player, root);
+			spike.tick(spplayer.GetNetPlayer(), root);
 		}
 		for (SupplyDrop supply : supplies) {
-			supply.tick(player);
+			supply.tick(spplayer.GetNetPlayer());
 		}
 //		for (NetworkedPlayer np : netPlayers) {
 //			np.tick(root);
 //		}
 		
-		player.checkPos(this);
-		coords = new Message(player.getTranslateX(), player.getTranslateY());
+		spplayer.GetNetPlayer().checkPos(this);
+		coords = new Message(spplayer.GetNetPlayer().getTranslateX(), spplayer.GetNetPlayer().getTranslateY());
 		client.sendToServer(coords);
 		
 		
@@ -242,8 +245,8 @@ public class GameClient extends Application {
 		t.start();
 	      
 		task.setOnSucceeded(event -> {
-			tempNP.setTranslateX(temp.getX());
-			tempNP.setTranslateY(temp.getY());
+			spriteNP.GetNetPlayer().setTranslateX(temp.getX());
+			spriteNP.GetNetPlayer().setTranslateY(temp.getY());
 		});
 		
 		/*try {
@@ -278,8 +281,8 @@ public class GameClient extends Application {
 //		spplayer.buttonReleasing(scene);
 		
 		//IF YOU WANT THE SPRITE UNCOMMENT THE ABOVE AND COMMENT OUT THE BELOW
-		player.buttonPressing(this, scene); 
-		player.buttonReleasing(scene);
+		spplayer.GetNetPlayer().buttonPressing(this, scene); 
+		spplayer.GetNetPlayer().buttonReleasing(scene);
 		
 //		temp2.buttonPressing(this, scene);
 //		temp2.buttonReleasing(scene);

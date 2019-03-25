@@ -13,17 +13,30 @@ public class SpritePlayer extends Pane {
 	private Player pl; //Player object that is covered with the sprite
 	private SpriteAnimation ani; //Sprite animation
 	private boolean forward; //Direction the sprite is facing
+	private NetworkedPlayer np;
 	
 	/**
 	 * Constructor of the sprite player
 	 */
-	public SpritePlayer(int lvlNum) {
+	public SpritePlayer(int lvlNum,boolean multi) {
 		this.forward=true;
+		if (!multi) {
 		this.pl=  new Player(200,0,40,50,Color.PINK,3, lvlNum);
+		
 		this.ani=new SpriteAnimation("player");
 		ani.resizeView(-38, -45, 120);
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
 		ani.translateYProperty().bindBidirectional(pl.translateYProperty());
+		}
+		if (multi) {
+		
+		this.np= new NetworkedPlayer(200,0,40,50,Color.PINK,3, lvlNum);
+		this.ani=new SpriteAnimation("player");
+		ani.resizeView(-38, -45, 120);
+		ani.translateXProperty().bindBidirectional(np.translateXProperty());
+		ani.translateYProperty().bindBidirectional(np.translateYProperty());
+		}
+		
 		
 		Pane PlayerSprite= new Pane();
 		PlayerSprite.getChildren().addAll(ani);
@@ -36,6 +49,9 @@ public class SpritePlayer extends Pane {
 	 */
 	public Player GetPlayer() {
 		return pl;
+	}
+	public NetworkedPlayer GetNetPlayer() {
+		return np;
 	}
 	
 	/**
