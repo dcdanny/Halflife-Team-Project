@@ -1,5 +1,6 @@
 package menu.view;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -30,7 +31,6 @@ public class SettingsMenuController {
 		return s;
 	}
 	
-	private MediaPlayer mediaplayer;
 	//private Button soundOn, soundOff, musicOn, musicOff;
 	
 	//public void start (Stage stage) {
@@ -79,30 +79,33 @@ public class SettingsMenuController {
 		//mediaplayer.setVolume(0.1);	
 	//}
 	
+	private MediaPlayer mediaplayer;
+	
 	@FXML
 	private void soundOn() throws IOException {
-		Media soundFile = new Media("shootSound.mp3");
+		Media soundFile = new Media(new File("data/shootSound.mp3").toURI().toString());
 		mediaplayer = new MediaPlayer(soundFile);
 		mediaplayer.play();
+		
 	}
 	
 	@FXML
 	private void soundOff() throws IOException {
-		Media soundFile = new Media("shootSound.mp3");
+		Media soundFile = new Media(new File("data/shootSound.mp3").toURI().toString());
 		mediaplayer = new MediaPlayer(soundFile);
 		mediaplayer.stop();
 	}
 	
 	@FXML
 	private void musicOn() throws IOException {
-		Media musicFile = new Media("Sample - summer.mp3");
+		Media musicFile = new Media(new File("data/Sample - summer.mp3").toURI().toString());
 		mediaplayer = new MediaPlayer(musicFile);
 		mediaplayer.play();
 	}
 	
 	@FXML
 	private void musicOff() throws IOException {
-		Media musicFile = new Media("Sample - summer.mp3");
+		Media musicFile = new Media(new File("data/Sample - summer.mp3").toURI().toString());
 		mediaplayer = new MediaPlayer(musicFile);
 		mediaplayer.stop();
 	}
