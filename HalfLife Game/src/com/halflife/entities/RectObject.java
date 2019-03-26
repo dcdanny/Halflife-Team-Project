@@ -3,8 +3,10 @@ package com.halflife.entities;
 
 import javafx.animation.FadeTransition;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import main.GameConstants;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 /**
@@ -79,7 +81,9 @@ public class RectObject extends Rectangle{
 		} else {
 			moveBulletX = -30;
 		}
+		Image img = new Image("bulletColour.png");
 		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", col, root, bulletDir);
+		bullet.setFill(new ImagePattern(img));
 		return bullet;
 	}
 	
