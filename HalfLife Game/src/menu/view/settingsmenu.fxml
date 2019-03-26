@@ -22,11 +22,15 @@
                      <Image url="@title/soundfx.png" />
                   </image>
                </ImageView>
-            <Label />
+            <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button mnemonicParsing="false" text="ON" />
-                  <Label />
+               </children>
+            </VBox>
+            <Label />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
                   <Button mnemonicParsing="false" text="OFF" />
                </children>
             </VBox>
@@ -39,11 +43,15 @@
                      <Image url="@title/music.png" />
                   </image>
                </ImageView>
-            <Label />
+            <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button mnemonicParsing="false" text="ON" />
-                  <Label />
+               </children>
+            </VBox>
+            <Label />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
                   <Button mnemonicParsing="false" text="OFF" />
                </children>
             </VBox>

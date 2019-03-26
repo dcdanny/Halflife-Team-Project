@@ -39,7 +39,6 @@ public class SettingsMenuController {
 		Button musicOn = new Button("musicOn");
 		Button musicOff = new Button("musicOff");
 		
-		
 		soundOn.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -50,7 +49,6 @@ public class SettingsMenuController {
 			}	
 		});
 		
-		
 		soundOff.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -60,7 +58,6 @@ public class SettingsMenuController {
 			}	
 		});
 		
-		
 		musicOn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -69,7 +66,6 @@ public class SettingsMenuController {
 				mediaplayer.play();
 			}	
 		});
-		
 		
 		musicOff.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
