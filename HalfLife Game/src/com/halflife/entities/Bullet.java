@@ -1,8 +1,11 @@
 package com.halflife.entities;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import main.CheckCollision;
 import main.GameConstants;
 
@@ -27,6 +30,8 @@ public class Bullet extends RectObject{
 	 */
 	public Bullet(double x, double y, int width, int height, String type, Color col, Pane root, Boolean bulletDir) {
 		super(x, y + 25, width, height, type, Color.GREEN);
+		Image img = new Image("res/bulletColour.png");
+		this.setFill(new ImagePattern(img));
 		collisionChecker = new CheckCollision();
 		hasShot(System.currentTimeMillis(), root, bulletDir);
 	}
