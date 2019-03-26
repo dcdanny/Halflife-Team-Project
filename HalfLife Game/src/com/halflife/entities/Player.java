@@ -57,6 +57,7 @@ public class Player extends RectObject{
 	private boolean hasWritten = false;
 
 	public boolean paused = false;
+	private boolean multiplayer;
 	
 
 	/**
@@ -68,9 +69,9 @@ public class Player extends RectObject{
 	 * @param col Colour of the player object
 	 * @param lives Number of lives the player object has
 	 */
-	public Player(double x, double y, int width, int height, Color col, int lives, int lvlNum) {
+	public Player(double x, double y, int width, int height, Color col, int lives, int lvlNum, boolean multiplayer) {
 		super(x, y, width, height, GameConstants.TYPE_PLAYER, col);
-		
+		this.multiplayer=multiplayer;
 		levelNumber = lvlNum;
 		
 		collisionChecker = new CheckCollision();
@@ -79,14 +80,19 @@ public class Player extends RectObject{
 		
 		completedLevel = false;
 		
-		heart = new Lives(GameConstants.MAX_LIVES);
-		heart.setLives(lives);
-		ammo = new Ammo(GameConstants.MAX_AMMO);
-		ammo.setAmmo(ammoNo);
+		
+		if(!multiplayer) {
+			ammo = new Ammo(GameConstants.MAX_AMMO);
+			ammo.setAmmo(ammoNo);
+			foreground.getChildren().add(ammo);
+			heart = new Lives(GameConstants.MAX_LIVES);
+			heart.setLives(lives);
+			foreground.getChildren().add(heart);
+		}
+		
+				
 		clock = new CountdownTimer();
-		foreground.getChildren().add(clock);
-		foreground.getChildren().add(heart);
-		foreground.getChildren().add(ammo);
+		foreground.getChildren().add(clock);;
 
 	}
 	
@@ -175,14 +181,19 @@ public class Player extends RectObject{
 	 */
 	public void loseLife(Pane root) {
 		root.setLayoutX(0);
-		if (lives > 0) {
+		if (lives > 0 && !multiplayer) {
 			this.Fade();
 			this.setTranslateX(200);
 			this.setTranslateY(0);
 			lives--;	
 			heart.lostlife();
-		}else
+		}else if(!multiplayer) {
 			setDead(true);
+		}else {
+			this.Fade();
+			this.setTranslateX(200);
+			this.setTranslateY(0);
+		}
 	}
 	
 	/**
@@ -271,7 +282,7 @@ public class Player extends RectObject{
 	 */
 	public void shoot(Pane root) {
 		
-		if (ammoNo > 0) {
+		if (ammoNo > 0 ) {
 			Bullet bullet = getBullet(this, Color.GREEN, root, bulletDir);
 			root.getChildren().add(bullet);
 			ammoNo--;
@@ -439,7 +450,7 @@ public class Player extends RectObject{
 				
 				break;
 			case SPACE:
-				if (!paused) {
+				if (!paused && !multiplayer) {
 					ammo.lostBullet();
 					shoot(game.root);
 					if (ammo.getAmmo() > 0) {

@@ -32,14 +32,15 @@ import menu.view.MainMenuController;
  */
 public class DeathScreen extends StackPane {
 
+	
+ 	private Stage primaryStage; //Game scene to be reset
+ 	private Game game; //Game object to be removed
+ 	
 	/**
 	 * Constructor for the death screen, creates all buttons
 	 * @param game Game object to reset the player
 	 * @param player Player to be reset
 	 */
- 	private Stage primaryStage;
- 	private Game game;
- 	
 	public DeathScreen(Game game, Player player,Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.game = game;
@@ -154,10 +155,15 @@ public class DeathScreen extends StackPane {
 		 this.getChildren().add(exitimg);
 		 this.getChildren().add(exitbutton);	
 	}
+	
+	/**
+	 * Removes the game
+	 */
 	private void destroyGame() {
 		game.stopGame();
 		game=null;
 	}
+	
 	/**
 	 * Adds a fade to when the death screen is displayed
 	 * @param rec Background object that fades

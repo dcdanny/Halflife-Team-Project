@@ -95,6 +95,7 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
+	
 	// The "BACK" button, directing to the first "HALFLIFE" menu
 	@FXML
 	private void goBack() throws IOException {
@@ -103,9 +104,9 @@ public class MainMenuController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startmenu.fxml"));
 		Pane mainMenu = loader.load();
 		sp1.keepAllbut(2);
-		sp1.resizeView(-10, -60, 300);
+		sp1.resizeView(-10, -135, 300);
 		sp2.flip();
-		sp2.resizeView(500, -200, 300);
+		sp2.resizeView(470, -220, 300);
 		mainMenu.getChildren().add(sp1);
 		mainMenu.getChildren().add(sp2);
 		StartMenuController controller = loader.getController();

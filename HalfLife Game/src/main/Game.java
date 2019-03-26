@@ -65,6 +65,8 @@ public class Game extends Application {
 	private Color bgcol =Color.valueOf("#333333");	
 	private int levelNumber;
  	private Stage primaryStage;
+	private AnimationTimer animattimer;
+
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
@@ -72,7 +74,6 @@ public class Game extends Application {
 	public Game(Server server, int lvlNum) {
 		this.server = server;
 		levelNumber = lvlNum;
-		spplayer = new SpritePlayer(levelNumber,false);
 	}
 	/**
 	 * Stops the game loop and the connected server
@@ -98,14 +99,31 @@ public class Game extends Application {
 	 * @return The constructed Pane root
 	 * @throws IOException
 	 */
-	private AnimationTimer animattimer;
+	
+	
 	private Parent createContent() throws IOException {	
 		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("#8096ba"))};
 	     LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
 	        RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
 	        bg.setFill(lg1);
-		root.setPrefSize(800, 600);
-	root.getChildren().add(spplayer);
+	        root.setPrefSize(800, 600);
+	        
+	        s = network.Server.showConnected();
+			if (s.length>1) {
+				multiplayer=true;
+			}
+			Arrays.sort(s);
+	        
+	        if(multiplayer) {
+				spplayer = new SpritePlayer(levelNumber,"2player");
+	        }else {
+				spplayer = new SpritePlayer(levelNumber,"1player");
+	        }
+
+	        
+	        
+	        
+	        root.getChildren().add(spplayer);
 	
 	animattimer = new AnimationTimer() {
 			@Override
@@ -116,13 +134,10 @@ public class Game extends Application {
 		
 		animattimer.start();
 		display.getChildren().addAll(bg,root,spplayer.GetPlayer().getForeground());
-		s = network.Server.showConnected();
-		if (s.length>1) {
-			multiplayer=true;
-		}
-		Arrays.sort(s);
+		
+		
 		if (multiplayer) {
-			spriteNP = new SpritePlayer(levelNumber,true);
+			spriteNP = new SpritePlayer(levelNumber,"networkedPlayer");
 			root.getChildren().add(spriteNP);
 			spriteNP.setOpacity(0.5);
 		}
@@ -230,7 +245,7 @@ public class Game extends Application {
 			spplayer.GetPlayer().checkPos(this);
 		} else if (!pauseShowing) {
 			pauseShowing = true;
-			pauseScreen = new PauseScreen(spplayer.GetPlayer());
+			pauseScreen = new PauseScreen(spplayer.GetPlayer(), primaryStage, this);
 			spplayer.GetPlayer().getForeground().getChildren().add(pauseScreen);
 		}
 		
