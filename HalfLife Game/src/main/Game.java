@@ -38,7 +38,11 @@ import com.halflife.entities.*;
 import main.CheckCollision;
 import network.*;
 
-
+/**
+ * GameClient --- A class to represent the entire game as seen in single player or the host of a multiplayer game
+ * @author Halflife
+ *
+ */
 public class Game extends Application {
 	private ListofAnimations anilist= new ListofAnimations();
 	public Pane root= new Pane();
