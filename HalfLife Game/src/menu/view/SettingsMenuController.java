@@ -16,10 +16,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import main.Music;
 
 public class SettingsMenuController {
 	String musicFile= "Sample - summer.mp3";
 	private Stage primaryStage;
+	Music mus= new Music();
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
@@ -36,16 +38,12 @@ public class SettingsMenuController {
 	
 	@FXML
 	private void soundOn() throws IOException {
-		Media soundFile = new Media("shootSound.mp3");
-		mediaplayer = new MediaPlayer(soundFile);
-		mediaplayer.play();
+		
 	}
 	
 	@FXML
 	private void soundOff() throws IOException {
-		Media soundFile = new Media("shootSound.mp3");
-		mediaplayer = new MediaPlayer(soundFile);
-		mediaplayer.stop();
+		
 	}
 	
 	@FXML
@@ -61,9 +59,7 @@ public class SettingsMenuController {
 	
 	@FXML
 	private void musicOff() throws IOException {
-		Media musicFile = new Media("Sample - summer.mp3");
-		mediaplayer = new MediaPlayer(musicFile);
-		mediaplayer.stop();
+		mus.stopMus();
 	}
 	
 	// The "BACK" button, directing to the main menu "HALFLIFE"
