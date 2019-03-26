@@ -1,11 +1,7 @@
 package main;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import javafx.fxml.Initializable;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -18,7 +14,6 @@ public class Music {
 		if (musicType.equals("music")) {
 			Media sound = new Media(new File(musicFile).toURI().toASCIIString());
 			mediaPlay = new MediaPlayer(sound);
-		
 		}
 		
 		playMus();
