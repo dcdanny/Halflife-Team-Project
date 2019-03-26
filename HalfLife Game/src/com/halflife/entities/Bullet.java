@@ -30,8 +30,6 @@ public class Bullet extends RectObject{
 	 */
 	public Bullet(double x, double y, int width, int height, String type, Color col, Pane root, Boolean bulletDir) {
 		super(x, y + 25, width, height, type, Color.GREEN);
-		Image img = new Image("res/bulletColour.png");
-		this.setFill(new ImagePattern(img));
 		collisionChecker = new CheckCollision();
 		hasShot(System.currentTimeMillis(), root, bulletDir);
 	}
