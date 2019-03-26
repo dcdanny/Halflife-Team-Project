@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 
+import com.halflife.entities.NetworkedPlayer;
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 
@@ -26,11 +27,31 @@ public class VictoryScreen extends StackPane {
 	private int timeint;
  	private Stage primaryStage;
  	private Game game;
+ 	private GameClient gameC;
+ 	private Player player;
+ 	private Pane root;
+ 	private NetworkedPlayer netPlayer;
 	
 	VictoryScreen(int timeGiven, Player player, Pane root,Game game,Stage primaryStage){
 		this.primaryStage = primaryStage;
 		this.game = game;
 		this.timeint=timeGiven;
+		this.player=player;
+		this.root=root;
+		setUp();
+		
+	}
+	
+	public VictoryScreen(NetworkedPlayer player, Pane root, GameClient gameClient, Stage stage) {
+		this.netPlayer=player;
+		this.root=root;
+		this.gameC=gameClient;
+		this.primaryStage=stage;
+		setUp();		
+		
+	}
+
+	public void setUp() {
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
 		 Image youwon = new Image("youwon.png");
          ImageView img= new ImageView(youwon);
@@ -47,7 +68,7 @@ public class VictoryScreen extends StackPane {
          ImageView time= new ImageView(timeimg);
          formatting(time,-50,0,300);
          
-         Label timeCount= new Label(""+timeGiven);
+         Label timeCount= new Label(""+timeint);
          timeCount.setTranslateX(60);
         
 		 timeCount.setFont(new Font ("Courier New",75));
@@ -153,9 +174,9 @@ public class VictoryScreen extends StackPane {
 			 this.getChildren().add(resbutton);			
 			 this.getChildren().add(exitimg);
 			 this.getChildren().add(exitbutton);
-			
+	}
 		
-}
+
 	private void destroyGame() {
 		game.stopGame();
 		game=null;

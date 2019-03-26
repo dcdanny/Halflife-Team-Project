@@ -275,6 +275,14 @@ public class NetworkedPlayer extends Player {
 		});
 		
 	}
+	
+	/**
+	 * Returns whether the player has finished the current level
+	 * @return Whether the player has finished the current level
+	 */
+	public boolean getLevelFinish() {
+		return completedLevel;
+	}
 
 	/**
 	 * Moves the screen so that the player can always be seen

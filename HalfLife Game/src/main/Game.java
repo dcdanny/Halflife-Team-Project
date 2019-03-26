@@ -108,11 +108,7 @@ public class Game extends Application {
 	        bg.setFill(lg1);
 	        root.setPrefSize(800, 600);
 	        
-	        s = network.Server.showConnected();
-			if (s.length>1) {
-				multiplayer=true;
-			}
-			Arrays.sort(s);
+	        
 	        
 	        if(multiplayer) {
 				spplayer = new SpritePlayer(levelNumber,"2player");
@@ -264,8 +260,15 @@ public class Game extends Application {
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
 			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root,this, primaryStage);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
-			Message m = new Message((double)-9999,(double)0);
+			Message m = new Message("youLose");
 			server.sendToAll(m);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//System.out.println(m.getType().toString());
 //			deathScreenDisplayed = true;
 		}
 		if (multiplayer) {
@@ -276,8 +279,16 @@ public class Game extends Application {
 			try {
 				if(!server.getReceived().isEmpty()) {
 					temp = server.getReceived().take();
-					spriteNP.GetNetPlayer().setTranslateX(temp.getX());
-					spriteNP.GetNetPlayer().setTranslateY(temp.getY());
+					if (temp.getType().equals("coords")) {
+						spriteNP.GetNetPlayer().setTranslateX(temp.getX());
+						spriteNP.GetNetPlayer().setTranslateY(temp.getY());
+					}else if(temp.getType().equals("text")) {
+						if(temp.getText().equals("youLose")&&!spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
+							DeathShow =new DeathScreen(this, spplayer.GetPlayer(),primaryStage, multiplayer);
+							spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
+						}
+					}
+					
 				}
 				
 			} catch (InterruptedException e) {
@@ -324,6 +335,12 @@ public class Game extends Application {
 	public void setUpLevel(String[] lvl) {
 		//anilist.wipeList();
 		levelWidth= lvl[0].length()*150;	
+		
+		s = network.Server.showConnected();
+		if (s.length>1) {
+			multiplayer=true;
+		}
+		Arrays.sort(s);
 		
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];
@@ -394,13 +411,15 @@ public class Game extends Application {
 				
 				case '7':
 					
-						platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
-						root.getChildren().add(platform);
-						platforms.add(platform);
+					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
+					root.getChildren().add(platform);
+					platforms.add(platform);
+					if(!multiplayer) {
 						SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
 						root.getChildren().add(supply);
 						supplies.add(supply);
-						rectNodes.add((RectObject)supply);					
+						rectNodes.add((RectObject)supply);
+					}
 					break;
 				}
 			}

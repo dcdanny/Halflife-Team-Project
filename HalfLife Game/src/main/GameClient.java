@@ -65,6 +65,8 @@ public class GameClient extends Application {
 	private Color bgcol =Color.valueOf("#333333");
 	private int levelNumber;
 	private Stage stage;
+	private VictoryScreen VictoryShow;
+
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
@@ -99,7 +101,7 @@ public class GameClient extends Application {
         bg.setFill(lg1);
 
 		root.setPrefSize(800, 600);
-		root.getChildren().add(spplayer);
+		root.getChildren().addAll(spplayer, spplayer.GetNetPlayer().getForeground());
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -109,21 +111,7 @@ public class GameClient extends Application {
 		
 		timer.start();
 		display.getChildren().addAll(bg,root);
-		
-		
-//		s = network.Server.showConnected();
-//		Arrays.sort(s);
-//		for (int i = 0; i <s.length-2;i++) {
-//			System.out.println(s[i]);
-//			NetworkedPlayer temp = new NetworkedPlayer(200,0,40,50,Color.GREEN,3);
-//			netPlayers.add(temp);
-//		}
-//
-//		for (NetworkedPlayer np : netPlayers) {
-//			root.getChildren().add(np);
-//		}		
-		
-//		netPlayers.add
+
 		spriteNP=new SpritePlayer(levelNumber, "networkedPlayer");
 		spriteNP.setOpacity(0.5);
 		//tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3, levelNumber);
@@ -229,13 +217,19 @@ public class GameClient extends Application {
 		for (SupplyDrop supply : supplies) {
 			supply.tick(spplayer.GetNetPlayer());
 		}
-//		for (NetworkedPlayer np : netPlayers) {
-//			np.tick(root);
-//		}
-//		if (!spplayer.GetNetPlayer().getForeground().getChildren().contains(YouLose)) {
-//			YouLose =new DeathScreen(this, spplayer.GetNetPlayer(),stage, true);
-//			spplayer.GetPlayer().getForeground().getChildren().add(YouLose);
-//		}
+		if (spplayer.GetNetPlayer().getLevelFinish()&&!spplayer.GetNetPlayer().getForeground().getChildren().contains(VictoryShow)) {
+			VictoryShow=new VictoryScreen(spplayer.GetNetPlayer(), root,this, stage);
+			spplayer.GetNetPlayer().getForeground().getChildren().add(VictoryShow);
+			Message m = new Message("youLose");
+			client.sendToServer(m);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
 		spplayer.GetNetPlayer().checkPos(this);
 		coords = new Message(spplayer.GetNetPlayer().getTranslateX(), spplayer.GetNetPlayer().getTranslateY());
 		client.sendToServer(coords);
@@ -252,27 +246,21 @@ public class GameClient extends Application {
 		Thread t = new Thread(task); 
 		t.start();
 	      
-		task.setOnSucceeded(event -> {
+		task.setOnSucceeded(event -> {				
+				
 			if(temp.getType().equals("coords")) {
-				System.out.println("IM HERE!!!");
+				spriteNP.GetNetPlayer().setTranslateX(temp.getX());
+				spriteNP.GetNetPlayer().setTranslateY(temp.getY());	
+			}else if (temp.getType().equals("text")) {
+				if (temp.getText().equals("youLose")&&!spplayer.GetNetPlayer().getForeground().getChildren().contains(YouLose)) {
+					YouLose =new DeathScreen(this, spplayer.GetNetPlayer(),stage, true);
+					spplayer.GetNetPlayer().getForeground().getChildren().add(YouLose);				
+				}
 			}
-			spriteNP.GetNetPlayer().setTranslateX(temp.getX());
-			spriteNP.GetNetPlayer().setTranslateY(temp.getY());			
+					
 		});
-		
-		/*try {
-			temp = client.getRecieved().take();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		tempNP.setTranslateX(temp.getX());
-		tempNP.setTranslateY(temp.getY());*/
-		
-	}
 	
-	
-
 
 	/**
 	 * Sets up the scene for the game, the title, keyboard hooks and such JavaFX necessities
@@ -376,10 +364,7 @@ public class GameClient extends Application {
 				case '7':
 					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.LIGHTSKYBLUE);
 					root.getChildren().add(platform);
-					platforms.add(platform);
-					SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
-					root.getChildren().add(supply);
-					supplies.add(supply);
+					platforms.add(platform);					
 					break;
 				}
 			}
