@@ -1,9 +1,13 @@
 package main;
 
+import java.io.IOException;
+
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,11 +16,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import menu.view.LevelMenuController;
+import menu.view.MainMenuController;
 
 public class VictoryScreen extends StackPane {
 	//SpriteAnimation sp= new SpriteAnimation();
 	private int timeint;
-	VictoryScreen(int timeGiven, Player player, Pane root,Game game){
+ 	private Stage primaryStage;
+ 	private Game game;
+	
+	VictoryScreen(int timeGiven, Player player, Pane root,Game game,Stage primaryStage){
+		this.primaryStage = primaryStage;
+		this.game = game;
 		this.timeint=timeGiven;
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
 		 Image youwon = new Image("youwon.png");
@@ -109,6 +122,24 @@ public class VictoryScreen extends StackPane {
 	         });
 	         exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
+		     		FXMLLoader loader = new FXMLLoader(getClass().getResource("../menu/view/levelmenu.fxml"));
+		    		Pane mainMenu;
+					try {
+						mainMenu = loader.load();
+
+		    		
+		    		LevelMenuController controller = loader.getController();
+		    		controller.setStage(primaryStage, game.server);
+		    		Scene scene = new Scene(mainMenu);
+		    		//setCursor(scene);
+		    		primaryStage.setScene(scene);
+		    		primaryStage.show();
+		             remove();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					destroyGame();
 	             
 	         });
 	         
@@ -125,7 +156,10 @@ public class VictoryScreen extends StackPane {
 			
 		
 }
-	
+	private void destroyGame() {
+		game.stopGame();
+		game=null;
+	}
 	
 	private ImageView formatting(ImageView img ,int x,int y, int fitwidth) {
 		img.setTranslateX(x);

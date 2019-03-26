@@ -137,9 +137,7 @@ public class DeathScreen extends StackPane {
 	    		Scene scene = new Scene(mainMenu);
 	    		//setCursor(scene);
 	    		primaryStage.setScene(scene);
-	    		this.primaryStage.setOnCloseRequest((WindowEvent event) -> {
-	    	        System.exit(0);
-	    	    });
+
 	    		primaryStage.show();
 	             remove();
 				} catch (IOException e1) {

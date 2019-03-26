@@ -11,7 +11,9 @@ import java.io.IOException;
 
 public class WriteFile {
 
-	private String path = System.getenv("APPDATA");
+	//private String path = System.getenv("APPDATA");
+	//The above line doesn't work on Linux so is replaced with the below
+	private String path = System.getProperty("user.home");
 	private boolean append = false;
 	
 	/**

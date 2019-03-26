@@ -50,7 +50,7 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	private Server server;
+	Server server;
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
@@ -73,9 +73,11 @@ public class Game extends Application {
 		levelNumber = lvlNum;
 		spplayer = new SpritePlayer(levelNumber,false);
 	}
+	/**
+	 * Stops the game loop and the connected server
+	 */
 	public void stopGame() {
 		server.stopServer();
-		
 		animattimer.stop();
 	}
 	/**
@@ -244,7 +246,7 @@ public class Game extends Application {
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
-			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root,this);
+			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root,this, primaryStage);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
 //			deathScreenDisplayed = true;
 		}
