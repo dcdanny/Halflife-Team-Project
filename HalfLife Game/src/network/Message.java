@@ -24,6 +24,7 @@ public class Message implements java.io.Serializable{
 	private String[] level=null;
 	private Double x=null;
 	private Double y=null;
+	private String type;
 
 	  /** Constructor for Message
 	   * 
@@ -32,6 +33,7 @@ public class Message implements java.io.Serializable{
 	public Message(String text) {
 		//this.sender = sender;
 		this.text = text;
+		setType("text");
 	}	  
 	/** Constructor for Message
 	 * 
@@ -39,6 +41,7 @@ public class Message implements java.io.Serializable{
 	 */
 	public Message(String[] level) {
 		this.setLevel(level);
+		setType("level");
 	}
 	/** Constructor for Message (For sending coordinates)
 	 * 
@@ -48,6 +51,7 @@ public class Message implements java.io.Serializable{
 	public Message(Double x, Double y) {
 		this.setX(x);
 		this.setY(y);
+		setType("coords");
 	}
 	/** Sets the sender attribute of the message
 	 * 
@@ -119,6 +123,12 @@ public class Message implements java.io.Serializable{
 	 */
 	private void setY(Double y) {
 		this.y = y;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

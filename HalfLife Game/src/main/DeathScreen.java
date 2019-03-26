@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.halflife.entities.NetworkedPlayer;
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
 import com.halflife.entities.SpritePlayer;
@@ -35,18 +36,48 @@ public class DeathScreen extends StackPane {
 	
  	private Stage primaryStage; //Game scene to be reset
  	private Game game; //Game object to be removed
+	private boolean multi;
+	private Player player;
+	private GameClient gameC;
+	private NetworkedPlayer netPlayer;
  	
 	/**
 	 * Constructor for the death screen, creates all buttons
 	 * @param game Game object to reset the player
 	 * @param player Player to be reset
 	 */
-	public DeathScreen(Game game, Player player,Stage primaryStage) {
+	public DeathScreen(Game game, Player player,Stage primaryStage,boolean multi) {
 		this.primaryStage = primaryStage;
 		this.game = game;
+		this.multi=multi;
+		this.player=player;
+		setUp();
+				
+				
+	}
+	
+	public DeathScreen(GameClient gameClient, NetworkedPlayer getNetPlayer, Stage stage, boolean multi) {
+		this.primaryStage =stage;
+		this.netPlayer=getNetPlayer;
+		this.multi=multi;
+		this.gameC=gameClient;
+		setUp();
+		
+	}
+
+	private void setUp() {
+		
+		
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.valueOf("#333333"));
+		 ImageView img= null;
+		 if (!multi) {
 		 Image youdied = new Image("youdied.png");
-         ImageView img= new ImageView(youdied);
+          img= new ImageView(youdied);
+		 }
+		 else {
+			 Image youlose= new Image("youlose.png");
+		img= new ImageView(youlose);
+		 }
          img.setFitWidth(500);
          img.setTranslateY(-100);
          img.setPreserveRatio(true);

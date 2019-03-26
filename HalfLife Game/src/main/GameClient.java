@@ -52,6 +52,7 @@ public class GameClient extends Application {
 	private SpritePlayer spriteNP;
 	private SpritePlayer spplayer;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
+	private DeathScreen YouLose ;
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
 	private List<NetworkedPlayer> netPlayers = new ArrayList<NetworkedPlayer>();
@@ -63,6 +64,7 @@ public class GameClient extends Application {
 	//private NetworkedPlayer tempNP;
 	private Color bgcol =Color.valueOf("#333333");
 	private int levelNumber;
+	private Stage stage;
 
 	private String[] currentLevel = Level_Info.LEVEL2;
 
@@ -230,7 +232,10 @@ public class GameClient extends Application {
 //		for (NetworkedPlayer np : netPlayers) {
 //			np.tick(root);
 //		}
-		
+//		if (!spplayer.GetNetPlayer().getForeground().getChildren().contains(YouLose)) {
+//			YouLose =new DeathScreen(this, spplayer.GetNetPlayer(),stage, true);
+//			spplayer.GetPlayer().getForeground().getChildren().add(YouLose);
+//		}
 		spplayer.GetNetPlayer().checkPos(this);
 		coords = new Message(spplayer.GetNetPlayer().getTranslateX(), spplayer.GetNetPlayer().getTranslateY());
 		client.sendToServer(coords);
@@ -248,8 +253,11 @@ public class GameClient extends Application {
 		t.start();
 	      
 		task.setOnSucceeded(event -> {
+			if(temp.getType().equals("coords")) {
+				System.out.println("IM HERE!!!");
+			}
 			spriteNP.GetNetPlayer().setTranslateX(temp.getX());
-			spriteNP.GetNetPlayer().setTranslateY(temp.getY());
+			spriteNP.GetNetPlayer().setTranslateY(temp.getY());			
 		});
 		
 		/*try {
@@ -277,7 +285,7 @@ public class GameClient extends Application {
 		createContent();
 //		Message nodes = new Message(rectNodes);
 //		server.sendToAll(nodes);
-		stage.setTitle("HALFLIFE");
+		stage.setTitle("POKO");
 		Scene scene = new Scene(display);
 		stage.setScene(scene);
 //		spplayer.buttonPressing(this, scene);

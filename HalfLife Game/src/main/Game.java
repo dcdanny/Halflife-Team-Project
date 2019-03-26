@@ -257,13 +257,15 @@ public class Game extends Application {
 		
 		
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
-			DeathShow =new DeathScreen(this, spplayer.GetPlayer(),primaryStage);
+			DeathShow =new DeathScreen(this, spplayer.GetPlayer(),primaryStage, multiplayer);
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
 		if (spplayer.GetPlayer().getLevelFinish() && !spplayer.GetPlayer().getForeground().getChildren().contains(VictoryShow)) {
 			VictoryShow=new VictoryScreen(spplayer.GetPlayer().getTimer().getTime(), spplayer.GetPlayer(), root,this, primaryStage);
 			spplayer.GetPlayer().getForeground().getChildren().add(VictoryShow);
+			Message m = new Message((double)-9999,(double)0);
+			server.sendToAll(m);
 //			deathScreenDisplayed = true;
 		}
 		if (multiplayer) {
@@ -391,13 +393,14 @@ public class Game extends Application {
 					break;
 				
 				case '7':
-					platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
-					root.getChildren().add(platform);
-					platforms.add(platform);
-					SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
-					root.getChildren().add(supply);
-					supplies.add(supply);
-					rectNodes.add((RectObject)supply);
+					
+						platform =new RectObject(j*150,i*100,150,10,GameConstants.TYPE_PLATFORM,Color.SKYBLUE);
+						root.getChildren().add(platform);
+						platforms.add(platform);
+						SupplyDrop supply =new SupplyDrop(j*150,i*100-50,50,50);
+						root.getChildren().add(supply);
+						supplies.add(supply);
+						rectNodes.add((RectObject)supply);					
 					break;
 				}
 			}
