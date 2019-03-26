@@ -19,6 +19,7 @@ import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import main.Music;
 import main.ReadLevel;
 import main.SpriteAnimation;
 import main.WriteFile;
@@ -42,9 +43,7 @@ public class StartMenu extends Application {
 		String musicFile = "data/Sample - summer.mp3";     // For example
 
 		try {
-			Media sound = new Media(new File(musicFile).toURI().toASCIIString());
-			MediaPlayer mediaPlayer = new MediaPlayer(sound);
-			mediaPlayer.play();
+			Music mus= new Music("music");
 			
 		}catch(MediaException e) {
 			System.out.println("Unable to play audio: "+e.getMessage());
