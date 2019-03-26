@@ -101,7 +101,7 @@ public class GameClient extends Application {
         bg.setFill(lg1);
 
 		root.setPrefSize(800, 600);
-		root.getChildren().addAll(spplayer, spplayer.GetNetPlayer().getForeground());
+		root.getChildren().add(spplayer);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -110,7 +110,7 @@ public class GameClient extends Application {
 		};
 		
 		timer.start();
-		display.getChildren().addAll(bg,root);
+		display.getChildren().addAll(bg,root,spplayer.GetNetPlayer().getForeground());
 
 		spriteNP=new SpritePlayer(levelNumber, "networkedPlayer");
 		spriteNP.setOpacity(0.5);
