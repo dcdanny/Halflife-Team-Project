@@ -254,13 +254,17 @@ public class Game extends Application {
 		
 			Message temp = null;
 			try {
-				temp = server.getReceived().take();
+				if(!server.getReceived().isEmpty()) {
+					temp = server.getReceived().take();
+					spriteNP.GetNetPlayer().setTranslateX(temp.getX());
+					spriteNP.GetNetPlayer().setTranslateY(temp.getY());
+				}
+				
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		spriteNP.GetNetPlayer().setTranslateX(temp.getX());
-		spriteNP.GetNetPlayer().setTranslateY(temp.getY());
+
 		}		
 	}
 	
