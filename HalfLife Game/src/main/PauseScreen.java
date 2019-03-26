@@ -26,12 +26,14 @@ import menu.view.MainMenuController;
  */
 public class PauseScreen extends StackPane {
 	
-	private Stage primaryStage;
-	private Game game;
+	private Stage primaryStage; //Game scene to be reset
+	private Game game; //Game object to be removed
 	
 	/**
 	 * Constructor for the pause screen, creates all buttons
 	 * @param player player object to be paused
+	 * @param primaryStage game scene to be reset
+	 * @param game game object to be removed
 	 */
 	public PauseScreen(Player player, Stage primaryStage, Game game){
 		 RectObject bg=new RectObject(265,150,250,300,"pausescreen",Color.rgb(1, 1, 1, 0.5));
@@ -128,6 +130,9 @@ public class PauseScreen extends StackPane {
          this.getChildren().add(exitButton);
 	}
 	
+	/**
+	 * Removes the game
+	 */
 	private void destroyGame() {
 		game.stopGame();
 		game=null;
