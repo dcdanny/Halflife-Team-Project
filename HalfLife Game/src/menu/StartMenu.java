@@ -43,7 +43,7 @@ public class StartMenu extends Application {
 		String musicFile = "data/Sample - summer.mp3";     // For example
 
 		try {
-			Music mus= new Music("menu");
+			Music mus= new Music("music");
 			
 		}catch(MediaException e) {
 			System.out.println("Unable to play audio: "+e.getMessage());

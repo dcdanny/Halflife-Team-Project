@@ -33,33 +33,39 @@ public class SettingsMenuController {
 		return s;
 	}
 	
-	private MediaPlayer mediaplayer;
 
+	private MediaPlayer mediaplayer;
 	
 	@FXML
 	private void soundOn() throws IOException {
-		
+
+		Media soundFile = new Media(new File("data/shootSound.mp3").toURI().toString());
+		mediaplayer = new MediaPlayer(soundFile);
+		mediaplayer.play();
+
 	}
 	
 	@FXML
 	private void soundOff() throws IOException {
-		
+
+		Media soundFile = new Media(new File("data/shootSound.mp3").toURI().toString());
+		mediaplayer = new MediaPlayer(soundFile);
+		mediaplayer.stop();
+
 	}
 	
 	@FXML
 	private void musicOn() throws IOException {
-		System.out.println("1");
-		Media sound = new Media(new File(musicFile).toURI().toASCIIString());
-		System.out.println("2");
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		System.out.println("3");
-		mediaPlayer.play();
-		
+		mus.playMus();
+	
+
 	}
 	
 	@FXML
 	private void musicOff() throws IOException {
+
 		mus.stopMus();
+
 	}
 	
 	// The "BACK" button, directing to the main menu "HALFLIFE"
