@@ -1,5 +1,6 @@
 package com.halflife.entities;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.animation.Animation;
@@ -7,6 +8,8 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.CheckCollision;
@@ -97,6 +100,9 @@ public class NetworkedPlayer extends Player {
 	 */
 	@Override
 	public void loseLife(Pane root) {
+		Media sound = new Media(new File("data/death.mp3").toURI().toASCIIString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 		this.Fade();
 		this.setTranslateX(200);
 		this.setTranslateY(0);
@@ -154,7 +160,9 @@ public class NetworkedPlayer extends Player {
 				}
 			}
 		};
-		
+		Media sound = new Media(new File("data/jump.mp3").toURI().toASCIIString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 		jTimer.start();
 	}
 	

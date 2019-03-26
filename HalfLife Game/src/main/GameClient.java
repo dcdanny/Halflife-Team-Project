@@ -95,7 +95,7 @@ public class GameClient extends Application {
 	 * @throws IOException
 	 */
 	private Parent createContent() throws IOException {
-		Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("557A7F"))};
+		Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("#8096ba"))};
         LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         RectObject bg=new RectObject(0,0,800,600,GameConstants.TYPE_BACKGROUND,Color.valueOf("#333333"));
         bg.setFill(lg1);
