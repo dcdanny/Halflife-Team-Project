@@ -63,6 +63,7 @@ public class Game extends Application {
 	private String[] currentLevel = Level_Info.LEVEL2;
 	private Color bgcol =Color.valueOf("#333333");	
 	private int levelNumber;
+ 	private Stage primaryStage;
 	/**
 	 * Constructor for the Game class
 	 * @param server Contains server information needed for multiplayer functionality
@@ -72,7 +73,11 @@ public class Game extends Application {
 		levelNumber = lvlNum;
 		spplayer = new SpritePlayer(levelNumber,false);
 	}
-
+	public void stopGame() {
+		server.stopServer();
+		
+		animattimer.stop();
+	}
 	/**
 	 * Setter for currentLevel,  
 	 * @param currentLevel The string array containing details on the chosen level
@@ -90,6 +95,7 @@ public class Game extends Application {
 	 * @return The constructed Pane root
 	 * @throws IOException
 	 */
+	private AnimationTimer animattimer;
 	private Parent createContent() throws IOException {	
 		 Stop[] stops = new Stop[] { new Stop(0, bgcol), new Stop(1, Color.valueOf("#8096ba"))};
 	     LinearGradient lg1 = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
@@ -98,14 +104,14 @@ public class Game extends Application {
 		root.setPrefSize(800, 600);
 	root.getChildren().add(spplayer);
 	
-		AnimationTimer timer = new AnimationTimer() {
+	animattimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				update();
 			}
 		};
 		
-		timer.start();
+		animattimer.start();
 		display.getChildren().addAll(bg,root,spplayer.GetPlayer().getForeground());
 		s = network.Server.showConnected();
 		if (s.length>1) {
@@ -233,7 +239,7 @@ public class Game extends Application {
 		
 		
 		if (spplayer.GetPlayer().isDead() && !spplayer.GetPlayer().getForeground().getChildren().contains(DeathShow)) {
-			DeathShow =new DeathScreen(this, spplayer.GetPlayer());
+			DeathShow =new DeathScreen(this, spplayer.GetPlayer(),primaryStage);
 			spplayer.GetPlayer().getForeground().getChildren().add(DeathShow);
 //			deathScreenDisplayed = true;
 		}
@@ -270,6 +276,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 //		System.out.println("Game is Starting!!!!!!!!!!");
+		this.primaryStage = stage;
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();

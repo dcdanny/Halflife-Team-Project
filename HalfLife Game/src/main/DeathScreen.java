@@ -2,6 +2,7 @@ package main;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.halflife.entities.Player;
 import com.halflife.entities.RectObject;
@@ -11,13 +12,19 @@ import com.sun.prism.paint.ImagePattern;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.*;
 
 import javafx.scene.paint.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import menu.view.MainMenuController;
 
 /**
  * Displays a new screen when the player has lost all of their lives
@@ -30,7 +37,12 @@ public class DeathScreen extends StackPane {
 	 * @param game Game object to reset the player
 	 * @param player Player to be reset
 	 */
-	public DeathScreen(Game game, Player player) {
+ 	private Stage primaryStage;
+ 	private Game game;
+ 	
+	public DeathScreen(Game game, Player player,Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		this.game = game;
 		 RectObject bg=new RectObject(0,0,800,600,"deathscreen",Color.valueOf("#333333"));
 		 Image youdied = new Image("youdied.png");
          ImageView img= new ImageView(youdied);
@@ -110,10 +122,31 @@ public class DeathScreen extends StackPane {
 	                exitimg.setFitWidth(400);
 	             }
 	         });
+
 	     exitbutton.setOnMouseClicked((MouseEvent e) -> {
 	             System.out.println("Clicked Exit!"); // change functionality
-	             remove();
 	             
+	     		FXMLLoader loader = new FXMLLoader(getClass().getResource("../menu/view/mainmenu.fxml"));
+	    		Pane mainMenu;
+				try {
+					mainMenu = loader.load();
+
+	    		
+	    		MainMenuController controller = loader.getController();
+	    		controller.setStage(primaryStage);
+	    		Scene scene = new Scene(mainMenu);
+	    		//setCursor(scene);
+	    		primaryStage.setScene(scene);
+	    		this.primaryStage.setOnCloseRequest((WindowEvent event) -> {
+	    	        System.exit(0);
+	    	    });
+	    		primaryStage.show();
+	             remove();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				destroyGame();
 	         });
 	         
 	     this.getChildren().add(bg);
@@ -123,7 +156,10 @@ public class DeathScreen extends StackPane {
 		 this.getChildren().add(exitimg);
 		 this.getChildren().add(exitbutton);	
 	}
-	
+	private void destroyGame() {
+		game.stopGame();
+		game=null;
+	}
 	/**
 	 * Adds a fade to when the death screen is displayed
 	 * @param rec Background object that fades
