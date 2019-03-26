@@ -127,16 +127,16 @@ public class DeathScreen extends StackPane {
 	             
 	             
 	         });
-	     Image exit= new Image("exit.png");
+	     Image exit= new Image("continue.png");
 	     ImageView exitimg= new ImageView(exit);
 	     exitimg.setFitWidth(400);
-	     exitimg.setTranslateX(140);
-	     exitimg.setTranslateY(180);
+	     exitimg.setTranslateX(160);
+	     exitimg.setTranslateY(190);
 	     exitimg.setPreserveRatio(true);
 	     exitimg.setSmooth(true);
 	     exitimg.setCache(true);
 	         
-	     RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
+	     RectObject exitbutton=new RectObject(160,190,400,100,"exit button",Color.TRANSPARENT);
 	     exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
 	         () {
 

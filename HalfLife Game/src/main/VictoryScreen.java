@@ -118,12 +118,12 @@ public class VictoryScreen extends StackPane {
 	             
 	             
 	         });
-	         Image exit= new Image("exit.png");
-	         ImageView exitimg= new ImageView(exit);
-	         formatting(exitimg,140,180,400);
+	         Image exit= new Image("continue.png");
+		     ImageView exitimg= new ImageView(exit);
+	         formatting(exitimg,160,190,400);
 	 
 	         
-	         RectObject exitbutton=new RectObject(150,180,160,100,"exit button",Color.TRANSPARENT);
+	         RectObject exitbutton=new RectObject(160,190,400,100,"exit button",Color.TRANSPARENT);
 	         exitbutton.setOnMouseEntered(new EventHandler<MouseEvent>
 	         () {
 

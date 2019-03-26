@@ -14,6 +14,7 @@ public class Music {
 		if (musicType.equals("music")) {
 			Media sound = new Media(new File(musicFile).toURI().toASCIIString());
 			mediaPlay = new MediaPlayer(sound);
+			mediaPlay.setVolume(0.1);
 		}
 		
 		playMus();
