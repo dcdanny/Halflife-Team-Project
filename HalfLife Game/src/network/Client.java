@@ -105,7 +105,6 @@ public class Client extends Thread {
 	 * @throws InterruptedException
 	 */
 	public Message waitForMessage() throws InterruptedException {
-		System.out.println("got");
 		Message msg = receiveQueue.take();
 		//Message msg = new Message("asdfghjk");
 
