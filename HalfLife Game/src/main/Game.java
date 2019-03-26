@@ -229,7 +229,7 @@ public class Game extends Application {
 			spplayer.GetPlayer().checkPos(this);
 		} else if (!pauseShowing) {
 			pauseShowing = true;
-			pauseScreen = new PauseScreen(spplayer.GetPlayer());
+			pauseScreen = new PauseScreen(spplayer.GetPlayer(), primaryStage, this);
 			spplayer.GetPlayer().getForeground().getChildren().add(pauseScreen);
 		}
 		
