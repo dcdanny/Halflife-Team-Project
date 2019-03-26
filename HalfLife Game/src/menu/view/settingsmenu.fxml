@@ -46,7 +46,7 @@
             <VBox prefHeight="200.0" prefWidth="100.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="ON" />
+                  <Button mnemonicParsing="false"  text="ON" />
                </children>
             </VBox>
             <Label />
