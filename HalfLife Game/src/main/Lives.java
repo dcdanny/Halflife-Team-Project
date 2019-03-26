@@ -14,10 +14,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Lives --- Adds the hearts to the screen, and controls what happens with them
+ * @author Halflife
+ */
 public class Lives extends Group {
-	private int lives = 3;
-	private boolean isDead;
-	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>();
+	
+	private int lives = 3; //Initial number of lives
+	private boolean isDead; //Whether the player is dead
+	private ArrayList<ImageView> heartlist = new ArrayList<ImageView>(); //Image list of heart images
 
 	/**
 	 * Constructor for displaying hearts on the game window corresponding to lives remaining

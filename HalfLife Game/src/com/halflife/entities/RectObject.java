@@ -81,9 +81,9 @@ public class RectObject extends Rectangle{
 		} else {
 			moveBulletX = -30;
 		}
-//		Image img = new Image("res/bulletColour.png");
-//		this.setFill(new ImagePattern(img));
+		Image img = new Image("bulletColour.png");
 		Bullet bullet = new Bullet(shooter.getTranslateX() + moveBulletX, shooter.getTranslateY(), 20, 5, shooter.getType() + "bullet", col, root, bulletDir);
+		bullet.setFill(new ImagePattern(img));
 		return bullet;
 	}
 	
