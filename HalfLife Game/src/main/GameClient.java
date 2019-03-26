@@ -73,7 +73,7 @@ public class GameClient extends Application {
 	public GameClient(Client client, int lvlNum) {
 		this.client=client;
 		levelNumber = lvlNum;
-		spplayer= new SpritePlayer(levelNumber,true);
+		spplayer= new SpritePlayer(levelNumber,"networkedPlayer");
 		//player= new NetworkedPlayer(200,0,40,50,Color.WHITE,3, levelNumber);
 	}
 
@@ -122,7 +122,7 @@ public class GameClient extends Application {
 //		}		
 		
 //		netPlayers.add
-		spriteNP=new SpritePlayer(levelNumber, true);
+		spriteNP=new SpritePlayer(levelNumber, "networkedPlayer");
 		spriteNP.setOpacity(0.5);
 		//tempNP = new NetworkedPlayer(200, 0, 40, 50, Color.BLACK, 3, levelNumber);
 //		for (NetworkedPlayer np : netPlayers) {

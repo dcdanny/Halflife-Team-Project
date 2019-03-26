@@ -37,8 +37,8 @@ public class NetworkedPlayer extends Player {
 	 * @param col Colour of the player object
 	 * @param lives Number of lives the player object has
 	 */
-	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives, int lvlNum) {
-		super(x,y,width,height, col, 3, lvlNum);
+	public NetworkedPlayer(double x, double y, int width, int height, Color col, int lives, int lvlNum, boolean multiplayer) {
+		super(x,y,width,height, col, 3, lvlNum, multiplayer);
 		collisionChecker = new CheckCollision();
 		movement(x, y);		
 		completedLevel = false;

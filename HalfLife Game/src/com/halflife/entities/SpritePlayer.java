@@ -18,19 +18,27 @@ public class SpritePlayer extends Pane {
 	/**
 	 * Constructor of the sprite player
 	 */
-	public SpritePlayer(int lvlNum,boolean multi) {
+	public SpritePlayer(int lvlNum,String type) {
 		this.forward=true;
-		if (!multi) {
-		this.pl=  new Player(200,0,40,50,Color.PINK,3, lvlNum);
+		if (type.equals("1player")) {
+		this.pl=  new Player(200,0,40,50,Color.PINK,3, lvlNum,false);
 		
 		this.ani=new SpriteAnimation("player");
 		ani.resizeView(-38, -45, 120);
 		ani.translateXProperty().bindBidirectional(pl.translateXProperty());
 		ani.translateYProperty().bindBidirectional(pl.translateYProperty());
 		}
-		if (multi) {
+		if(type.equals("2player")) {
+			this.pl=  new Player(200,0,40,50,Color.PINK,3, lvlNum,true);
+			
+			this.ani=new SpriteAnimation("player");
+			ani.resizeView(-38, -45, 120);
+			ani.translateXProperty().bindBidirectional(pl.translateXProperty());
+			ani.translateYProperty().bindBidirectional(pl.translateYProperty());
+		}
+		if (type.equals("networkedPlayer")) {
 		
-		this.np= new NetworkedPlayer(200,0,40,50,Color.PINK,3, lvlNum);
+		this.np= new NetworkedPlayer(200,0,40,50,Color.PINK,3, lvlNum,true);
 		this.ani=new SpriteAnimation("player");
 		ani.resizeView(-38, -45, 120);
 		ani.translateXProperty().bindBidirectional(np.translateXProperty());
