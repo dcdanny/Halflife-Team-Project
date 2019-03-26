@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import main.SpriteAnimation;
 
 /**
- * ListOfAnimations --- Keeps track of all animations running and
- * deletes them if necessary.
+ * ListOfAnimations Keeps track of all animations running and deletes them if necessary.
  * @author Halflife
  */
 public class ListofAnimations {

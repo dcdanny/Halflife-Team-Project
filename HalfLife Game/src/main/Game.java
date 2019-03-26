@@ -40,6 +40,7 @@ import network.*;
 
 
 public class Game extends Application {
+	private ListofAnimations anilist= new ListofAnimations();
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	private SpritePlayer spplayer;
@@ -304,6 +305,7 @@ public class Game extends Application {
 	 * @param lvl The encoded level
 	 */
 	public void setUpLevel(String[] lvl) {
+		//anilist.wipeList();
 		levelWidth= lvl[0].length()*150;	
 		
 		for (int i = 0; i < lvl.length; i++) {
