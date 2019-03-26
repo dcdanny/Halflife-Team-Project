@@ -180,6 +180,9 @@ public class Player extends RectObject{
 	 * @param root Contains all objects that the player could interact with
 	 */
 	public void loseLife(Pane root) {
+		Media sound = new Media(new File("data/death.mp3").toURI().toASCIIString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 		root.setLayoutX(0);
 		if (lives > 0 && !multiplayer) {
 			this.Fade();
@@ -247,6 +250,9 @@ public class Player extends RectObject{
 			}
 		};
 		jTimer.start();
+		Media sound = new Media(new File("data/jump.mp3").toURI().toASCIIString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
 	}
 	
 	/**
