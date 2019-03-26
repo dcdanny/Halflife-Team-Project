@@ -49,6 +49,7 @@ public class Game extends Application {
 	private Pane display=new Pane();
 	private SpritePlayer spplayer;
 	private SpritePlayer spriteNP;
+	private CloudsAnimation cloudani;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
 	private List<SupplyDrop> supplies = new ArrayList<SupplyDrop>();
 	private List<Spike> spikes = new ArrayList<Spike>();
@@ -112,7 +113,7 @@ public class Game extends Application {
 	        bg.setFill(lg1);
 	        root.setPrefSize(800, 600);
 	        
-	        
+	       
 	        
 	        if(multiplayer) {
 				spplayer = new SpritePlayer(levelNumber,"2player");
@@ -122,7 +123,7 @@ public class Game extends Application {
 
 	        
 	        
-	        
+	       // root.getChildren().add(cloudani);
 	        root.getChildren().add(spplayer);
 	
 	animattimer = new AnimationTimer() {
@@ -142,6 +143,9 @@ public class Game extends Application {
 			spriteNP.setOpacity(0.5);
 		}
 		
+		CloudsAnimation cloudfront= new CloudsAnimation(levelWidth);
+		cloudfront.setOpacity(0.75);
+		 root.getChildren().add(cloudfront);
 		ImageView controls = new ImageView(new Image("controls.png"));
 		controls.setX(-30);
 		controls.setY(350);
@@ -339,7 +343,8 @@ public class Game extends Application {
 	public void setUpLevel(String[] lvl) {
 		//anilist.wipeList();
 		levelWidth= lvl[0].length()*150;	
-		
+		cloudani= new CloudsAnimation(levelWidth);
+		 root.getChildren().add(cloudani);
 		s = network.Server.showConnected();
 		if (s.length>1) {
 			multiplayer=true;
@@ -428,6 +433,7 @@ public class Game extends Application {
 				}
 			}
 		}	
-		
+		 
 	}
+	
 }
