@@ -48,7 +48,7 @@ public class GameClient extends Application {
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	//private RectObject player=new RectObject(500,300,40,50,"player",Color.WHITE);
-	
+	private CloudsAnimation cloudani;
 	private SpritePlayer spriteNP;
 	private SpritePlayer spplayer;
 	private List<SpriteEnemy> enemies = new ArrayList<SpriteEnemy>();
@@ -110,6 +110,9 @@ public class GameClient extends Application {
 		};
 		
 		timer.start();
+		CloudsAnimation cloudfront= new CloudsAnimation(levelWidth);
+		cloudfront.setOpacity(0.75);
+		 root.getChildren().add(cloudfront);
 		display.getChildren().addAll(bg,root,spplayer.GetNetPlayer().getForeground());
 
 		spriteNP=new SpritePlayer(levelNumber, "networkedPlayer");
@@ -298,7 +301,7 @@ public class GameClient extends Application {
 	 */
 	private void setUpLevel(String[] lvl) {
 		levelWidth= lvl[0].length()*150;	
-		
+		cloudani= new CloudsAnimation(levelWidth);
 		for (int i = 0; i < lvl.length; i++) {
 			String line=lvl[i];
 			for (int j = 0; j < line.length(); j++) {
