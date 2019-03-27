@@ -252,6 +252,7 @@ public class Player extends RectObject{
 		jTimer.start();
 		Media sound = new Media(new File("data/jump.mp3").toURI().toASCIIString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setVolume(0.1);
 		mediaPlayer.play();
 	}
 	
