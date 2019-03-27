@@ -13,12 +13,21 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+/**
+ * CloudsAnimation --- Creates animated clouds that appear randomly in the background
+ * @author Halflife
+ */
 public class CloudsAnimation extends Pane {
-	//ImageView clouds;
-	ArrayList <ImageView> cloudsList= new ArrayList();
-	Pane pane;
-	Random rand= new Random();
-	int levelWidth;
+
+	private ArrayList <ImageView> cloudsList= new ArrayList(); //List of cloud images
+	private Pane pane; //Pane the clouds are displayed on
+	private Random rand= new Random(); //Random variable to determine clouds
+	private int levelWidth; //Width of the level
+	
+	/**
+	 * Constructor for the clouds
+	 * @param levelWidth
+	 */
 	public CloudsAnimation(int levelWidth){
 		this.levelWidth=levelWidth;
 		Image cloud1= new Image("cloud1.png");
@@ -45,6 +54,9 @@ public class CloudsAnimation extends Pane {
 		
 	}
 	
+	/**
+	 * Starts the cloud animations
+	 */
 	private void start() {
 		
 		TranslateTransition tt=null;
@@ -71,6 +83,13 @@ public class CloudsAnimation extends Pane {
 		}
 	   
 	}
+	
+	/**
+	 * Formats the clouds into the correct size
+	 * @param img Cloud image to be edited
+	 * @param levelWidth Width of the level
+	 * @return Edited cloud image
+	 */
 	private ImageView formatting(ImageView img,int levelWidth) {
 		System.out.println("width"+levelWidth); 
 		img.setOpacity(0.50);
@@ -88,7 +107,6 @@ public class CloudsAnimation extends Pane {
 		//img.setPreserveRatio(true);
 		return img;
 	}
-	
 	
 }
 
