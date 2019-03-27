@@ -36,6 +36,7 @@ public class StartMenu extends Application {
 	private CloudsAnimation cloud;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("POKO");
 		this.primaryStage.setWidth(800);
@@ -43,6 +44,7 @@ public class StartMenu extends Application {
 		this.primaryStage.setMinWidth(250);
 		this.primaryStage.setMinHeight(250);
 		this.primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image("icon.png"));
 		String musicFile = "data/Sample - summer.mp3";     // For example
 
 		try {

@@ -319,11 +319,12 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 //		System.out.println("Game is Starting!!!!!!!!!!");
+		
 		this.primaryStage = stage;
 		stage.setResizable(false);
 		setUpLevel(currentLevel);
 		createContent();
-		stage.setTitle("Poko");
+		//stage.setTitle("Poko");
 		Scene scene = new Scene(display);
 		setCursor(scene);
 		stage.setScene(scene);
