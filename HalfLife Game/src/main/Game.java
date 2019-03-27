@@ -45,7 +45,7 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	private Server server;
+	public Server server;
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
