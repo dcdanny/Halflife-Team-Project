@@ -50,7 +50,7 @@ public class Bullet extends RectObject{
 				} else {
 					moveX(-GameConstants.BULLET_SPEED);
 				}
-				if (secondsElapsed >= 3 || checkCollided(root)){
+				if (secondsElapsed >= 2 || checkCollided(root)){
 					setDead(true);
 					stop();
 				}
