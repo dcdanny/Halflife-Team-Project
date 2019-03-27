@@ -18,6 +18,6 @@ public class GoalPlatform extends RectObject {
 	 * @param height Height of the goal platform object
 	 */
 	public GoalPlatform(double x, double y, int width, int height) {
-		super(x, y, width, height, GameConstants.TYPE_GOAL, Color.YELLOW);
+		super(x, y, width, height, GameConstants.TYPE_GOAL, Color.valueOf("#231082"));
 	}
 }

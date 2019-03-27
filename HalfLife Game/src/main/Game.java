@@ -372,7 +372,7 @@ public class Game extends Application {
 				rectNodes.add((RectObject)platform);
 				break; 
 				case '2':
-					Node gPlatform =new GoalPlatform(j*150,i*100,150,30);
+					Node gPlatform =new GoalPlatform(j*150,i*100,150,15);
 					root.getChildren().add(gPlatform);
 					platforms.add(gPlatform);
 					rectNodes.add((RectObject)gPlatform);
