@@ -24,6 +24,7 @@ public class CloudsAnimation extends Pane {
 		Image cloud1= new Image("cloud1.png");
 		Image cloud2= new Image ("cloud2.png");
 		Image cloud3= new Image ("cloud3.png");
+		this.setPickOnBounds(false);
 		
 		for (int i = 0; i < rand.nextInt(7)+1; i++) {
 			ImageView cloudsone= new ImageView(cloud1);
@@ -45,9 +46,11 @@ public class CloudsAnimation extends Pane {
 	}
 	
 	private void start() {
+		
 		TranslateTransition tt=null;
 		for (int j = 0; j < cloudsList.size(); j++) {
-			 tt = new TranslateTransition(Duration.seconds(100), cloudsList.get(j));
+			int durationval= rand.nextInt(50)+50;
+			 tt = new TranslateTransition(Duration.seconds(durationval), cloudsList.get(j));
 			  tt.setByX(levelWidth);
 		      tt.setCycleCount(TranslateTransition.INDEFINITE);
 		      tt.play();

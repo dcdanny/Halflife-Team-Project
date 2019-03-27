@@ -13,12 +13,14 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import main.CloudsAnimation;
 import main.Music;
 import main.ReadLevel;
 import main.SpriteAnimation;
@@ -31,6 +33,7 @@ public class StartMenu extends Application {
 	private static Pane mainLayout;
 	private SpriteAnimation sp1 = new SpriteAnimation("player");
 	private SpriteAnimation sp2 = new SpriteAnimation("player");
+	private CloudsAnimation cloud;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -55,6 +58,8 @@ public class StartMenu extends Application {
 		sp1.resizeView(10, -135, 300);
 		sp2.flip();
 		sp2.resizeView(470, -220, 300);
+		cloud=new CloudsAnimation(200);
+		
 	}
 	
 	private Scene setCursor(Scene s) {
@@ -69,8 +74,19 @@ public class StartMenu extends Application {
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
 		setAnis();
 		mainLayout = loader.load();
+		StackPane cloudpane= new StackPane();
+		
+		
+		cloudpane.getChildren().add(cloud);
+		cloudpane.setPickOnBounds(false);
+		cloudpane.isMouseTransparent();
 		mainLayout.getChildren().add(sp1);
-		mainLayout.getChildren().add(sp2);
+		
+		
+		//mainLayout.getChildren().add(sp2);
+
+		mainLayout.getChildren().add(cloudpane);
+		mainLayout.setPickOnBounds(false);
 		StartMenuController controller = loader.getController();
 		controller.setStage(primaryStage);
 		Scene scene = new Scene(mainLayout);
