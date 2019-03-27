@@ -17,7 +17,6 @@ public class ListofAnimations {
 	 */
 	public void addToList(SpriteAnimation ani) {
 		anilist.add(ani);
-		System.out.println("currently this many animations: "+anilist.size());
 	}
 	
 	/**
@@ -30,7 +29,6 @@ public class ListofAnimations {
 			stoppingani.stopAnimation();
 			anilist.remove(i);
 		}
-		System.out.println("currently this many animations: "+anilist.size());
 	}
 	
 	/**
@@ -43,7 +41,6 @@ public class ListofAnimations {
 				anilist.remove(i);
 			}
 		}
-		System.out.println("currently this many animations: "+anilist.size());
 	}
 	
 	/**
@@ -54,6 +51,5 @@ public class ListofAnimations {
 			anilist.get(i).stopAnimation();
 			anilist.remove(i);
 		}
-		System.out.println("currently this many animations: "+anilist.size());
 	}
 }

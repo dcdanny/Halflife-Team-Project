@@ -130,7 +130,6 @@ public class Player extends RectObject{
 				setVelY(0);
 				if (!completedLevel) {
 					completedLevel = true;
-					System.out.println("Winner");
 				}
 				
 				if (!hasWritten) {
@@ -144,10 +143,6 @@ public class Player extends RectObject{
 					for (int i = 0; i < 4; i++) {
 						levels[i] = r.readLine();
 					}
-					System.out.println("LEVELS:" + levels[0]);
-					System.out.println("LEVELS:" + levels[1]);
-					System.out.println("LEVELS:" + levels[2]);
-					System.out.println("LEVELS:" + levels[3]);
 					levels[levelNumber-1] = "level"+levelNumber+"=true";
 					
 				} catch (IOException e1) {
@@ -180,9 +175,11 @@ public class Player extends RectObject{
 	 * @param root Contains all objects that the player could interact with
 	 */
 	public void loseLife(Pane root) {
-		Media sound = new Media(new File("data/death.mp3").toURI().toASCIIString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+		if (!this.isDead()) {
+			Media sound = new Media(new File("data/death.mp3").toURI().toASCIIString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
 		root.setLayoutX(0);
 		if (lives > 0 && !multiplayer) {
 			this.Fade();
@@ -250,10 +247,12 @@ public class Player extends RectObject{
 			}
 		};
 		jTimer.start();
-		Media sound = new Media(new File("data/jump.mp3").toURI().toASCIIString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setVolume(0.1);
-		mediaPlayer.play();
+		if (!this.isDead()) {
+			Media sound = new Media(new File("data/jump.mp3").toURI().toASCIIString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.setVolume(0.1);
+			mediaPlayer.play();
+		}
 	}
 	
 	/**
@@ -294,7 +293,6 @@ public class Player extends RectObject{
 			root.getChildren().add(bullet);
 			ammoNo--;
 		}else {
-			System.out.println("No Bullets");
 			this.noBullets();
 		}
 		ammo.setAmmo(ammoNo);
@@ -332,9 +330,9 @@ public class Player extends RectObject{
             ft.play();
             foreground.getChildren().remove(img);
         }  
-        
-		foreground.getChildren().add(img);
-		
+        if (!this.isDead()) {
+        	foreground.getChildren().add(img);
+        }
 	}
 	
 	/**
@@ -391,12 +389,10 @@ public class Player extends RectObject{
 	 * @param i Number of bullets to add to the player
 	 */
 	public void addAmmo(int i) {
-		System.out.println("OLD AMMO + " + ammoNo);
 		if (ammoNo + i > GameConstants.MAX_AMMO)
 			ammoNo = GameConstants.MAX_AMMO;
 		else
 			ammoNo += i;
-		System.out.println("NEW AMMO + " + ammoNo);
 		
 		ammo.setAmmo(ammoNo);
 		ammo.addBullets();
@@ -461,9 +457,11 @@ public class Player extends RectObject{
 					ammo.lostBullet();
 					shoot(game.root);
 					if (ammo.getAmmo() > 0) {
-						Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
-						MediaPlayer mediaPlayer = new MediaPlayer(sound);
-						mediaPlayer.play();
+						if (!this.isDead()) {
+							Media sound = new Media(new File("data/Pop.mp3").toURI().toASCIIString());
+							MediaPlayer mediaPlayer = new MediaPlayer(sound);
+							mediaPlayer.play();
+						}
 					}
 				}
 				break;
