@@ -76,8 +76,11 @@ public class CloudsAnimation extends Pane {
 		System.out.println("XVAL"+xval);
 		img.setTranslateX(xval);
 		img.setTranslateY(yval);
-		img.setScaleX(0.2);
-		img.setScaleY(0.2);
+		double scale= rand.nextInt(3)+1;
+		double scaledouble=scale/10;
+		System.out.println(scaledouble);
+		img.setScaleX(scaledouble);
+		img.setScaleY(scaledouble);
 		
 		//img.setPreserveRatio(true);
 		return img;
