@@ -10,7 +10,7 @@ import javafx.util.Duration;
 /**
  * CountdownTimer --- Counts the amount of time the player has been alive for,
  * and displays when the level is completed.
- * @author Halflife
+ * @author Rohab
  */
 public class CountdownTimer extends Pane{
 	

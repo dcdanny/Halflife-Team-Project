@@ -5,7 +5,7 @@ import main.SpriteAnimation;
 
 /**
  * ListOfAnimations Keeps track of all animations running and deletes them if necessary.
- * @author Halflife
+ * @author Rohab
  */
 public class ListofAnimations {
 	

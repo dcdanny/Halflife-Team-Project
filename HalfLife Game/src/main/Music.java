@@ -7,7 +7,7 @@ import javafx.scene.media.MediaPlayer;
 
 /**
  * Music --- Creates and plays background music
- * @author Halflife
+ * @author Rohab
  */
 public class Music {
 	

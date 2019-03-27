@@ -4,13 +4,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import main.SpriteAnimation;
 
+
+
+/**
+ * Adds a sprite animation on top of a Enemy object
+ * @author Rohab
+ */
 public class SpriteEnemy extends Pane {
 	
 	private BaseEnemy enemy; //Player object that is covered with the sprite
 	private SpriteAnimation ani; //Sprite animation
 	
 	/**
-	 * Constructor of the sprite player
+	 * Constructor of the sprite enemy
 	 * @param l 
 	 * @param k 
 	 * @param j 
@@ -31,8 +37,8 @@ public class SpriteEnemy extends Pane {
 	}
 	
 	/**
-	 * Returns the player object that the sprite animation is on top of
-	 * @return Player object that the sprite animation is on top of
+	 * Returns the enemy object that the sprite animation is on top of
+	 * @return Enemy object that the sprite animation is on top of
 	 */
 	public BaseEnemy GetEnemy() {
 		return enemy;

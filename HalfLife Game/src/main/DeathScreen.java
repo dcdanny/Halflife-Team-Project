@@ -55,7 +55,13 @@ public class DeathScreen extends StackPane {
 				
 				
 	}
-	
+	/**
+	 * Constructor for death screen if it is client side 
+	 * @param gameClient
+	 * @param getNetPlayer
+	 * @param stage
+	 * @param multi
+	 */
 	public DeathScreen(GameClient gameClient, NetworkedPlayer getNetPlayer, Stage stage, boolean multi) {
 		this.primaryStage =stage;
 		this.netPlayer=getNetPlayer;
@@ -64,7 +70,9 @@ public class DeathScreen extends StackPane {
 		setUp();
 		
 	}
-
+	/**
+	 * Sets up all buttons
+	 */
 	private void setUp() {
 		
 		

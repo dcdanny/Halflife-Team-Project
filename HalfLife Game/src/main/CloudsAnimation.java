@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 /**
  * CloudsAnimation --- Creates animated clouds that appear randomly in the background
- * @author Halflife
+ * @author Rohab
  */
 public class CloudsAnimation extends Pane {
 

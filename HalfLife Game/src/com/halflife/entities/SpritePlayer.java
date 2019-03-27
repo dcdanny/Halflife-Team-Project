@@ -6,7 +6,7 @@ import main.SpriteAnimation;
 
 /**
  * Adds a sprite animation on top of a player object
- * @author Halflife
+ * @author Rohab
  */
 public class SpritePlayer extends Pane {
 	
