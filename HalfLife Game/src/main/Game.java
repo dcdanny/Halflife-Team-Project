@@ -6,9 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,23 +23,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.paint.CycleMethod;
 import com.halflife.enemies.*;
 import com.halflife.entities.*;
 
+import main.CheckCollision;
 import network.*;
 
 /**
- * GameClient --- A class to represent the entire game as seen in single player or the host of a multiplayer game
+ * Game --- A class to represent the entire game as seen in single player or the host of a multiplayer game
  * @author Halflife
  *
  */
 public class Game extends Application {
+	private ListofAnimations anilist= new ListofAnimations();
 	public Pane root= new Pane();
 	private Pane display=new Pane();
 	private SpritePlayer spplayer;
@@ -45,11 +56,12 @@ public class Game extends Application {
 	private ArrayList<Node> platforms=new ArrayList<Node>();
 	private int levelWidth;
 	private String[] s = new String[ClientTable.size()];
-	public Server server;
+	Server server;
 	private ArrayList<RectObject> rectNodes = new ArrayList<RectObject>();
 	private Message coords;
 	private boolean multiplayer=false;
 	private boolean paused = false;
+	//private NetworkedPlayer player2;
 	private StackPane DeathShow;
 	private VictoryScreen VictoryShow;
 	private StackPane pauseScreen;

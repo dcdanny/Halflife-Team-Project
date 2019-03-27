@@ -17,6 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class SpriteAnimation extends Pane {
+	/**
+	 * SpriteAnimation --- A class to create a frame by frame animation, iterating through
+	 * @author Rohab
+	 *
+	 */
+
 	private int imageIndex = 0 ;
 	private final int frameTime = 2000; // milliseconds
 	private ImageView imageView = new ImageView();
@@ -25,9 +31,11 @@ public class SpriteAnimation extends Pane {
 	Timeline timeline= new Timeline();
 
 	ListofAnimations playingAnimations= new ListofAnimations();
-
+/**
+ * Constructor for sprite animation using type to set the specific image
+ * @param type
+ */
 	
-
 	public SpriteAnimation(String type) {
 		
 		Image frame1=null;
@@ -84,16 +92,28 @@ public class SpriteAnimation extends Pane {
 	
 	}
 	
-	
+	/** 
+	 * Stop that particular timeline animation
+	 */
 	public void stopAnimation() {
 		timeline.stop();
 		
 		
-		System.out.println("HAS STOPPED");
+		
 	}
+	
+	/** 
+	 * Get the animation
+	 * @return timeline
+	 */
 	public Timeline getTimeline() {
 		return timeline;
 	}
+	/** 
+	 * Set animation imageview to the correct dimensions 
+	 * @param img
+	 * @return the formatted image
+	 */
 	private ImageView format (ImageView img) {
 		img.setFitWidth(120);
 		img.setFitHeight(120);
@@ -101,14 +121,29 @@ public class SpriteAnimation extends Pane {
 		return img;
 		
 	}
+	/** 
+	 * Flip the image view so the sprite animation can face the other direction if they are moving that way
+	 * @return
+	 */
 	public ImageView flip() {
 		imageView.setScaleX((double)-1);
 		return imageView;
 	}
+	/** 
+	 * Flip the image view so the sprite animation can face the normal direction if they are moving that way
+	 * @return
+	 */
 	public ImageView flipnorm() {
 		imageView.setScaleX((double)1);
 		return imageView;
 	}
+	/**
+	 * Resize the animation if it is used elsewhere e.g. the menu
+	 * @param x
+	 * @param y
+	 * @param fit
+	 * @return the resized image
+	 */
 
 	public ImageView resizeView(int x , int y , int fit) {
 		imageView.setFitHeight(fit);
@@ -117,15 +152,25 @@ public class SpriteAnimation extends Pane {
 		imageView.setTranslateY(y);
 		return imageView;
 	}
+	/**
+	 * Stops animations besides the int howmany
+	 * @param howmany
+	 */
 	public void keepAllbut (int howmany) {
 	
 			playingAnimations.keepAllBut(howmany);
 			
 		
 	}
+/**
+ * Removes all animations
+ */
 	public void removeAllOthers() {
 		playingAnimations.wipeList();
 	}
+	/**
+	 * Keep all animations 
+	 */
 	public void keepitself() {
 		playingAnimations.keepOnly(this);
 	}

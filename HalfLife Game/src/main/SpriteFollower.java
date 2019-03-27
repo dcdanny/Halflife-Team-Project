@@ -10,10 +10,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+/**
+ * SpriteFollower --- A class to create the level menu sprite that follows the mouse on the screen
+ * @author Rohab
+ *
+ */
 public class SpriteFollower extends Pane {
 	SpriteAnimation sp= new SpriteAnimation("player");
 	double x;
 	double y;
+	/** 
+	 * Constructor for Spritefollower, requires the pane to access its size and mouse movements on the pane,
+	 * it translates the sprite animation according to mouse movements
+	 * @param p
+	 */
 	
 	public SpriteFollower(Pane p){
 	
@@ -59,6 +69,10 @@ public class SpriteFollower extends Pane {
 	    timer.start();
 	    getChildren().add(sp);
 	}
+	/**
+	 * Get SpriteAnimation
+	 * @return SpriteAnimation
+	 */
 	public SpriteAnimation getSpriteAnimation(){
 		return sp;
 	}

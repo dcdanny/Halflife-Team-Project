@@ -22,6 +22,11 @@ import javafx.stage.WindowEvent;
 import menu.view.LevelMenuController;
 import menu.view.MainMenuController;
 
+/**
+ * VictoryScreen- Pane that shows up when the player reaches the goal state
+ * @author Rohab
+ *
+ */
 public class VictoryScreen extends StackPane {
 	//SpriteAnimation sp= new SpriteAnimation();
 	private int timeint;
@@ -32,6 +37,14 @@ public class VictoryScreen extends StackPane {
  	private Pane root;
  	private NetworkedPlayer netPlayer;
 	
+ 	/** 
+ 	 * Constructor for the Victory Screen, if the game is singleplayer or this is the host screen
+ 	 * @param timeGiven
+ 	 * @param player
+ 	 * @param root
+ 	 * @param game
+ 	 * @param primaryStage
+ 	 */
 	VictoryScreen(int timeGiven, Player player, Pane root,Game game,Stage primaryStage){
 		this.primaryStage = primaryStage;
 		this.game = game;
@@ -41,7 +54,13 @@ public class VictoryScreen extends StackPane {
 		setUp();
 		
 	}
-	
+	/**
+	 * Constructor for Victory Screen, if the game is a client, and this is the clients screen 
+	 * @param player
+	 * @param root
+	 * @param gameClient
+	 * @param stage
+	 */
 	public VictoryScreen(NetworkedPlayer player, Pane root, GameClient gameClient, Stage stage) {
 		this.netPlayer=player;
 		this.root=root;
@@ -50,6 +69,9 @@ public class VictoryScreen extends StackPane {
 		setUp();		
 		
 	}
+	/**
+	 * Sets up the pane, adding buttons and background
+	 */
 
 	public void setUp() {
 		 RectObject bg=new RectObject(0,0,800,600,"victoryscreen",Color.valueOf("#4CAF88"));
@@ -62,7 +84,6 @@ public class VictoryScreen extends StackPane {
          ImageView trop= new ImageView(trophyimg);
          formatting(trop,-300,0,300);
     
-         //need if statement for multiplayer or single
          
          Image timeimg = new Image("time.png");
          ImageView time= new ImageView(timeimg);
@@ -73,10 +94,7 @@ public class VictoryScreen extends StackPane {
         
 		 timeCount.setFont(new Font ("Courier New",75));
 		 timeCount.setTextFill(Color.WHITE);
-         
-		 //sp.flip();
-	 	 //sp.resizeView(500, 150, 300);
-				         
+
 	         Image restart = new Image("restart.png");
 	         ImageView resimg= new ImageView(restart);
 	         formatting(resimg,-150,180,400);
@@ -175,12 +193,22 @@ public class VictoryScreen extends StackPane {
 			 this.getChildren().add(exitimg);
 			 this.getChildren().add(exitbutton);
 	}
-		
+	/**
+	 * Method to stop the game if continue button is presses
+	 */
 
 	private void destroyGame() {
 		game.stopGame();
 		game=null;
 	}
+	/**
+	 * Method to format the images on screen
+	 * @param img
+	 * @param x
+	 * @param y
+	 * @param fitwidth
+	 * @return formatted images
+	 */
 	
 	private ImageView formatting(ImageView img ,int x,int y, int fitwidth) {
 		img.setTranslateX(x);
@@ -192,6 +220,9 @@ public class VictoryScreen extends StackPane {
 		
 		return img;
 	}
+	/**
+	 * Method to remove everything on this pane
+	 */
 	
 	public void remove() {
 		 this.getChildren().clear();
