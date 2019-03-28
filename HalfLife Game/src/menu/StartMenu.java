@@ -1,11 +1,7 @@
 package menu;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-//import java.io.File;
 import java.io.IOException;
-
-import com.halflife.enemies.SpriteEnemy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,19 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
-import javafx.scene.media.MediaPlayer;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import main.CloudsAnimation;
 import main.Music;
-import main.ReadLevel;
 import main.SpriteAnimation;
 import main.WriteFile;
 import menu.view.*;
 
+/**
+ * StartMenu --- Starts the first menu
+ * @author HalfLife
+ *
+ */
 public class StartMenu extends Application {
 	
 	private static Stage primaryStage;
@@ -34,6 +30,10 @@ public class StartMenu extends Application {
 	private SpriteAnimation sp1 = new SpriteAnimation("player");
 	private SpriteAnimation sp2 = new SpriteAnimation("player");
 	private CloudsAnimation cloud;
+	
+	/**
+	 * General layout settings
+	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
@@ -45,12 +45,11 @@ public class StartMenu extends Application {
 		this.primaryStage.setMinHeight(250);
 		this.primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image("icon.png"));
-		String musicFile = "data/Sample - summer.mp3";     // For example
+		String musicFile = "data/Sample - summer.mp3";
 
 		try {
 			Music mus= new Music("music");
-			
-		}catch(MediaException e) {
+		} catch(MediaException e) {
 			System.out.println("Unable to play audio: "+e.getMessage());
 		}
 		showMainView();
@@ -61,7 +60,6 @@ public class StartMenu extends Application {
 		sp2.flip();
 		sp2.resizeView(470, -220, 300);
 		cloud=new CloudsAnimation(200);
-		
 	}
 	
 	private Scene setCursor(Scene s) {
@@ -70,7 +68,10 @@ public class StartMenu extends Application {
 		return s;
 	}
 	
-	// Loading the first "HALFLIFE" menu
+	/**
+	 * Loading the first "POKO" menu
+	 * @throws IOException
+	 */
 	public void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(StartMenu.class.getResource("view/startmenu.fxml"));
@@ -78,14 +79,10 @@ public class StartMenu extends Application {
 		mainLayout = loader.load();
 		StackPane cloudpane= new StackPane();
 		
-		
 		cloudpane.getChildren().add(cloud);
 		cloudpane.setPickOnBounds(false);
 		cloudpane.isMouseTransparent();
 		mainLayout.getChildren().add(sp1);
-		
-		
-		//mainLayout.getChildren().add(sp2);
 
 		mainLayout.getChildren().add(cloudpane);
 		mainLayout.setPickOnBounds(false);
@@ -95,8 +92,8 @@ public class StartMenu extends Application {
 		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
+	
 	/**
 	 * Main Class to start the game
 	 * @param args Command line arguments passed - None needed
@@ -109,6 +106,6 @@ public class StartMenu extends Application {
 			e.printStackTrace();
 		}
 		launch(args);
-
+		
 	}
 }

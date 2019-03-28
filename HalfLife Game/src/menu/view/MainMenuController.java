@@ -14,6 +14,11 @@ import main.SpriteFollower;
 import network.Client;
 import network.Server;
 
+/**
+ * MainMenuController --- Supplies the methods for the main menu screen
+ * @author HalfLife
+ *
+ */
 public class MainMenuController {
 	
 	private Stage primaryStage;
@@ -25,8 +30,8 @@ public class MainMenuController {
 	
 	public void setStage(Stage stage) {
 		primaryStage = stage;
-		this.primaryStage.setWidth(800);//So the menu works on bens laptop?
-		this.primaryStage.setHeight(600);//So the menu works on bens laptop?
+		this.primaryStage.setWidth(800);
+		this.primaryStage.setHeight(600);
 	}
 	
 	private Scene setCursor(Scene s) {
@@ -35,7 +40,11 @@ public class MainMenuController {
 		return s;
 	}
 
-	// The "SINGLE-PLAYER" button, directing to the "SELECT GAME LEVEL" menu
+	/**
+	 * the button "single player"
+	 * directing to the game level selection menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goSingle() throws IOException {
 		System.out.println("Start server...");
@@ -64,12 +73,13 @@ public class MainMenuController {
 		setCursor(scene);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
-		
 	}
-	
-	// The "MULTI-PLAYERS" button, directing to the "MULTI-PLAYERS" menu
+
+	/**
+	 * the button "multi player"
+	 * directing to the multi player menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goMulti() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("multimenu.fxml"));
@@ -82,7 +92,11 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
-	// The "SETTINGS" button, directing to the "SETTINGS" menu
+	/**
+	 * the button "settings"
+	 * directing to the settings menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goSettings() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("settingsmenu.fxml"));
@@ -95,8 +109,11 @@ public class MainMenuController {
 		primaryStage.show();
 	}
 	
-	
-	// The "BACK" button, directing to the first "HALFLIFE" menu
+	/**
+	 * the button "back"
+	 * directing to the start menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		SpriteAnimation sp1 = new SpriteAnimation("player");

@@ -2,8 +2,6 @@ package menu.view;
 
 import java.io.IOException;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -12,11 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import main.Game;
 import network.Client;
-import network.Server;
 
+/**
+ * JoinMenuController --- Supplies the methods for the join game menu screen
+ * @author HalfLife
+ *
+ */
 public class JoinMenuController {
 	
 	private Stage primaryStage;
@@ -32,7 +32,11 @@ public class JoinMenuController {
 		return s;
 	}
 	
-	// The "BACK" Button, directing to the "MULTI-PLAYERS" menu
+	/**
+	 * the button "back"
+	 * directing to the multiplayer menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("multimenu.fxml"));
@@ -45,7 +49,11 @@ public class JoinMenuController {
 		primaryStage.show();
 	}
 	
-	// The "NEXT" Button, directing to the Game
+	/**
+	 * the button "next"
+	 * directing to the game
+	 * @throws IOException
+	 */
 	@FXML
 	private void goNext() throws IOException {
 		System.out.println(ipAddrInput.getText());
@@ -55,7 +63,6 @@ public class JoinMenuController {
 		System.out.println("port: "+port);
 		Client client = new Client(port,"dan",ipAddrInput.getText());
 		client.start();
-		//server.getclientTable().getQueue("dan");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("waitscreen.fxml"));
 		Pane joinMenu = loader.load();
 		WaitScreenController controller = loader.getController();
@@ -64,37 +71,6 @@ public class JoinMenuController {
 		setCursor(scene);
 		primaryStage.setScene(scene);
 		
-//		primaryStage.setOnShowing((WindowEvent e) -> {
-//			System.out.println("onshowing triggered");
-//	        //controller.waitConnection();
-//			Pane root = null;
-//			try {
-//				root = client.waitForMessage().getPane();
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			System.out.println("end onshowing");
-//			
-//	    });
-		
 		primaryStage.show();
-		
-		
-		/*while (!primaryStage.isShowing()) {
-			if (primaryStage.isShowing())
-				break;
-		}*/
-		
-		/*
-		System.out.println("z");
-		if (primaryStage.isShowing())
-			initialiseController(controller, client);
-			
-			System.out.println("waiting");
-*/
 	}
-	/*public void initialiseController(WaitScreenController controller, Client client) {
-		controller.initialise(primaryStage, client);
-	}*/
 }

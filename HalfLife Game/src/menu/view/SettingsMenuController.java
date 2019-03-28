@@ -14,7 +14,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import main.Music;
 
-public class SettingsMenuController {
+/**
+ * SettingsMenuController --- Supplies the methods for the settings menu screen
+ * @author HalfLife
+ *
+ */
+	public class SettingsMenuController {
 	String musicFile= "Sample - summer.mp3";
 	private Stage primaryStage;
 	Music mus= new Music();
@@ -45,17 +50,31 @@ public class SettingsMenuController {
 		mediaplayer.stop();
 	}
 	
+	/**
+	 * the button "on"
+	 * turning on the background music
+	 * @throws IOException
+	 */
 	@FXML
 	private void musicOn() throws IOException {
 		mus.playMus();
 	}
 	
+	/**
+	 * the button "off"
+	 * turning off the background music
+	 * @throws IOException
+	 */
 	@FXML
 	private void musicOff() throws IOException {
 		mus.stopMus();
 	}
-	
-	// The "BACK" button, directing to the main menu "HALFLIFE"
+
+	/**
+	 * the button "back"
+	 * directing to the main menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));

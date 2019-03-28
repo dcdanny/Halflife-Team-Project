@@ -1,35 +1,25 @@
 package menu.view;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-import com.halflife.entities.RectObject;
-
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import main.Game;
 import main.GameClient;
-import main.GameConstants;
-import main.Level_Info;
 import network.Client;
-import network.Message;
-import network.Server;
 
+/** 
+ * WaitScreenController --- Supplies the methods for the wait screen of joining game
+ * @author HalfLife
+ *
+ */
 public class WaitScreenController {
 	
 	private Stage primaryStage;
@@ -64,7 +54,6 @@ public class WaitScreenController {
 
 		     System.out.println("m");
 
-			//System.out.println("Get: "+ msga1.get());
 			System.out.println("n");
 		      
 		} catch (Exception e) {
@@ -87,10 +76,13 @@ public class WaitScreenController {
 		return s;
 	}
 	
-	// The "Disconnect" Button
+	/**
+	 * the button "disconnect"
+	 * directing to the game joining menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
-		//client.stopClient();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("joinmenu.fxml"));
 		Pane joinmenu = loader.load();
 		JoinMenuController controller = loader.getController();
