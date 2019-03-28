@@ -17,10 +17,10 @@ Windows/Linux/Mac Operating Systems
 
 
 ## Authors
-Ben Norton 
-David Reynolds 
-Tsoi Man Lai
-Rohab Imbesat
-Daniel Clarke 
+Ben Norton, 
+David Reynolds, 
+Tsoi Man Lai, 
+Rohab Imbesat, 
+Daniel Clarke and 
 Declan Fisher
 
