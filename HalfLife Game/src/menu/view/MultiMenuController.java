@@ -10,6 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * MultiMenuController --- Supplies the methods for the multi player menu screen
+ * @author HalfLife
+ *
+ */
 public class MultiMenuController {
 	
 	private Stage primaryStage;
@@ -24,7 +29,11 @@ public class MultiMenuController {
 		return s;
 	}
 	
-	// The "HOST GAME" button, directing to the "HOST GAME" menu
+	/**
+	 * the button "host game"
+	 * directing to the game hosting menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goHost() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("hostmenu.fxml"));
@@ -37,7 +46,11 @@ public class MultiMenuController {
 		primaryStage.show();
 	}
 	
-	// The "JOIN GAME" button, directing to the "JOIN GAME" menu
+	/**
+	 * the button "join game"
+	 * directing to the game joining menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goJoin() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("joinmenu.fxml"));
@@ -49,8 +62,12 @@ public class MultiMenuController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	
-	// The "BACK" button, directing to the main menu "HALFLIFE" 
+
+	/**
+	 * the button "back"
+	 * directing to the main menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));

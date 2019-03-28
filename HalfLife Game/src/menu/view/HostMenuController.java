@@ -1,8 +1,6 @@
 package menu.view;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import network.Client;
-import network.Message;
 import network.Server;
+
+/**
+ *  HostMenuController --- Supplies the methods for the host game menu screen
+ * @author HalfLife
+ */
 
 public class HostMenuController {
 	
@@ -42,13 +44,22 @@ public class HostMenuController {
 		server.start();
 				
 	}
-	
+	/**
+	 * set the cursor icon for a particular scene
+	 * @param s scene to set cursor in
+	 * @return the scene with new cursor
+	 */
 	private Scene setCursor(Scene s) {
 		Image cursor = new Image("cursor.png");
 		s.setCursor(new ImageCursor(cursor));
 		return s;
 	}
-	// The "BACK" Button, directing to the "MULTI-PLAYERS" menu
+	
+	/**
+	 * the button "back"
+	 * directing to the multiplayer menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		server.stopServer();
@@ -62,7 +73,11 @@ public class HostMenuController {
 		primaryStage.show();
 	}
 	
-	// The "NEXT" Button, directing to the "SELECT GAME LEVEL" menu
+	/**
+	 * the button "next"
+	 * directing to the game level selection menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goNext() throws IOException {
 		server.setAllowNewPlayers(false); //Stop any further players from connecting

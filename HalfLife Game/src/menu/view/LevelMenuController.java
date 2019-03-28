@@ -3,7 +3,6 @@ package menu.view;
 import java.io.File;
 import java.io.IOException;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +20,11 @@ import main.Level_Info;
 import main.ReadLevel;
 import network.*;
 
+/**
+ * LevelMenuController --- Supplies the methods for the game level selection menu screen
+ * @author HalfLife
+ *
+ */
 public class LevelMenuController {
 	
 	private Stage primaryStage;
@@ -31,7 +35,11 @@ public class LevelMenuController {
 		this.server = server;
 	}
 	
-	// The "1" Button, directing to the Game "Level 1"
+	/**
+	 * the button "1"
+	 * directing to the game - level 1
+	 * @throws Exception
+	 */
 	@FXML
 	private void go1() throws Exception {
 			Game game = new Game(server,1);
@@ -41,7 +49,11 @@ public class LevelMenuController {
 			game.start(primaryStage);
 	}
 	
-	// The "2" Button, directing to the Game "Level 2"
+	/**
+	 * the button "2"
+	 * directing to the game - level 2
+	 * @throws Exception
+	 */
 	@FXML
 	private void go2() throws Exception {
 		Game game = new Game(server,2);
@@ -51,7 +63,11 @@ public class LevelMenuController {
 		game.start(primaryStage);
 	}
 	
-	// The "3" Button, directing to the Game "Level 3"
+	/**
+	 * the button "3"
+	 * directing to the game - level 3
+	 * @throws Exception
+	 */
 	@FXML
 	private void go3() throws Exception {
 		Game game = new Game(server,3);
@@ -61,7 +77,11 @@ public class LevelMenuController {
 		game.start(primaryStage);
 	}
 	
-	// The "4" Button, directing to the Game "Level 4"
+	/**
+	 * the button "4"
+	 * directing to the game - level 4
+	 * @throws Exception
+	 */
 	@FXML
 	private void go4() throws Exception {
 		Game game = new Game(server, 4);
@@ -77,7 +97,10 @@ public class LevelMenuController {
 		return s;
 	}
 	
-	// The "Upload" Button
+	/**
+	 * the button "upload"
+	 * upload the customized level
+	 */
 	@FXML
 	private ListView listview;
 	
@@ -104,8 +127,12 @@ public class LevelMenuController {
 			 System.out.println(readLevel.returnErrors()[0]);
 		 }
 	}
-	
-	// The "BACK" Button, directing to the main menu "HALFLIFE"
+
+	/**
+	 * the button "back"
+	 * directing to the main menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goBack() throws IOException {
 		server.stopServer();

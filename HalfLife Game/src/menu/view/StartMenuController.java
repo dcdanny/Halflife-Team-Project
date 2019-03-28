@@ -7,12 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.SpriteAnimation;
 import javafx.stage.WindowEvent;
 
+/**
+ * StartMenuController --- Supplies the methods for the game start menu screen
+ * @author HalfLife
+ *
+ */
 public class StartMenuController {
 	
 	private Stage primaryStage;
@@ -27,7 +30,11 @@ public class StartMenuController {
 		return s;
 	}
 	
-	// The "START" Button, directing to the main menu "HALFLIFE"
+	/**
+	 * the button "Start"
+	 * directing to the main menu
+	 * @throws IOException
+	 */
 	@FXML
 	private void goStart() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
@@ -44,7 +51,11 @@ public class StartMenuController {
 		primaryStage.show();
 	}
 	
-	// The "EXIT" Button, quitting the game
+	/**
+	 * the button "exit"
+	 * quitting the game
+	 * @throws IOException
+	 */
 	@FXML
 	private void goExit() throws IOException {
 		System.exit(0);
